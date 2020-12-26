@@ -9,13 +9,13 @@ import UIKit
 
 class GroceryListTableViewController: UITableViewController {
 
-    static var toDay = Date()
+    static var today = Date()
     
     var groceries: [Grocery] = [
-        Grocery(title: "양파", category: .Vegetable, count: 5, dueDate: toDay.addingTimeInterval(secondOfDay*7*2), saveDate: toDay,
+        Grocery(title: "양파", category: .Vegetable, count: 5, dueDate: today.addingTimeInterval(secondOfDay*7*2), saveDate: today,
                 notes: "", storage: Storage.Outdoor),
-        Grocery(title: "양배추", category: .Vegetable, count: 1, dueDate: toDay.addingTimeInterval(secondOfDay*30), saveDate: toDay, notes: "", storage: Storage.Refrigeration),
-        Grocery(title: "달걀", category: .MeatsAndEggs, count: 30, dueDate: toDay.addingTimeInterval(-secondOfDay*7), saveDate: toDay, notes: "", storage: Storage.Refrigeration)
+        Grocery(title: "양배추", category: .Vegetable, count: 1, dueDate: today.addingTimeInterval(secondOfDay*30), saveDate: today, notes: "", storage: Storage.Refrigeration),
+        Grocery(title: "달걀", category: .MeatsAndEggs, count: 30, dueDate: today.addingTimeInterval(-secondOfDay*7), saveDate: today, notes: "", storage: Storage.Refrigeration)
     ]
 
     
