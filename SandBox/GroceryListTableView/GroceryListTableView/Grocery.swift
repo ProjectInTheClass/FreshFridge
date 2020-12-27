@@ -7,15 +7,15 @@
 
 import Foundation
 
-enum Category {
-    case ETC
-    case MeatsAndEggs
-    case MarineProducts
-    case CookingAndSidedishes
-    case Vegetable
-    case Fruits
-    case DrinksAndSnacks
-    case SeasonedAndOilAndSauce
+enum Category: String, CaseIterable {
+    case ETC = "ETC"
+    case MeatsAndEggs = "MeatsAndEggs"
+    case MarineProducts = "MarineProducts"
+    case CookingAndSidedishes = "CookingAndSidedishes"
+    case Vegetable = "Vegetable"
+    case Fruits = "Fruits"
+    case DrinksAndSnacks = "DrinksAndSnacks"
+    case SeasonedAndOilAndSauce = "SeasonedAndOilAndSauce"
 }
 
 enum Storage
@@ -36,3 +36,11 @@ struct Grocery {
 }
 
 let secondOfDay: Double = 60*60*24.0
+
+enum FridgeFilter: String
+{
+    case CategoryFilter = "분류별"
+    case RefrigerationFilter = "냉장"
+    case FreezingFilter = "냉동"
+    case OutdoorFilter = "실외"
+}
