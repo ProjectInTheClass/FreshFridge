@@ -16,6 +16,7 @@
 		8E62C563259759CF009BED2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E62C561259759CF009BED2C /* LaunchScreen.storyboard */; };
 		8E62C56C259759F7009BED2C /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E62C56B259759F7009BED2C /* Grocery.swift */; };
 		8E62C56F25975A1C009BED2C /* GroceryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E62C56E25975A1C009BED2C /* GroceryListTableViewController.swift */; };
+		EEA21D3F259DC5D800CDBF68 /* AddItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA21D3E259DC5D800CDBF68 /* AddItemTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		8E62C564259759CF009BED2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E62C56B259759F7009BED2C /* Grocery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grocery.swift; sourceTree = "<group>"; };
 		8E62C56E25975A1C009BED2C /* GroceryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListTableViewController.swift; sourceTree = "<group>"; };
+		EEA21D3E259DC5D800CDBF68 /* AddItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				8E62C55F259759CF009BED2C /* Assets.xcassets */,
 				8E62C561259759CF009BED2C /* LaunchScreen.storyboard */,
 				8E62C564259759CF009BED2C /* Info.plist */,
+				EEA21D3E259DC5D800CDBF68 /* AddItemTableViewController.swift */,
 			);
 			path = GroceryListTableView;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEA21D3F259DC5D800CDBF68 /* AddItemTableViewController.swift in Sources */,
 				8E62C55B259759CE009BED2C /* ViewController.swift in Sources */,
 				8E3EA93725977E600041CF7C /* GroceryListTableViewCell.swift in Sources */,
 				8E62C557259759CE009BED2C /* AppDelegate.swift in Sources */,

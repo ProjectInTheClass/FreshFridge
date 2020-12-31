@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -103,7 +102,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="vVy-US-3nR">
                         <barButtonItem key="rightBarButtonItem" title="추가" id="8C4-qK-MVM">
                             <connections>
-                                <segue destination="y4b-iw-QHj" kind="presentation" modalPresentationStyle="fullScreen" id="3tr-l9-Trs"/>
+                                <segue destination="Omy-Wo-MqF" kind="presentation" modalPresentationStyle="fullScreen" id="b9Q-Xq-Tr3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -112,21 +111,37 @@
             </objects>
             <point key="canvasLocation" x="347.82608695652175" y="26.785714285714285"/>
         </scene>
-        <!--상품추가-->
-        <scene sceneID="O5r-Oa-8MG">
+        <!--상품 추가-->
+        <scene sceneID="kz5-oA-19z">
             <objects>
-                <viewController id="79u-h5-56N" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Faw-o5-aD9">
+                <tableViewController id="u9v-2o-49D" customClass="AddItemTableViewController" customModule="GroceryListTableView" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MiM-mY-Sbk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="UCy-fe-AeS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="상품추가" largeTitleDisplayMode="always" id="8DN-y9-eap"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="j32-hh-CvF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddItemCell" id="HKL-0E-ldl">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HKL-0E-ldl" id="Gat-NP-pSw">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="u9v-2o-49D" id="Xqz-Jg-pTr"/>
+                            <outlet property="delegate" destination="u9v-2o-49D" id="Rlq-4b-bIC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="상품 추가" largeTitleDisplayMode="always" id="h6W-8a-v73">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="arrow-left-s-line" id="Zd6-cw-Nip"/>
+                        <barButtonItem key="rightBarButtonItem" title="완료" id="P3X-cu-Lnc"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="39X-iN-oqV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2118.840579710145" y="-607.36607142857144"/>
+            <point key="canvasLocation" x="1957.9710144927537" y="-632.14285714285711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sLz-MR-1t3">
@@ -145,25 +160,26 @@
             <point key="canvasLocation" x="-636" y="27"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="t0f-1X-VuQ">
+        <scene sceneID="b4m-xc-owD">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="y4b-iw-QHj" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Omy-Wo-MqF" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vfi-hi-yEU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OgO-K1-g2r">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="79u-h5-56N" kind="relationship" relationship="rootViewController" id="qYi-VP-hdA"/>
+                        <segue destination="u9v-2o-49D" kind="relationship" relationship="rootViewController" id="U3M-Fa-OwO"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1GZ-4y-0Ee" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Hx-FO-slc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1208.6956521739132" y="-607.36607142857144"/>
+            <point key="canvasLocation" x="1047.8260869565217" y="-632.14285714285711"/>
         </scene>
     </scenes>
     <resources>
+        <image name="arrow-left-s-line" width="24" height="24"/>
         <image name="gray" width="128" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
