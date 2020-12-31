@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -99,11 +100,33 @@
                             <outlet property="delegate" destination="5Yk-kn-0A3" id="2vc-8O-yA9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="vVy-US-3nR"/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="vVy-US-3nR">
+                        <barButtonItem key="rightBarButtonItem" title="추가" id="8C4-qK-MVM">
+                            <connections>
+                                <segue destination="y4b-iw-QHj" kind="presentation" modalPresentationStyle="fullScreen" id="3tr-l9-Trs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9pD-XE-xW0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="347.82608695652175" y="26.785714285714285"/>
+        </scene>
+        <!--상품추가-->
+        <scene sceneID="O5r-Oa-8MG">
+            <objects>
+                <viewController id="79u-h5-56N" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Faw-o5-aD9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="UCy-fe-AeS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="상품추가" largeTitleDisplayMode="always" id="8DN-y9-eap"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j32-hh-CvF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2118.840579710145" y="-607.36607142857144"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sLz-MR-1t3">
@@ -119,13 +142,34 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UR3-XM-0m2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-541" y="27"/>
+            <point key="canvasLocation" x="-636" y="27"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="t0f-1X-VuQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="y4b-iw-QHj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vfi-hi-yEU">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="79u-h5-56N" kind="relationship" relationship="rootViewController" id="qYi-VP-hdA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1GZ-4y-0Ee" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1208.6956521739132" y="-607.36607142857144"/>
         </scene>
     </scenes>
     <resources>
         <image name="gray" width="128" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
