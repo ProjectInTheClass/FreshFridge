@@ -79,7 +79,7 @@
                             <outlet property="delegate" destination="hRM-g7-Rez" id="fcv-fN-M3o"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="FreshFridge" id="3OQ-Sg-WqG">
+                    <navigationItem key="navigationItem" title="FreshFridge" largeTitleDisplayMode="always" id="3OQ-Sg-WqG" colorLabel="IBBuiltInLabel-Red">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="GHe-B3-Zls">
                             <connections>
                                 <action selector="EditButtonTapped:" destination="hRM-g7-Rez" id="pcn-MC-H3H"/>
@@ -115,7 +115,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C2F-4V-7n8">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="334" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
@@ -143,7 +143,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mLL-Ic-M0D">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="334" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
@@ -171,7 +171,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BWP-U5-SqH">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="334" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
@@ -199,7 +199,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GIZ-iY-AhQ">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="334" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
@@ -252,9 +252,10 @@
         <scene sceneID="Iv0-xY-PdH">
             <objects>
                 <navigationController id="Urc-wr-fhH" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nZ2-G6-HDT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="nZ2-G6-HDT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.86410359841179873" green="1" blue="0.91546653320030524" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <connections>
                         <segue destination="5Vr-BW-tt4" kind="relationship" relationship="rootViewController" id="2B4-SA-8mK"/>
@@ -268,9 +269,15 @@
         <scene sceneID="GI2-T3-XDL">
             <objects>
                 <navigationController id="qYA-QQ-5n1" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="v8c-fe-m0l">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="v8c-fe-m0l">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.1832034234254406" green="1" blue="0.58012689587856725" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" red="0.24938366017521013" green="0.79379171409354299" blue="0.55827477740043352" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="hRM-g7-Rez" kind="relationship" relationship="rootViewController" id="rZw-Yt-uo9"/>
@@ -284,6 +291,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="arc-ed-xCK"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.27361725434697598" green="0.79379171409354299" blue="0.68275173959083268" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="displayP3"/>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
