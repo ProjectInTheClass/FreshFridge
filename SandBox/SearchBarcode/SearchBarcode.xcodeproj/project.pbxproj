@@ -13,6 +13,9 @@
 		8E01D7C025A20E9100115207 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E01D7BE25A20E9100115207 /* Main.storyboard */; };
 		8E01D7C225A20E9300115207 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E01D7C125A20E9300115207 /* Assets.xcassets */; };
 		8E01D7C525A20E9300115207 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E01D7C325A20E9300115207 /* LaunchScreen.storyboard */; };
+		8E01D7CE25A2155E00115207 /* FetchDataFoodSafetyKorea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E01D7CD25A2155E00115207 /* FetchDataFoodSafetyKorea.swift */; };
+		8E01D7D125A2156800115207 /* GoogleSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E01D7D025A2156800115207 /* GoogleSearcher.swift */; };
+		8E01D7D425A2157000115207 /* WebScrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E01D7D325A2157000115207 /* WebScrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		8E01D7C125A20E9300115207 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E01D7C425A20E9300115207 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E01D7C625A20E9300115207 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E01D7CD25A2155E00115207 /* FetchDataFoodSafetyKorea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchDataFoodSafetyKorea.swift; path = ../../FoodSafetyKoreaOpenAPITest/FoodSafetyKoreaOpenAPITest/FetchDataFoodSafetyKorea.swift; sourceTree = "<group>"; };
+		8E01D7D025A2156800115207 /* GoogleSearcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleSearcher.swift; path = ../../FoodSafetyKoreaOpenAPITest/FoodSafetyKoreaOpenAPITest/GoogleSearcher.swift; sourceTree = "<group>"; };
+		8E01D7D325A2157000115207 /* WebScrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebScrapper.swift; path = ../../FoodSafetyKoreaOpenAPITest/FoodSafetyKoreaOpenAPITest/WebScrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 				8E01D7C125A20E9300115207 /* Assets.xcassets */,
 				8E01D7C325A20E9300115207 /* LaunchScreen.storyboard */,
 				8E01D7C625A20E9300115207 /* Info.plist */,
+				8E01D7CD25A2155E00115207 /* FetchDataFoodSafetyKorea.swift */,
+				8E01D7D025A2156800115207 /* GoogleSearcher.swift */,
+				8E01D7D325A2157000115207 /* WebScrapper.swift */,
 			);
 			path = SearchBarcode;
 			sourceTree = "<group>";
@@ -137,9 +146,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E01D7D425A2157000115207 /* WebScrapper.swift in Sources */,
 				8E01D7BD25A20E9100115207 /* ViewController.swift in Sources */,
 				8E01D7B925A20E9100115207 /* AppDelegate.swift in Sources */,
 				8E01D7BB25A20E9100115207 /* SceneDelegate.swift in Sources */,
+				8E01D7CE25A2155E00115207 /* FetchDataFoodSafetyKorea.swift in Sources */,
+				8E01D7D125A2156800115207 /* GoogleSearcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
