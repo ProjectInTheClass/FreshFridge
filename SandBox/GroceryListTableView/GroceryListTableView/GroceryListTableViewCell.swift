@@ -24,4 +24,8 @@ class GroceryListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func countButtonTapped(_ sender: Any) {
+        
+        print("countButtonTapped")
+    }
 }

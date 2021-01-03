@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--신선한 냉장고-->
         <scene sceneID="UTL-yJ-VwZ">
             <objects>
                 <tableViewController id="5Yk-kn-0A3" customClass="GroceryListTableViewController" customModule="GroceryListTableView" customModuleProvider="target" sceneMemberID="viewController">
@@ -72,6 +72,9 @@
                                                         <constraint firstAttribute="width" constant="50" id="NU2-8X-pPG"/>
                                                     </constraints>
                                                     <state key="normal" backgroundImage="gray"/>
+                                                    <connections>
+                                                        <action selector="countButtonTapped:" destination="nJW-qD-Vay" eventType="touchUpInside" id="ura-1A-IFu"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -99,7 +102,7 @@
                             <outlet property="delegate" destination="5Yk-kn-0A3" id="2vc-8O-yA9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="vVy-US-3nR"/>
+                    <navigationItem key="navigationItem" title="신선한 냉장고" id="vVy-US-3nR"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9pD-XE-xW0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -112,7 +115,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zT3-si-8sI">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="W9M-u9-Ilr">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="5Yk-kn-0A3" kind="relationship" relationship="rootViewController" id="L5H-MA-RIv"/>
                     </connections>
