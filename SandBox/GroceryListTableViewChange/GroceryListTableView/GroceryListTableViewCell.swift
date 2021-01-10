@@ -16,7 +16,7 @@ class GroceryListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        //expirationLabel.layer.cornerRadius = 10
+        expirationLabel.layer.cornerRadius = 2
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
