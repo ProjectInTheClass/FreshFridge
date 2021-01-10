@@ -13,7 +13,7 @@ struct Grocery {
     
     var title: String
     var category: Category
-    var count: Int
+    var count: Double
     var dueDate: Date
     var saveDate: Date
     var notes: String
