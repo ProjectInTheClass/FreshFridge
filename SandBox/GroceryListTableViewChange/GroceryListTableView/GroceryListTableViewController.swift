@@ -117,6 +117,7 @@ class GroceryListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groceryCell", for: indexPath) as! GroceryListTableViewCell
 
+     
         // Configure the cell...
         if(filteredGroceries.count > 0)
         {
