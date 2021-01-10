@@ -58,10 +58,11 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="65" height="20"/>
                                                                     <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                                     <constraints>
+                                                                        <constraint firstAttribute="height" constant="20" id="K3N-xq-tC0"/>
                                                                         <constraint firstAttribute="height" constant="20" id="YoR-lS-iAr"/>
                                                                         <constraint firstAttribute="width" constant="65" id="tOq-6F-v4m"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -72,6 +73,9 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="Dbl-zW-hCT"/>
+                                                            </constraints>
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
@@ -92,6 +96,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="TBB-8N-7wj" firstAttribute="leading" secondItem="Woh-ej-7lo" secondAttribute="trailing" id="Anf-3j-SRv"/>
+                                                <constraint firstAttribute="height" constant="60" id="I9A-5c-uI3"/>
                                             </constraints>
                                         </stackView>
                                     </subviews>
