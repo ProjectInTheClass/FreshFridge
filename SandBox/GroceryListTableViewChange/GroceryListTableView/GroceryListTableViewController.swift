@@ -20,13 +20,13 @@ class GroceryListTableViewController: UITableViewController {
                 notes: "", storage: .Refrigeration, fridgeName: "메인 냉장고", isPercentageCount: false),
         Grocery(title: "치즈", category: .MeatsAndEggs, count: 14, dueDate: today.addingTimeInterval(secondOfDay*14), saveDate: today,
                 notes: "아기 먹일 유기농 치즈", storage: .Refrigeration, fridgeName: "메인 냉장고", isPercentageCount: false),
-        Grocery(title: "이유식용 소고기", category: .MeatsAndEggs, count: 100, dueDate: today.addingTimeInterval(secondOfDay*30), saveDate: today,
+        Grocery(title: "이유식용 소고기", category: .MeatsAndEggs, count: 1, dueDate: today.addingTimeInterval(secondOfDay*30), saveDate: today,
                 notes: "", storage: .Refrigeration, fridgeName: "메인 냉장고", isPercentageCount: true),
         Grocery(title: "사과", category: .Fruits, count: 5, dueDate: today.addingTimeInterval(secondOfDay*8), saveDate: today,
                 notes: "", storage: .Refrigeration, fridgeName: "메인 냉장고", isPercentageCount: false),
         Grocery(title: "고등어", category: .MarineProducts, count: 3, dueDate: today.addingTimeInterval(-secondOfDay*3), saveDate: today,
                 notes: "", storage: .Refrigeration, fridgeName: "메인 냉장고", isPercentageCount: false),
-        Grocery(title: "김치", category: .CookingAndSidedishes, count: 50, dueDate: today.addingTimeInterval(secondOfDay*60), saveDate: today,
+        Grocery(title: "김치", category: .CookingAndSidedishes, count: 0.5, dueDate: today.addingTimeInterval(secondOfDay*60), saveDate: today,
                 notes: "19년 김장 김치", storage: .Refrigeration, fridgeName: "메인 냉장고", isPercentageCount: true),
         Grocery(title: "롯데햄)켄터키핫도그75g(냉동)", category: .CookingAndSidedishes, count: 10, dueDate: today.addingTimeInterval(secondOfDay*90), saveDate: today,
                 notes: "", storage: .Freezing, fridgeName: "메인 냉장고", isPercentageCount: false),
@@ -90,7 +90,7 @@ class GroceryListTableViewController: UITableViewController {
             if filtered.count > 0
             {
                 cellCount.append(filtered.count)
-                numberOfSections=1
+                numberOfSections = 1
                 filteredGroceries.append(filtered)
                 sectionNames.append(Grocery.FridgeFilter.RefrigerationFilter.rawValue)
             }
@@ -132,11 +132,11 @@ class GroceryListTableViewController: UITableViewController {
             
             if(grocery.isPercentageCount)
             {
-                cell.countButton.setTitle("\(grocery.count)%", for: .normal)
+                cell.countButton.setTitle("\(Int(grocery.count*100))%", for: .normal)
             }
             else
             {
-                cell.countButton.setTitle("\(grocery.count)", for: .normal)
+                cell.countButton.setTitle("\(Int(grocery.count))", for: .normal)
             }
             
         }
