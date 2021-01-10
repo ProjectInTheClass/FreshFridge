@@ -128,7 +128,8 @@ class GroceryListTableViewController: UITableViewController {
             let diffDate = grocery.dueDate.timeIntervalSinceNow
             let diffDay = Int(diffDate/(secondOfDay))
             cell.expirationLabel?.text = diffDay>=0 ? String("D-\(diffDay+1)") : String("D+\(-diffDay)")
-            cell.expirationLabel?.textColor = diffDay>=0 ? UIColor.darkGray : .red
+            cell.expirationLabel?.backgroundColor = diffDay>=0 ? UIColor.systemGray5 : .red
+            cell.expirationLabel?.textColor = diffDay>=0 ? UIColor.darkGray : .white
             
             if(grocery.isPercentageCount)
             {
