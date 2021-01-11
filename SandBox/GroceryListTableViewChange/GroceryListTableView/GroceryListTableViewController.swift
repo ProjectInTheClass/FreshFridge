@@ -7,25 +7,8 @@
 
 import UIKit
 
-
-extension UIButton
-{
-    func switchOn(isOn: Bool)
-    {
-        if(isOn)
-        {
-            setTitleColor(.systemBlue, for: .normal)
-        }
-        else
-        {
-            setTitleColor(.systemGray, for: .normal)
-        }
-    }
-}
-
-
-class GroceryListTableViewController: UITableViewController {
-
+class GroceryListTableViewController: UITableViewController, GroceryListCellDelegate {
+    
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var refrigerationButton: UIButton!
     @IBOutlet weak var freezingButton: UIButton!
@@ -75,10 +58,10 @@ class GroceryListTableViewController: UITableViewController {
     
     func updateButtons()
     {
-        categoryButton.switchOn(isOn: categoryButtonOn)
-        refrigerationButton.switchOn(isOn: refrigerationButtonOn)
-        freezingButton.switchOn(isOn: freezingButtonOn)
-        outdoorButton.switchOn(isOn: outdoorButtonOn)
+        categoryButton.switchOnOff(isOn: categoryButtonOn)
+        refrigerationButton.switchOnOff(isOn: refrigerationButtonOn)
+        freezingButton.switchOnOff(isOn: freezingButtonOn)
+        outdoorButton.switchOnOff(isOn: outdoorButtonOn)
     }
     
     func updateTableView()
@@ -131,6 +114,35 @@ class GroceryListTableViewController: UITableViewController {
 
         }
     }
+    
+    func countButtonTapped(sender: GroceryListTableViewCell) {
+        if let indexPath = tableView.indexPath(for: sender)
+        {
+            var groceries = filteredGroceries[indexPath.section]
+            var grocery = groceries[indexPath.row]
+            
+            if(grocery.isPercentageCount == false)
+            {
+                grocery.count -= 1
+                if( grocery.count < 0 )
+                {
+                    grocery.count = 0
+                }
+            }
+            else
+            {
+                grocery.count -= 0.1
+                if( grocery.count < 0 )
+                {
+                    grocery.count = 0
+                }
+            }
+            
+            filteredGroceries[indexPath.section] = groceries
+            
+            sender.countButton.updatePieChart(count: groceries[indexPath.row].count, isPercentage: groceries[indexPath.row].isPercentageCount)
+        }
+    }
 
     // MARK: - Table view data source
 
@@ -154,10 +166,12 @@ class GroceryListTableViewController: UITableViewController {
 
      
         // Configure the cell...
-        if(filteredGroceries.count > 0)
+        if(filteredGroceries.count > indexPath.section)
         {
             let groceries = filteredGroceries[indexPath.section]
             let grocery = groceries[indexPath.row]
+            
+            cell.delegate = self
 
             cell.titleLabel?.text = grocery.info.title
             
@@ -167,15 +181,7 @@ class GroceryListTableViewController: UITableViewController {
             cell.expirationLabel?.backgroundColor = diffDay>=0 ? UIColor.systemGray5 : .red
             cell.expirationLabel?.textColor = diffDay>=0 ? UIColor.darkGray : .white
             
-            if(grocery.isPercentageCount)
-            {
-                cell.countButton.setTitle("\(Int(grocery.count*100))%", for: .normal)
-            }
-            else
-            {
-                cell.countButton.setTitle("\(Int(grocery.count))", for: .normal)
-            }
-            
+            cell.countButton.updatePieChart(count: grocery.count, isPercentage: grocery.isPercentageCount)
         }
         
         return cell

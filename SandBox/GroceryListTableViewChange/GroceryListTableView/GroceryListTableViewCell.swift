@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol GroceryListCellDelegate: class {
+    func countButtonTapped(sender: GroceryListTableViewCell)
+}
+
 class GroceryListTableViewCell: UITableViewCell {
+    
+    weak var delegate: GroceryListCellDelegate?
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var expirationLabel: UILabel!
@@ -28,6 +34,8 @@ class GroceryListTableViewCell: UITableViewCell {
     @IBAction func countButtonTapped(_ sender: Any) {
         
         print("countButtonTapped")
+        
+        delegate?.countButtonTapped(sender: self)
     }
     
     
