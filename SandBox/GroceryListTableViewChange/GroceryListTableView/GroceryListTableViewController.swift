@@ -161,15 +161,26 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         return sectionNames[section]
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "groceryCell", for: indexPath) as! GroceryListTableViewCell
-
-     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        var cell: GroceryListTableViewCell! = nil
+        
         // Configure the cell...
         if(filteredGroceries.count > indexPath.section)
         {
             let groceries = filteredGroceries[indexPath.section]
             let grocery = groceries[indexPath.row]
+            
+            if(grocery.info.image == nil)
+            {
+                cell = tableView.dequeueReusableCell(withIdentifier: "groceryCell", for: indexPath) as? GroceryListTableViewCell
+            }
+            else
+            {
+                cell = tableView.dequeueReusableCell(withIdentifier: "groceryPictureCell", for: indexPath) as? GroceryListTableViewCell
+                let pictureCell = cell as? GroceryListTableViewPictureCell
+                pictureCell?.titleImage.image = grocery.info.image?.image()
+            }
             
             cell.delegate = self
 
@@ -178,8 +189,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             let diffDate = grocery.dueDate.date.timeIntervalSinceNow
             let diffDay = Int(diffDate/(DueDate.secondOfDay))
             cell.expirationLabel?.text = diffDay>=0 ? String("D-\(diffDay+1)") : String("D+\(-diffDay)")
-            cell.expirationLabel?.backgroundColor = diffDay>=0 ? UIColor.systemGray5 : .red
-            cell.expirationLabel?.textColor = diffDay>=0 ? UIColor.darkGray : .white
+            cell.expirationLabel?.backgroundColor = diffDay>=3 ? UIColor.systemGray5 : .red
+            cell.expirationLabel?.textColor = diffDay>=3 ? UIColor.darkGray : .white
             
             cell.countButton.updatePieChart(count: grocery.count, isPercentage: grocery.isPercentageCount)
         }
