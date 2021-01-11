@@ -8,23 +8,6 @@
 import Foundation
 import UIKit
 
-struct GroceryID: Equatable
-{
-    var id: Int64 = -1
-    
-    static var issuedID: Int64 = 0
-    static func issue() -> GroceryID
-    {
-        GroceryID.issuedID += 1
-        return GroceryID(id : GroceryID.issuedID)
-    }
-    
-    static func setIssuedID(newVal: Int64)
-    {
-        GroceryID.issuedID = newVal
-    }
-}
-
 struct DueDate
 {
     static let secondOfDay: Double = 60*60*24.0
@@ -50,7 +33,6 @@ struct TypedImage
 
 class GroceryHistory
 {
-    var id: GroceryID
     var title: String
     var category: Category
     var favorite: Bool = false
@@ -59,7 +41,6 @@ class GroceryHistory
     
     init(title: String, category: Category)
     {
-        id = GroceryID.issue()
         self.title = title
         self.category = category
     }
@@ -78,7 +59,6 @@ class GroceryHistory
 
 class Grocery
 {
-    //var id: GroceryID           //GroceryHistory id
     var info: GroceryHistory
     
     var count: Double
@@ -169,7 +149,6 @@ enum FridgeViewSort: Int, CaseIterable
 }
 
 // adding dumy data
-var groceryID: GroceryID = GroceryID()
 //var groceryHistories: [GroceryHistory] = []
 //var groceries: [Grocery] = []
 
