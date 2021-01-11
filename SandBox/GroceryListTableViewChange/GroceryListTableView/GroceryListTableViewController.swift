@@ -30,6 +30,7 @@ class GroceryListTableViewController: UITableViewController {
     @IBOutlet weak var refrigerationButton: UIButton!
     @IBOutlet weak var freezingButton: UIButton!
     @IBOutlet weak var outdoorButton: UIButton!
+
     
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
@@ -127,6 +128,7 @@ class GroceryListTableViewController: UITableViewController {
             numberOfSections = 1
             filteredGroceries.append(showGroceries)
             sectionNames.append("")
+
         }
     }
 
@@ -150,6 +152,7 @@ class GroceryListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groceryCell", for: indexPath) as! GroceryListTableViewCell
 
+     
         // Configure the cell...
         if(filteredGroceries.count > 0)
         {
@@ -161,15 +164,16 @@ class GroceryListTableViewController: UITableViewController {
             let diffDate = grocery.dueDate.date.timeIntervalSinceNow
             let diffDay = Int(diffDate/(DueDate.secondOfDay))
             cell.expirationLabel?.text = diffDay>=0 ? String("D-\(diffDay+1)") : String("D+\(-diffDay)")
-            cell.expirationLabel?.textColor = diffDay>=0 ? UIColor.darkGray : .red
+            cell.expirationLabel?.backgroundColor = diffDay>=0 ? UIColor.systemGray5 : .red
+            cell.expirationLabel?.textColor = diffDay>=0 ? UIColor.darkGray : .white
             
             if(grocery.isPercentageCount)
             {
-                cell.countButton.setTitle("\(grocery.count)%", for: .normal)
+                cell.countButton.setTitle("\(Int(grocery.count*100))%", for: .normal)
             }
             else
             {
-                cell.countButton.setTitle("\(grocery.count)", for: .normal)
+                cell.countButton.setTitle("\(Int(grocery.count))", for: .normal)
             }
             
         }
