@@ -128,7 +128,9 @@
                                                         <constraint firstAttribute="height" constant="50" id="47a-5P-KCl"/>
                                                         <constraint firstAttribute="width" constant="50" id="NU2-8X-pPG"/>
                                                     </constraints>
-                                                    <state key="normal" backgroundImage="gray"/>
+                                                    <state key="normal" backgroundImage="gray">
+                                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="countButtonTapped:" destination="nJW-qD-Vay" eventType="touchUpInside" id="ura-1A-IFu"/>
                                                     </connections>
@@ -221,7 +223,9 @@
                                                         <constraint firstAttribute="width" constant="50" id="0QD-Do-oZq"/>
                                                         <constraint firstAttribute="height" constant="50" id="oyD-DA-N4d"/>
                                                     </constraints>
-                                                    <state key="normal" backgroundImage="gray"/>
+                                                    <state key="normal" backgroundImage="gray">
+                                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="countButtonTapped:" destination="VQX-hk-sRL" eventType="touchUpInside" id="mTV-zu-TbB"/>
                                                     </connections>

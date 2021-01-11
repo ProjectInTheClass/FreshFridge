@@ -22,16 +22,24 @@ extension UIButton
         }
     }
     
-    func updatePieChart(count: Double, isPercentage: Bool) {
+    func updatePieChart(count: Double, isPercentage: Bool)
+    {
         if(isPercentage == false)
         {
             self.setTitle("\(Int(count))", for: .normal)
-            self.setBackgroundImage(UIImage(named: "gray"), for: .normal)
+            if(count > 0)
+            {
+                self.setBackgroundImage(UIImage(named: "gray"), for: .normal)
+            }
+            else
+            {
+                self.setBackgroundImage(UIImage(named: "0percent"), for: .normal)
+            }
         }
         else
         {
             self.setTitle("\(Int(count*100))%", for: .normal)
-            self.setTitleColor(.white, for: .normal)
+            //self.setTitleColor(.white, for: .normal)
             if(count >= 0.9)
             {
                 self.setBackgroundImage(UIImage(named: "100percent"), for: .normal)
@@ -75,7 +83,6 @@ extension UIButton
             else
             {
                 self.setBackgroundImage(UIImage(named: "0percent"), for: .normal)
-                self.setTitleColor(.systemGray, for: .normal)
             }
         }
     }

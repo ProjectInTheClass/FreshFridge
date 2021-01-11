@@ -25,8 +25,6 @@ class TypedImage
     var filename: String
     var fileExtension: String = "png"
     
-    var testImage: UIImage? // test
-    
     init(filename: String)
     {
         self.filename = filename
@@ -66,11 +64,8 @@ class TypedImage
         // file로 저장
         if let data = uiImage.pngData()
         {
-            
             let fullFilename = getDocumentsDirectory().appendingPathComponent("\(filename).\(fileExtension)")
             try? data.write(to: fullFilename)
-            
-            testImage = uiImage
         }
     }
 }

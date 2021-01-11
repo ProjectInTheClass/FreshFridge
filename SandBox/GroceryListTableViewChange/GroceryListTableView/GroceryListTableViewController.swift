@@ -179,16 +179,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             {
                 cell = tableView.dequeueReusableCell(withIdentifier: "groceryPictureCell", for: indexPath) as? GroceryListTableViewCell
                 let pictureCell = cell as? GroceryListTableViewPictureCell
-                
-                if let image = grocery.info.image?.testImage
-                {
-                    pictureCell?.titleImage.image = grocery.info.image?.image()
-                    //pictureCell?.titleImage.image = image
-                }
-                else
-                {
-                    pictureCell?.titleImage.image = grocery.info.image?.image()
-                }
+                pictureCell?.titleImage.image = grocery.info.image?.image()
             }
             
             cell.delegate = self
