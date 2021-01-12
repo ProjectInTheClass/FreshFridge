@@ -1,1 +1,1 @@
-# Fresh Fridge Project
+# FreshFridge
