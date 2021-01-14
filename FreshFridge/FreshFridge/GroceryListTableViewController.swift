@@ -131,7 +131,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             }
             else
             {
-                grocery.count -= 0.1
+                grocery.count -= 10
                 if( grocery.count < 0 )
                 {
                     grocery.count = 0

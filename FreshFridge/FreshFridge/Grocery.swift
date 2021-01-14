@@ -110,7 +110,7 @@ class Grocery
 {
     var info: GroceryHistory
     
-    var count: Double
+    var count: Int
     var isPercentageCount: Bool
     
     var dueDate: DueDate
@@ -120,7 +120,7 @@ class Grocery
     
     var notes: String?
     
-    init(info: GroceryHistory, count: Double, isPercentageCount: Bool, dueDate: DueDate, storage: Storage, fridgeName: String, notes: String?)
+    init(info: GroceryHistory, count: Int, isPercentageCount: Bool, dueDate: DueDate, storage: Storage, fridgeName: String, notes: String?)
     {
         self.info = info
         self.count = count
@@ -225,10 +225,10 @@ var groceries = [
     Grocery(info: getGroceryHistory(title: "양배추", category: .Vegetable), count: 1, isPercentageCount: false, dueDate: DueDate(14), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
     Grocery(info: getGroceryHistory(title: "달걀", category: .MeatsAndEggs), count: 30, isPercentageCount: false, dueDate: DueDate(-1), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
     Grocery(info: getGroceryHistory(title: "치즈", category: .CookingAndSidedishes), count: 14, isPercentageCount: false, dueDate: DueDate(14), storage: .Refrigeration, fridgeName: selectedfrideName, notes: "아기 먹일 유기농 치즈"),
-    Grocery(info: getGroceryHistory(title: "이유식용 소고기", category: .MeatsAndEggs), count: 1, isPercentageCount: true, dueDate: DueDate(30), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+    Grocery(info: getGroceryHistory(title: "이유식용 소고기", category: .MeatsAndEggs), count: 100, isPercentageCount: true, dueDate: DueDate(30), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
     Grocery(info: getGroceryHistory(title: "사과", category: .Fruits), count: 5, isPercentageCount: false, dueDate: DueDate(8), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
     Grocery(info: getGroceryHistory(title: "고등어", category: .MarineProducts), count: 3, isPercentageCount: false, dueDate: DueDate(3), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
-    Grocery(info: getGroceryHistory(title: "김치", category: .CookingAndSidedishes), count: 0.3, isPercentageCount: true, dueDate: DueDate(60), storage: .Refrigeration, fridgeName: selectedfrideName, notes: "19년도 김장 김치"),
+    Grocery(info: getGroceryHistory(title: "김치", category: .CookingAndSidedishes), count: 30, isPercentageCount: true, dueDate: DueDate(60), storage: .Refrigeration, fridgeName: selectedfrideName, notes: "19년도 김장 김치"),
     Grocery(info: getGroceryHistory(title: "바나나우유", category: .CookingAndSidedishes), count: 10, isPercentageCount: false, dueDate: DueDate(90), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
     Grocery(info: getGroceryHistory(title: "면사랑)해물볶음우동370g(냉동)", category: .CookingAndSidedishes), count: 5, isPercentageCount: false, dueDate: DueDate(30), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil)
     ]
