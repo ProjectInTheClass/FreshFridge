@@ -39,44 +39,43 @@ extension UIButton
         else
         {
             self.setTitle("\(Int(count*100))%", for: .normal)
-            //self.setTitleColor(.white, for: .normal)
-            if(count >= 0.9)
+            if(count == 1.0)
             {
                 self.setBackgroundImage(UIImage(named: "100percent"), for: .normal)
             }
-            else if(count >= 0.8)
+            else if(count >= 0.9)
             {
                 self.setBackgroundImage(UIImage(named: "90percent"), for: .normal)
             }
-            else if(count >= 0.7)
+            else if(count >= 0.8)
             {
                 self.setBackgroundImage(UIImage(named: "80percent"), for: .normal)
             }
-            else if(count >= 0.6)
+            else if(count >= 0.7)
             {
                 self.setBackgroundImage(UIImage(named: "70percent"), for: .normal)
             }
-            else if(count >= 0.5)
+            else if(count >= 0.6)
             {
                 self.setBackgroundImage(UIImage(named: "60percent"), for: .normal)
             }
-            else if(count >= 0.4)
+            else if(count >= 0.5)
             {
                 self.setBackgroundImage(UIImage(named: "50percent"), for: .normal)
             }
-            else if(count >= 0.3)
+            else if(count >= 0.4)
             {
                 self.setBackgroundImage(UIImage(named: "40percent"), for: .normal)
             }
-            else if(count >= 0.2)
+            else if(count >= 0.3)
             {
                 self.setBackgroundImage(UIImage(named: "30percent"), for: .normal)
             }
-            else if(count >= 0.1)
+            else if(count >= 0.2)
             {
                 self.setBackgroundImage(UIImage(named: "20percent"), for: .normal)
             }
-            else if(count > 0.0)
+            else if(count >= 0.1)
             {
                 self.setBackgroundImage(UIImage(named: "10percent"), for: .normal)
             }
