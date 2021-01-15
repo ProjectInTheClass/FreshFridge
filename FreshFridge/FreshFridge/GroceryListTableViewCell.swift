@@ -22,7 +22,8 @@ class GroceryListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        expirationLabel.layer.cornerRadius = 2
+        expirationLabel.layer.cornerRadius = 3
+        expirationLabel.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -48,6 +49,9 @@ class GroceryListTableViewPictureCell : GroceryListTableViewCell
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        titleImage.layer.cornerRadius = 3
+        titleImage.clipsToBounds = true
         
     }
 
