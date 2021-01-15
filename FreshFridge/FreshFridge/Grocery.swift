@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct DueDate
+struct DueDate: Codable
 {
     static let secondOfDay: Double = 60*60*24.0
     
@@ -20,7 +20,7 @@ struct DueDate
     }
 }
 
-class TypedImage
+class TypedImage: Codable
 {
     var filename: String
     var fileExtension: String = "png"
@@ -53,11 +53,7 @@ class TypedImage
         return nil
     }
     
-    func getDocumentsDirectory() -> URL
-    {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
-    }
+    
     
     func makeImage(uiImage: UIImage)
     {
@@ -70,7 +66,13 @@ class TypedImage
     }
 }
 
-class GroceryHistory
+func getDocumentsDirectory() -> URL
+{
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
+
+class GroceryHistory : Codable
 {
     var title: String
     var category: Category
@@ -91,7 +93,7 @@ class GroceryHistory
         self.image = image
     }
     
-    enum Category: String, CaseIterable
+    enum Category: String, CaseIterable, Codable
     {
         case ETC = "ETC"
         case MeatsAndEggs = "MeatsAndEggs"
@@ -102,11 +104,87 @@ class GroceryHistory
         case DrinksAndSnacks = "DrinksAndSnacks"
         case SeasonedAndOilAndSauce = "SeasonedAndOilAndSauce"
     }
+    
+    static let archiveURL = getDocumentsDirectory().appendingPathComponent("groceryHistory").appendingPathExtension("plist")
+    static func loadGroceryHistory() -> [GroceryHistory]?
+    {
+        guard let codedGroceryHistory = try? Data(contentsOf: archiveURL) else { return nil }
+
+        let propertyListDecoder = PropertyListDecoder()
+        return try? propertyListDecoder.decode(Array<GroceryHistory>.self, from: codedGroceryHistory)
+    }
+    
+    static func saveGroceryHistory(_ groceryHistories: [GroceryHistory])
+    {
+        let propertyListEncoder = PropertyListEncoder()
+        let codedGroceryHistories = try? propertyListEncoder.encode(groceryHistories)
+        try? codedGroceryHistories?.write(to: archiveURL, options: .noFileProtection)
+    }
+    
+    static func loadSampleGroceryHistory() -> [GroceryHistory]
+    {
+        return [
+        GroceryHistory(title: "사과", category: .Fruits),
+        GroceryHistory(title: "배", category: .Fruits),
+        GroceryHistory(title: "바나나", category: .Fruits),
+        GroceryHistory(title: "귤", category: .Fruits),
+        GroceryHistory(title: "복숭아", category: .Fruits),
+        GroceryHistory(title: "감", category: .Fruits),
+        GroceryHistory(title: "파인애플", category: .Fruits),
+        GroceryHistory(title: "토마토", category: .Vegetable),
+        GroceryHistory(title: "딸기", category: .Fruits),
+        GroceryHistory(title: "고등어", category: .MarineProducts),
+        GroceryHistory(title: "김치", category: .CookingAndSidedishes),
+        GroceryHistory(title: "바나나우유", category: .DrinksAndSnacks, image: TypedImage(image: UIImage(named: "dumyPicture1")) ),
+        GroceryHistory(title: "소고기", category: .MeatsAndEggs),
+        GroceryHistory(title: "돼지고기", category: .MeatsAndEggs),
+        GroceryHistory(title: "닭고기", category: .MeatsAndEggs),
+        GroceryHistory(title: "생선", category: .MarineProducts),
+        GroceryHistory(title: "양파", category: .Vegetable),
+        GroceryHistory(title: "김치", category: .Vegetable),
+        GroceryHistory(title: "대파", category: .Vegetable),
+        GroceryHistory(title: "고추", category: .Vegetable),
+        GroceryHistory(title: "마늘", category: .Vegetable),
+        GroceryHistory(title: "무", category: .Vegetable),
+        GroceryHistory(title: "당근", category: .Vegetable),
+        GroceryHistory(title: "애호박", category: .Vegetable),
+        GroceryHistory(title: "가지", category: .Vegetable),
+        GroceryHistory(title: "브로콜리", category: .Vegetable),
+        GroceryHistory(title: "상추", category: .Vegetable),
+        GroceryHistory(title: "양배추", category: .Vegetable),
+        GroceryHistory(title: "파프리카", category: .Vegetable),
+        GroceryHistory(title: "시금치", category: .Vegetable),
+        GroceryHistory(title: "감자", category: .Vegetable),
+        GroceryHistory(title: "고구마", category: .Vegetable),
+        GroceryHistory(title: "두부", category: .ETC),
+        GroceryHistory(title: "라면", category: .ETC),
+        GroceryHistory(title: "소면", category: .ETC),
+        GroceryHistory(title: "햄", category: .ETC),
+        GroceryHistory(title: "계란", category: .MeatsAndEggs),
+        GroceryHistory(title: "참치", category: .ETC),
+        GroceryHistory(title: "김", category: .ETC),
+        GroceryHistory(title: "밀가루", category: .ETC),
+        GroceryHistory(title: "우유", category: .DrinksAndSnacks),
+        GroceryHistory(title: "치즈", category: .DrinksAndSnacks),
+        GroceryHistory(title: "소금", category: .SeasonedAndOilAndSauce),
+        GroceryHistory(title: "참기름", category: .SeasonedAndOilAndSauce),
+        GroceryHistory(title: "마요네즈", category: .SeasonedAndOilAndSauce),
+        GroceryHistory(title: "진간장", category: .SeasonedAndOilAndSauce),
+        GroceryHistory(title: "국간장", category: .SeasonedAndOilAndSauce),
+        GroceryHistory(title: "후추", category: .SeasonedAndOilAndSauce),
+        GroceryHistory(title: "올리브유", category: .SeasonedAndOilAndSauce),
+        GroceryHistory(title: "포도씨유", category: .SeasonedAndOilAndSauce),
+        GroceryHistory(title: "카놀라유", category: .SeasonedAndOilAndSauce),
+        GroceryHistory(title: "식용유", category: .SeasonedAndOilAndSauce),
+        GroceryHistory(title: "물엿", category: .SeasonedAndOilAndSauce)]
+    }
 }
 
 
 
-class Grocery
+
+
+class Grocery : Codable
 {
     var info: GroceryHistory
     
@@ -131,7 +209,7 @@ class Grocery
         self.notes = notes
     }
     
-    enum Storage: Int, CaseIterable 
+    enum Storage: Int, CaseIterable, Codable
     {
         case Refrigeration = 0
         case Freezing = 1
@@ -149,6 +227,49 @@ class Grocery
                 return "실외"
             }
         }
+    }
+    
+    static let archiveURL = getDocumentsDirectory().appendingPathComponent("grocery").appendingPathExtension("plist")
+    static func loadGrocery() -> [Grocery]?
+    {
+        guard let codedGrocery = try? Data(contentsOf: archiveURL) else { return nil }
+
+        let propertyListDecoder = PropertyListDecoder()
+        return try? propertyListDecoder.decode(Array<Grocery>.self, from: codedGrocery)
+    }
+    
+    static func saveGrocery(_ groceries: [Grocery])
+    {
+        let propertyListEncoder = PropertyListEncoder()
+        let codedGrocery = try? propertyListEncoder.encode(groceries)
+        try? codedGrocery?.write(to: archiveURL, options: .noFileProtection)
+    }
+    
+    static func loadSampleGrocery() -> [Grocery]
+    {
+        return [Grocery(info: getGroceryHistory(title: "양파", category: .Vegetable), count: 5, isPercentageCount: false, dueDate: DueDate(2), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "양배추", category: .Vegetable), count: 1, isPercentageCount: false, dueDate: DueDate(14), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "달걀", category: .MeatsAndEggs), count: 30, isPercentageCount: false, dueDate: DueDate(-1), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "치즈", category: .DrinksAndSnacks), count: 14, isPercentageCount: false, dueDate: DueDate(14), storage: .Refrigeration, fridgeName: selectedfrideName, notes: "아기 먹일 유기농 치즈"),
+        Grocery(info: getGroceryHistory(title: "이유식용 소고기", category: .MeatsAndEggs), count: 100, isPercentageCount: true, dueDate: DueDate(30), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "사과", category: .Fruits), count: 5, isPercentageCount: false, dueDate: DueDate(8), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "고등어", category: .MarineProducts), count: 3, isPercentageCount: false, dueDate: DueDate(3), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "김치", category: .CookingAndSidedishes), count: 30, isPercentageCount: true, dueDate: DueDate(60), storage: .Refrigeration, fridgeName: selectedfrideName, notes: "19년도 김장 김치"),
+        Grocery(info: getGroceryHistory(title: "바나나우유", category: .DrinksAndSnacks), count: 10, isPercentageCount: false, dueDate: DueDate(90), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "딸기", category: .Fruits), count: 100, isPercentageCount: true, dueDate: DueDate(10), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "사과", category: .Fruits), count: 8, isPercentageCount: false, dueDate: DueDate(5), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "바나나", category: .Fruits), count: 6, isPercentageCount: false, dueDate: DueDate(2), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "요거트", category: .DrinksAndSnacks), count: 6, isPercentageCount: false, dueDate: DueDate(7), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "당근", category: .Vegetable), count: 3, isPercentageCount: false, dueDate: DueDate(10), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "바닐라 아이스크림", category: .DrinksAndSnacks), count: 80, isPercentageCount: true, dueDate: DueDate(21), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "진간장", category: .SeasonedAndOilAndSauce), count: 40, isPercentageCount: true, dueDate: DueDate(180), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "멸치액젓", category: .SeasonedAndOilAndSauce), count: 90, isPercentageCount: true, dueDate: DueDate(180), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "토마토케찹", category: .SeasonedAndOilAndSauce), count: 10, isPercentageCount: true, dueDate: DueDate(210), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "냉동 돈까스", category: .MeatsAndEggs), count: 8, isPercentageCount: false, dueDate: DueDate(60), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "냉동 돈까스", category: .MeatsAndEggs), count: 2, isPercentageCount: false, dueDate: DueDate(30), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "참치캔", category: .MeatsAndEggs), count: 15, isPercentageCount: false, dueDate: DueDate(210), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil),
+        Grocery(info: getGroceryHistory(title: "쌀", category: .ETC), count: 70, isPercentageCount: true, dueDate: DueDate(60), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil)
+        ]
     }
 }
 
@@ -207,32 +328,8 @@ enum FridgeViewSort: Int, CaseIterable
 //var cartGroceries: [CartGerocery] = []
 
 // adding dumy data
-var groceryHistories = [
-    GroceryHistory(title: "양파", category: .Vegetable),
-    GroceryHistory(title: "양배추", category: .Vegetable),
-    GroceryHistory(title: "달걀", category: .MeatsAndEggs),
-    GroceryHistory(title: "치즈", category: .MeatsAndEggs),
-    GroceryHistory(title: "이유식용 소고기", category: .MeatsAndEggs),
-    GroceryHistory(title: "사과", category: .Fruits),
-    GroceryHistory(title: "고등어", category: .MarineProducts),
-    GroceryHistory(title: "김치", category: .CookingAndSidedishes),
-    GroceryHistory(title: "바나나우유", category: .CookingAndSidedishes, image: TypedImage(image: UIImage(named: "dumyPicture1")) ),
-    GroceryHistory(title: "면사랑)해물볶음우동370g(냉동)", category: .CookingAndSidedishes)
-]
-
-var groceries = [
-    Grocery(info: getGroceryHistory(title: "양파", category: .Vegetable), count: 5, isPercentageCount: false, dueDate: DueDate(2), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil),
-    Grocery(info: getGroceryHistory(title: "양배추", category: .Vegetable), count: 1, isPercentageCount: false, dueDate: DueDate(14), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-    Grocery(info: getGroceryHistory(title: "달걀", category: .MeatsAndEggs), count: 30, isPercentageCount: false, dueDate: DueDate(-1), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-    Grocery(info: getGroceryHistory(title: "치즈", category: .CookingAndSidedishes), count: 14, isPercentageCount: false, dueDate: DueDate(14), storage: .Refrigeration, fridgeName: selectedfrideName, notes: "아기 먹일 유기농 치즈"),
-    Grocery(info: getGroceryHistory(title: "이유식용 소고기", category: .MeatsAndEggs), count: 100, isPercentageCount: true, dueDate: DueDate(30), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-    Grocery(info: getGroceryHistory(title: "사과", category: .Fruits), count: 5, isPercentageCount: false, dueDate: DueDate(8), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-    Grocery(info: getGroceryHistory(title: "고등어", category: .MarineProducts), count: 3, isPercentageCount: false, dueDate: DueDate(3), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
-    Grocery(info: getGroceryHistory(title: "김치", category: .CookingAndSidedishes), count: 30, isPercentageCount: true, dueDate: DueDate(60), storage: .Refrigeration, fridgeName: selectedfrideName, notes: "19년도 김장 김치"),
-    Grocery(info: getGroceryHistory(title: "바나나우유", category: .CookingAndSidedishes), count: 10, isPercentageCount: false, dueDate: DueDate(90), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-    Grocery(info: getGroceryHistory(title: "면사랑)해물볶음우동370g(냉동)", category: .CookingAndSidedishes), count: 5, isPercentageCount: false, dueDate: DueDate(30), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil)
-    ]
-
+var groceryHistories = [GroceryHistory]()
+var groceries = [Grocery]()
 var cartGroceries: [CartGerocery] = [
     CartGerocery(info: getGroceryHistory(title: "양배추", category: .Vegetable)),
     CartGerocery(info: getGroceryHistory(title: "달걀", category: .MeatsAndEggs)),

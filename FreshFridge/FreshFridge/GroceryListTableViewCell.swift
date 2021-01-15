@@ -33,9 +33,11 @@ class GroceryListTableViewCell: UITableViewCell {
 
     @IBAction func countButtonTapped(_ sender: Any) {
         
-        print("countButtonTapped")
+        //print("countButtonTapped")
         
         delegate?.countButtonTapped(sender: self)
+        
+        Grocery.saveGrocery(groceries)
     }
 }
 

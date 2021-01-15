@@ -52,6 +52,24 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        if let savedGroceryHistories = GroceryHistory.loadGroceryHistory()
+        {
+            groceryHistories = savedGroceryHistories
+        }
+        else
+        {
+            groceryHistories = GroceryHistory.loadSampleGroceryHistory()
+        }
+        
+        if let savedGroceries = Grocery.loadGrocery()
+        {
+            groceries = savedGroceries
+        }
+        else
+        {
+            groceries = Grocery.loadSampleGrocery()
+        }
+        
         updateButtons()
         updateTableView()
     }
