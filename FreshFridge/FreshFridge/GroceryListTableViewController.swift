@@ -70,6 +70,15 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             groceries = Grocery.loadSampleGrocery()
         }
         
+        if let savedCartGroceries = CartGrocery.loadCartGrocery()
+        {
+            cartGroceries = savedCartGroceries
+        }
+        else
+        {
+            cartGroceries = CartGrocery.loadSampleCartGrocery()
+        }
+        
         updateButtons()
         updateTableView()
     }

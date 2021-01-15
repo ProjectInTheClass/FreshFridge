@@ -273,13 +273,39 @@ class Grocery : Codable
     }
 }
 
-class CartGerocery
+class CartGrocery: Codable
 {
     var info: GroceryHistory
     var isPurchased: Bool = false
     
     init(info: GroceryHistory) {
         self.info = info
+    }
+    
+    static let archiveURL = getDocumentsDirectory().appendingPathComponent("cartGrocery").appendingPathExtension("plist")
+    static func loadCartGrocery() -> [CartGrocery]?
+    {
+        guard let codedCartGrocery = try? Data(contentsOf: archiveURL) else { return nil }
+
+        let propertyListDecoder = PropertyListDecoder()
+        return try? propertyListDecoder.decode(Array<CartGrocery>.self, from: codedCartGrocery)
+    }
+    
+    static func saveCartGrocery(_ groceries: [CartGrocery])
+    {
+        let propertyListEncoder = PropertyListEncoder()
+        let codedCartGrocery = try? propertyListEncoder.encode(cartGroceries)
+        try? codedCartGrocery?.write(to: archiveURL, options: .noFileProtection)
+    }
+    
+    static func loadSampleCartGrocery() -> [CartGrocery]
+    {
+        return [ CartGrocery(info: getGroceryHistory(title: "양배추", category: .Vegetable)),
+            CartGrocery(info: getGroceryHistory(title: "달걀", category: .MeatsAndEggs)),
+            CartGrocery(info: getGroceryHistory(title: "양파", category: .Vegetable)),
+            CartGrocery(info: getGroceryHistory(title: "고등어", category: .MarineProducts)),
+            CartGrocery(info: getGroceryHistory(title: "김치", category: .CookingAndSidedishes)),
+        ]
     }
 }
 
@@ -330,13 +356,7 @@ enum FridgeViewSort: Int, CaseIterable
 // adding dumy data
 var groceryHistories = [GroceryHistory]()
 var groceries = [Grocery]()
-var cartGroceries: [CartGerocery] = [
-    CartGerocery(info: getGroceryHistory(title: "양배추", category: .Vegetable)),
-    CartGerocery(info: getGroceryHistory(title: "달걀", category: .MeatsAndEggs)),
-    CartGerocery(info: getGroceryHistory(title: "양파", category: .Vegetable)),
-    CartGerocery(info: getGroceryHistory(title: "고등어", category: .MarineProducts)),
-    CartGerocery(info: getGroceryHistory(title: "김치", category: .CookingAndSidedishes)),
-]
+var cartGroceries = [CartGrocery]()
 
 
 
