@@ -26,7 +26,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     var freezingButtonOn = true
     var outdoorButtonOn = true
     
-    func isFridgeViewFilterSelected(_ filter: FridgeViewFilter) -> Bool
+    func isFridgeViewFilterSelected(_ filter: FridgeViewFilter) -> Bool // typealias FridgeViewFilter = Grocery.Storage 냉장, 냉동, 실외
     {
         switch filter {
         case .Refrigeration:
@@ -52,13 +52,13 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        if let savedGroceryHistories = GroceryHistory.loadGroceryHistory()
+        if let savedGroceryHistories = GroceryHistory.loadGroceryHistory() // 저장된게 있으면
         {
             groceryHistories = savedGroceryHistories
         }
         else
         {
-            groceryHistories = GroceryHistory.loadSampleGroceryHistory()
+            groceryHistories = GroceryHistory.loadSampleGroceryHistory() // 저장된게 없으면 초기 더미데이터를 불러온다.
         }
         
         if let savedGroceries = Grocery.loadGrocery()
@@ -94,25 +94,25 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     func updateTableView()
     {
         numberOfSections = 0
-        numbersOfRowInSection.removeAll()
-        filteredGroceries.removeAll()
-        sectionNames.removeAll()
+        numbersOfRowInSection.removeAll() // 숫자 섹션 안에 몇개의 로가 있는지 저장하는 어레이
+        filteredGroceries.removeAll() //
+        sectionNames.removeAll() //
         
         // 냉장, 냉동, 실외 선택으로 보여지는 groceries를 필터링해서 showGroceries에 추가한다.
         var showGroceries: [Grocery] = []
         
-        for filter in FridgeViewFilter.allCases
+        for filter in FridgeViewFilter.allCases // filter에는 냉장, 냉동, 실외 모든 케이스가 하나씩 차례대로 할당된다. FridgeViewFilter = Grocery.Storage
         {
-            if isFridgeViewFilterSelected(filter)
+            if isFridgeViewFilterSelected(filter) // 냉장, 냉동, 실외 3가지중 어떤게 켜져있는지 확인해서 켜져 있는 항목에 해당하는 값만 showGroceries에 어팬드 한다.
             {
-                showGroceries.append(contentsOf: groceries.filter{ $0.storage == filter})
+                showGroceries.append(contentsOf: groceries.filter{ $0.storage == filter}) // 처음에 filter 값이 냉장이므로 냉장 프러퍼티를 가진 값만 showGroceries 어펜드 된다.
             }
         }
         
         // 분류별이면 카테고리별로 섹터를 나누고 카테고리 순서로 filteredGroceries에 항목을 추가한다.
         if isFridgeViewCategorySelected()
         {
-            for category in GroceryHistory.Category.allCases
+            for category in GroceryHistory.Category.allCases // 반복문의 category 안에는 어레이속 카테고리의 모든 케이스가 담긴다.
             {
                 var sectionGroceries: [Grocery] = []
                 for grocery in showGroceries
