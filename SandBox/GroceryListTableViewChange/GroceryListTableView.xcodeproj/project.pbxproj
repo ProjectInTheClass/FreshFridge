@@ -23,6 +23,7 @@
 		8E62C563259759CF009BED2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E62C561259759CF009BED2C /* LaunchScreen.storyboard */; };
 		8E62C56C259759F7009BED2C /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E62C56B259759F7009BED2C /* Grocery.swift */; };
 		8E62C56F25975A1C009BED2C /* GroceryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E62C56E25975A1C009BED2C /* GroceryListTableViewController.swift */; };
+		F77F7F4625B1F1C7009048CE /* PurchaseRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77F7F4525B1F1C7009048CE /* PurchaseRecordTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		8E62C564259759CF009BED2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E62C56B259759F7009BED2C /* Grocery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grocery.swift; sourceTree = "<group>"; };
 		8E62C56E25975A1C009BED2C /* GroceryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListTableViewController.swift; sourceTree = "<group>"; };
+		F77F7F4525B1F1C7009048CE /* PurchaseRecordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseRecordTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				8E4B994F25AD419C00F2B0BF /* FridgeMain.storyboard */,
 				8E4B995525AD421500F2B0BF /* FridgeSelection.storyboard */,
 				8E4B994525AD368800F2B0BF /* PurchaseRecord.storyboard */,
+				F77F7F4525B1F1C7009048CE /* PurchaseRecordTableViewController.swift */,
 				8E4B994B25AD401300F2B0BF /* ShopingCart.storyboard */,
 				8E4B994825AD3FFB00F2B0BF /* FamilyShare.storyboard */,
 				8E01D73625A0172800115207 /* AddGroceryTableViewController.swift */,
@@ -176,6 +179,7 @@
 				8E4B994325AC610A00F2B0BF /* UIButtonExtension.swift in Sources */,
 				8E3EA93725977E600041CF7C /* GroceryListTableViewCell.swift in Sources */,
 				8E62C557259759CE009BED2C /* AppDelegate.swift in Sources */,
+				F77F7F4625B1F1C7009048CE /* PurchaseRecordTableViewController.swift in Sources */,
 				8E62C56F25975A1C009BED2C /* GroceryListTableViewController.swift in Sources */,
 				8E62C559259759CE009BED2C /* SceneDelegate.swift in Sources */,
 				8E62C56C259759F7009BED2C /* Grocery.swift in Sources */,
