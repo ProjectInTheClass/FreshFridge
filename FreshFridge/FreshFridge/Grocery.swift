@@ -77,32 +77,34 @@ class GroceryHistory : Codable
     var title: String
     var category: Category
     var favorite: Bool = false
-    var lastestPurchaseDate: Date = Date() // 냉장고에 추가 될때 갱신하도록
+    var lastestPurchaseDate: Date
     var image: TypedImage?
     
-    init(title: String, category: Category)
+    init(title: String, category: Category, lastestPurchaseDate: Date)
     {
         self.title = title
         self.category = category
+        self.lastestPurchaseDate = lastestPurchaseDate
     }
     
-    init(title: String, category: Category, image: TypedImage)
+    init(title: String, category: Category, lastestPurchaseDate: Date, image: TypedImage)
     {
         self.title = title
         self.category = category
         self.image = image
+        self.lastestPurchaseDate = lastestPurchaseDate
     }
     
     enum Category: String, CaseIterable, Codable
     {
-        case ETC = "ETC"
-        case MeatsAndEggs = "MeatsAndEggs"
-        case MarineProducts = "MarineProducts"
-        case CookingAndSidedishes = "CookingAndSidedishes"
-        case Vegetable = "Vegetable"
-        case Fruits = "Fruits"
-        case DrinksAndSnacks = "DrinksAndSnacks"
-        case SeasonedAndOilAndSauce = "SeasonedAndOilAndSauce"
+        case MeatsAndEggs = "정육.계란"
+        case MarineProducts = "수산.해산물.건어물"
+        case CookingAndSidedishes = "국.반찬.메인요리"
+        case Vegetable = "채소"
+        case Fruits = "과일"
+        case DrinksAndSnacks = "음료.간식"
+        case SeasonedAndOilAndSauce = "면.양념.오일"
+        case ETC = "기타"
     }
     
     static let archiveURL = getDocumentsDirectory().appendingPathComponent("groceryHistory").appendingPathExtension("plist")
@@ -124,59 +126,59 @@ class GroceryHistory : Codable
     static func loadSampleGroceryHistory() -> [GroceryHistory]
     {
         return [
-        GroceryHistory(title: "사과", category: .Fruits),
-        GroceryHistory(title: "배", category: .Fruits),
-        GroceryHistory(title: "바나나", category: .Fruits),
-        GroceryHistory(title: "귤", category: .Fruits),
-        GroceryHistory(title: "복숭아", category: .Fruits),
-        GroceryHistory(title: "감", category: .Fruits),
-        GroceryHistory(title: "파인애플", category: .Fruits),
-        GroceryHistory(title: "토마토", category: .Vegetable),
-        GroceryHistory(title: "딸기", category: .Fruits),
-        GroceryHistory(title: "고등어", category: .MarineProducts),
-        GroceryHistory(title: "김치", category: .CookingAndSidedishes),
-        GroceryHistory(title: "바나나우유", category: .DrinksAndSnacks, image: TypedImage(image: UIImage(named: "dumyPicture1")) ),
-        GroceryHistory(title: "소고기", category: .MeatsAndEggs),
-        GroceryHistory(title: "돼지고기", category: .MeatsAndEggs),
-        GroceryHistory(title: "닭고기", category: .MeatsAndEggs),
-        GroceryHistory(title: "생선", category: .MarineProducts),
-        GroceryHistory(title: "양파", category: .Vegetable),
-        GroceryHistory(title: "김치", category: .Vegetable),
-        GroceryHistory(title: "대파", category: .Vegetable),
-        GroceryHistory(title: "고추", category: .Vegetable),
-        GroceryHistory(title: "마늘", category: .Vegetable),
-        GroceryHistory(title: "무", category: .Vegetable),
-        GroceryHistory(title: "당근", category: .Vegetable),
-        GroceryHistory(title: "애호박", category: .Vegetable),
-        GroceryHistory(title: "가지", category: .Vegetable),
-        GroceryHistory(title: "브로콜리", category: .Vegetable),
-        GroceryHistory(title: "상추", category: .Vegetable),
-        GroceryHistory(title: "양배추", category: .Vegetable),
-        GroceryHistory(title: "파프리카", category: .Vegetable),
-        GroceryHistory(title: "시금치", category: .Vegetable),
-        GroceryHistory(title: "감자", category: .Vegetable),
-        GroceryHistory(title: "고구마", category: .Vegetable),
-        GroceryHistory(title: "두부", category: .ETC),
-        GroceryHistory(title: "라면", category: .ETC),
-        GroceryHistory(title: "소면", category: .ETC),
-        GroceryHistory(title: "햄", category: .ETC),
-        GroceryHistory(title: "계란", category: .MeatsAndEggs),
-        GroceryHistory(title: "참치", category: .ETC),
-        GroceryHistory(title: "김", category: .ETC),
-        GroceryHistory(title: "밀가루", category: .ETC),
-        GroceryHistory(title: "우유", category: .DrinksAndSnacks),
-        GroceryHistory(title: "치즈", category: .DrinksAndSnacks),
-        GroceryHistory(title: "소금", category: .SeasonedAndOilAndSauce),
-        GroceryHistory(title: "참기름", category: .SeasonedAndOilAndSauce),
-        GroceryHistory(title: "마요네즈", category: .SeasonedAndOilAndSauce),
-        GroceryHistory(title: "진간장", category: .SeasonedAndOilAndSauce),
-        GroceryHistory(title: "국간장", category: .SeasonedAndOilAndSauce),
-        GroceryHistory(title: "후추", category: .SeasonedAndOilAndSauce),
-        GroceryHistory(title: "올리브유", category: .SeasonedAndOilAndSauce),
-        GroceryHistory(title: "포도씨유", category: .SeasonedAndOilAndSauce),
-        GroceryHistory(title: "카놀라유", category: .SeasonedAndOilAndSauce),
-        GroceryHistory(title: "식용유", category: .SeasonedAndOilAndSauce),
-        GroceryHistory(title: "물엿", category: .SeasonedAndOilAndSauce)]
+            GroceryHistory(title: "사과", category: .Fruits, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "배", category: .Fruits, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "바나나", category: .Fruits, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "귤", category: .Fruits, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "복숭아", category: .Fruits, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "감", category: .Fruits, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "파인애플", category: .Fruits, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "토마토", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "딸기", category: .Fruits, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "고등어", category: .MarineProducts, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "김치", category: .CookingAndSidedishes, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "바나나우유", category: .DrinksAndSnacks, lastestPurchaseDate: Date(), image: TypedImage(image: UIImage(named: "dumyPicture1"))),
+        GroceryHistory(title: "소고기", category: .MeatsAndEggs, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "돼지고기", category: .MeatsAndEggs, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "닭고기", category: .MeatsAndEggs, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "생선", category: .MarineProducts, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "양파", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "김치", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "대파", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "고추", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "마늘", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "무", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "당근", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "애호박", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "가지", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "브로콜리", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "상추", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "양배추", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "파프리카", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "시금치", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "감자", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "고구마", category: .Vegetable, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "두부", category: .ETC, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "라면", category: .ETC, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "소면", category: .ETC, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "햄", category: .ETC, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "계란", category: .MeatsAndEggs, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "참치", category: .ETC, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "김", category: .ETC, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "밀가루", category: .ETC, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "우유", category: .DrinksAndSnacks, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "치즈", category: .DrinksAndSnacks, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "소금", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "참기름", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "마요네즈", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "진간장", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "국간장", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "후추", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "올리브유", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "포도씨유", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "카놀라유", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "식용유", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "물엿", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date())]
     }
 }
 
@@ -318,7 +320,7 @@ func getGroceryHistory(title: String, category: GroceryHistory.Category) -> Groc
     }
     else
     {
-        let groceryHistory = GroceryHistory(title: title, category: category)
+        let groceryHistory = GroceryHistory(title: title, category: category, lastestPurchaseDate: Date())
         groceryHistories.append(groceryHistory)
         return groceryHistory
     }

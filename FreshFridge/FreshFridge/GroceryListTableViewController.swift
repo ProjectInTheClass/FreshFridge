@@ -145,8 +145,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     func countButtonTapped(sender: GroceryListTableViewCell) {
         if let indexPath = tableView.indexPath(for: sender)
         {
-            var groceries = filteredGroceries[indexPath.section]
-            var grocery = groceries[indexPath.row]
+            let groceries = filteredGroceries[indexPath.section]
+            let grocery = groceries[indexPath.row]
             
             if(grocery.isPercentageCount == false)
             {
@@ -299,7 +299,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     // MARK: - Navigation
     @IBAction func unwindToGroceryListTableView(_ unwindSegue: UIStoryboardSegue) {
-        let sourceViewController = unwindSegue.source
+        //let sourceViewController = unwindSegue.source
         // Use data from the view controller which initiated the unwind segue
         guard unwindSegue.identifier == "SaveUnwind" else { return }
         
