@@ -93,8 +93,8 @@ class GroceryHistory
     
     enum Category: String, CaseIterable
     {
-        case ETC = "ETC"
-        case MeatsAndEggs = "MeatsAndEggs"
+        case ETC = "기타"
+        case MeatsAndEggs = "육류 계란"
         case MarineProducts = "MarineProducts"
         case CookingAndSidedishes = "CookingAndSidedishes"
         case Vegetable = "Vegetable"

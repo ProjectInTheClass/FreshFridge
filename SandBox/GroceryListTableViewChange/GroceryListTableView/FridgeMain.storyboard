@@ -18,7 +18,6 @@
         <!--신선한 냉장고-->
         <scene sceneID="Cas-ri-qah">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LiK-Wa-qfH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController id="vYU-FV-4xE" customClass="GroceryListTableViewController" customModule="GroceryListTableView" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="O3B-uX-Ajd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -280,18 +279,18 @@
                         <outlet property="refrigerationButton" destination="yJs-pA-1Bp" id="zmT-jA-H7d"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LiK-Wa-qfH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1257.9710144927537" y="26.785714285714285"/>
         </scene>
         <!--상품 추가-->
         <scene sceneID="RGc-tL-yxn">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bC0-XO-wKY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="W4W-Mv-TNc" userLabel="Exit" sceneMemberID="exit"/>
                 <tableViewController id="sNw-Yj-hjd" customClass="AddGroceryTableViewController" customModule="GroceryListTableView" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="5" id="xD8-Ra-w2X">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="ADO-w4-kCH">
                                 <cells>
@@ -314,6 +313,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="eQc-bt-4uq" secondAttribute="bottom" id="K91-To-Jr9"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -678,13 +678,14 @@
                         <outlet property="storageSelectButton" destination="YXK-u5-8JR" id="B2t-A4-rtm"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bC0-XO-wKY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="W4W-Mv-TNc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4964" y="-601"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SD7-ll-4gN">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y98-VK-31U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="Eeo-Zh-F4j" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DdM-cJ-5bK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -694,13 +695,13 @@
                         <segue destination="sNw-Yj-hjd" kind="relationship" relationship="rootViewController" id="CWE-VF-hIu"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y98-VK-31U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4074" y="-600"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CLn-dw-ujD">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qK5-bm-SPI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="xse-za-Uo7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="fridge" id="UH4-os-9Z6"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -716,6 +717,7 @@
                         <segue destination="vYU-FV-4xE" kind="relationship" relationship="rootViewController" id="eHQ-DJ-2QT"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qK5-bm-SPI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="368.11594202898556" y="26.785714285714285"/>
         </scene>
