@@ -17,12 +17,18 @@ class AddGroceryTableViewController: UITableViewController {
     @IBOutlet weak var countIncreaseButton: UIButton!
     @IBOutlet weak var percentageSwitch: UISwitch!
     @IBOutlet weak var dueDateTitleLabel: UILabel!
-    @IBOutlet weak var dueDateLabel: UILabel!
+    @IBOutlet weak var dueDateButton: UIButton!
     @IBOutlet weak var dueDateIncreaseWeek: UIButton!
     @IBOutlet weak var dueDateIncreaseMonth: UIButton!
-    @IBOutlet weak var storageSelectButton: UIButton!
+    @IBOutlet weak var fridgeSelectButton: UIButton!
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var pictureButton: UIButton!
+//    @IBOutlet weak var barcodeScanButton: UIButton!
+    
+    var barcodeScanButton: UIButton!
+    let barcodeScanButtonOffset: CGFloat = 100.0
+    
+    var isDueDatePickerShown = false
     
     var grocery: Grocery?
     
@@ -36,10 +42,18 @@ class AddGroceryTableViewController: UITableViewController {
         dueDateTitleLabel.clipsToBounds = true
         dueDateTitleLabel.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
         
-        dueDateLabel.layer.cornerRadius = 10
-        dueDateLabel.clipsToBounds = true
-        dueDateLabel.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
-
+        dueDateButton.layer.cornerRadius = 10
+        dueDateButton.clipsToBounds = true
+        dueDateButton.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
+        
+        barcodeScanButton = UIButton(frame: CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50))
+        barcodeScanButton.backgroundColor = .orange
+        barcodeScanButton.setTitle("Barcode Scan", for: .normal)
+        barcodeScanButton.addTarget(self, action: #selector(barcodeScanButtonTapped(_:)), for: .touchUpInside)
+        barcodeScanButton.layer.cornerRadius = 20
+        barcodeScanButton.clipsToBounds = true
+        self.view.addSubview(barcodeScanButton)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -59,13 +73,77 @@ class AddGroceryTableViewController: UITableViewController {
             dateFormatter.timeStyle = .none
             dateFormatter.locale = Locale(identifier: "ko_KR")
             
-            dueDateLabel.text = dateFormatter.string(from: grocery.dueDate.date)
-            storageSelectButton.setTitle(grocery.fridgeName, for: .normal)
+            dueDateButton.setTitle(dateFormatter.string(from: grocery.dueDate.date), for: .normal)
+            fridgeSelectButton.setTitle(grocery.fridgeName, for: .normal)
             noteTextField.text = grocery.notes
             
         }
     }
 
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        barcodeScanButton.frame.origin.y = scrollView.frame.height - barcodeScanButtonOffset + scrollView.contentOffset.y
+    }
+    
+    let dueDatePickerIndexPath = IndexPath(row: 1, section: 4)
+    let pictureButtonIndexPath = IndexPath(row: 0, section: 7)
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if(indexPath == dueDatePickerIndexPath)
+        {
+            if(isDueDatePickerShown)
+            {
+                return 250.0
+            }
+            else
+            {
+                return 0.0
+            }
+        }
+        else if(indexPath == pictureButtonIndexPath)
+        {
+            return 200.0
+        }
+        
+        return 44.0
+    }
+    
+    @IBAction func storageSegmentTapped(_ sender: Any) {
+    }
+    
+    @IBAction func nameTextFieldEdited(_ sender: Any) {
+    }
+    
+    @IBAction func categoryButtonTapped(_ sender: Any) {
+    }
+    
+    @IBAction func countDecreaseButtonTapped(_ sender: Any) {
+    }
+    
+    @IBAction func countIncreaseButtonTapped(_ sender: Any) {
+    }
+    
+    @IBAction func percentageSwitchChanged(_ sender: Any) {
+    }
+    
+    @IBAction func dueDateButtonTapped(_ sender: Any) {
+        isDueDatePickerShown.toggle()
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    @IBAction func dueDateIncreaseWeekTapped(_ sender: Any) {
+    }
+    
+    @IBAction func dueDateIncreaseMonthTapped(_ sender: Any) {
+    }
+    
+    @IBAction func fridgeSelectButtonTapped(_ sender: Any) {
+    }
+    @IBAction func noteTextFieldEdited(_ sender: Any) {
+    }
+    @IBAction func pictureButtonTapped(_ sender: Any) {
+    }
+    @IBAction func barcodeScanButtonTapped(_ sender: Any) {
+    }
     // MARK: - Table view data source
 /*
     override func numberOfSections(in tableView: UITableView) -> Int {
