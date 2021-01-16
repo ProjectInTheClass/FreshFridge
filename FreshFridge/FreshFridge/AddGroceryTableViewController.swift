@@ -16,17 +16,29 @@ class AddGroceryTableViewController: UITableViewController {
     @IBOutlet weak var countDecreaseButton: UIButton!
     @IBOutlet weak var countIncreaseButton: UIButton!
     @IBOutlet weak var percentageSwitch: UISwitch!
+    @IBOutlet weak var dueDateTitleLabel: UILabel!
     @IBOutlet weak var dueDateLabel: UILabel!
     @IBOutlet weak var dueDateIncreaseWeek: UIButton!
     @IBOutlet weak var dueDateIncreaseMonth: UIButton!
     @IBOutlet weak var storageSelectButton: UIButton!
-    @IBOutlet weak var noteButton: UIButton!
+    @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var pictureButton: UIButton!
     
     var grocery: Grocery?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        countLabel.layer.cornerRadius = 10
+        countLabel.clipsToBounds = true
+        
+        dueDateTitleLabel.layer.cornerRadius = 10
+        dueDateTitleLabel.clipsToBounds = true
+        dueDateTitleLabel.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
+        
+        dueDateLabel.layer.cornerRadius = 10
+        dueDateLabel.clipsToBounds = true
+        dueDateLabel.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -49,7 +61,7 @@ class AddGroceryTableViewController: UITableViewController {
             
             dueDateLabel.text = dateFormatter.string(from: grocery.dueDate.date)
             storageSelectButton.setTitle(grocery.fridgeName, for: .normal)
-            noteButton.setTitle(grocery.notes, for: .normal)
+            noteTextField.text = grocery.notes
             
         }
     }
