@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "freshFridge.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "freshFridge.pdf",
       "idiom" : "universal",
       "scale" : "2x"
     },
