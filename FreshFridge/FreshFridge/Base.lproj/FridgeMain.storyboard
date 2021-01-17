@@ -713,7 +713,7 @@
         <scene sceneID="dOP-kj-HxD">
             <objects>
                 <navigationController id="TG5-xT-Abw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="FreshFridge_icon_80px" id="1ND-Yz-l96"/>
+                    <tabBarItem key="tabBarItem" title="" image="freshFridge_icon" id="1ND-Yz-l96"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3vZ-Ba-jIG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -736,7 +736,6 @@
         <segue reference="hZy-hr-RAe"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="FreshFridge_icon_80px" width="26.666666030883789" height="26.666666030883789"/>
         <image name="button:Qsm-Vz-TEa:backgroundImage" width="29" height="29">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
@@ -2622,6 +2621,7 @@ AAGlFAABpRYAAaUYAAGlGgABtroAAba/AAG2zAABts8AAbbcAAG24QABtukAAbbsAAG28QABtvkAAAAA
 AAAEAQAAAAAAAABoAAAAAAAAAAAAAAAAAAG2/A
 </mutableData>
         </image>
+        <image name="freshFridge_icon" width="19" height="24.666666030883789"/>
         <image name="imageView:mqN-eC-TPh:image" width="115" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
