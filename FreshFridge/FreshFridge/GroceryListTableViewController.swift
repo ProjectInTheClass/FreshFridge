@@ -122,10 +122,10 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         // 분류별이면 카테고리별로 섹션를 나누고 카테고리 순서로 filteredGroceries에 항목을 추가한다.
         if isFridgeViewCategorySelected()
         {
-            for category in GroceryHistory.Category.allCases // 기타, 육류, 채소 등 7가지
+            for category in GroceryHistory.Category.allCases // 기타, 육류, 채소 등 7가지 이넘의 케이스 값을 하나씩 호출
             {
                 var sectionGroceries: [Grocery] = []
-                for grocery in showGroceries // showGroceries 값은 냉장, 냉동, 실외 순으로 배열되어 있다.
+                for grocery in showGroceries // showGroceries 값은 냉장, 냉동, 실외 버튼이 켜지고 꺼진 상태에 따라 한번 걸러진 어레이.
                 {
                     if(grocery.info.category == category)
                     {

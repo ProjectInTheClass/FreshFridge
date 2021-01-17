@@ -40,7 +40,7 @@
         <scene sceneID="peJ-rX-e71">
             <objects>
                 <navigationController id="YxD-Xb-Gsp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="list.bullet" catalog="system" id="h36-6n-zHz"/>
+                    <tabBarItem key="tabBarItem" title="" image="purchaseList_Icon_80px.png" id="h36-6n-zHz"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QkG-BZ-LFK">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -56,7 +56,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="list.bullet" catalog="system" width="128" height="88"/>
+        <image name="purchaseList_Icon_80px.png" width="26.666666030883789" height="26.666666030883789"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
