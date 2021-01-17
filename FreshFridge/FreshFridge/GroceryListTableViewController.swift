@@ -18,7 +18,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
     var numbersOfRowInSection: [Int] = []
-    var filteredGroceries: [[Grocery]] = []
+    var filteredGroceries: [[Grocery]] = [] // 어레이의 어레이
     
     //var filtersInFridgeView: [Bool] = [true, true, true]   // FridgeViewFilter순서
     var categoryButtonOn = true
@@ -99,40 +99,45 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         sectionNames.removeAll()
         
         // 냉장, 냉동, 실외 선택으로 보여지는 groceries를 필터링해서 showGroceries에 추가한다.
+        
+        
+//        var showGroceries = groceries.filter{ (refrigerationButton == true && $0.storage == .Refeigeration) || (freezingButton == true &&)  }
+
+        
         var showGroceries: [Grocery] = []
         
-        for filter in FridgeViewFilter.allCases
+        for filter in FridgeViewFilter.allCases // 냉장, 냉동, 실외 3번 반복된다.
         {
             if isFridgeViewFilterSelected(filter)
             {
                 showGroceries.append(contentsOf: groceries.filter{ $0.storage == filter})
             }
-        }
+        } 
         
-        // 분류별이면 카테고리별로 섹터를 나누고 카테고리 순서로 filteredGroceries에 항목을 추가한다.
+        // 분류별이면 카테고리별로 섹션를 나누고 카테고리 순서로 filteredGroceries에 항목을 추가한다.
         if isFridgeViewCategorySelected()
         {
-            for category in GroceryHistory.Category.allCases
+            for category in GroceryHistory.Category.allCases // 기타, 육류, 채소 등 7가지
             {
                 var sectionGroceries: [Grocery] = []
-                for grocery in showGroceries
+                for grocery in showGroceries // showGroceries 값은 냉장, 냉동, 실외 순으로 배열되어 있다.
                 {
                     if(grocery.info.category == category)
                     {
-                        sectionGroceries.append(grocery)
+                        sectionGroceries.append(grocery) // 동일한 카테고리 프로퍼티를 가진 값이 배열로 묶인다. 처음으로 쌀이 ETC여서 어팬드 되었단다.
                     }
                 }
                 
-                if sectionGroceries.count > 0
+                if sectionGroceries.count > 0 // 하나라도 담겨 있으면
                 {
-                    numbersOfRowInSection.append(sectionGroceries.count)
-                    numberOfSections += 1
-                    filteredGroceries.append(sectionGroceries)
-                    sectionNames.append(category.rawValue)
+                    numbersOfRowInSection.append(sectionGroceries.count) // 몇개 담겨있는지 세서 Row 갯수를 정한다.
+                    numberOfSections += 1 // 섹션은 0에서 하나씩 추가된다.
+                    filteredGroceries.append(sectionGroceries) //
+                    sectionNames.append(category.rawValue) // rawValue 는 enum Category의 case 뒤에 붙은 "스트링" 값을 가져다준다.
                 }
             }
         }
-        else
+        else // 분류별이 아니면 섹션 나누지 않고 그대로 진행한다.
         {
             numbersOfRowInSection.append(showGroceries.count)
             numberOfSections = 1
@@ -198,7 +203,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             let groceries = filteredGroceries[indexPath.section]
             let grocery = groceries[indexPath.row]
             
-            if(grocery.info.image == nil)
+            if(grocery.info.image == nil) // 이미지 값의 유무에 따라 셀의 모양이 다르다.
             {
                 cell = tableView.dequeueReusableCell(withIdentifier: "groceryCell", for: indexPath) as? GroceryListTableViewCell
             }
@@ -213,8 +218,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
 
             cell.titleLabel?.text = grocery.info.title
             
-            let diffDate = grocery.dueDate.date.timeIntervalSinceNow
-            let diffDay = Int(diffDate/(DueDate.secondOfDay))
+            let diffDate = grocery.dueDate.date.timeIntervalSinceNow // 초값이 소숫점 값으로 할당
+            let diffDay = Int(diffDate/(DueDate.secondOfDay)) // 초값을 하루초값으로 나눠서 일 수로 변환된다.
             cell.expirationLabel?.text = diffDay>=0 ? String("D-\(diffDay+1)") : String("D+\(-diffDay)")
             cell.expirationLabel?.backgroundColor = diffDay>=3 ? UIColor.systemGray5 : .red
             cell.expirationLabel?.textColor = diffDay>=3 ? UIColor.darkGray : .white

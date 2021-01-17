@@ -10,11 +10,11 @@ import UIKit
 
 struct DueDate: Codable
 {
-    static let secondOfDay: Double = 60*60*24.0
+    static let secondOfDay: Double = 60*60*24.0 // 하루 24시간을 초 값으로
     
     var date: Date
     
-    init(_ addingDay: Int)
+    init(_ addingDay: Int) // 값은 몇 일인지 인트값으로 들어온다.
     {
         date = Date().addingTimeInterval(DueDate.secondOfDay*Double(addingDay))
     }
@@ -96,7 +96,7 @@ class GroceryHistory : Codable
     enum Category: String, CaseIterable, Codable
     {
         case ETC = "ETC"
-        case MeatsAndEggs = "MeatsAndEggs"
+        case MeatsAndEggs = "Meats And Eggs"
         case MarineProducts = "MarineProducts"
         case CookingAndSidedishes = "CookingAndSidedishes"
         case Vegetable = "Vegetable"
@@ -106,6 +106,7 @@ class GroceryHistory : Codable
     }
     
     static let archiveURL = getDocumentsDirectory().appendingPathComponent("groceryHistory").appendingPathExtension("plist")
+    
     static func loadGroceryHistory() -> [GroceryHistory]?
     {
         guard let codedGroceryHistory = try? Data(contentsOf: archiveURL) else { return nil }
@@ -200,7 +201,7 @@ class Grocery : Codable
     
     init(info: GroceryHistory, count: Int, isPercentageCount: Bool, dueDate: DueDate, storage: Storage, fridgeName: String, notes: String?)
     {
-        self.info = info
+        self.info = info // 이름과 카테고리를 상속받는다.
         self.count = count
         self.isPercentageCount = isPercentageCount
         self.dueDate = dueDate
@@ -247,7 +248,8 @@ class Grocery : Codable
     
     static func loadSampleGrocery() -> [Grocery]
     {
-        return [Grocery(info: getGroceryHistory(title: "양파", category: .Vegetable), count: 5, isPercentageCount: false, dueDate: DueDate(2), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil),
+        return [
+        Grocery(info: getGroceryHistory(title: "양파", category: .Vegetable), count: 5, isPercentageCount: false, dueDate: DueDate(2), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil),
         Grocery(info: getGroceryHistory(title: "양배추", category: .Vegetable), count: 1, isPercentageCount: false, dueDate: DueDate(14), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
         Grocery(info: getGroceryHistory(title: "달걀", category: .MeatsAndEggs), count: 30, isPercentageCount: false, dueDate: DueDate(-1), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
         Grocery(info: getGroceryHistory(title: "치즈", category: .DrinksAndSnacks), count: 14, isPercentageCount: false, dueDate: DueDate(14), storage: .Refrigeration, fridgeName: selectedfrideName, notes: "아기 먹일 유기농 치즈"),
