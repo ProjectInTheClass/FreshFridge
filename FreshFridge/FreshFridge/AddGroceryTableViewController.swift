@@ -20,6 +20,7 @@ class AddGroceryTableViewController: UITableViewController {
     @IBOutlet weak var dueDateButton: UIButton!
     @IBOutlet weak var dueDateIncreaseWeek: UIButton!
     @IBOutlet weak var dueDateIncreaseMonth: UIButton!
+    @IBOutlet weak var dueDatePicker: UIDatePicker!
     @IBOutlet weak var fridgeSelectButton: UIButton!
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var pictureButton: UIButton!
@@ -31,6 +32,9 @@ class AddGroceryTableViewController: UITableViewController {
     var isDueDatePickerShown = false
     
     var grocery: Grocery?
+    
+    var count: Int = 0  // 추가 버튼으로 들어온 경우 사용됨
+    var dueDate: DueDate = DueDate(0)   // 추가 버튼으로 들어온 경우 사용됨
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,26 +65,42 @@ class AddGroceryTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         if let grocery = grocery
         {
-            storageSegment.selectedSegmentIndex = grocery.storage.rawValue
+            count = grocery.count
+            dueDate.date = grocery.dueDate.date
             
+            storageSegment.selectedSegmentIndex = grocery.storage.rawValue
             nameTextField.text = grocery.info.title
             categoryButton.setTitle(grocery.info.category.rawValue, for: .normal)
             countLabel.text = "\(Int(grocery.count))"
             percentageSwitch.isOn = grocery.isPercentageCount
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .short
-            dateFormatter.timeStyle = .none
-            dateFormatter.locale = Locale(identifier: "ko_KR")
-            
-            dueDateButton.setTitle(dateFormatter.string(from: grocery.dueDate.date), for: .normal)
             fridgeSelectButton.setTitle(grocery.fridgeName, for: .normal)
             noteTextField.text = grocery.notes
+            updateTableView()
+            
+            self.title = ""
             
         }
+        else
+        {
+            count = 0
+            dueDate.date = Date()
+            
+            storageSegment.selectedSegmentIndex = 0
+            categoryButton.setTitle(GroceryHistory.Category.ETC.rawValue, for: .normal)
+            countLabel.text = "\(Int(count))"
+            percentageSwitch.isOn = false
+            fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
+            updateTableView()
+            
+            self.title = "상품 추가"
+        }
+        
+        
+        
     }
 
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
         barcodeScanButton.frame.origin.y = scrollView.frame.height - barcodeScanButtonOffset + scrollView.contentOffset.y
     }
     
@@ -91,7 +111,7 @@ class AddGroceryTableViewController: UITableViewController {
         {
             if(isDueDatePickerShown)
             {
-                return 250.0
+                return 300.0
             }
             else
             {
@@ -106,22 +126,83 @@ class AddGroceryTableViewController: UITableViewController {
         return 44.0
     }
     
-    @IBAction func storageSegmentTapped(_ sender: Any) {
+    func updateTableView()
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dueDateButton.setTitle(dateFormatter.string(from: dueDate.date), for: .normal)
+        
+        countLabel.text = "\(Int(count))"
+        
+        if(grocery != nil)
+        {
+            fridgeSelectButton.setTitle(grocery?.fridgeName, for: .normal)
+        }
+        else
+        {
+            fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
+        }
+    }
+    //@IBAction func countDecreaseButtontapped(_ sender: Any)
+    //{
+    //if(percentageSwitch.isOn)
+    //{
+    //count -= 10
+    //}
+    //else
+    // {
+    //count -= 1
+    //}
+    @IBAction func countDecreaseButtonTapped(_ sender: Any)
+    {
+        if(percentageSwitch.isOn)
+        {
+            count -= 10
+        }
+        else
+        {
+            count -= 1
+        }
+        
+        if(count < 0)
+        {
+            count = 0
+        }
+        
+        updateTableView()
     }
     
-    @IBAction func nameTextFieldEdited(_ sender: Any) {
-    }
-    
-    @IBAction func categoryButtonTapped(_ sender: Any) {
-    }
-    
-    @IBAction func countDecreaseButtonTapped(_ sender: Any) {
-    }
-    
-    @IBAction func countIncreaseButtonTapped(_ sender: Any) {
+    @IBAction func countIncreaseButtonTapped(_ sender: Any)
+    {
+        if(percentageSwitch.isOn)
+        {
+            count += 10
+            if(count > 100)
+            {
+                count = 100
+            }
+        }
+        else
+        {
+            count += 1
+        }
+        
+        updateTableView()
     }
     
     @IBAction func percentageSwitchChanged(_ sender: Any) {
+        if(percentageSwitch.isOn)
+        {
+            count = 100
+        }
+        else
+        {
+            count = 1
+        }
+        
+        countLabel.text = "\(count)"
     }
     
     @IBAction func dueDateButtonTapped(_ sender: Any) {
@@ -130,20 +211,62 @@ class AddGroceryTableViewController: UITableViewController {
         tableView.endUpdates()
     }
     
-    @IBAction func dueDateIncreaseWeekTapped(_ sender: Any) {
+    @IBAction func dueDatePickerChanged(_ sender: Any)
+    {
+        dueDate.date = dueDatePicker.date
+        
+        updateTableView()
     }
     
-    @IBAction func dueDateIncreaseMonthTapped(_ sender: Any) {
+    @IBAction func dueDateIncreaseWeekTapped(_ sender: Any)
+    {
+        dueDate.addDays(7)
+        updateTableView()
+    }
+    
+    @IBAction func dueDateIncreaseMonthTapped(_ sender: Any)
+    {
+        dueDate.addMonth()
+        updateTableView()
     }
     
     @IBAction func fridgeSelectButtonTapped(_ sender: Any) {
     }
-    @IBAction func noteTextFieldEdited(_ sender: Any) {
-    }
+    
     @IBAction func pictureButtonTapped(_ sender: Any) {
     }
     @IBAction func barcodeScanButtonTapped(_ sender: Any) {
     }
+    
+    @IBAction func unwindToAddGrocery(_ unwindSegue: UIStoryboardSegue)
+    {
+        if( unwindSegue.identifier == "defaultNameSeque")
+        {
+            let sourceViewController = unwindSegue.source as! DefaultNameViewController
+            if(sourceViewController.selectedName != "")
+            {
+                // Use data from the view controller which initiated the unwind segue
+                nameTextField.text = sourceViewController.selectedName
+            }
+        }
+        else if(unwindSegue.identifier == "CategorySegue")
+        {
+            let sourceViewController = unwindSegue.source as! CategoryTableViewController
+            if(sourceViewController.categoryName != "")
+            {
+                categoryButton.setTitle(sourceViewController.categoryName, for: .normal)
+            }
+        }
+        else if(unwindSegue.identifier == "ToAddGrocery")
+        {
+            let sourceViewController = unwindSegue.source as! SelectFridgeNameTableViewController
+            if(sourceViewController.fridgeName != "")
+            {
+                fridgeSelectButton.setTitle(sourceViewController.fridgeName, for: .normal)
+            }
+        }
+    }
+    
     // MARK: - Table view data source
 /*
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -201,14 +324,20 @@ class AddGroceryTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if(segue.identifier == "FromAddGrocerySeque")
+        {
+            let navController = segue.destination as! UINavigationController
+            let controller = navController.topViewController as! SelectFridgeNameTableViewController
+            controller.grocery = grocery
+            controller.isFromAddGrocery = true
+        }
     }
-    */
+    
 
 }

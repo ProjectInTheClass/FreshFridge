@@ -13,10 +13,28 @@ struct DueDate: Codable
     static let secondOfDay: Double = 60*60*24.0
     
     var date: Date
-    
+        
     init(_ addingDay: Int)
     {
         date = Date().addingTimeInterval(DueDate.secondOfDay*Double(addingDay))
+    }
+    
+    mutating func addDays(_ addingDay: Int)
+    {
+        date.addTimeInterval(DueDate.secondOfDay*Double(addingDay))
+    }
+    
+    mutating func addMonth()
+    {
+        let nextMonthDate = Calendar.current.date(byAdding: .month, value: 1, to: date)
+        date = nextMonthDate ?? date
+    }
+    
+    func getExpirationDay() -> String
+    {
+        let diffDate = date.timeIntervalSinceNow
+        let diffDay = Int(diffDate/(DueDate.secondOfDay))
+        return diffDay>=0 ? String("D-\(diffDay+1)") : String("D+\(-diffDay)")
     }
 }
 
@@ -240,7 +258,8 @@ class Grocery : Codable
         return try? propertyListDecoder.decode(Array<Grocery>.self, from: codedGrocery)
     }
     
-    static func saveGrocery(_ groceries: [Grocery])
+    static func saveGrocery
+    (_ groceries: [Grocery])
     {
         let propertyListEncoder = PropertyListEncoder()
         let codedGrocery = try? propertyListEncoder.encode(groceries)
@@ -331,6 +350,18 @@ func getGroceryHistory(title: String, category: GroceryHistory.Category) -> Groc
 var fridgeNames = ["신선한냉장고", "김치냉장고", "추가냉장고1", "추가냉장고2"]
 var selectedFridgeIndex: [Int] = [0] // 다중 선택가능, fridgeNames index를 배열로 저장한다.
 var selectedfrideName = fridgeNames[selectedFridgeIndex[0]] // 다중선택된 selectedFridgeIndex중 첫번째 것으로 할당
+
+let defaultNames = [
+    "소고기", "돼지고기", "닭고기", "생선",
+    "양파", "김치", "대파", "고추",
+    "마늘", "무", "당근", "애호박",
+    "가지", "브로콜리", "상추", "양배추",
+    "파프리카", "시금치", "감자", "고구마",
+    "두부", "라면", "소면", "햄",
+    "계란", "참치", "김", "밀가루",
+    "우유", "소금", "참기름", "마요네즈",
+    "진간장", "국간장", "후추", "올리브유",
+    "포도씨유", "카놀라유", "식용유", "물엿"]
 
 // 메인뷰의 필터링
 typealias FridgeViewFilter = Grocery.Storage

@@ -79,11 +79,11 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             cartGroceries = CartGrocery.loadSampleCartGrocery()
         }
         
-        updateButtons()
+        updateFilteringButtons()
         updateTableView()
     }
     
-    func updateButtons()
+    func updateFilteringButtons()
     {
         categoryButton.switchOnOff(isOn: categoryButtonOn)
         refrigerationButton.switchOnOff(isOn: refrigerationButtonOn)
@@ -91,22 +91,40 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         outdoorButton.switchOnOff(isOn: outdoorButtonOn)
     }
     
+    func updateTableViewCell()
+    {
+        
+    }
+    
+    func isEnableFridgeName(name: String) -> Bool
+    {
+        for index in 0...selectedFridgeIndex.count-1
+        {
+            if(name == fridgeNames[selectedFridgeIndex[index]])
+            {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
     func updateTableView()
     {
+        self.title = selectedfrideName
+        
         numberOfSections = 0
         numbersOfRowInSection.removeAll()
         filteredGroceries.removeAll()
         sectionNames.removeAll()
         
         // 냉장, 냉동, 실외 선택으로 보여지는 groceries를 필터링해서 showGroceries에 추가한다.
-        var showGroceries: [Grocery] = []
-        
-        for filter in FridgeViewFilter.allCases
+        let showGroceries = groceries.filter
         {
-            if isFridgeViewFilterSelected(filter)
-            {
-                showGroceries.append(contentsOf: groceries.filter{ $0.storage == filter})
-            }
+            (((refrigerationButtonOn == true && $0.storage == .Refrigeration)
+            || (freezingButtonOn == true && $0.storage == .Freezing)
+            || (outdoorButtonOn == true && $0.storage == .Outdoor))
+                && isEnableFridgeName(name: $0.fridgeName))
         }
         
         // 분류별이면 카테고리별로 섹터를 나누고 카테고리 순서로 filteredGroceries에 항목을 추가한다.
@@ -215,7 +233,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             
             let diffDate = grocery.dueDate.date.timeIntervalSinceNow
             let diffDay = Int(diffDate/(DueDate.secondOfDay))
-            cell.expirationLabel?.text = diffDay>=0 ? String("D-\(diffDay+1)") : String("D+\(-diffDay)")
+            cell.expirationLabel?.text = grocery.dueDate.getExpirationDay()
             cell.expirationLabel?.backgroundColor = diffDay>=3 ? UIColor.systemGray5 : .red
             cell.expirationLabel?.textColor = diffDay>=3 ? UIColor.darkGray : .white
             
@@ -228,7 +246,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     @IBAction func categoryButtonTapped(_ sender: Any)
     {
         categoryButtonOn.toggle()
-        updateButtons()
+        updateFilteringButtons()
         updateTableView()
         tableView.reloadData()
 
@@ -237,7 +255,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     @IBAction func refrigerationButtonTapped(_ sender: Any)
     {
         refrigerationButtonOn.toggle()
-        updateButtons()
+        updateFilteringButtons()
         updateTableView()
         tableView.reloadData()
 
@@ -246,7 +264,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     @IBAction func freezingButtonTapped(_ sender: Any)
     {
         freezingButtonOn.toggle()
-        updateButtons()
+        updateFilteringButtons()
         updateTableView()
         tableView.reloadData()
 
@@ -255,7 +273,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     @IBAction func outdoorButtonTapped(_ sender: Any)
     {
         outdoorButtonOn.toggle()
-        updateButtons()
+        updateFilteringButtons()
         updateTableView()
         tableView.reloadData()
     }
@@ -301,11 +319,74 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     @IBAction func unwindToGroceryListTableView(_ unwindSegue: UIStoryboardSegue) {
         //let sourceViewController = unwindSegue.source
         // Use data from the view controller which initiated the unwind segue
-        guard unwindSegue.identifier == "SaveUnwind" else { return }
+        if(unwindSegue.identifier == "SaveUnwind")
+        {
         
-        // 구현 필요..
-        
-        
+            if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
+            {
+                let title = sourceViewController.nameTextField.text ?? ""
+                let category = GroceryHistory.Category(rawValue: sourceViewController.categoryButton.title(for: .normal) ?? "")!
+                //grocery.info.image =
+                
+                let count = sourceViewController.count
+                let isPercentageCount = sourceViewController.percentageSwitch.isOn
+                
+                let dueDate = sourceViewController.dueDate
+                
+                let storage = Grocery.Storage(rawValue: sourceViewController.storageSegment.selectedSegmentIndex)!
+                let fridgeName = sourceViewController.fridgeSelectButton.title(for: .normal) ?? ""
+                let notes = sourceViewController.noteTextField.text
+                
+                
+                if let grocery = sourceViewController.grocery
+                {
+                    // editing
+                    grocery.info.title = title
+                    grocery.info.category = category
+                    //grocery.info.image
+                    grocery.count = count
+                    grocery.isPercentageCount = isPercentageCount
+                    grocery.dueDate = dueDate
+                    grocery.storage = storage
+                    grocery.fridgeName = fridgeName
+                    grocery.notes = notes
+                    
+                    if(grocery.info.image == nil)
+                    {
+                        let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as! GroceryListTableViewCell
+                        cell.titleLabel.text = title
+                        cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
+                        cell.countButton.setTitle("\(grocery.count)", for: .normal)
+                    }
+                    else
+                    {
+                        let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as! GroceryListTableViewPictureCell
+                        cell.titleLabel.text = title
+                        cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
+                        cell.countButton.setTitle("\(grocery.count)", for: .normal)
+                        //cell.imageView
+                    }
+                }
+                else
+                {
+                    // adding
+                    let newGrocery = Grocery(info: getGroceryHistory(title: title, category: category), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
+                    groceries.append(newGrocery)
+                    
+                    updateTableView()
+                }
+                
+                tableView.reloadData()
+                
+                Grocery.saveGrocery(groceries)
+            }
+        }
+        else if(unwindSegue.identifier == "ToGroceryList")
+        {
+            selectedfrideName = fridgeNames[selectedFridgeIndex[0]]
+            updateTableView()
+            tableView.reloadData()
+        }
     }
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
