@@ -249,6 +249,7 @@ class Grocery : Codable
     static func loadSampleGrocery() -> [Grocery]
     {
         return [
+        Grocery(info: getGroceryHistory(title: "냉동 돈까스", category: .MeatsAndEggs), count: 8, isPercentageCount: false, dueDate: DueDate(60), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
         Grocery(info: getGroceryHistory(title: "양파", category: .Vegetable), count: 5, isPercentageCount: false, dueDate: DueDate(2), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil),
         Grocery(info: getGroceryHistory(title: "양배추", category: .Vegetable), count: 1, isPercentageCount: false, dueDate: DueDate(14), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
         Grocery(info: getGroceryHistory(title: "달걀", category: .MeatsAndEggs), count: 30, isPercentageCount: false, dueDate: DueDate(-1), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
@@ -267,7 +268,6 @@ class Grocery : Codable
         Grocery(info: getGroceryHistory(title: "진간장", category: .SeasonedAndOilAndSauce), count: 40, isPercentageCount: true, dueDate: DueDate(180), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
         Grocery(info: getGroceryHistory(title: "멸치액젓", category: .SeasonedAndOilAndSauce), count: 90, isPercentageCount: true, dueDate: DueDate(180), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
         Grocery(info: getGroceryHistory(title: "토마토케찹", category: .SeasonedAndOilAndSauce), count: 10, isPercentageCount: true, dueDate: DueDate(210), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-        Grocery(info: getGroceryHistory(title: "냉동 돈까스", category: .MeatsAndEggs), count: 8, isPercentageCount: false, dueDate: DueDate(60), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
         Grocery(info: getGroceryHistory(title: "냉동 돈까스", category: .MeatsAndEggs), count: 2, isPercentageCount: false, dueDate: DueDate(30), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
         Grocery(info: getGroceryHistory(title: "참치캔", category: .MeatsAndEggs), count: 15, isPercentageCount: false, dueDate: DueDate(210), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil),
         Grocery(info: getGroceryHistory(title: "쌀", category: .ETC), count: 70, isPercentageCount: true, dueDate: DueDate(60), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil)

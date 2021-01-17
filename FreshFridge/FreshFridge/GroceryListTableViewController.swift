@@ -100,10 +100,14 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         
         // 냉장, 냉동, 실외 선택으로 보여지는 groceries를 필터링해서 showGroceries에 추가한다.
         
-        
-//        var showGroceries = groceries.filter{ (refrigerationButton == true && $0.storage == .Refeigeration) || (freezingButton == true &&)  }
-
-        
+        let showGroceries = groceries.filter
+            {
+              (refrigerationButtonOn == true && $0.storage == .Refrigeration)
+              || (freezingButtonOn == true && $0.storage == .Freezing)
+              || (outdoorButtonOn == true && $0.storage == .Outdoor)
+            }
+         
+        /*
         var showGroceries: [Grocery] = []
         
         for filter in FridgeViewFilter.allCases // 냉장, 냉동, 실외 3번 반복된다.
@@ -112,7 +116,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             {
                 showGroceries.append(contentsOf: groceries.filter{ $0.storage == filter})
             }
-        } 
+        }
+         */
         
         // 분류별이면 카테고리별로 섹션를 나누고 카테고리 순서로 filteredGroceries에 항목을 추가한다.
         if isFridgeViewCategorySelected()
