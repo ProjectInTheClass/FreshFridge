@@ -130,7 +130,7 @@ class SelectFridgeNameTableViewController: UITableViewController {
 
     @IBAction func backButtonTapped(_ sender: Any)
     {
-        if grocery != nil
+        if(isFromAddGrocery)
         {
             performSegue(withIdentifier: "ToAddGrocery", sender: self)
         }

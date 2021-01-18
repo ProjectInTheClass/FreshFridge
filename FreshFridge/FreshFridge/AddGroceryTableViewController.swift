@@ -44,7 +44,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         storageSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .normal)
         
         
-        countLabel.layer.cornerRadius = 10
+        countLabel.layer.cornerRadius = 8
         countLabel.clipsToBounds = true
         
         dueDateTitleLabel.layer.cornerRadius = 10
