@@ -45,6 +45,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        GroceryImage.viewSize = CGSize(width: view.frame.width, height: view.frame.height)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -204,6 +206,16 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         return sectionNames[section]
+    }
+    
+    override public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+
+        if let view = view as? UITableViewHeaderFooterView {
+            //view.backgroundView?.backgroundColor = UIColor.blue
+            //view.textLabel?.backgroundColor = UIColor.clear
+            //view.textLabel?.textColor = UIColor.darkGray
+            view.textLabel?.font = .systemFont(ofSize: 17)
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell

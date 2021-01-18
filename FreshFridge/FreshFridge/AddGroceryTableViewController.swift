@@ -39,6 +39,11 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        storageSegment.setTitleTextAttributes([NSAttributedString.Key.font: systemFont15], for: .normal)
+        storageSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .selected)
+        storageSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .normal)
+        
+        
         countLabel.layer.cornerRadius = 10
         countLabel.clipsToBounds = true
         
@@ -49,6 +54,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         dueDateButton.layer.cornerRadius = 10
         dueDateButton.clipsToBounds = true
         dueDateButton.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
+        
+        pictureButton.imageView?.contentMode = .scaleAspectFit
         
         barcodeScanButton = UIButton(frame: CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50))
         barcodeScanButton.backgroundColor = .orange
@@ -62,7 +69,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // self.navigationItemscaleAspectFit.rightBarButtonItem = self.editButtonItem
         if let grocery = grocery
         {
             count = grocery.count
@@ -78,8 +85,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             if(grocery.info.image != nil)
             {
                 pictureButton.setImage(grocery.info.image?.image(), for: .normal)
-                pictureButton.imageView?.frame = pictureButton.frame
-                pictureButton.imageView?.contentMode = .scaleAspectFit
+                
             }
             updateTableView()
             
@@ -126,7 +132,14 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         }
         else if(indexPath == pictureButtonIndexPath)
         {
-            return 200.0
+            if(view.superview != nil)
+            {
+                return view.superview!.frame.size.width * 3.0 / 4.0
+            }
+            else
+            {
+                return view.frame.width * 3.0 / 4.0
+            }
         }
         
         return 44.0
@@ -277,11 +290,9 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             grocery.info.image = typeImage
         }
         
-        //pictureButton.setBackgroundImage(typeImage.image(), for: .normal)
         pictureButton.setImage(typeImage.image(), for: .normal)
-        pictureButton.imageView?.contentMode = .scaleAspectFit
         
-        
+
         dismiss(animated: true, completion: nil)
     }
     

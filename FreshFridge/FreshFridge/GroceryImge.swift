@@ -11,14 +11,9 @@ import CryptoKit
 
 class GroceryImage: Codable
 {
-    var filename: String
+    var filename: String = ""
     var fileExtension: String = "png"
-    var targetSize: CGSize = CGSize(width: 200, height: 200)
-    
-    init(filename: String)
-    {
-        self.filename = filename
-    }
+    static var viewSize: CGSize = CGSize(width: 192, height: 108)
     
     init(image: UIImage?)
     {
@@ -36,8 +31,8 @@ class GroceryImage: Codable
         {
             let size = image.size
 
-            let widthRatio  = targetSize.width  / size.width
-            let heightRatio = targetSize.height / size.height
+            let widthRatio  = GroceryImage.viewSize.width  / size.width
+            let heightRatio = GroceryImage.viewSize.height / size.height
 
             // Figure out what our orientation is, and use that to form the rectangle
             var newSize: CGSize

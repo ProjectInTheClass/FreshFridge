@@ -294,6 +294,8 @@ func getDocumentsDirectory() -> URL
     return paths[0]
 }
 
+let systemFont15 = UIFont.systemFont(ofSize: 15)
+
 
 // 메인뷰 냉장고 이름 선택
 var fridgeNames = ["신선한냉장고", "김치냉장고", "추가냉장고1", "추가냉장고2"]
