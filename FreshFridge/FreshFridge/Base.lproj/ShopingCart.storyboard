@@ -30,7 +30,9 @@
                             <outlet property="delegate" destination="xCs-Wd-AV3" id="41t-28-irW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="장바구니" id="hBn-rY-psi"/>
+                    <navigationItem key="navigationItem" title="장바구니" id="hBn-rY-psi">
+                        <barButtonItem key="rightBarButtonItem" title="추가" id="qrZ-7Q-MUh"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yuX-NB-S2W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
