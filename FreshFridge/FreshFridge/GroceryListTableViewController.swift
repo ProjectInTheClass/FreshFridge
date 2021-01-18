@@ -353,18 +353,29 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     
                     if(grocery.info.image == nil)
                     {
-                        let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as! GroceryListTableViewCell
-                        cell.titleLabel.text = title
-                        cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
-                        cell.countButton.setTitle("\(grocery.count)", for: .normal)
+                        if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewCell
+                        {
+                            cell.titleLabel.text = title
+                            cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
+                            cell.countButton.setTitle("\(grocery.count)", for: .normal)
+                        }
+                        else
+                        {
+                            tableView.reloadData()
+                        }
                     }
                     else
                     {
-                        let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as! GroceryListTableViewPictureCell
-                        cell.titleLabel.text = title
-                        cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
-                        cell.countButton.setTitle("\(grocery.count)", for: .normal)
-                        //cell.imageView
+                        if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewPictureCell
+                        {
+                            cell.titleLabel.text = title
+                            cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
+                            cell.countButton.setTitle("\(grocery.count)", for: .normal)
+                        }
+                        else
+                        {
+                            tableView.reloadData()
+                        }
                     }
                 }
                 else

@@ -245,6 +245,7 @@
                                     <outlet property="expirationLabel" destination="pHQ-go-Nce" id="oPR-Za-Px9"/>
                                     <outlet property="titleImage" destination="mqN-eC-TPh" id="Vf9-DQ-lfg"/>
                                     <outlet property="titleLabel" destination="nyN-Se-9pY" id="JP0-XC-XmG"/>
+                                    <segue destination="eEB-RA-Rbm" kind="presentation" identifier="EditCell" id="z0t-Z5-I7d"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -690,7 +691,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ol-NH-34j">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ol-NH-34j">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="200"/>
                                                     <state key="normal" title="사진 추가">
                                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -944,7 +945,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="frF-Of-ENu"/>
-        <segue reference="hZy-hr-RAe"/>
+        <segue reference="z0t-Z5-I7d"/>
         <segue reference="DMT-S1-uLM"/>
     </inferredMetricsTieBreakers>
     <resources>

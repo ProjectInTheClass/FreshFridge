@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddGroceryTableViewController: UITableViewController {
+class AddGroceryTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     @IBOutlet weak var storageSegment: UISegmentedControl!
     @IBOutlet weak var nameTextField: UITextField!
@@ -28,7 +28,7 @@ class AddGroceryTableViewController: UITableViewController {
     
     var barcodeScanButton: UIButton!
     let barcodeScanButtonOffset: CGFloat = 100.0
-    
+
     var isDueDatePickerShown = false
     
     var grocery: Grocery?
@@ -75,6 +75,12 @@ class AddGroceryTableViewController: UITableViewController {
             percentageSwitch.isOn = grocery.isPercentageCount
             fridgeSelectButton.setTitle(grocery.fridgeName, for: .normal)
             noteTextField.text = grocery.notes
+            if(grocery.info.image != nil)
+            {
+                pictureButton.setImage(grocery.info.image?.image(), for: .normal)
+                pictureButton.imageView?.frame = pictureButton.frame
+                pictureButton.imageView?.contentMode = .scaleAspectFit
+            }
             updateTableView()
             
             self.title = ""
@@ -145,16 +151,7 @@ class AddGroceryTableViewController: UITableViewController {
             fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
         }
     }
-    //@IBAction func countDecreaseButtontapped(_ sender: Any)
-    //{
-    //if(percentageSwitch.isOn)
-    //{
-    //count -= 10
-    //}
-    //else
-    // {
-    //count -= 1
-    //}
+    
     @IBAction func countDecreaseButtonTapped(_ sender: Any)
     {
         if(percentageSwitch.isOn)
@@ -192,7 +189,8 @@ class AddGroceryTableViewController: UITableViewController {
         updateTableView()
     }
     
-    @IBAction func percentageSwitchChanged(_ sender: Any) {
+    @IBAction func percentageSwitchChanged(_ sender: Any)
+    {
         if(percentageSwitch.isOn)
         {
             count = 100
@@ -205,7 +203,8 @@ class AddGroceryTableViewController: UITableViewController {
         countLabel.text = "\(count)"
     }
     
-    @IBAction func dueDateButtonTapped(_ sender: Any) {
+    @IBAction func dueDateButtonTapped(_ sender: Any)
+    {
         isDueDatePickerShown.toggle()
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -214,7 +213,6 @@ class AddGroceryTableViewController: UITableViewController {
     @IBAction func dueDatePickerChanged(_ sender: Any)
     {
         dueDate.date = dueDatePicker.date
-        
         updateTableView()
     }
     
@@ -233,8 +231,60 @@ class AddGroceryTableViewController: UITableViewController {
     @IBAction func fridgeSelectButtonTapped(_ sender: Any) {
     }
     
-    @IBAction func pictureButtonTapped(_ sender: Any) {
+    @IBAction func pictureButtonTapped(_ sender: UIButton)
+    {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        let alertController = UIAlertController(title: "Choose Image Source", message: nil, preferredStyle: .actionSheet)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera)
+        {
+            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { action in
+                //print("User selected Camera Action")
+                imagePicker.sourceType = .camera
+                self.present(imagePicker, animated: true, completion: nil)
+            })
+            
+            alertController.addAction(cameraAction)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
+        {
+            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: {
+                action in
+                //print("User selected Photo Library Action")
+                imagePicker.sourceType = .photoLibrary
+                self.present(imagePicker, animated: true, completion: nil)
+                })
+            alertController.addAction(photoLibraryAction)
+        }
+        
+        alertController.popoverPresentationController?.sourceView = sender
+        
+        present(alertController, animated: true, completion: nil)
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let selectedImage = info[.originalImage] as? UIImage else { return }
+        
+        let typeImage = TypedImage(image: selectedImage)
+        if let grocery = grocery
+        {
+            grocery.info.image = typeImage
+        }
+        
+        //pictureButton.setBackgroundImage(typeImage.image(), for: .normal)
+        pictureButton.setImage(typeImage.image(), for: .normal)
+        pictureButton.imageView?.contentMode = .scaleAspectFit
+        
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func barcodeScanButtonTapped(_ sender: Any) {
     }
     
