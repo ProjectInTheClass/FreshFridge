@@ -25,6 +25,7 @@
 		8EA2CC2125B40EC900D80622 /* DefaultNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2025B40EC900D80622 /* DefaultNameViewController.swift */; };
 		8EA2CC2425B40EE600D80622 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */; };
 		8EA2CC2825B4201600D80622 /* SelectFridgeNameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */; };
+		8EA2CC2C25B55A2500D80622 /* GroceryImge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2B25B55A2500D80622 /* GroceryImge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		8EA2CC2025B40EC900D80622 /* DefaultNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNameViewController.swift; sourceTree = "<group>"; };
 		8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFridgeNameTableViewController.swift; sourceTree = "<group>"; };
+		8EA2CC2B25B55A2500D80622 /* GroceryImge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryImge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				8E4B99D225AD4AF500F2B0BF /* SceneDelegate.swift */,
 				8E4B99D425AD4AF500F2B0BF /* ViewController.swift */,
 				8E4B99FA25AD4EFE00F2B0BF /* Grocery.swift */,
+				8EA2CC2B25B55A2500D80622 /* GroceryImge.swift */,
 				8E4B99FD25AD4EFE00F2B0BF /* UIButtonExtension.swift */,
 				8E4B99FB25AD4EFE00F2B0BF /* GroceryListTableViewController.swift */,
 				8E4B99FC25AD4EFE00F2B0BF /* GroceryListTableViewCell.swift */,
@@ -186,6 +189,7 @@
 				8E4B99D125AD4AF500F2B0BF /* AppDelegate.swift in Sources */,
 				8EA2CC2425B40EE600D80622 /* CategoryTableViewController.swift in Sources */,
 				8E4B99D325AD4AF500F2B0BF /* SceneDelegate.swift in Sources */,
+				8EA2CC2C25B55A2500D80622 /* GroceryImge.swift in Sources */,
 				8EA2CC2825B4201600D80622 /* SelectFridgeNameTableViewController.swift in Sources */,
 				8E4B99FF25AD4EFE00F2B0BF /* Grocery.swift in Sources */,
 			);

@@ -271,7 +271,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         
-        let typeImage = TypedImage(image: selectedImage)
+        let typeImage = GroceryImage(image: selectedImage)
         if let grocery = grocery
         {
             grocery.info.image = typeImage

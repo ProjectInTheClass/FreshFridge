@@ -8,130 +8,13 @@
 import Foundation
 import UIKit
 
-struct DueDate: Codable
-{
-    static let secondOfDay: Double = 60*60*24.0
-    
-    var date: Date
-        
-    init(_ addingDay: Int)
-    {
-        date = Date().addingTimeInterval(DueDate.secondOfDay*Double(addingDay))
-    }
-    
-    mutating func addDays(_ addingDay: Int)
-    {
-        date.addTimeInterval(DueDate.secondOfDay*Double(addingDay))
-    }
-    
-    mutating func addMonth()
-    {
-        let nextMonthDate = Calendar.current.date(byAdding: .month, value: 1, to: date)
-        date = nextMonthDate ?? date
-    }
-    
-    func getExpirationDay() -> String
-    {
-        let diffDate = date.timeIntervalSinceNow
-        let diffDay = Int(diffDate/(DueDate.secondOfDay))
-        return diffDay>=0 ? String("D-\(diffDay+1)") : String("D+\(-diffDay)")
-    }
-}
-
-class TypedImage: Codable
-{
-    var filename: String
-    var fileExtension: String = "png"
-    let targetSize: CGSize = CGSize(width: 200, height: 200)
-    
-    init(filename: String)
-    {
-        self.filename = filename
-    }
-    
-    init(image: UIImage?)
-    {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM_dd_yyyy_HH_mm_ss_SSS"
-        filename = dateFormatter.string(from: Date())
-        
-        if let image = image
-        {
-            if (image.imageOrientation != UIImage.Orientation.up)
-            {
-                let size = image.size
-
-                let widthRatio  = targetSize.width  / size.width
-                let heightRatio = targetSize.height / size.height
-
-                // Figure out what our orientation is, and use that to form the rectangle
-                var newSize: CGSize
-                if(widthRatio > heightRatio) {
-                    newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-                } else {
-                    newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
-                }
-                
-                UIGraphicsBeginImageContextWithOptions(newSize, false, image.scale);
-                let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-                image.draw(in: rect)
-
-                let normalizedImage : UIImage! = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                if(normalizedImage != nil)
-                {
-                    makeImage(uiImage: normalizedImage)
-                }
-                else
-                {
-                    print("rotation failed.")
-                    makeImage(uiImage: image)
-                }
-            }
-            else
-            {
-                makeImage(uiImage: image)
-            }
-        }
-    }
-
-    func image() -> UIImage?
-    {
-        let fullFilename = getDocumentsDirectory().appendingPathComponent("\(filename).\(fileExtension)")
-        if let data = try? Data(contentsOf: fullFilename)
-        {
-            return UIImage(data: data)
-        }
-        
-        return nil
-    }
-    
-    
-    
-    func makeImage(uiImage: UIImage)
-    {
-        // file로 저장
-        if let data = uiImage.pngData()
-        {
-            let fullFilename = getDocumentsDirectory().appendingPathComponent("\(filename).\(fileExtension)")
-            try? data.write(to: fullFilename)
-        }
-    }
-}
-
-func getDocumentsDirectory() -> URL
-{
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return paths[0]
-}
-
 class GroceryHistory : Codable
 {
     var title: String
     var category: Category
     var favorite: Bool = false
     var lastestPurchaseDate: Date
-    var image: TypedImage?
+    var image: GroceryImage?
     
     init(title: String, category: Category, lastestPurchaseDate: Date)
     {
@@ -140,7 +23,7 @@ class GroceryHistory : Codable
         self.lastestPurchaseDate = lastestPurchaseDate
     }
     
-    init(title: String, category: Category, lastestPurchaseDate: Date, image: TypedImage)
+    init(title: String, category: Category, lastestPurchaseDate: Date, image: GroceryImage)
     {
         self.title = title
         self.category = category
@@ -190,7 +73,7 @@ class GroceryHistory : Codable
         GroceryHistory(title: "딸기", category: .Fruits, lastestPurchaseDate: Date()),
         GroceryHistory(title: "고등어", category: .MarineProducts, lastestPurchaseDate: Date()),
         GroceryHistory(title: "김치", category: .CookingAndSidedishes, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "바나나우유", category: .DrinksAndSnacks, lastestPurchaseDate: Date(), image: TypedImage(image: UIImage(named: "dumyPicture1"))),
+        GroceryHistory(title: "바나나우유", category: .DrinksAndSnacks, lastestPurchaseDate: Date(), image: GroceryImage(image: UIImage(named: "dumyPicture1"))),
         GroceryHistory(title: "소고기", category: .MeatsAndEggs, lastestPurchaseDate: Date()),
         GroceryHistory(title: "돼지고기", category: .MeatsAndEggs, lastestPurchaseDate: Date()),
         GroceryHistory(title: "닭고기", category: .MeatsAndEggs, lastestPurchaseDate: Date()),
@@ -361,6 +244,35 @@ class CartGrocery: Codable
     }
 }
 
+struct DueDate: Codable
+{
+    static let secondOfDay: Double = 60*60*24.0
+    
+    var date: Date
+        
+    init(_ addingDay: Int)
+    {
+        date = Date().addingTimeInterval(DueDate.secondOfDay*Double(addingDay))
+    }
+    
+    mutating func addDays(_ addingDay: Int)
+    {
+        date.addTimeInterval(DueDate.secondOfDay*Double(addingDay))
+    }
+    
+    mutating func addMonth()
+    {
+        let nextMonthDate = Calendar.current.date(byAdding: .month, value: 1, to: date)
+        date = nextMonthDate ?? date
+    }
+    
+    func getExpirationDay() -> String
+    {
+        let diffDate = date.timeIntervalSinceNow
+        let diffDay = Int(diffDate/(DueDate.secondOfDay))
+        return diffDay>=0 ? String("D-\(diffDay+1)") : String("D+\(-diffDay)")
+    }
+}
 
 func getGroceryHistory(title: String, category: GroceryHistory.Category) -> GroceryHistory
 {
@@ -374,6 +286,12 @@ func getGroceryHistory(title: String, category: GroceryHistory.Category) -> Groc
         groceryHistories.append(groceryHistory)
         return groceryHistory
     }
+}
+
+func getDocumentsDirectory() -> URL
+{
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
 }
 
 
