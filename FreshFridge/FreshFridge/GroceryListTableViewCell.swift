@@ -49,10 +49,13 @@ class GroceryListTableViewPictureCell : GroceryListTableViewCell
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        /*
+        titleImage.contentMode = .scaleAspectFill
         titleImage.layer.cornerRadius = 3
         titleImage.clipsToBounds = true
-        
+        */
+        // cornerRadius와 scaleAspectFit이 동시에 안됨
+        titleImage.contentMode = .scaleAspectFit
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

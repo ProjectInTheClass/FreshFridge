@@ -34,6 +34,7 @@ class DefaultNameViewController: UIViewController {
             button.setTitle(name, for: .normal)
             button.setTitleColor(.darkGray, for: .normal)
             button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+            button.titleLabel?.font = systemFont15
             
             view.addSubview(button)
             
