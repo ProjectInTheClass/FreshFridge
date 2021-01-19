@@ -317,6 +317,9 @@
                                                                 <segment title="냉동"/>
                                                                 <segment title="실외"/>
                                                             </segments>
+                                                            <connections>
+                                                                <action selector="storageSegmentedControlTapped:" destination="bIZ-Js-LAB" eventType="valueChanged" id="gVU-g3-EDX"/>
+                                                            </connections>
                                                         </segmentedControl>
                                                     </subviews>
                                                 </stackView>
@@ -357,6 +360,7 @@
                                                             </constraints>
                                                             <state key="normal" image="chevron.forward" catalog="system"/>
                                                             <connections>
+                                                                <action selector="defaultNameButtonTapped:" destination="bIZ-Js-LAB" eventType="touchUpInside" id="LZT-PQ-OgR"/>
                                                                 <segue destination="fOP-zn-5Zj" kind="presentation" id="GgE-sQ-Sw7"/>
                                                             </connections>
                                                         </button>
@@ -392,6 +396,7 @@
                                                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
                                                             <connections>
+                                                                <action selector="categoryButtonTapped:" destination="bIZ-Js-LAB" eventType="touchUpInside" id="q1Z-5e-1vM"/>
                                                                 <segue destination="kXz-ih-OqX" kind="presentation" id="DMT-S1-uLM"/>
                                                             </connections>
                                                         </button>
@@ -402,6 +407,7 @@
                                                             </constraints>
                                                             <state key="normal" image="chevron.right" catalog="system"/>
                                                             <connections>
+                                                                <action selector="categorySelectButtonTapped:" destination="bIZ-Js-LAB" eventType="touchUpInside" id="MDw-iO-Wl4"/>
                                                                 <segue destination="kXz-ih-OqX" kind="presentation" id="X79-Bh-IQh"/>
                                                             </connections>
                                                         </button>
@@ -461,24 +467,24 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Di7-XT-u93">
                                                                     <rect key="frame" x="35" y="0.0" width="50" height="43.5"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEG-ON-TOk">
+                                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9RE-NT-EUt">
                                                                             <rect key="frame" x="0.0" y="2" width="50" height="39.5"/>
                                                                             <color key="backgroundColor" systemColor="systemGray5Color"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="50" id="rUO-f6-yIK"/>
-                                                                            </constraints>
+                                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
+                                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
+                                                                            <connections>
+                                                                                <action selector="countTextFieldEdited:" destination="bIZ-Js-LAB" eventType="editingDidEnd" id="Dlo-CB-Exf"/>
+                                                                            </connections>
+                                                                        </textField>
                                                                     </subviews>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
-                                                                        <constraint firstItem="VEG-ON-TOk" firstAttribute="top" secondItem="Di7-XT-u93" secondAttribute="top" constant="2" id="Gms-aA-T0G"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="9RE-NT-EUt" secondAttribute="bottom" constant="2" id="B3u-nS-nJb"/>
+                                                                        <constraint firstItem="9RE-NT-EUt" firstAttribute="top" secondItem="Di7-XT-u93" secondAttribute="top" constant="2" id="N2H-za-8f9"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="9RE-NT-EUt" secondAttribute="trailing" id="YV8-z8-FTd"/>
                                                                         <constraint firstAttribute="width" constant="50" id="bpH-3J-CE4"/>
-                                                                        <constraint firstItem="VEG-ON-TOk" firstAttribute="leading" secondItem="Di7-XT-u93" secondAttribute="leading" id="kIj-E8-nBL"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="VEG-ON-TOk" secondAttribute="trailing" id="nSd-Sk-0zY"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="VEG-ON-TOk" secondAttribute="bottom" constant="2" id="uhM-Ol-PKm"/>
+                                                                        <constraint firstItem="9RE-NT-EUt" firstAttribute="leading" secondItem="Di7-XT-u93" secondAttribute="leading" id="inG-IQ-LKI"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZIT-BI-uTm">
@@ -545,6 +551,10 @@
                                                 <constraint firstItem="bOf-ZM-VJp" firstAttribute="top" secondItem="3t7-mX-OCz" secondAttribute="top" id="pPI-JK-jlm"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="CqR-Hy-JVL" appends="YES" id="XHs-sj-I1c"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -621,6 +631,10 @@
                                                 <constraint firstItem="a16-eF-SSv" firstAttribute="leading" secondItem="zfI-Hy-G12" secondAttribute="leading" id="yy7-ai-QWa"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="FyQ-Ld-zBQ" appends="YES" id="K7X-f0-SPU"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DatePickerCell" rowHeight="300" id="aDh-CN-vRy">
                                         <rect key="frame" x="20" y="262.5" width="374" height="300"/>
@@ -629,8 +643,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="xsc-kC-Cei">
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsc-kC-Cei">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="341"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="632684160.76684999">
+                                                        <!--2021-01-18 17:36:00 +0000-->
+                                                    </date>
+                                                    <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                                        <!--1970-01-01 11:00:00 +0000-->
+                                                    </date>
+                                                    <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                                        <!--2037-12-31 11:00:00 +0000-->
+                                                    </date>
                                                     <connections>
                                                         <action selector="dueDatePickerChanged:" destination="bIZ-Js-LAB" eventType="valueChanged" id="KVm-gl-iBJ"/>
                                                     </connections>
@@ -661,7 +684,7 @@
                                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="fridgeSelectButtonTapped:" destination="bIZ-Js-LAB" eventType="touchUpInside" id="EA7-LI-3tB"/>
+                                                        <action selector="fridgeSelectButtonTapped:" destination="bIZ-Js-LAB" eventType="touchUpInside" id="wKg-4n-qnw"/>
                                                         <segue destination="T5Z-K6-eBj" kind="presentation" identifier="FromAddGrocerySeque" id="frF-Of-ENu"/>
                                                     </connections>
                                                 </button>
@@ -763,9 +786,10 @@
                     <size key="freeformSize" width="414" height="1200"/>
                     <connections>
                         <outlet property="categoryButton" destination="Edp-Ci-IUk" id="70t-na-upN"/>
+                        <outlet property="completeButton" destination="oT2-je-PeG" id="zJM-5q-5ng"/>
                         <outlet property="countDecreaseButton" destination="FdF-iU-wSx" id="gid-y2-XEp"/>
                         <outlet property="countIncreaseButton" destination="ZIT-BI-uTm" id="fvz-tO-J0H"/>
-                        <outlet property="countLabel" destination="VEG-ON-TOk" id="onE-lY-3D3"/>
+                        <outlet property="countTextField" destination="9RE-NT-EUt" id="Ncm-YC-dbp"/>
                         <outlet property="dueDateButton" destination="F6H-WG-7Em" id="U7Y-OP-1wX"/>
                         <outlet property="dueDateIncreaseMonth" destination="2mN-lD-CQU" id="ioq-Rt-FJ8"/>
                         <outlet property="dueDateIncreaseWeek" destination="4fu-qZ-wGQ" id="0qo-JS-CMB"/>
@@ -781,6 +805,16 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2k5-gM-DAJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Nq0-ff-atw" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="CqR-Hy-JVL">
+                    <connections>
+                        <action selector="countTableCellTapped:" destination="bIZ-Js-LAB" id="QHI-va-vSf"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="FyQ-Ld-zBQ">
+                    <connections>
+                        <action selector="dueDateTableCellTapped:" destination="bIZ-Js-LAB" id="JpK-Xz-4R7"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3098.5507246376815" y="-241.07142857142856"/>
         </scene>

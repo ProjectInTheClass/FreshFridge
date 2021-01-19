@@ -72,6 +72,12 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             groceries = Grocery.loadSampleGrocery()
         }
         
+        // link groceries and groceryHistories
+        for grocery in groceries
+        {
+            grocery.info = getGroceryHistory(title: grocery.info.title, category: grocery.info.category)
+        }
+        
         if let savedCartGroceries = CartGrocery.loadCartGrocery()
         {
             cartGroceries = savedCartGroceries
@@ -348,14 +354,14 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 let storage = Grocery.Storage(rawValue: sourceViewController.storageSegment.selectedSegmentIndex)!
                 let fridgeName = sourceViewController.fridgeSelectButton.title(for: .normal) ?? ""
                 let notes = sourceViewController.noteTextField.text
-                
+                let image = sourceViewController.groceryImage
                 
                 if let grocery = sourceViewController.grocery
                 {
                     // editing
                     grocery.info.title = title
                     grocery.info.category = category
-                    //grocery.info.image
+                    grocery.info.image = image
                     grocery.count = count
                     grocery.isPercentageCount = isPercentageCount
                     grocery.dueDate = dueDate
@@ -394,6 +400,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 {
                     // adding
                     let newGrocery = Grocery(info: getGroceryHistory(title: title, category: category), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
+                    newGrocery.info.image = image
                     groceries.append(newGrocery)
                     
                     updateTableView()

@@ -7,12 +7,13 @@
 
 import UIKit
 
-class AddGroceryTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class AddGroceryTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITextFieldDelegate {
 
+    @IBOutlet weak var completeButton: UIBarButtonItem!
     @IBOutlet weak var storageSegment: UISegmentedControl!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var categoryButton: UIButton!
-    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var countTextField: UITextField!
     @IBOutlet weak var countDecreaseButton: UIButton!
     @IBOutlet weak var countIncreaseButton: UIButton!
     @IBOutlet weak var percentageSwitch: UISwitch!
@@ -24,7 +25,6 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     @IBOutlet weak var fridgeSelectButton: UIButton!
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var pictureButton: UIButton!
-//    @IBOutlet weak var barcodeScanButton: UIButton!
     
     var barcodeScanButton: UIButton!
     let barcodeScanButtonOffset: CGFloat = 100.0
@@ -35,6 +35,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     var count: Int = 0  // 추가 버튼으로 들어온 경우 사용됨
     var dueDate: DueDate = DueDate(0)   // 추가 버튼으로 들어온 경우 사용됨
+    var groceryImage: GroceryImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +44,10 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         storageSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .selected)
         storageSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .normal)
         
+        nameTextField.delegate = self
         
-        countLabel.layer.cornerRadius = 8
-        countLabel.clipsToBounds = true
+        countTextField.layer.cornerRadius = 8
+        countTextField.clipsToBounds = true
         
         dueDateTitleLabel.layer.cornerRadius = 10
         dueDateTitleLabel.clipsToBounds = true
@@ -54,6 +56,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         dueDateButton.layer.cornerRadius = 10
         dueDateButton.clipsToBounds = true
         dueDateButton.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
+        
+        noteTextField.delegate = self
         
         pictureButton.imageView?.contentMode = .scaleAspectFit
         
@@ -78,13 +82,14 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             storageSegment.selectedSegmentIndex = grocery.storage.rawValue
             nameTextField.text = grocery.info.title
             categoryButton.setTitle(grocery.info.category.rawValue, for: .normal)
-            countLabel.text = "\(Int(grocery.count))"
+            countTextField.text = "\(Int(grocery.count))"
             percentageSwitch.isOn = grocery.isPercentageCount
             fridgeSelectButton.setTitle(grocery.fridgeName, for: .normal)
             noteTextField.text = grocery.notes
-            if(grocery.info.image != nil)
+            groceryImage = grocery.info.image
+            if(groceryImage != nil)
             {
-                pictureButton.setImage(grocery.info.image?.image(), for: .normal)
+                pictureButton.setImage(groceryImage?.image(), for: .normal)
                 
             }
             updateTableView()
@@ -94,12 +99,12 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         }
         else
         {
-            count = 0
+            count = 1
             dueDate.date = Date()
             
             storageSegment.selectedSegmentIndex = 0
             categoryButton.setTitle(GroceryHistory.Category.ETC.rawValue, for: .normal)
-            countLabel.text = "\(Int(count))"
+            countTextField.text = "\(Int(count))"
             percentageSwitch.isOn = false
             fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
             updateTableView()
@@ -107,13 +112,26 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             self.title = "상품 추가"
         }
         
-        
-        
+        enableCompletButton()
     }
-
+    
+    @objc func dismissKeyboard()
+    {
+        self.view.endEditing(true)
+        enableCompletButton()
+    }
+    
     override func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         barcodeScanButton.frame.origin.y = scrollView.frame.height - barcodeScanButtonOffset + scrollView.contentOffset.y
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.
+    {
+//        nameTextField.resignFirstResponder()
+//        noteTextField.resignFirstResponder()
+        dismissKeyboard()
+        return true;
     }
     
     let dueDatePickerIndexPath = IndexPath(row: 1, section: 4)
@@ -153,7 +171,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dueDateButton.setTitle(dateFormatter.string(from: dueDate.date), for: .normal)
         
-        countLabel.text = "\(Int(count))"
+        countTextField.text = "\(Int(count))"
         
         if(grocery != nil)
         {
@@ -163,6 +181,64 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         {
             fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
         }
+    }
+    
+    func enableCompletButton()
+    {
+        completeButton.isEnabled = false
+        
+        if let text = nameTextField.text
+        {
+            if(text != "")
+            {
+                completeButton.isEnabled = true
+            }
+        }
+    }
+    
+    @IBAction func countTableCellTapped(_ sender: Any)
+    {
+        dismissKeyboard()
+    }
+    
+    @IBAction func dueDateTableCellTapped(_ sender: Any)
+    {
+        dismissKeyboard()
+    }
+    
+    @IBAction func storageSegmentedControlTapped(_ sender: Any)
+    {
+        dismissKeyboard()
+    }
+    
+    @IBAction func nameTextFieldEdited(_ sender: Any)
+    {
+    }
+    
+    @IBAction func defaultNameButtonTapped(_ sender: Any)
+    {
+        dismissKeyboard()
+    }
+    
+    @IBAction func categoryButtonTapped(_ sender: Any)
+    {
+        dismissKeyboard()
+    }
+    
+    @IBAction func categorySelectButtonTapped(_ sender: Any)
+    {
+        dismissKeyboard()
+    }
+    
+    @IBAction func countTextFieldEdited(_ sender: Any)
+    {
+        count = 0
+        if let text = countTextField.text
+        {
+            count = Int(text) ?? 0
+        }
+    
+        updateTableView()
     }
     
     @IBAction func countDecreaseButtonTapped(_ sender: Any)
@@ -182,6 +258,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         }
         
         updateTableView()
+        dismissKeyboard()
     }
     
     @IBAction func countIncreaseButtonTapped(_ sender: Any)
@@ -200,6 +277,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         }
         
         updateTableView()
+        dismissKeyboard()
     }
     
     @IBAction func percentageSwitchChanged(_ sender: Any)
@@ -213,7 +291,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             count = 1
         }
         
-        countLabel.text = "\(count)"
+        countTextField.text = "\(count)"
+        dismissKeyboard()
     }
     
     @IBAction func dueDateButtonTapped(_ sender: Any)
@@ -221,27 +300,38 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         isDueDatePickerShown.toggle()
         tableView.beginUpdates()
         tableView.endUpdates()
+        dismissKeyboard()
     }
     
     @IBAction func dueDatePickerChanged(_ sender: Any)
     {
         dueDate.date = dueDatePicker.date
         updateTableView()
+        dismissKeyboard()
     }
     
     @IBAction func dueDateIncreaseWeekTapped(_ sender: Any)
     {
         dueDate.addDays(7)
         updateTableView()
+        dismissKeyboard()
     }
     
     @IBAction func dueDateIncreaseMonthTapped(_ sender: Any)
     {
         dueDate.addMonth()
         updateTableView()
+        dismissKeyboard()
     }
     
-    @IBAction func fridgeSelectButtonTapped(_ sender: Any) {
+    @IBAction func fridgeSelectButtonTapped(_ sender: Any)
+    {
+        dismissKeyboard()
+    }
+    
+    @IBAction func notesTextFieldEdited(_ sender: Any)
+    {
+        //noteTextField.resignFirstResponder()
     }
     
     @IBAction func pictureButtonTapped(_ sender: UIButton)
@@ -279,24 +369,23 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         alertController.popoverPresentationController?.sourceView = sender
         
         present(alertController, animated: true, completion: nil)
+        dismissKeyboard()
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         
-        let typeImage = GroceryImage(image: selectedImage)
-        if let grocery = grocery
-        {
-            grocery.info.image = typeImage
-        }
-        
-        pictureButton.setImage(typeImage.image(), for: .normal)
-        
+        groceryImage = GroceryImage(image: selectedImage)
+        pictureButton.setImage(groceryImage?.image(), for: .normal)
 
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func barcodeScanButtonTapped(_ sender: Any) {
+    @IBAction func barcodeScanButtonTapped(_ sender: Any)
+    {
+        // 구현 필요
+        
+        dismissKeyboard()
     }
     
     @IBAction func unwindToAddGrocery(_ unwindSegue: UIStoryboardSegue)
@@ -308,6 +397,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             {
                 // Use data from the view controller which initiated the unwind segue
                 nameTextField.text = sourceViewController.selectedName
+                enableCompletButton()
             }
         }
         else if(unwindSegue.identifier == "CategorySegue")
@@ -324,6 +414,10 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             if(sourceViewController.fridgeName != "")
             {
                 fridgeSelectButton.setTitle(sourceViewController.fridgeName, for: .normal)
+                if let grocery = grocery
+                {
+                    grocery.fridgeName = sourceViewController.fridgeName
+                }
             }
         }
     }
