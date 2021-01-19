@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PurchaseRecordTableViewController: UITableViewController, UISearchBarDelegate {
+class PurchaseRecordTableViewController: UITableViewController, UISearchBarDelegate, PurchaseRecordCellDelegate  {
 
     
     @IBOutlet weak var SearchBar: UISearchBar!
