@@ -717,7 +717,9 @@
         <scene sceneID="dOP-kj-HxD">
             <objects>
                 <navigationController id="TG5-xT-Abw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="freshFridge_icon" id="1ND-Yz-l96"/>
+                    <tabBarItem key="tabBarItem" title="" image="freshFridge_icon" id="1ND-Yz-l96">
+                        <inset key="imageInsets" minX="0.0" minY="3" maxX="0.0" maxY="3"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3vZ-Ba-jIG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

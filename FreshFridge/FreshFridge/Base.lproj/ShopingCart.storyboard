@@ -40,7 +40,9 @@
         <scene sceneID="5Q6-2b-Vun">
             <objects>
                 <navigationController id="6ej-XU-0UW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="cart_icon" id="e8d-fU-I8c"/>
+                    <tabBarItem key="tabBarItem" title="" image="cart_icon" id="e8d-fU-I8c">
+                        <inset key="imageInsets" minX="0.0" minY="3" maxX="0.0" maxY="3"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mr2-Gj-1lP">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -56,7 +58,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cart_icon" width="29.333333969116211" height="24.666666030883789"/>
+        <image name="cart_icon" width="44" height="37"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
