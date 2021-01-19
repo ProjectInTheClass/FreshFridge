@@ -7,8 +7,19 @@
 
 import UIKit
 
-class PurchaseRecordTableViewCell: UITableViewCell {
+protocol PurchaseRecordCellDelegate: class {
+    func fovoriteCheckMarkTapped(sender: PurchaseRecordTableViewCell)
+}
 
+class PurchaseRecordTableViewCell: UITableViewCell {
+   
+    weak var delegate: PurchaseRecordCellDelegate?
+    
+    @IBOutlet weak var FavoriteCheckButton: UIView!
+    @IBOutlet weak var ListTextLabel: UIView!
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,4 +31,9 @@ class PurchaseRecordTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    
+    @IBAction func FavoriteButtonTapped(_ sender: UIButton) {
+        delegate?.fovoriteCheckMarkTapped(sender: self)
+    }
+    
 }

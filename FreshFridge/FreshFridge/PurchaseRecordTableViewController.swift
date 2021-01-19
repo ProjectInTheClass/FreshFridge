@@ -7,39 +7,130 @@
 
 import UIKit
 
-class PurchaseRecordTableViewController: UITableViewController {
+class PurchaseRecordTableViewController: UITableViewController, UISearchBarDelegate {
 
+    
+    @IBOutlet weak var SearchBar: UISearchBar!
+    
+    @IBOutlet weak var CategorySortButton: UIButton!
+    @IBOutlet weak var FavoriteSortButton: UIButton!
+    @IBOutlet weak var RecentSortButton: UIButton!
+    
+    var numberOfSections: Int = 0
+    var sectionNames: [String] = []
+    var numbersOfRowInSection: [Int] = []
+    var filteredGroceries: [[Grocery]] = [] // 어레이의 어레이: Nesting
+    var searchbarGroceries: [[Grocery]] = []
+    
+    var categorySortButtonOn = true
+    var favoriteSortBurronOn = true
+    var recentSortButtonOn = true
+           
     override func viewDidLoad() {
         super.viewDidLoad()
+                      
+        SearchBar.delegate = self
+        
+        if let savedGroceryHistories = GroceryHistory.loadGroceryHistory() {
+            groceryHistories = savedGroceryHistories
+        } else {
+            groceryHistories = GroceryHistory.loadSampleGroceryHistory()
+        }
+        
+        
+        if let savedGroceries = Grocery.loadGrocery() {
+            groceries = savedGroceries
+        } else {
+            groceries = Grocery.loadSampleGrocery()
+        }
+        
+        
+        if let savedCartGroceries = CartGrocery.loadCartGrocery() {
+            cartGroceries = savedCartGroceries
+        } else {
+            cartGroceries = CartGrocery.loadSampleCartGrocery()
+        }
 
+        updateButtons()
+        updateTableView()
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
+    func updateButtons() {
+        
+    }
+    
+    
+    func updateTableView() {
+        numberOfSections = 0
+        numbersOfRowInSection.removeAll()
+        filteredGroceries.removeAll()
+        sectionNames.removeAll()
+        
+//        if
+//        분류별인 경우
+        for category in GroceryHistory.Category.allCases {
+            var sectionGroceries: [Grocery] = []
+            for grocery in groceries {
+                if grocery.info.category == category {
+                    sectionGroceries.append(grocery)
+                }
+            }
+            if sectionGroceries.count > 0 {
+                numbersOfRowInSection.append(sectionGroceries.count) // 몇개 담겨있는지 세서 Row 갯수를 정한다.
+                numberOfSections += 1 // 섹션은 0에서 하나씩 추가된다.
+                filteredGroceries.append(sectionGroceries) //
+                sectionNames.append(category.rawValue) // rawValue 는 enum Category의 case 뒤에 붙은 "스트링" 값을 가져다준다.
+            }
+        }
+        
+//        else
+        // 분류별이 아니면 섹션 나누지 않고 그대로 진행한다.
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredGroceries = []
+        
+        if searchText == "" {
+            searchbarGroceries = filteredGroceries
+        } else {
+//            searchbarGroceries = filteredGroceries.filter { $0.info.title.contains(searchText)}
+            }
+        self.tableView.reloadData()
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return numberOfSections
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return numbersOfRowInSection[section]
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionNames[section]
     }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        // Configure the cell...
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath)
+        let cellContents = searchbarGroceries[indexPath.row]
+//        cell.textLabel?.text = cellContents.info.title
+        
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -86,4 +177,14 @@ class PurchaseRecordTableViewController: UITableViewController {
     }
     */
 
+    
+    @IBAction func CategorySortButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func FavoriteSortButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func RecentSortButtonTapped(_ sender: UIButton) {
+    }
+    
 }
