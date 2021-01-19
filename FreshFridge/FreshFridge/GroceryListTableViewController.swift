@@ -299,6 +299,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.info.title, category: selectedGrocery.info.category))
             cartGroceries.append(cartGrocery)
             
+            CartGrocery.saveCartGrocery(cartGroceries)
+            
             success(true)
         })
         
@@ -323,6 +325,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     groceries.remove(at: selectedIndex.offset)
                     updateTableView()
                     tableView.reloadData()
+                    
+                    Grocery.saveGrocery(groceries)
                 }
             
                 success(true)
@@ -369,6 +373,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 groceries.insert(fromGrocery, at: toIndex.offset)
                 updateTableView()
                 tableView.reloadData()
+                
+                Grocery.saveGrocery(groceries)
             }
         }
     }
