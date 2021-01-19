@@ -29,7 +29,8 @@ extension UIButton
             self.setTitle("\(Int(count))", for: .normal)
             if(count > 0)
             {
-                self.setBackgroundImage(UIImage(named: "gray"), for: .normal)
+                self.setBackgroundImage(UIImage(named: "100percent"), for: .normal)
+//                self.setBackgroundImage(UIImage(named: "gray"), for: .normal)
             }
             else
             {
