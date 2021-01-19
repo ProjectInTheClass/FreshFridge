@@ -95,14 +95,14 @@ class GroceryHistory : Codable
     
     enum Category: String, CaseIterable, Codable
     {
-        case ETC = "ETC"
-        case MeatsAndEggs = "Meats And Eggs"
-        case MarineProducts = "MarineProducts"
-        case CookingAndSidedishes = "CookingAndSidedishes"
+        case CookingAndSidedishes = "Cooking and Sidedishes"
+        case MeatsAndEggs = "Meats and Eggs"
+        case MarineProducts = "Marine Products"
         case Vegetable = "Vegetable"
         case Fruits = "Fruits"
-        case DrinksAndSnacks = "DrinksAndSnacks"
-        case SeasonedAndOilAndSauce = "SeasonedAndOilAndSauce"
+        case DrinksAndSnacks = "Drinks and Snacks"
+        case SeasonedAndOilAndSauce = "Seasoned, Oil and Sauce"
+        case ETC = "ETC"
     }
     
     static let archiveURL = getDocumentsDirectory().appendingPathComponent("groceryHistory").appendingPathExtension("plist")
