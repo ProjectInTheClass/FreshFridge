@@ -106,7 +106,7 @@
                                                                         <constraint firstAttribute="height" constant="20" id="Y4F-20-MjW"/>
                                                                         <constraint firstAttribute="width" constant="55" id="hTv-Bg-4G5"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -201,7 +201,7 @@
                                                                         <constraint firstAttribute="width" constant="55" id="Iq9-0f-Ye3"/>
                                                                         <constraint firstAttribute="height" constant="20" id="Lcd-Jd-g6I"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
