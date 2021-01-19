@@ -106,7 +106,7 @@
                                                                         <constraint firstAttribute="height" constant="20" id="Y4F-20-MjW"/>
                                                                         <constraint firstAttribute="width" constant="55" id="hTv-Bg-4G5"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -201,7 +201,7 @@
                                                                         <constraint firstAttribute="width" constant="55" id="Iq9-0f-Ye3"/>
                                                                         <constraint firstAttribute="height" constant="20" id="Lcd-Jd-g6I"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -721,8 +721,8 @@
                         <inset key="imageInsets" minX="0.0" minY="3" maxX="0.0" maxY="3"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3vZ-Ba-jIG">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="3vZ-Ba-jIG">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
