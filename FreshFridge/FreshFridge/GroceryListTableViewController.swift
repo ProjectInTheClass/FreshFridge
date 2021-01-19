@@ -226,8 +226,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             let diffDate = grocery.dueDate.date.timeIntervalSinceNow // 초값이 소숫점 값으로 할당
             let diffDay = Int(diffDate/(DueDate.secondOfDay)) // 초값을 하루초값으로 나눠서 일 수로 변환된다.
             cell.expirationLabel?.text = diffDay>=0 ? String("D-\(diffDay+1)") : String("D+\(-diffDay)")
-            cell.expirationLabel?.backgroundColor = diffDay>=3 ? UIColor.systemGray5 : .red
-            cell.expirationLabel?.textColor = diffDay>=3 ? UIColor.darkGray : .white
+//            cell.expirationLabel?.backgroundColor = diffDay>=3 ? UIColor.systemGray5 : .red
+            cell.expirationLabel?.textColor = diffDay>=3 ? UIColor.darkGray : .systemRed
             
             cell.countButton.updatePieChart(count: grocery.count, isPercentage: grocery.isPercentageCount)
         }
