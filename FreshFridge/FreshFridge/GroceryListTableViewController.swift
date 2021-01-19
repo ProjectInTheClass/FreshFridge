@@ -7,8 +7,8 @@
 
 import UIKit
 
-class GroceryListTableViewController: UITableViewController, GroceryListCellDelegate {
-    
+class GroceryListTableViewController: UITableViewController, GroceryListCellDelegate, UITableViewDragDelegate, UITableViewDropDelegate
+{
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var refrigerationButton: UIButton!
     @IBOutlet weak var freezingButton: UIButton!
@@ -45,6 +45,10 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.dragInteractionEnabled = true
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
         
         GroceryImage.viewSize = CGSize(width: view.frame.width, height: view.frame.height)
 
@@ -198,7 +202,6 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return numberOfSections
@@ -261,6 +264,121 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         return cell
     }
     
+    
+    
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+     */
+    /*
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            
+            
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    */
+    
+    // editing
+    override func tableView(_ tableView: UITableView,
+                    leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+     {
+        let closeAction = UIContextualAction(style: .destructive, title:  "Cart", handler:
+        { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+                
+            print("Going to the cart ...")
+            
+            let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+            let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.info.title, category: selectedGrocery.info.category))
+            cartGroceries.append(cartGrocery)
+            
+            success(true)
+        })
+        
+        closeAction.image = UIImage(systemName: "cart")
+        closeAction.backgroundColor = .systemGreen
+     
+        return UISwipeActionsConfiguration(actions: [closeAction])
+     }
+   
+    override func tableView(_ tableView: UITableView,
+                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+     {
+        let modifyAction = UIContextualAction(style: .destructive, title:  "Trash", handler:
+            { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+             
+                print("Trash action ...")
+                
+                let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+                
+                if let selectedIndex = findGroceryIndex(grocery: selectedGrocery)
+                {
+                    groceries.remove(at: selectedIndex.offset)
+                    updateTableView()
+                    tableView.reloadData()
+                }
+            
+                success(true)
+         })
+        
+         modifyAction.image = UIImage(systemName: "trash")
+         modifyAction.backgroundColor = .red
+     
+         return UISwipeActionsConfiguration(actions: [modifyAction])
+     }
+    
+    // Rearranging
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem]
+    {
+        return [UIDragItem(itemProvider: NSItemProvider())]
+    }
+
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal
+    {
+        if session.localDragSession != nil && numberOfSections == 1
+        { // Drag originated from the same app.
+            return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        }
+
+        return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
+    }
+
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator)
+    {
+    }
+    
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath)
+    {
+        if(numberOfSections == 1)
+        {
+            let fromGrocery = filteredGroceries[fromIndexPath.section][fromIndexPath.row]
+            let toGrocery = filteredGroceries[to.section][to.row]
+            
+            if let fromIndex = findGroceryIndex(grocery: fromGrocery),
+               let toIndex = findGroceryIndex(grocery: toGrocery)
+            {
+                groceries.remove(at: fromIndex.offset)
+                groceries.insert(fromGrocery, at: toIndex.offset)
+                updateTableView()
+                tableView.reloadData()
+            }
+        }
+    }
+
+    // Override to support conditional rearranging of the table view.
+    /*
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    }
+    */
+    
     @IBAction func categoryButtonTapped(_ sender: Any)
     {
         categoryButtonOn.toggle()
@@ -297,40 +415,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     }
     
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+    
+    
 
     
     // MARK: - Navigation
@@ -409,6 +495,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 tableView.reloadData()
                 
                 Grocery.saveGrocery(groceries)
+                GroceryHistory.saveGroceryHistory(groceryHistories)
             }
         }
         else if(unwindSegue.identifier == "ToGroceryList")

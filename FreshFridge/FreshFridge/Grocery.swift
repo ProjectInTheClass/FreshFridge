@@ -172,8 +172,7 @@ class Grocery : Codable
         return try? propertyListDecoder.decode(Array<Grocery>.self, from: codedGrocery)
     }
     
-    static func saveGrocery
-    (_ groceries: [Grocery])
+    static func saveGrocery(_ groceries: [Grocery])
     {
         let propertyListEncoder = PropertyListEncoder()
         let codedGrocery = try? propertyListEncoder.encode(groceries)
@@ -288,6 +287,11 @@ func getGroceryHistory(title: String, category: GroceryHistory.Category) -> Groc
     }
 }
 
+func findGroceryIndex(grocery: Grocery) -> EnumeratedSequence<[Grocery]>.Element?
+{
+    return groceries.enumerated().first(where: {$0.element === grocery})
+}
+
 func getDocumentsDirectory() -> URL
 {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -332,12 +336,6 @@ enum FridgeViewSort: Int, CaseIterable
     }
 }
 
-
-//var groceryHistories: [GroceryHistory] = []
-//var groceries: [Grocery] = []
-//var cartGroceries: [CartGerocery] = []
-
-// adding dumy data
 var groceryHistories = [GroceryHistory]()
 var groceries = [Grocery]()
 var cartGroceries = [CartGrocery]()
