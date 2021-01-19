@@ -167,6 +167,11 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     }
     */
 
+    func fovoriteCheckMarkTapped(sender: PurchaseRecordTableViewCell) {
+        print("넘어오긴 했군")
+    }
+    
+    
     /*
     // MARK: - Navigation
 
