@@ -18,7 +18,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
     var numbersOfRowInSection: [Int] = []
-    var filteredGroceries: [[Grocery]] = [] // 어레이의 어레이
+    var filteredGroceries: [[Grocery]] = [] // 어레이의 어레이: Nesting
     
     //var filtersInFridgeView: [Bool] = [true, true, true]   // FridgeViewFilter순서
     var categoryButtonOn = true
@@ -226,8 +226,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             let diffDate = grocery.dueDate.date.timeIntervalSinceNow // 초값이 소숫점 값으로 할당
             let diffDay = Int(diffDate/(DueDate.secondOfDay)) // 초값을 하루초값으로 나눠서 일 수로 변환된다.
             cell.expirationLabel?.text = diffDay>=0 ? String("D-\(diffDay+1)") : String("D+\(-diffDay)")
-//            cell.expirationLabel?.backgroundColor = diffDay>=3 ? UIColor.systemGray5 : .red
-            cell.expirationLabel?.textColor = diffDay>=3 ? UIColor.darkGray : .systemRed
+            cell.expirationLabel?.backgroundColor = diffDay>=3 ? UIColor.systemGray6 : .red
+            cell.expirationLabel?.textColor = diffDay>=3 ? UIColor.darkGray : .white
             
             cell.countButton.updatePieChart(count: grocery.count, isPercentage: grocery.isPercentageCount)
         }

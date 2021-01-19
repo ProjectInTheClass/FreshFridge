@@ -35,7 +35,9 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5K-YJ-Xmq">
                                             <rect key="frame" x="0.0" y="0.0" width="103.5" height="44"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <state key="normal" title="분류별"/>
+                                            <state key="normal" title="분류별">
+                                                <color key="titleColor" systemColor="systemOrangeColor"/>
+                                            </state>
                                             <connections>
                                                 <action selector="categoryButtonTapped:" destination="FWd-TQ-AyV" eventType="touchUpInside" id="OLj-Fe-wiD"/>
                                             </connections>
@@ -43,7 +45,9 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccY-1T-3mc">
                                             <rect key="frame" x="103.5" y="0.0" width="103.5" height="44"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <state key="normal" title="냉장"/>
+                                            <state key="normal" title="냉장">
+                                                <color key="titleColor" systemColor="systemOrangeColor"/>
+                                            </state>
                                             <connections>
                                                 <action selector="refrigerationButtonTapped:" destination="FWd-TQ-AyV" eventType="touchUpInside" id="sP8-Yh-zFX"/>
                                             </connections>
@@ -51,7 +55,9 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTS-JF-eWw">
                                             <rect key="frame" x="207" y="0.0" width="103.5" height="44"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <state key="normal" title="냉동"/>
+                                            <state key="normal" title="냉동">
+                                                <color key="titleColor" red="1" green="0.4653607609" blue="0.00075926952359999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </state>
                                             <connections>
                                                 <action selector="freezingButtonTapped:" destination="FWd-TQ-AyV" eventType="touchUpInside" id="oBS-Fs-yeo"/>
                                             </connections>
@@ -59,7 +65,10 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ePx-zD-F6d">
                                             <rect key="frame" x="310.5" y="0.0" width="103.5" height="44"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <state key="normal" title="실외"/>
+                                            <color key="tintColor" systemColor="systemOrangeColor"/>
+                                            <state key="normal" title="실외">
+                                                <color key="titleColor" systemColor="systemOrangeColor"/>
+                                            </state>
                                             <connections>
                                                 <action selector="outdoorButtonTapped:" destination="FWd-TQ-AyV" eventType="touchUpInside" id="og7-XJ-Id5"/>
                                             </connections>
@@ -101,7 +110,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2OV-H8-oB2">
                                                             <rect key="frame" x="0.0" y="24" width="324" height="20"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="D-100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZxX-Yj-UWM">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="D-100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZxX-Yj-UWM">
                                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="20"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
@@ -197,7 +206,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oqT-re-W1m">
                                                             <rect key="frame" x="0.0" y="24" width="274" height="20"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="D-100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHQ-go-Nce">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="D-100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHQ-go-Nce">
                                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="20"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
