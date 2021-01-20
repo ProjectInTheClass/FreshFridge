@@ -42,7 +42,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="groceryCell" rowHeight="54" id="gUr-1M-w14" customClass="GroceryListTableViewCell" customModule="FreshFridge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="shopingCartCell" rowHeight="54" id="gUr-1M-w14" customClass="ShopingCartTableViewCell" customModule="FreshFridge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gUr-1M-w14" id="RmL-Bl-rn3">
@@ -102,7 +102,7 @@
                                     <outlet property="titleLabel" destination="cqg-is-4gC" id="DJa-uI-W5b"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="groceryPictureCell" rowHeight="54" id="0B6-hM-wAu" customClass="GroceryListTableViewPictureCell" customModule="FreshFridge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="shopingCartPictureCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="groceryPictureCell" rowHeight="54" id="0B6-hM-wAu" customClass="ShopingCartTableViewPictureCell" customModule="FreshFridge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="126" width="414" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0B6-hM-wAu" id="zN6-Zp-qay">
