@@ -93,14 +93,14 @@ class GroceryHistory
     
     enum Category: String, CaseIterable
     {
-        case ETC = "ETC"
-        case MeatsAndEggs = "MeatsAndEggs"
-        case MarineProducts = "MarineProducts"
-        case CookingAndSidedishes = "CookingAndSidedishes"
-        case Vegetable = "Vegetable"
-        case Fruits = "Fruits"
-        case DrinksAndSnacks = "DrinksAndSnacks"
-        case SeasonedAndOilAndSauce = "SeasonedAndOilAndSauce"
+        case MeatsAndEggs = "정육.계란"
+        case MarineProducts = "수산.해산물.건어물"
+        case CookingAndSidedishes = "국.반찬.메인요리"
+        case Vegetable = "채소"
+        case Fruits = "과일"
+        case DrinksAndSnacks = "음료.간식"
+        case SeasonedAndOilAndSauce = "면.양념.오일"
+        case ETC = "기타"
     }
 }
 

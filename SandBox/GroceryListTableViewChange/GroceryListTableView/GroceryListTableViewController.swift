@@ -17,25 +17,40 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
-    var numbersOfRowInSection: [Int] = []
+    var numbersOfRowInSection: [Int] = []//섹션마다 row갯수 [2,4,3]
     var filteredGroceries: [[Grocery]] = []
     
     //var filtersInFridgeView: [Bool] = [true, true, true]   // FridgeViewFilter순서
     var categoryButtonOn = true
-    var refrigerationButtonOn = true
+    var refrigerationButtonOn: Bool = true
     var freezingButtonOn = true
     var outdoorButtonOn = true
     
     func isFridgeViewFilterSelected(_ filter: FridgeViewFilter) -> Bool
     {
-        switch filter {
-        case .Refrigeration:
+//        switch filter {
+//        case .Refrigeration:
+//            return refrigerationButtonOn
+//        case .Freezing:
+//            return freezingButtonOn
+//        case .Outdoor:
+//            return outdoorButtonOn
+//        }
+        
+        if(filter == .Refrigeration)
+        {
             return refrigerationButtonOn
-        case .Freezing:
+        }
+        else if( filter == .Freezing)
+        {
             return freezingButtonOn
-        case .Outdoor:
+        }
+        else if(filter == .Outdoor)
+        {
             return outdoorButtonOn
         }
+        
+        return true
     }
     
     func isFridgeViewCategorySelected() -> Bool
@@ -66,21 +81,41 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     func updateTableView()
     {
-        numberOfSections = 0
-        numbersOfRowInSection.removeAll()
-        filteredGroceries.removeAll()
-        sectionNames.removeAll()
+        numberOfSections = 0// 품목이 있는 카테고리 갯수
+        numbersOfRowInSection.removeAll()//[2,3,1,...]
+        filteredGroceries.removeAll()//. [[라면, 국수], [소고기, 돼지고기, 닭고기],[고등어],...]
+        sectionNames.removeAll()//[etc,meat..]
         
         // 냉장, 냉동, 실외 선택으로 보여지는 groceries를 필터링해서 showGroceries에 추가한다.
         var showGroceries: [Grocery] = []
         
-        for filter in FridgeViewFilter.allCases
+        for grocery in groceries
         {
-            if isFridgeViewFilterSelected(filter)
+            //if isFridgeViewFilterSelected(grocery.storage)
+            if(grocery.storage == .Refrigeration)
             {
-                showGroceries.append(contentsOf: groceries.filter{ $0.storage == filter})
+                if( refrigerationButtonOn )
+                {
+                    showGroceries.append(grocery)
+                }
             }
+            else if(grocery.storage == .Freezing)
+            {
+                if( freezingButtonOn )
+                {
+                    showGroceries.append(grocery)
+                }
+            }
+            
         }
+        
+//        for filter in FridgeViewFilter.allCases
+//        {
+//            if isFridgeViewFilterSelected(filter)
+//            {
+//                showGroceries.append(contentsOf: groceries.filter{ $0.storage == filter})
+//            }
+//        }
         
         // 분류별이면 카테고리별로 섹터를 나누고 카테고리 순서로 filteredGroceries에 항목을 추가한다.
         if isFridgeViewCategorySelected()

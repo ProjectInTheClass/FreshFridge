@@ -15,7 +15,6 @@
 		8E4B99DD25AD4AF700F2B0BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E4B99DB25AD4AF700F2B0BF /* LaunchScreen.storyboard */; };
 		8E4B99E725AD4B8400F2B0BF /* FamilyShare.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E4B99E525AD4B8400F2B0BF /* FamilyShare.storyboard */; };
 		8E4B99EB25AD4BE100F2B0BF /* FridgeMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E4B99E925AD4BE100F2B0BF /* FridgeMain.storyboard */; };
-		8E4B99EF25AD4C2E00F2B0BF /* FridgeSelection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E4B99ED25AD4C2E00F2B0BF /* FridgeSelection.storyboard */; };
 		8E4B99F325AD4C5900F2B0BF /* PurchaseRecord.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E4B99F125AD4C5900F2B0BF /* PurchaseRecord.storyboard */; };
 		8E4B99F725AD4C9200F2B0BF /* ShopingCart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E4B99F525AD4C9200F2B0BF /* ShopingCart.storyboard */; };
 		8E4B99FE25AD4EFE00F2B0BF /* AddGroceryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B99F925AD4EFE00F2B0BF /* AddGroceryTableViewController.swift */; };
@@ -23,6 +22,12 @@
 		8E4B9A0025AD4EFE00F2B0BF /* GroceryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B99FB25AD4EFE00F2B0BF /* GroceryListTableViewController.swift */; };
 		8E4B9A0125AD4EFE00F2B0BF /* GroceryListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B99FC25AD4EFE00F2B0BF /* GroceryListTableViewCell.swift */; };
 		8E4B9A0225AD4EFE00F2B0BF /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B99FD25AD4EFE00F2B0BF /* UIButtonExtension.swift */; };
+		8EA2CC2125B40EC900D80622 /* DefaultNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2025B40EC900D80622 /* DefaultNameViewController.swift */; };
+		8EA2CC2425B40EE600D80622 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */; };
+		8EA2CC2825B4201600D80622 /* SelectFridgeNameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */; };
+		8EA2CC2C25B55A2500D80622 /* GroceryImge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2B25B55A2500D80622 /* GroceryImge.swift */; };
+		EE281C6925B7E8D40017AF54 /* ShopingCartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */; };
+		EE281C7725B837300017AF54 /* ShopingCartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +41,6 @@
 		8E4B99DE25AD4AF700F2B0BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E4B99E625AD4B8400F2B0BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/FamilyShare.storyboard; sourceTree = "<group>"; };
 		8E4B99EA25AD4BE100F2B0BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/FridgeMain.storyboard; sourceTree = "<group>"; };
-		8E4B99EE25AD4C2E00F2B0BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/FridgeSelection.storyboard; sourceTree = "<group>"; };
 		8E4B99F225AD4C5900F2B0BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PurchaseRecord.storyboard; sourceTree = "<group>"; };
 		8E4B99F625AD4C9200F2B0BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ShopingCart.storyboard; sourceTree = "<group>"; };
 		8E4B99F925AD4EFE00F2B0BF /* AddGroceryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroceryTableViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +48,12 @@
 		8E4B99FB25AD4EFE00F2B0BF /* GroceryListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListTableViewController.swift; sourceTree = "<group>"; };
 		8E4B99FC25AD4EFE00F2B0BF /* GroceryListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListTableViewCell.swift; sourceTree = "<group>"; };
 		8E4B99FD25AD4EFE00F2B0BF /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		8EA2CC2025B40EC900D80622 /* DefaultNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNameViewController.swift; sourceTree = "<group>"; };
+		8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
+		8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFridgeNameTableViewController.swift; sourceTree = "<group>"; };
+		8EA2CC2B25B55A2500D80622 /* GroceryImge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryImge.swift; sourceTree = "<group>"; };
+		EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopingCartTableViewController.swift; sourceTree = "<group>"; };
+		EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopingCartTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,20 +89,25 @@
 				8E4B99D025AD4AF500F2B0BF /* AppDelegate.swift */,
 				8E4B99D225AD4AF500F2B0BF /* SceneDelegate.swift */,
 				8E4B99D425AD4AF500F2B0BF /* ViewController.swift */,
-				8E4B99F925AD4EFE00F2B0BF /* AddGroceryTableViewController.swift */,
 				8E4B99FA25AD4EFE00F2B0BF /* Grocery.swift */,
-				8E4B99FC25AD4EFE00F2B0BF /* GroceryListTableViewCell.swift */,
-				8E4B99FB25AD4EFE00F2B0BF /* GroceryListTableViewController.swift */,
+				8EA2CC2B25B55A2500D80622 /* GroceryImge.swift */,
 				8E4B99FD25AD4EFE00F2B0BF /* UIButtonExtension.swift */,
-				8E4B99D625AD4AF500F2B0BF /* Main.storyboard */,
+				8E4B99FB25AD4EFE00F2B0BF /* GroceryListTableViewController.swift */,
+				8E4B99FC25AD4EFE00F2B0BF /* GroceryListTableViewCell.swift */,
+				8E4B99F925AD4EFE00F2B0BF /* AddGroceryTableViewController.swift */,
+				8EA2CC2025B40EC900D80622 /* DefaultNameViewController.swift */,
+				8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */,
+				8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */,
+				EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */,
+				EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */,
 				8E4B99D925AD4AF700F2B0BF /* Assets.xcassets */,
 				8E4B99DB25AD4AF700F2B0BF /* LaunchScreen.storyboard */,
-				8E4B99DE25AD4AF700F2B0BF /* Info.plist */,
-				8E4B99E525AD4B8400F2B0BF /* FamilyShare.storyboard */,
+				8E4B99D625AD4AF500F2B0BF /* Main.storyboard */,
 				8E4B99E925AD4BE100F2B0BF /* FridgeMain.storyboard */,
-				8E4B99ED25AD4C2E00F2B0BF /* FridgeSelection.storyboard */,
 				8E4B99F125AD4C5900F2B0BF /* PurchaseRecord.storyboard */,
 				8E4B99F525AD4C9200F2B0BF /* ShopingCart.storyboard */,
+				8E4B99E525AD4B8400F2B0BF /* FamilyShare.storyboard */,
+				8E4B99DE25AD4AF700F2B0BF /* Info.plist */,
 			);
 			path = FreshFridge;
 			sourceTree = "<group>";
@@ -157,7 +172,6 @@
 				8E4B99F325AD4C5900F2B0BF /* PurchaseRecord.storyboard in Resources */,
 				8E4B99EB25AD4BE100F2B0BF /* FridgeMain.storyboard in Resources */,
 				8E4B99DD25AD4AF700F2B0BF /* LaunchScreen.storyboard in Resources */,
-				8E4B99EF25AD4C2E00F2B0BF /* FridgeSelection.storyboard in Resources */,
 				8E4B99DA25AD4AF700F2B0BF /* Assets.xcassets in Resources */,
 				8E4B99E725AD4B8400F2B0BF /* FamilyShare.storyboard in Resources */,
 				8E4B99D825AD4AF500F2B0BF /* Main.storyboard in Resources */,
@@ -174,11 +188,17 @@
 			files = (
 				8E4B99D525AD4AF500F2B0BF /* ViewController.swift in Sources */,
 				8E4B9A0225AD4EFE00F2B0BF /* UIButtonExtension.swift in Sources */,
+				EE281C7725B837300017AF54 /* ShopingCartTableViewCell.swift in Sources */,
 				8E4B9A0125AD4EFE00F2B0BF /* GroceryListTableViewCell.swift in Sources */,
+				EE281C6925B7E8D40017AF54 /* ShopingCartTableViewController.swift in Sources */,
 				8E4B9A0025AD4EFE00F2B0BF /* GroceryListTableViewController.swift in Sources */,
+				8EA2CC2125B40EC900D80622 /* DefaultNameViewController.swift in Sources */,
 				8E4B99FE25AD4EFE00F2B0BF /* AddGroceryTableViewController.swift in Sources */,
 				8E4B99D125AD4AF500F2B0BF /* AppDelegate.swift in Sources */,
+				8EA2CC2425B40EE600D80622 /* CategoryTableViewController.swift in Sources */,
 				8E4B99D325AD4AF500F2B0BF /* SceneDelegate.swift in Sources */,
+				8EA2CC2C25B55A2500D80622 /* GroceryImge.swift in Sources */,
+				8EA2CC2825B4201600D80622 /* SelectFridgeNameTableViewController.swift in Sources */,
 				8E4B99FF25AD4EFE00F2B0BF /* Grocery.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,14 +236,6 @@
 				8E4B99EA25AD4BE100F2B0BF /* Base */,
 			);
 			name = FridgeMain.storyboard;
-			sourceTree = "<group>";
-		};
-		8E4B99ED25AD4C2E00F2B0BF /* FridgeSelection.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8E4B99EE25AD4C2E00F2B0BF /* Base */,
-			);
-			name = FridgeSelection.storyboard;
 			sourceTree = "<group>";
 		};
 		8E4B99F125AD4C5900F2B0BF /* PurchaseRecord.storyboard */ = {

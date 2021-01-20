@@ -7,8 +7,8 @@
 
 import UIKit
 
-class GroceryListTableViewController: UITableViewController, GroceryListCellDelegate {
-    
+class GroceryListTableViewController: UITableViewController, GroceryListCellDelegate, UITableViewDragDelegate, UITableViewDropDelegate
+{
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var refrigerationButton: UIButton!
     @IBOutlet weak var freezingButton: UIButton!
@@ -45,6 +45,12 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.dragInteractionEnabled = true
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
+        
+        GroceryImage.viewSize = CGSize(width: view.frame.width, height: view.frame.height)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -70,6 +76,12 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             groceries = Grocery.loadSampleGrocery()
         }
         
+        // link groceries and groceryHistories
+        for grocery in groceries
+        {
+            grocery.info = getGroceryHistory(title: grocery.info.title, category: grocery.info.category)
+        }
+        
         if let savedCartGroceries = CartGrocery.loadCartGrocery()
         {
             cartGroceries = savedCartGroceries
@@ -79,11 +91,11 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             cartGroceries = CartGrocery.loadSampleCartGrocery()
         }
         
-        updateButtons()
+        updateFilteringButtons()
         updateTableView()
     }
     
-    func updateButtons()
+    func updateFilteringButtons()
     {
         categoryButton.switchOnOff(isOn: categoryButtonOn)
         refrigerationButton.switchOnOff(isOn: refrigerationButtonOn)
@@ -91,22 +103,40 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         outdoorButton.switchOnOff(isOn: outdoorButtonOn)
     }
     
+    func updateTableViewCell()
+    {
+        
+    }
+    
+    func isEnableFridgeName(name: String) -> Bool
+    {
+        for index in 0...selectedFridgeIndex.count-1
+        {
+            if(name == fridgeNames[selectedFridgeIndex[index]])
+            {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
     func updateTableView()
     {
+        self.title = selectedfrideName
+        
         numberOfSections = 0
         numbersOfRowInSection.removeAll()
         filteredGroceries.removeAll()
         sectionNames.removeAll()
         
         // 냉장, 냉동, 실외 선택으로 보여지는 groceries를 필터링해서 showGroceries에 추가한다.
-        var showGroceries: [Grocery] = []
-        
-        for filter in FridgeViewFilter.allCases
+        let showGroceries = groceries.filter
         {
-            if isFridgeViewFilterSelected(filter)
-            {
-                showGroceries.append(contentsOf: groceries.filter{ $0.storage == filter})
-            }
+            (((refrigerationButtonOn == true && $0.storage == .Refrigeration)
+            || (freezingButtonOn == true && $0.storage == .Freezing)
+            || (outdoorButtonOn == true && $0.storage == .Outdoor))
+                && isEnableFridgeName(name: $0.fridgeName))
         }
         
         // 분류별이면 카테고리별로 섹터를 나누고 카테고리 순서로 filteredGroceries에 항목을 추가한다.
@@ -145,8 +175,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     func countButtonTapped(sender: GroceryListTableViewCell) {
         if let indexPath = tableView.indexPath(for: sender)
         {
-            var groceries = filteredGroceries[indexPath.section]
-            var grocery = groceries[indexPath.row]
+            let groceries = filteredGroceries[indexPath.section]
+            let grocery = groceries[indexPath.row]
             
             if(grocery.isPercentageCount == false)
             {
@@ -172,7 +202,6 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return numberOfSections
@@ -186,6 +215,16 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         return sectionNames[section]
+    }
+    
+    override public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+
+        if let view = view as? UITableViewHeaderFooterView {
+            //view.backgroundView?.backgroundColor = UIColor.blue
+            //view.textLabel?.backgroundColor = UIColor.clear
+            //view.textLabel?.textColor = UIColor.darkGray
+            view.textLabel?.font = .systemFont(ofSize: 17)
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -215,7 +254,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             
             let diffDate = grocery.dueDate.date.timeIntervalSinceNow
             let diffDay = Int(diffDate/(DueDate.secondOfDay))
-            cell.expirationLabel?.text = diffDay>=0 ? String("D-\(diffDay+1)") : String("D+\(-diffDay)")
+            cell.expirationLabel?.text = grocery.dueDate.getExpirationDay()
             cell.expirationLabel?.backgroundColor = diffDay>=3 ? UIColor.systemGray5 : .red
             cell.expirationLabel?.textColor = diffDay>=3 ? UIColor.darkGray : .white
             
@@ -225,40 +264,6 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         return cell
     }
     
-    @IBAction func categoryButtonTapped(_ sender: Any)
-    {
-        categoryButtonOn.toggle()
-        updateButtons()
-        updateTableView()
-        tableView.reloadData()
-
-    }
-    
-    @IBAction func refrigerationButtonTapped(_ sender: Any)
-    {
-        refrigerationButtonOn.toggle()
-        updateButtons()
-        updateTableView()
-        tableView.reloadData()
-
-    }
-    
-    @IBAction func freezingButtonTapped(_ sender: Any)
-    {
-        freezingButtonOn.toggle()
-        updateButtons()
-        updateTableView()
-        tableView.reloadData()
-
-    }
-    
-    @IBAction func outdoorButtonTapped(_ sender: Any)
-    {
-        outdoorButtonOn.toggle()
-        updateButtons()
-        updateTableView()
-        tableView.reloadData()
-    }
     
     
     /*
@@ -267,45 +272,244 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
-
+     */
     /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     */
+    
+    // editing
+    override func tableView(_ tableView: UITableView,
+                    leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+     {
+        let closeAction = UIContextualAction(style: .destructive, title:  "Cart", handler:
+        { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+                
+            print("Going to the cart ...")
+            
+            let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+            let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.info.title, category: selectedGrocery.info.category))
+            cartGroceries.append(cartGrocery)
+            
+            CartGrocery.saveCartGrocery(cartGroceries)
+            
+            success(true)
+        })
+        
+        closeAction.image = UIImage(systemName: "cart")
+        closeAction.backgroundColor = .systemGreen
+     
+        return UISwipeActionsConfiguration(actions: [closeAction])
+     }
+   
+    override func tableView(_ tableView: UITableView,
+                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+     {
+        let modifyAction = UIContextualAction(style: .destructive, title:  "Trash", handler:
+            { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+             
+                print("Trash action ...")
+                
+                let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+                
+                if let selectedIndex = findGroceryIndex(grocery: selectedGrocery)
+                {
+                    groceries.remove(at: selectedIndex.offset)
+                    updateTableView()
+                    tableView.reloadData()
+                    
+                    Grocery.saveGrocery(groceries)
+                }
+            
+                success(true)
+         })
+        
+         modifyAction.image = UIImage(systemName: "trash")
+         modifyAction.backgroundColor = .red
+     
+         return UISwipeActionsConfiguration(actions: [modifyAction])
+     }
+    
+    // Rearranging
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem]
+    {
+        return [UIDragItem(itemProvider: NSItemProvider())]
+    }
 
-    /*
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal
+    {
+        if session.localDragSession != nil && numberOfSections == 1
+        { // Drag originated from the same app.
+            return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        }
+
+        return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
+    }
+
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator)
+    {
+    }
+    
     // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath)
+    {
+        if(numberOfSections == 1)
+        {
+            let fromGrocery = filteredGroceries[fromIndexPath.section][fromIndexPath.row]
+            let toGrocery = filteredGroceries[to.section][to.row]
+            
+            if let fromIndex = findGroceryIndex(grocery: fromGrocery),
+               let toIndex = findGroceryIndex(grocery: toGrocery)
+            {
+                groceries.remove(at: fromIndex.offset)
+                groceries.insert(fromGrocery, at: toIndex.offset)
+                updateTableView()
+                tableView.reloadData()
+                
+                Grocery.saveGrocery(groceries)
+            }
+        }
     }
-    */
 
-    /*
     // Override to support conditional rearranging of the table view.
+    /*
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
     }
     */
+    
+    @IBAction func categoryButtonTapped(_ sender: Any)
+    {
+        categoryButtonOn.toggle()
+        updateFilteringButtons()
+        updateTableView()
+        tableView.reloadData()
+
+    }
+    
+    @IBAction func refrigerationButtonTapped(_ sender: Any)
+    {
+        refrigerationButtonOn.toggle()
+        updateFilteringButtons()
+        updateTableView()
+        tableView.reloadData()
+
+    }
+    
+    @IBAction func freezingButtonTapped(_ sender: Any)
+    {
+        freezingButtonOn.toggle()
+        updateFilteringButtons()
+        updateTableView()
+        tableView.reloadData()
+
+    }
+    
+    @IBAction func outdoorButtonTapped(_ sender: Any)
+    {
+        outdoorButtonOn.toggle()
+        updateFilteringButtons()
+        updateTableView()
+        tableView.reloadData()
+    }
+    
+    
+    
+    
 
     
     // MARK: - Navigation
     @IBAction func unwindToGroceryListTableView(_ unwindSegue: UIStoryboardSegue) {
-        let sourceViewController = unwindSegue.source
+        //let sourceViewController = unwindSegue.source
         // Use data from the view controller which initiated the unwind segue
-        guard unwindSegue.identifier == "SaveUnwind" else { return }
+        if(unwindSegue.identifier == "SaveUnwind")
+        {
         
-        // 구현 필요..
-        
-        
+            if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
+            {
+                let title = sourceViewController.nameTextField.text ?? ""
+                let category = GroceryHistory.Category(rawValue: sourceViewController.categoryButton.title(for: .normal) ?? "")!
+                //grocery.info.image =
+                
+                let count = sourceViewController.count
+                let isPercentageCount = sourceViewController.percentageSwitch.isOn
+                
+                let dueDate = sourceViewController.dueDate
+                
+                let storage = Grocery.Storage(rawValue: sourceViewController.storageSegment.selectedSegmentIndex)!
+                let fridgeName = sourceViewController.fridgeSelectButton.title(for: .normal) ?? ""
+                let notes = sourceViewController.noteTextField.text
+                let image = sourceViewController.groceryImage
+                
+                if let grocery = sourceViewController.grocery
+                {
+                    // editing
+                    grocery.info.title = title
+                    grocery.info.category = category
+                    grocery.info.image = image
+                    grocery.count = count
+                    grocery.isPercentageCount = isPercentageCount
+                    grocery.dueDate = dueDate
+                    grocery.storage = storage
+                    grocery.fridgeName = fridgeName
+                    grocery.notes = notes
+                    
+                    if(grocery.info.image == nil)
+                    {
+                        if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewCell
+                        {
+                            cell.titleLabel.text = title
+                            cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
+                            cell.countButton.setTitle("\(grocery.count)", for: .normal)
+                        }
+                        else
+                        {
+                            tableView.reloadData()
+                        }
+                    }
+                    else
+                    {
+                        if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewPictureCell
+                        {
+                            cell.titleLabel.text = title
+                            cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
+                            cell.countButton.setTitle("\(grocery.count)", for: .normal)
+                        }
+                        else
+                        {
+                            tableView.reloadData()
+                        }
+                    }
+                }
+                else
+                {
+                    // adding
+                    let newGrocery = Grocery(info: getGroceryHistory(title: title, category: category), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
+                    newGrocery.info.image = image
+                    groceries.append(newGrocery)
+                    
+                    updateTableView()
+                }
+                
+                tableView.reloadData()
+                
+                Grocery.saveGrocery(groceries)
+                GroceryHistory.saveGroceryHistory(groceryHistories)
+            }
+        }
+        else if(unwindSegue.identifier == "ToGroceryList")
+        {
+            selectedfrideName = fridgeNames[selectedFridgeIndex[0]]
+            updateTableView()
+            tableView.reloadData()
+        }
     }
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
