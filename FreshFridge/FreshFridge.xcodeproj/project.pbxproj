@@ -28,6 +28,8 @@
 		8EA2CC2C25B55A2500D80622 /* GroceryImge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2B25B55A2500D80622 /* GroceryImge.swift */; };
 		EE281C6925B7E8D40017AF54 /* ShopingCartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */; };
 		EE281C7725B837300017AF54 /* ShopingCartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */; };
+		F701FB6425B88779006906E8 /* PurchaseRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F701FB6225B88779006906E8 /* PurchaseRecordTableViewCell.swift */; };
+		F701FB6525B88779006906E8 /* PurchaseRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F701FB6325B88779006906E8 /* PurchaseRecordTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		8EA2CC2B25B55A2500D80622 /* GroceryImge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryImge.swift; sourceTree = "<group>"; };
 		EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopingCartTableViewController.swift; sourceTree = "<group>"; };
 		EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopingCartTableViewCell.swift; sourceTree = "<group>"; };
+		F701FB6225B88779006906E8 /* PurchaseRecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseRecordTableViewCell.swift; sourceTree = "<group>"; };
+		F701FB6325B88779006906E8 /* PurchaseRecordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseRecordTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				8EA2CC2025B40EC900D80622 /* DefaultNameViewController.swift */,
 				8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */,
 				8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */,
+				F701FB6225B88779006906E8 /* PurchaseRecordTableViewCell.swift */,
+				F701FB6325B88779006906E8 /* PurchaseRecordTableViewController.swift */,
 				EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */,
 				EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */,
 				8E4B99D925AD4AF700F2B0BF /* Assets.xcassets */,
@@ -189,11 +195,13 @@
 				8E4B99D525AD4AF500F2B0BF /* ViewController.swift in Sources */,
 				8E4B9A0225AD4EFE00F2B0BF /* UIButtonExtension.swift in Sources */,
 				EE281C7725B837300017AF54 /* ShopingCartTableViewCell.swift in Sources */,
+				F701FB6525B88779006906E8 /* PurchaseRecordTableViewController.swift in Sources */,
 				8E4B9A0125AD4EFE00F2B0BF /* GroceryListTableViewCell.swift in Sources */,
 				EE281C6925B7E8D40017AF54 /* ShopingCartTableViewController.swift in Sources */,
 				8E4B9A0025AD4EFE00F2B0BF /* GroceryListTableViewController.swift in Sources */,
 				8EA2CC2125B40EC900D80622 /* DefaultNameViewController.swift in Sources */,
 				8E4B99FE25AD4EFE00F2B0BF /* AddGroceryTableViewController.swift in Sources */,
+				F701FB6425B88779006906E8 /* PurchaseRecordTableViewCell.swift in Sources */,
 				8E4B99D125AD4AF500F2B0BF /* AppDelegate.swift in Sources */,
 				8EA2CC2425B40EE600D80622 /* CategoryTableViewController.swift in Sources */,
 				8E4B99D325AD4AF500F2B0BF /* SceneDelegate.swift in Sources */,
