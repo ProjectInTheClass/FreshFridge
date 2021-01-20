@@ -125,7 +125,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath)
         let cellContents = filteredGroceries[indexPath.row] // as! PurchaseRecordTableViewCell
         print(cellContents)
-        cell.textLabel?.text = cellContents.info.title
+//        cell.textLabel?.text = cellContents.title
         
 
         return cell
