@@ -25,6 +25,7 @@
 		8E4B9A0225AD4EFE00F2B0BF /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B99FD25AD4EFE00F2B0BF /* UIButtonExtension.swift */; };
 		F7737D5E25B714DF00540F7F /* PurchaseRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7737D5D25B714DF00540F7F /* PurchaseRecordTableViewController.swift */; };
 		F7737D6125B7150100540F7F /* PurchaseRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7737D6025B7150100540F7F /* PurchaseRecordTableViewCell.swift */; };
+		F7737D6525B735BF00540F7F /* PurchaseRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7737D6425B735BF00540F7F /* PurchaseRecord.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		8E4B99FD25AD4EFE00F2B0BF /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		F7737D5D25B714DF00540F7F /* PurchaseRecordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseRecordTableViewController.swift; sourceTree = "<group>"; };
 		F7737D6025B7150100540F7F /* PurchaseRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseRecordTableViewCell.swift; sourceTree = "<group>"; };
+		F7737D6425B735BF00540F7F /* PurchaseRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseRecord.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				8E4B99DE25AD4AF700F2B0BF /* Info.plist */,
 				8E4B99E925AD4BE100F2B0BF /* FridgeMain.storyboard */,
 				8E4B99ED25AD4C2E00F2B0BF /* FridgeSelection.storyboard */,
+				F7737D6425B735BF00540F7F /* PurchaseRecord.swift */,
 				8E4B99F125AD4C5900F2B0BF /* PurchaseRecord.storyboard */,
 				F7737D5D25B714DF00540F7F /* PurchaseRecordTableViewController.swift */,
 				F7737D6025B7150100540F7F /* PurchaseRecordTableViewCell.swift */,
@@ -178,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7737D6525B735BF00540F7F /* PurchaseRecord.swift in Sources */,
 				8E4B99D525AD4AF500F2B0BF /* ViewController.swift in Sources */,
 				8E4B9A0225AD4EFE00F2B0BF /* UIButtonExtension.swift in Sources */,
 				8E4B9A0125AD4EFE00F2B0BF /* GroceryListTableViewCell.swift in Sources */,

@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class PurchaseRecordTableViewController: UITableViewController, UISearchBarDelegate, PurchaseRecordCellDelegate  {
 
     
@@ -19,38 +20,30 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
     var numbersOfRowInSection: [Int] = []
-    var filteredGroceries: [[Grocery]] = [] // 어레이의 어레이: Nesting
-    var searchbarGroceries: [[Grocery]] = []
+    var filteredGroceries: [[GroceryHistory]] = []
+    var searchbarGroceries = groceryHistories
     
     var categorySortButtonOn = true
     var favoriteSortBurronOn = true
     var recentSortButtonOn = true
-           
+        
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                       
         SearchBar.delegate = self
         
-        if let savedGroceryHistories = GroceryHistory.loadGroceryHistory() {
+        if let savedGroceryHistories = GroceryHistory.loadGroceryHistory()
+        {
             groceryHistories = savedGroceryHistories
-        } else {
+        }
+        else
+        {
             groceryHistories = GroceryHistory.loadSampleGroceryHistory()
         }
         
-        
-        if let savedGroceries = Grocery.loadGrocery() {
-            groceries = savedGroceries
-        } else {
-            groceries = Grocery.loadSampleGrocery()
-        }
-        
-        
-        if let savedCartGroceries = CartGrocery.loadCartGrocery() {
-            cartGroceries = savedCartGroceries
-        } else {
-            cartGroceries = CartGrocery.loadSampleCartGrocery()
-        }
-
         updateButtons()
         updateTableView()
         
@@ -61,6 +54,19 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+                
+        if searchText == "" {
+            searchbarGroceries = groceryHistories
+        } else {
+            searchbarGroceries = groceryHistories.filter { $0.title.contains(searchText)}
+            }
+        self.tableView.reloadData()
+    }
+ 
+    
+    
     
     func updateButtons() {
         
@@ -74,11 +80,11 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         sectionNames.removeAll()
         
 //        if
-//        분류별인 경우
+//        분류별인 경우, 우선 분류별인 경우만 구현
         for category in GroceryHistory.Category.allCases {
-            var sectionGroceries: [Grocery] = []
-            for grocery in groceries {
-                if grocery.info.category == category {
+            var sectionGroceries: [GroceryHistory] = []
+            for grocery in searchbarGroceries {
+                if grocery.category == category {
                     sectionGroceries.append(grocery)
                 }
             }
@@ -90,20 +96,13 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             }
         }
         
-//        else
-        // 분류별이 아니면 섹션 나누지 않고 그대로 진행한다.
+//        else {  // 분류별이 아니면 섹션 나누지 않고 그대로 진행한다.
+//        numbersOfRowInSection.append(searchbarGroceries.count)
+//        numberOfSections = 1
+//        filteredGroceries.append(searchbarGroceries)
+//        sectionNames.append("")
     }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredGroceries = []
-        
-        if searchText == "" {
-            searchbarGroceries = filteredGroceries
-        } else {
-//            searchbarGroceries = filteredGroceries.filter { $0.info.title.contains(searchText)}
-            }
-        self.tableView.reloadData()
-    }
+
     
     // MARK: - Table view data source
 
@@ -124,8 +123,9 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath)
-        let cellContents = searchbarGroceries[indexPath.row]
-//        cell.textLabel?.text = cellContents.info.title
+        let cellContents = filteredGroceries[indexPath.row] // as! PurchaseRecordTableViewCell
+        print(cellContents)
+        cell.textLabel?.text = cellContents.info.title
         
 
         return cell

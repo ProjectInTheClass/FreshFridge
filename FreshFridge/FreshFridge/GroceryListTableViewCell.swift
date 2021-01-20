@@ -22,8 +22,8 @@ class GroceryListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        expirationLabel.layer.cornerRadius = 3
-        expirationLabel.clipsToBounds = true
+        expirationLabel.layer.cornerRadius = 5
+        expirationLabel.clipsToBounds = true // 신기하게 이 한줄이 있어야 실제로 코너라운드가 UI에 적용이 되는군요.
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -50,7 +50,7 @@ class GroceryListTableViewPictureCell : GroceryListTableViewCell
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        titleImage.layer.cornerRadius = 3
+        titleImage.layer.cornerRadius = 5
         titleImage.clipsToBounds = true
         
     }
