@@ -8,8 +8,17 @@
 import UIKit
 
 class ShopingCartTableViewController: UITableViewController{
+    @IBOutlet weak var categoryButton: UIButton!
+    @IBOutlet weak var latestButton: UIButton!
+   
+    var numberOfSections: Int = 0
+    var sectionNames: [String] = []
+    var numbersOfRowInSection: [Int] = []
+    var filteredGroceries: [[Grocery]] = []
     
-    
+    //var filtersInFridgeView: [Bool] = [true, true, true]   // FridgeViewFilter순서
+    var categoryButtonOn = true
+    var latestButtonOn = true
     
     
 
@@ -27,23 +36,29 @@ class ShopingCartTableViewController: UITableViewController{
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return numberOfSections
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return numbersOfRowInSection[section]
     }
 
-    /*
+  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell: ShopingCartTableViewCell! = nil
+        
+        
+        
+        
+        /*
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
-
+*/
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -89,5 +104,4 @@ class ShopingCartTableViewController: UITableViewController{
         // Pass the selected object to the new view controller.
     }
     */
-
 }
