@@ -43,15 +43,16 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                       
         SearchBar.delegate = self
         
-        if let savedGroceryHistories = GroceryHistory.loadGroceryHistory()
-        {
-            groceryHistories = savedGroceryHistories
-        }
-        else
-        {
-            groceryHistories = GroceryHistory.loadSampleGroceryHistory()
-        }
-        
+//        if let savedGroceryHistories = GroceryHistory.loadGroceryHistory()
+//        {
+//            groceryHistories = savedGroceryHistories
+//        }
+//        else
+//        {
+//            groceryHistories = GroceryHistory.loadSampleGroceryHistory()
+//        }
+//
+        searchbarGroceries = groceryHistories
         updateButtons()
         updateTableView()
         

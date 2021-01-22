@@ -35,7 +35,6 @@
                                                     <state key="normal" title="종류별"/>
                                                     <connections>
                                                         <action selector="CategorySortButtonTapped:" destination="Xx5-TJ-k4i" eventType="touchUpInside" id="iWg-Nr-e3f"/>
-                                                        <action selector="FavoritSortButtonTapped:" destination="Xx5-TJ-k4i" eventType="touchUpInside" id="2Ec-9G-Otu"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kul-z3-o9U">
@@ -106,7 +105,6 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="FavoriteButtonTapped" destination="SeZ-YD-VoW" id="sR3-VS-Zbj"/>
                                     <outlet property="FavoriteCheckButton" destination="SeZ-YD-VoW" id="1YI-OZ-FRg"/>
                                     <outlet property="ListTextLabel" destination="SeZ-YD-VoW" id="Eff-p8-kUL"/>
                                 </connections>
