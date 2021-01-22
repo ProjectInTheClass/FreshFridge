@@ -15,9 +15,11 @@ class PurchaseRecordTableViewCell: UITableViewCell {
    
     weak var delegate: PurchaseRecordCellDelegate?
     
-    @IBOutlet weak var FavoriteCheckButton: UIView!
-    @IBOutlet weak var ListTextLabel: UIView!
+   
+    @IBOutlet weak var FavoriteMarkButton: UIButton!
     
+    
+    @IBOutlet weak var PurchaseRecordListLabel: UILabel!
     
     
     override func awakeFromNib() {
@@ -30,7 +32,14 @@ class PurchaseRecordTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func updateCell(with inCell: GroceryHistory) {
+        FavoriteMarkButton.isSelected = inCell.favorite
+        PurchaseRecordListLabel.text = inCell.title
+        
+    }
+    
+    
     
     @IBAction func FavoriteButtonTapped(_ sender: UIButton) {
         delegate?.fovoriteCheckMarkTapped(sender: self)

@@ -21,12 +21,13 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     var sectionNames: [String] = []
     var numbersOfRowInSection: [Int] = []
         
+    //처음에는 아래 기본값이지만 차후에 사용자가 바꿀수 있고 바뀐 그 값은 저장되어 있어야 한다.
     var categorySortButtonOn = true
     var favoriteSortButtonOn = true
     var recentSortButtonOn = false
     
     
-    //테이블 뷰는 기본적으로 아래 어레이를 가지고 만든다.
+    // 섹션을 나누지 않을 때는 아래 어레이를 가지고 만든다.
     var purchaseRecordTableViewArray: [GroceryHistory] = []
     
     // 섹션을 나눌 때는 아래 네스팅된 어레이를 가지고 만든다.
@@ -35,8 +36,11 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     // 서치바를 위한 어레이
     var searchbarGroceries: [GroceryHistory] = groceryHistories
     
-    // 가나다 순으로 정렬된 어레이
-    var inAlphabeticalOrderArray: [GroceryHistory] = []
+    // 최신순 또는 가나다 순으로 정렬된 어레이
+    var sortedArray: [GroceryHistory] = []
+    
+    // 즐겨찾기가 상단에 위치하도록 먼저 걸러지는 어레이
+    var favoriteFirstArray: [GroceryHistory] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,10 +94,34 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         filteredGroceries.removeAll()
         sectionNames.removeAll()
         
-        if categorySortButtonOn == true {  // 분류별인 경우
+        // 최신순 버튼이 켜져 있으면 서치바에서 넘어온 어레이를 그대로 담는다. 기본 어레이는 사용자가 추가한 순서대로 어팬드 되니까 어짜피 최신순 일 것이다.
+        if recentSortButtonOn == true {
+            sortedArray = searchbarGroceries
+        }
+        // 최신순 버튼이 꺼져 있으면 타이틀의 가나다 순으로 정렬해서 다음 어레이에 담는다.
+        else {
+            sortedArray = searchbarGroceries.sorted { $0.title < $1.title }
+        }
+        
+        
+        // 즐겨찾기 버튼이 켜져 있으면 어레이 값 중에서 즐겨찾기 값이 참인 것 먼저 상단에 위치하도록 정렬한다.
+        if favoriteSortButtonOn == true {
+            let favoriteGroceries = sortedArray.filter { $0.favorite == true }
+            purchaseRecordTableViewArray.append(contentsOf: favoriteGroceries)
+            let notFavoriteGroceries = sortedArray.filter { $0.favorite == false }
+            purchaseRecordTableViewArray.append(contentsOf: notFavoriteGroceries)
+        }
+        // 즐겨찾기 버튼이 꺼져 있으면 그냥 다음 어레이에 그대로 담는다.
+        else {
+            purchaseRecordTableViewArray = sortedArray
+        }
+         
+        
+        // 분류별 버튼이 켜져 있으면 테이블 뷰를 섹션으로 나누어서 카테고리별로 정렬한다.
+        if categorySortButtonOn == true {
         for category in GroceryHistory.Category.allCases {
             var sectionGroceries: [GroceryHistory] = []
-            for grocery in searchbarGroceries {
+            for grocery in purchaseRecordTableViewArray {
                 if grocery.category == category {
                     sectionGroceries.append(grocery)
                 }
@@ -107,17 +135,21 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         }
     }
         else {  // 분류별이 아니면 섹션 나누지 않고 그대로 진행한다.
-        numbersOfRowInSection.append(searchbarGroceries.count)
+        numbersOfRowInSection.append(purchaseRecordTableViewArray.count)
         numberOfSections = 1
-        filteredGroceries.append(searchbarGroceries)
+        filteredGroceries.append(purchaseRecordTableViewArray)
         sectionNames.append("")
         }
     }
 
-//    func favoriteFirstSorting(_ array: )
+
     
     
     // MARK: - Table view data source
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -136,9 +168,10 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath)
-        let cellContents = filteredGroceries[indexPath.row] // as! PurchaseRecordTableViewCell
-        print(cellContents)
-//        cell.textLabel?.text = cellContents.title
+        let cellContents = filteredGroceries[indexPath.section][indexPath.row] // as? PurchaseRecordTableViewCell
+        cell.textLabel?.text = cellContents.title
+//        cell.updateCell(with: cellContents)
+       
         
 
         return cell

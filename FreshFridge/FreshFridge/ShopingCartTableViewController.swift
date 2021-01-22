@@ -44,9 +44,8 @@ class ShopingCartTableViewController: UITableViewController{
         return numbersOfRowInSection[section]
     }
 
-  
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+  /*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: ShopingCartTableViewCell! = nil
     
         if(filteredGroceries.count > indexPath.section){
@@ -71,8 +70,10 @@ class ShopingCartTableViewController: UITableViewController{
         // Configure the cell...
 */
         return cell
+        }
     }
-    
+ 
+ */
 
     /*
     // Override to support conditional editing of the table view.
@@ -118,4 +119,6 @@ class ShopingCartTableViewController: UITableViewController{
         // Pass the selected object to the new view controller.
     }
     */
+
+
 }

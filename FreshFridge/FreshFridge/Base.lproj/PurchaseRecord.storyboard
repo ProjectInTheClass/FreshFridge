@@ -85,7 +85,7 @@
                                                     </constraints>
                                                     <state key="normal" title="Button" image="favorite-Icon"/>
                                                     <connections>
-                                                        <action selector="FavoriteButtonTapped:" destination="0jO-oe-uXx" eventType="touchUpInside" id="HLD-vJ-IVT"/>
+                                                        <action selector="FavoriteButtonTapped:" destination="0jO-oe-uXx" eventType="touchUpInside" id="GQS-aR-Zzj"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Krg-VZ-UnG">
@@ -106,7 +106,9 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="FavoriteCheckButton" destination="SeZ-YD-VoW" id="1YI-OZ-FRg"/>
+                                    <outlet property="FavoriteMarkButton" destination="Ib1-Pa-ivl" id="VTe-bn-Rgd"/>
                                     <outlet property="ListTextLabel" destination="SeZ-YD-VoW" id="Eff-p8-kUL"/>
+                                    <outlet property="PurchaseRecordListLabel" destination="Krg-VZ-UnG" id="wfa-dO-TYI"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -149,7 +151,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="favorite-Icon" width="47" height="45"/>
+        <image name="favorite-Icon" width="94" height="90"/>
         <image name="purchaseList_Icon" width="33.333332061767578" height="33.333332061767578"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
