@@ -213,11 +213,16 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     }
     */
 
+    
+    // ㅕ
     func fovoriteCheckMarkTapped(sender: PurchaseRecordTableViewCell) {
-        print("넘어오긴 했군")
+        if let indexPath = tableView.indexPath(for: sender) {
+            let thisGrocery = filteredGroceries[indexPath.section][indexPath.row]
+            thisGrocery.favorite = !thisGrocery.favorite
+            filteredGroceries[indexPath.section][indexPath.row] = thisGrocery
+        }
     }
-    
-    
+        
     /*
     // MARK: - Navigation
 
