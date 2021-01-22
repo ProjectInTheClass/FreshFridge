@@ -14,7 +14,7 @@ class ShopingCartTableViewController: UITableViewController{
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
     var numbersOfRowInSection: [Int] = []
-    var filteredGroceries: [[Grocery]] = []
+    var filteredGroceries: [[CartGrocery]] = []
     
     //var filtersInFridgeView: [Bool] = [true, true, true]   // FridgeViewFilter순서
     var categoryButtonOn = true
@@ -45,10 +45,24 @@ class ShopingCartTableViewController: UITableViewController{
     }
 
   
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         var cell: ShopingCartTableViewCell! = nil
-        
-        
+    
+        if(filteredGroceries.count > indexPath.section){
+            let groceries = filteredGroceries[indexPath.section]
+            let grocery = groceries[indexPath.row]
+         /*
+           if(gorcery.info.image == nil)
+            {
+                cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartCell", for indexPath) as? ShopingCartTableViewCell
+            }else{
+                cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartPictureCell", for: indexPath) as? ShopingCartTableViewCell
+                let pictureCell = cell as? ShopingCartTableViewPictureCell
+                pictureCell?.titleImage.image = grocery.info.image?.image()
+            }
+        }
+        */
         
         
         /*
