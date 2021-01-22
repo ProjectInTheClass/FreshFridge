@@ -99,10 +99,10 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="countButton" destination="EIC-cv-VTc" id="mWl-XR-C1i"/>
-                                    <outlet property="titleLabel" destination="cqg-is-4gC" id="DJa-uI-W5b"/>
+                                    <outlet property="titleLabel" destination="RmL-Bl-rn3" id="gRh-B9-uMm"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="shopingCartPictureCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="groceryPictureCell" rowHeight="54" id="0B6-hM-wAu" customClass="ShopingCartTableViewPictureCell" customModule="FreshFridge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="shopingCartPictureCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="shopingCartPictureCell" rowHeight="54" id="0B6-hM-wAu" customClass="ShopingCartTableViewPictureCell" customModule="FreshFridge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="126" width="414" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0B6-hM-wAu" id="zN6-Zp-qay">
@@ -168,7 +168,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="countButton" destination="mSD-mZ-Pr8" id="Imr-M5-bPR"/>
-                                    <outlet property="titleImage" destination="gh3-Ep-HRa" id="QHD-1l-FPJ"/>
+                                    <outlet property="titleImage" destination="gh3-Ep-HRa" id="JzW-tm-KSb"/>
                                     <outlet property="titleLabel" destination="ewp-u0-1xQ" id="Mke-fG-Xwq"/>
                                 </connections>
                             </tableViewCell>
@@ -181,6 +181,10 @@
                     <navigationItem key="navigationItem" title="장바구니" id="hBn-rY-psi">
                         <barButtonItem key="rightBarButtonItem" title="추가" id="qrZ-7Q-MUh"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="LatestButton" destination="XSf-JB-LAc" id="fL3-dg-KWT"/>
+                        <outlet property="categoryButton" destination="y3m-mM-dz1" id="TeS-q7-Uu7"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yuX-NB-S2W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
