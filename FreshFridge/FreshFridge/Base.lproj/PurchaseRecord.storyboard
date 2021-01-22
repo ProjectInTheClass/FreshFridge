@@ -152,7 +152,7 @@
     </scenes>
     <resources>
         <image name="favorite-Icon" width="47" height="45"/>
-        <image name="purchaseList_Icon" width="50" height="50"/>
+        <image name="purchaseList_Icon" width="33.333332061767578" height="33.333332061767578"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

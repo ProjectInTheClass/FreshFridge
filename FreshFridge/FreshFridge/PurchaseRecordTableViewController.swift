@@ -20,15 +20,23 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
     var numbersOfRowInSection: [Int] = []
-    var filteredGroceries: [[GroceryHistory]] = []
-    var searchbarGroceries = groceryHistories
-    
-    var categorySortButtonOn = true
-    var favoriteSortBurronOn = true
-    var recentSortButtonOn = true
         
+    var categorySortButtonOn = true
+    var favoriteSortButtonOn = true
+    var recentSortButtonOn = false
     
     
+    //테이블 뷰는 기본적으로 아래 어레이를 가지고 만든다.
+    var purchaseRecordTableViewArray: [GroceryHistory] = []
+    
+    // 섹션을 나눌 때는 아래 네스팅된 어레이를 가지고 만든다.
+    var filteredGroceries: [[GroceryHistory]] = []
+    
+    // 서치바를 위한 어레이
+    var searchbarGroceries: [GroceryHistory] = groceryHistories
+    
+    // 가나다 순으로 정렬된 어레이
+    var inAlphabeticalOrderArray: [GroceryHistory] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +77,9 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     
     
     func updateButtons() {
-        
+        CategorySortButton.switchOnOff(isOn: categorySortButtonOn)
+        FavoriteSortButton.switchOnOff(isOn: favoriteSortButtonOn)
+        RecentSortButton.switchOnOff(isOn: recentSortButtonOn)
     }
     
     
@@ -79,8 +89,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         filteredGroceries.removeAll()
         sectionNames.removeAll()
         
-//        if
-//        분류별인 경우, 우선 분류별인 경우만 구현
+        if categorySortButtonOn == true {  // 분류별인 경우
         for category in GroceryHistory.Category.allCases {
             var sectionGroceries: [GroceryHistory] = []
             for grocery in searchbarGroceries {
@@ -95,14 +104,17 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 sectionNames.append(category.rawValue) // rawValue 는 enum Category의 case 뒤에 붙은 "스트링" 값을 가져다준다.
             }
         }
-        
-//        else {  // 분류별이 아니면 섹션 나누지 않고 그대로 진행한다.
-//        numbersOfRowInSection.append(searchbarGroceries.count)
-//        numberOfSections = 1
-//        filteredGroceries.append(searchbarGroceries)
-//        sectionNames.append("")
+    }
+        else {  // 분류별이 아니면 섹션 나누지 않고 그대로 진행한다.
+        numbersOfRowInSection.append(searchbarGroceries.count)
+        numberOfSections = 1
+        filteredGroceries.append(searchbarGroceries)
+        sectionNames.append("")
+        }
     }
 
+//    func favoriteFirstSorting(_ array: )
+    
     
     // MARK: - Table view data source
 
@@ -184,12 +196,25 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
 
     
     @IBAction func CategorySortButtonTapped(_ sender: UIButton) {
+        categorySortButtonOn = !categorySortButtonOn
+        updateButtons()
+        updateTableView()
+        tableView.reloadData()
+        
     }
     
     @IBAction func FavoriteSortButtonTapped(_ sender: UIButton) {
+        favoriteSortButtonOn = !favoriteSortButtonOn
+        updateButtons()
+        updateTableView()
+        tableView.reloadData()
     }
     
     @IBAction func RecentSortButtonTapped(_ sender: UIButton) {
+        recentSortButtonOn.toggle()
+        updateButtons()
+        updateTableView()
+        tableView.reloadData()
     }
     
 }

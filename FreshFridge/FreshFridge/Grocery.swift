@@ -12,21 +12,23 @@ class GroceryHistory : Codable
 {
     var title: String
     var category: Category
-    var favorite: Bool = false
+    var favorite: Bool
     var lastestPurchaseDate: Date
     var image: GroceryImage?
     
-    init(title: String, category: Category, lastestPurchaseDate: Date)
+    init(title: String, category: Category, favorite: Bool , lastestPurchaseDate: Date)
     {
         self.title = title
         self.category = category
+        self.favorite = favorite
         self.lastestPurchaseDate = lastestPurchaseDate
     }
     
-    init(title: String, category: Category, lastestPurchaseDate: Date, image: GroceryImage)
+    init(title: String, category: Category, favorite: Bool, lastestPurchaseDate: Date, image: GroceryImage)
     {
         self.title = title
         self.category = category
+        self.favorite = favorite
         self.image = image
         self.lastestPurchaseDate = lastestPurchaseDate
     }
@@ -62,59 +64,59 @@ class GroceryHistory : Codable
     static func loadSampleGroceryHistory() -> [GroceryHistory]
     {
         return [
-            GroceryHistory(title: "사과", category: .Fruits, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "배", category: .Fruits, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "바나나", category: .Fruits, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "귤", category: .Fruits, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "복숭아", category: .Fruits, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "감", category: .Fruits, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "파인애플", category: .Fruits, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "토마토", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "딸기", category: .Fruits, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "고등어", category: .MarineProducts, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "김치", category: .CookingAndSidedishes, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "바나나우유", category: .DrinksAndSnacks, lastestPurchaseDate: Date(), image: GroceryImage(image: UIImage(named: "dumyPicture1"))),
-        GroceryHistory(title: "소고기", category: .MeatsAndEggs, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "돼지고기", category: .MeatsAndEggs, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "닭고기", category: .MeatsAndEggs, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "생선", category: .MarineProducts, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "양파", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "김치", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "대파", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "고추", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "마늘", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "무", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "당근", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "애호박", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "가지", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "브로콜리", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "상추", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "양배추", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "파프리카", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "시금치", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "감자", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "고구마", category: .Vegetable, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "두부", category: .ETC, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "라면", category: .ETC, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "소면", category: .ETC, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "햄", category: .ETC, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "계란", category: .MeatsAndEggs, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "참치", category: .ETC, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "김", category: .ETC, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "밀가루", category: .ETC, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "우유", category: .DrinksAndSnacks, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "치즈", category: .DrinksAndSnacks, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "소금", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "참기름", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "마요네즈", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "진간장", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "국간장", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "후추", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "올리브유", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "포도씨유", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "카놀라유", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "식용유", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "물엿", category: .SeasonedAndOilAndSauce, lastestPurchaseDate: Date())]
+            GroceryHistory(title: "사과", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "배", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "바나나", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "귤", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "복숭아", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "감", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "파인애플", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "토마토", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "딸기", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "고등어", category: .MarineProducts, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "김치", category: .CookingAndSidedishes, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "바나나우유", category: .DrinksAndSnacks, favorite: false, lastestPurchaseDate: Date(), image: GroceryImage(image: UIImage(named: "dumyPicture1"))),
+        GroceryHistory(title: "소고기", category: .MeatsAndEggs, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "돼지고기", category: .MeatsAndEggs, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "닭고기", category: .MeatsAndEggs, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "생선", category: .MarineProducts, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "양파", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "김치", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "대파", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "고추", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "마늘", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "무", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "당근", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "애호박", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "가지", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "브로콜리", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "상추", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "양배추", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "파프리카", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "시금치", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "감자", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "고구마", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "두부", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "라면", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "소면", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "햄", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "계란", category: .MeatsAndEggs, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "참치", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "김", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "밀가루", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "우유", category: .DrinksAndSnacks, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "치즈", category: .DrinksAndSnacks, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "소금", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "참기름", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "마요네즈", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "진간장", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "국간장", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "후추", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "올리브유", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "포도씨유", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "카놀라유", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "식용유", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "물엿", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date())]
     }
 }
 
@@ -281,7 +283,7 @@ func getGroceryHistory(title: String, category: GroceryHistory.Category) -> Groc
     }
     else
     {
-        let groceryHistory = GroceryHistory(title: title, category: category, lastestPurchaseDate: Date())
+        let groceryHistory = GroceryHistory(title: title, category: category, favorite: .init(), lastestPurchaseDate: Date())
         groceryHistories.append(groceryHistory)
         return groceryHistory
     }
