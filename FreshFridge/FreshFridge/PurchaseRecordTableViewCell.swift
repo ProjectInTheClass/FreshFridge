@@ -35,12 +35,14 @@ class PurchaseRecordTableViewCell: UITableViewCell {
     }
     
     func updateCell(with inCell: GroceryHistory) {
-        FavoriteMarkButton.isSelected = inCell.favorite
+//        FavoriteMarkButton.isSelected = inCell.favorite
         PurchaseRecordListLabel.text = inCell.title
         
-        if(inCell.favorite) {
-              FavoriteMarkButton.setImage(UIImage(named: "favorite-Icon.fill"), for: .normal)
-            }
+        if inCell.favorite == true {
+            FavoriteMarkButton.setImage(UIImage(named: "favorite-Icon.fill"), for: .normal)
+        } else {
+            FavoriteMarkButton.setImage(UIImage(named: "favorite-Icon"), for: .normal)
+        }
     }
     
     

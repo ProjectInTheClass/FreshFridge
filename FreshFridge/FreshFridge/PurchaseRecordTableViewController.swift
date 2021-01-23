@@ -172,7 +172,54 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         return cell
     }
     
+    // 셀의 왼쪽에서 오른쪽으로 스와이프 했을 때 카트로 보내는 이밴트
+    override func tableView(_ tableView: UITableView,
+                    leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let toCartAction = UIContextualAction(style: .destructive, title:  "Cart", handler:
+        { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+            let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category))
+            cartGroceries.append(cartGrocery)
+            
+            CartGrocery.saveCartGrocery(cartGroceries)
+            
+            success(true)
+        })
+        
+        toCartAction.image = UIImage(systemName: "cart")
+        toCartAction.backgroundColor = .systemGreen
+     
+        return UISwipeActionsConfiguration(actions: [toCartAction])
+     }
+    
+    /*
+    // 셀을 오른쪽에서 왼쪽으로 스와이프 했을 때 냉장고로 보내는 이밴트
+    override func tableView(_ tableView: UITableView,
+                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let toFridgeAction = UIContextualAction(style: .destructive, title:  "Fridge", handler:
+            { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+                
+                let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+                let fridgeGrocery = Grocery(info: GroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, favorite: selectedGrocery.favorite, lastestPurchaseDate: Date), count: 1, isPercentageCount: false, dueDate: DueDate(3), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
+                    Grocery(info: getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category))
+                groceries.append(fridgeGrocery)
+                
+                Grocery.saveCartGrocery(fridgeGrocery)
+                
+                success(true)
+         })
+        
+        toFridgeAction.image = UIImage(systemName: "freshFridge_icon")
+        toFridgeAction.backgroundColor = .systemBlue
+     
+         return UISwipeActionsConfiguration(actions: [toFridgeAction])
+     }
+    */
 
+    
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
