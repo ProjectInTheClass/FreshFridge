@@ -37,7 +37,6 @@ class PurchaseRecordTableViewCell: UITableViewCell {
     func updateCell(with inCell: GroceryHistory) {
         FavoriteMarkButton.isSelected = inCell.favorite
         PurchaseRecordListLabel.text = inCell.title
-        
     }
     
     
