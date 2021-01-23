@@ -66,6 +66,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         } else {
             searchbarGroceries = groceryHistories.filter { $0.title.contains(searchText)}
             }
+        updateTableView()
         self.tableView.reloadData()
     }
  
@@ -160,10 +161,9 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as! PurchaseRecordTableViewCell
         
-        let cellContents = filteredGroceries[indexPath.section][indexPath.row] // as? PurchaseRecordTableViewCell
-//        cell.textLabel?.text = cellContents.title
+        let cellContents = filteredGroceries[indexPath.section][indexPath.row]
         cell.updateCell(with: cellContents)
-//        cell.updateCell(with: cellContents)
+
        
         
 
@@ -243,7 +243,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     }
     
     @IBAction func RecentSortButtonTapped(_ sender: UIButton) {
-        recentSortButtonOn.toggle()
+        recentSortButtonOn = !recentSortButtonOn
         updateButtons()
         updateTableView()
         tableView.reloadData()
