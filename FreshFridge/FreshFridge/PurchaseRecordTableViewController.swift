@@ -22,15 +22,15 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     var numbersOfRowInSection: [Int] = []
         
     //처음에는 아래 기본값이지만 차후에 사용자가 바꿀수 있고 바뀐 그 값은 저장되어 있어야 한다.
-    var categorySortButtonOn = true
+    var categorySortButtonOn = false
     var favoriteSortButtonOn = true
     var recentSortButtonOn = false
     
     
-    // 섹션을 나누지 않을 때는 아래 어레이를 가지고 만든다.
+    // 즐겨찾기가 상단에 위치하도록 먼저 걸러거나 아니거나 한 어레이
     var purchaseRecordTableViewArray: [GroceryHistory] = []
     
-    // 섹션을 나눌 때는 아래 네스팅된 어레이를 가지고 만든다.
+    // 최종 테이블 뷰는 필터드그로서리즈로 만든다. 카네고리별로 분류 될수 있다.
     var filteredGroceries: [[GroceryHistory]] = []
     
     // 서치바를 위한 어레이
@@ -39,8 +39,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     // 최신순 또는 가나다 순으로 정렬된 어레이
     var sortedArray: [GroceryHistory] = []
     
-    // 즐겨찾기가 상단에 위치하도록 먼저 걸러지는 어레이
-    var favoriteFirstArray: [GroceryHistory] = []
+
+//    var favoriteFirstArray: [GroceryHistory] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -212,10 +212,12 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     // 즐겨찾기 별표 버튼을 누르면 반응
     func fovoriteCheckMarkTapped(sender: PurchaseRecordTableViewCell) {
         if let indexPath = tableView.indexPath(for: sender) {
-            let thisGrocery = filteredGroceries[indexPath.section][indexPath.row]
+            var thisGrocery = filteredGroceries[indexPath.section][indexPath.row]
             thisGrocery.favorite = !thisGrocery.favorite
             filteredGroceries[indexPath.section][indexPath.row] = thisGrocery
         }
+        updateTableView()
+        
     }
         
     /*
