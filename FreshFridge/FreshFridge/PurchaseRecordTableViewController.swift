@@ -47,7 +47,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                       
         SearchBar.delegate = self
         
-//        searchbarGroceries = groceryHistories
+        searchbarGroceries = groceryHistories
         updateButtons()
         updateTableView()
         
@@ -158,9 +158,11 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as! PurchaseRecordTableViewCell
+        
         let cellContents = filteredGroceries[indexPath.section][indexPath.row] // as? PurchaseRecordTableViewCell
-        cell.textLabel?.text = cellContents.title
+//        cell.textLabel?.text = cellContents.title
+        cell.updateCell(with: cellContents)
 //        cell.updateCell(with: cellContents)
        
         
