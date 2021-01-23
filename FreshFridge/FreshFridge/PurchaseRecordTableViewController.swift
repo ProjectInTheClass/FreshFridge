@@ -83,6 +83,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     func updateTableView() {
         numberOfSections = 0
         numbersOfRowInSection.removeAll()
+        sortedArray.removeAll()
+        purchaseRecordTableViewArray.removeAll()
         filteredGroceries.removeAll()
         sectionNames.removeAll()
         
