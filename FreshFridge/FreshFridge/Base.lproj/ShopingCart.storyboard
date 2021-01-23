@@ -25,9 +25,6 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y3m-mM-dz1">
                                             <rect key="frame" x="0.0" y="0.0" width="207" height="44"/>
                                             <state key="normal" title="분류별"/>
-                                            <connections>
-                                                <action selector="CartegorySortButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="iPN-p8-eFj"/>
-                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSf-JB-LAc">
                                             <rect key="frame" x="207" y="0.0" width="207" height="44"/>
@@ -91,9 +88,6 @@
                                                     <state key="normal" backgroundImage="button:EIC-cv-VTc:backgroundImage">
                                                         <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="countButtonTapped:" destination="gUr-1M-w14" eventType="touchUpInside" id="9BQ-TU-B8n"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -112,8 +106,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="CheckCartButton" destination="y5m-9V-DOS" id="S8q-of-hIP"/>
-                                    <outlet property="countButton" destination="EIC-cv-VTc" id="mWl-XR-C1i"/>
-                                    <outlet property="titleLabel" destination="RmL-Bl-rn3" id="gRh-B9-uMm"/>
+                                    <outlet property="titleLabel" destination="cqg-is-4gC" id="GwP-mR-fGw"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="shopingCartPictureCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="shopingCartPictureCell" rowHeight="54" id="0B6-hM-wAu" customClass="ShopingCartTableViewPictureCell" customModule="FreshFridge" customModuleProvider="target">
@@ -163,9 +156,6 @@
                                                     <state key="normal" backgroundImage="button:mSD-mZ-Pr8:backgroundImage">
                                                         <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="countButtonTapped:" destination="0B6-hM-wAu" eventType="touchUpInside" id="scj-au-HMs"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -185,9 +175,8 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <outlet property="countButton" destination="mSD-mZ-Pr8" id="Imr-M5-bPR"/>
                                     <outlet property="titleImage" destination="gh3-Ep-HRa" id="JzW-tm-KSb"/>
-                                    <outlet property="titleLabel" destination="ewp-u0-1xQ" id="Mke-fG-Xwq"/>
+                                    <outlet property="titleLabel" destination="ewp-u0-1xQ" id="tdF-zf-JwX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -200,7 +189,6 @@
                         <barButtonItem key="rightBarButtonItem" title="추가" id="qrZ-7Q-MUh"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="LatestButton" destination="XSf-JB-LAc" id="fL3-dg-KWT"/>
                         <outlet property="categoryButton" destination="y3m-mM-dz1" id="TeS-q7-Uu7"/>
                         <outlet property="latestButton" destination="XSf-JB-LAc" id="iYc-8l-Ovp"/>
                     </connections>
