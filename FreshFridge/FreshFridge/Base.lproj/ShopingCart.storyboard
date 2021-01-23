@@ -25,10 +25,16 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y3m-mM-dz1">
                                             <rect key="frame" x="0.0" y="0.0" width="207" height="44"/>
                                             <state key="normal" title="분류별"/>
+                                            <connections>
+                                                <action selector="CartegorySortButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="iPN-p8-eFj"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSf-JB-LAc">
                                             <rect key="frame" x="207" y="0.0" width="207" height="44"/>
                                             <state key="normal" title="최신순"/>
+                                            <connections>
+                                                <action selector="RecentSortButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="9qX-9C-2E9"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
@@ -52,11 +58,18 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Tyy-nd-gk4">
                                             <rect key="frame" x="20" y="5" width="382" height="44"/>
                                             <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5m-9V-DOS">
+                                                    <rect key="frame" x="0.0" y="0.0" width="151" height="44"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="CheckCartButtonTapped:" destination="gUr-1M-w14" eventType="touchUpInside" id="CqW-UL-lNC"/>
+                                                    </connections>
+                                                </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="LGZ-Sa-sND">
-                                                    <rect key="frame" x="0.0" y="0.0" width="332" height="44"/>
+                                                    <rect key="frame" x="151" y="0.0" width="181" height="44"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqg-is-4gC">
-                                                            <rect key="frame" x="0.0" y="0.0" width="332" height="44"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="181" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="TwE-JI-Wgk"/>
                                                             </constraints>
@@ -98,6 +111,7 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
+                                    <outlet property="CheckCartButton" destination="y5m-9V-DOS" id="S8q-of-hIP"/>
                                     <outlet property="countButton" destination="EIC-cv-VTc" id="mWl-XR-C1i"/>
                                     <outlet property="titleLabel" destination="RmL-Bl-rn3" id="gRh-B9-uMm"/>
                                 </connections>
@@ -112,18 +126,22 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="li8-e8-frZ">
                                             <rect key="frame" x="20" y="5" width="382" height="44"/>
                                             <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSe-q0-ohD">
+                                                    <rect key="frame" x="0.0" y="0.0" width="71.5" height="44"/>
+                                                    <state key="normal" title="Button"/>
+                                                </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:gh3-Ep-HRa:image" translatesAutoresizingMaskIntoConstraints="NO" id="gh3-Ep-HRa">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
+                                                    <rect key="frame" x="76.5" y="0.0" width="50" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="lG3-A0-RLS"/>
                                                         <constraint firstAttribute="width" constant="50" id="tho-xx-wkY"/>
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="pyS-tc-b3G">
-                                                    <rect key="frame" x="55" y="0.0" width="272" height="44"/>
+                                                    <rect key="frame" x="131.5" y="0.0" width="195.5" height="44"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewp-u0-1xQ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="272" height="44"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="195.5" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="zdF-5a-hJy"/>
                                                             </constraints>
@@ -184,6 +202,7 @@
                     <connections>
                         <outlet property="LatestButton" destination="XSf-JB-LAc" id="fL3-dg-KWT"/>
                         <outlet property="categoryButton" destination="y3m-mM-dz1" id="TeS-q7-Uu7"/>
+                        <outlet property="latestButton" destination="XSf-JB-LAc" id="iYc-8l-Ovp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yuX-NB-S2W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -91,7 +91,7 @@ class GroceryHistory : Codable
         GroceryHistory(title: "가지", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
         GroceryHistory(title: "브로콜리", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
         GroceryHistory(title: "상추", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "양배추", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
+        GroceryHistory(title: "양배추", category: .Vegetable, favorite: true, lastestPurchaseDate: Date()),
         GroceryHistory(title: "파프리카", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
         GroceryHistory(title: "시금치", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
         GroceryHistory(title: "감자", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
