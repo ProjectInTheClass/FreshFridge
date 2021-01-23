@@ -100,13 +100,14 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         return cell
     }
 
-
-    func checkCartButtonTapped(sender: ShopingCartTableViewCell) {
+// 장바구니 체크 박스 누르면 반응
+    func checkCartTapped(sender: ShopingCartTableViewCell) {
         if let indexPath = tableView.indexPath(for: sender) {
-            let cartGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
-            
-            filteredCartGroceries[indexPath.section][indexPath.row] = cartGrocery}
-        
+            let checkGrocery = filteredGroceries[indexPath.section][indexPath.row]
+            checkGrocery.isPurchased = !checkGrocery.isPurchased
+            filteredGroceries[indexPath.section][indexPath.row] = checkGrocery
+        }
+        updateTableView()
     }
     
  
@@ -128,12 +129,4 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         tableView.reloadData()
     }
     
-    func checkCartTapped(sender: ShopingCartTableViewCell) {
-        if let indexPath = tableView.indexPath(for: sender) {
-            var checkGrocery = filteredGroceries[indexPath.section][indexPath.row]
-            checkGrocery.isPurchased = !checkGrocery.isPurchased
-            filteredGroceries[indexPath.section][indexPath.row] = checkGrocery
-        }
-        updateTableView()
-    }
 }
