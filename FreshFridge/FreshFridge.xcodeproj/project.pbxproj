@@ -26,6 +26,7 @@
 		8EA2CC2425B40EE600D80622 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */; };
 		8EA2CC2825B4201600D80622 /* SelectFridgeNameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */; };
 		8EA2CC2C25B55A2500D80622 /* GroceryImge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2B25B55A2500D80622 /* GroceryImge.swift */; };
+		8EA2CC6225BAEE9700D80622 /* BezierCurveHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC6125BAEE9700D80622 /* BezierCurveHelper.swift */; };
 		EE281C6925B7E8D40017AF54 /* ShopingCartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */; };
 		EE281C7725B837300017AF54 /* ShopingCartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */; };
 		F701FB6425B88779006906E8 /* PurchaseRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F701FB6225B88779006906E8 /* PurchaseRecordTableViewCell.swift */; };
@@ -54,6 +55,7 @@
 		8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFridgeNameTableViewController.swift; sourceTree = "<group>"; };
 		8EA2CC2B25B55A2500D80622 /* GroceryImge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryImge.swift; sourceTree = "<group>"; };
+		8EA2CC6125BAEE9700D80622 /* BezierCurveHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierCurveHelper.swift; sourceTree = "<group>"; };
 		EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopingCartTableViewController.swift; sourceTree = "<group>"; };
 		EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopingCartTableViewCell.swift; sourceTree = "<group>"; };
 		F701FB6225B88779006906E8 /* PurchaseRecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseRecordTableViewCell.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 		8E4B99C425AD4AF500F2B0BF = {
 			isa = PBXGroup;
 			children = (
+				8EA2CC6125BAEE9700D80622 /* BezierCurveHelper.swift */,
 				8E4B99CF25AD4AF500F2B0BF /* FreshFridge */,
 				8E4B99CE25AD4AF500F2B0BF /* Products */,
 			);
@@ -201,6 +204,7 @@
 				8E4B9A0025AD4EFE00F2B0BF /* GroceryListTableViewController.swift in Sources */,
 				8EA2CC2125B40EC900D80622 /* DefaultNameViewController.swift in Sources */,
 				8E4B99FE25AD4EFE00F2B0BF /* AddGroceryTableViewController.swift in Sources */,
+				8EA2CC6225BAEE9700D80622 /* BezierCurveHelper.swift in Sources */,
 				F701FB6425B88779006906E8 /* PurchaseRecordTableViewCell.swift in Sources */,
 				8E4B99D125AD4AF500F2B0BF /* AppDelegate.swift in Sources */,
 				8EA2CC2425B40EE600D80622 /* CategoryTableViewController.swift in Sources */,

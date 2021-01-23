@@ -46,6 +46,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         tableView.dragInteractionEnabled = true
         tableView.dragDelegate = self
         tableView.dropDelegate = self
@@ -286,15 +288,91 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     }
     */
     
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func addIcon(origin: CGPoint, size: CGSize, systemName: String, color: UIColor, tag: Int) -> UIView
+    {
+        let imageView = UIImageView()
+        imageView.frame = CGRect(origin: origin, size: size)
+        imageView.image = UIImage(systemName: systemName)
+        imageView.tintColor = color//UIColor.lightGray
+        imageView.isOpaque = false
+        imageView.layer.cornerRadius = 3
+        //imageView.layer.borderColor = UIColor.clear.cgColor// UIColor.lightGray.cgColor
+        //imageView.layer.borderWidth = 3
+        imageView.layer.masksToBounds = true
+        imageView.tag = tag
+        view.addSubview(imageView)
+        
+        return imageView
+    }
+    
+    private func curveAnimation(from: CGPoint, to: CGPoint, size: CGSize, systemName: String, color: UIColor, duration: TimeInterval)
+    {
+        let controlPoint = CGPoint(x: (to.x + from.x) * 0.5, y: from.y - 100.0)
+        let tag: Int = 1000
+        
+        let icon : UIView = addIcon(origin: from, size: size, systemName: systemName, color: color, tag: tag)
+        
+        let numberOfKeyFrames = 50
+        UIView.animateKeyframes(withDuration: duration, delay: 0, options: [.calculationModeCubic], animations:
+        {
+            for i in 1...numberOfKeyFrames
+            {
+                let t = CGFloat(i) / CGFloat(numberOfKeyFrames)
+                let origin = BezierCurve(t: t, p0: from, c1: controlPoint, p1: to)
+              
+                //print(origin)
+                
+                UIView.addKeyframe(withRelativeStartTime: TimeInterval(t), relativeDuration: TimeInterval(1/CGFloat(numberOfKeyFrames))*duration)
+                {
+                    icon.frame = CGRect(origin: origin, size: size)
+                }
+            }
+        }, completion: {_ in
+            if let viewWithTag = self.view.viewWithTag(tag)
+            {
+                viewWithTag.removeFromSuperview()
+            }})
+    }
+    
+    var contentOffset: CGPoint = CGPoint()
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        contentOffset = CGPoint(x: scrollView.contentOffset.x, y: scrollView.contentOffset.y + 92)
+    }
+    
     // editing
     override func tableView(_ tableView: UITableView,
                     leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
      {
         let closeAction = UIContextualAction(style: .destructive, title:  "Cart", handler:
         { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-                
+        
             print("Going to the cart ...")
-            
+            /*
+            if let cell = tableView.cellForRow(at: indexPath) as? GroceryListTableViewCell
+            {
+                let screenRect = UIScreen.main.bounds
+                let screenWidth = screenRect.size.width
+                let screenHeight = screenRect.size.height
+                
+                
+                let tabBarWidth = screenWidth / 4.0
+                let cartTabIndex = 2
+                let cartTabCenter: CGFloat = tabBarWidth * CGFloat(cartTabIndex) + tabBarWidth * 0.5
+                
+                let systemName: String = "cart"
+                let size = CGSize(width: 30, height: 25)
+                let originFrom = CGPoint(x: cell.frame.origin.x + tableView.contentOffset.x, y: cell.frame.origin.y + tableView.contentOffset.y)//CGPoint(x: 100, y: 50)
+                let originTo = CGPoint(x: cartTabCenter + tableView.contentOffset.x, y: screenHeight + tableView.contentOffset.y)
+                let color: UIColor = UIColor.systemGreen
+                let duration: TimeInterval = 1
+                curveAnimation(from: originFrom, to: originTo, size: size, systemName: systemName, color: color, duration: duration)
+            }
+            */
+            // goto the cart
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
             let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.info.title, category: selectedGrocery.info.category))
             cartGroceries.append(cartGrocery)
@@ -317,19 +395,30 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
              
                 print("Trash action ...")
-                
-                let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-                
-                if let selectedIndex = findGroceryIndex(grocery: selectedGrocery)
+                if let cell = tableView.cellForRow(at: indexPath) as? GroceryListTableViewCell
                 {
-                    groceries.remove(at: selectedIndex.offset)
-                    updateTableView()
-                    tableView.reloadData()
+                    let translate = CATransform3DTranslate(CATransform3DIdentity, -1000, 0, 0)
                     
-                    Grocery.saveGrocery(groceries)
+                    UIView.animate(withDuration: 0.5, animations: {cell.layer.transform = translate})
+                    {_ in
+                        cell.layer.transform = CATransform3DIdentity
+                        
+                        let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+                        
+                        if let selectedIndex = findGroceryIndex(grocery: selectedGrocery)
+                        {
+                            groceries.remove(at: selectedIndex.offset)
+                            updateTableView()
+                            tableView.reloadData()
+                            
+                            Grocery.saveGrocery(groceries)
+                        }
+                    
+                        
+                    }
+                    
+                    success(true)
                 }
-            
-                success(true)
          })
         
          modifyAction.image = UIImage(systemName: "trash")

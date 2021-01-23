@@ -58,6 +58,26 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
+        
+        // adding box
+        let boxWidth = 300
+        let boxHeight = 225
+        let centerX = view.bounds.width * 0.5
+        let centerY = view.bounds.height * 0.5
+        
+        let cgRect = CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5), y: Int(centerY) - Int(Double(boxHeight) * 0.5), width: boxWidth, height: boxHeight)
+        let myView = UIImageView()
+        myView.frame = cgRect
+        myView.backgroundColor = UIColor.clear
+        myView.isOpaque = false
+        myView.layer.cornerRadius = 3
+        myView.layer.borderColor =  UIColor.orange.cgColor
+        myView.layer.borderWidth = 3
+        myView.layer.masksToBounds = true
+        previewLayer.addSublayer(myView.layer)
+        
+        view.addSubview(myView)
+        
         view.layer.addSublayer(previewLayer)
 
         captureSession.startRunning()
