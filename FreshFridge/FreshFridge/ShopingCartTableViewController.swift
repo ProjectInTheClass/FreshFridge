@@ -112,7 +112,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         let cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartCell", for: indexPath) as! ShopingCartTableViewCell
         
         let cellContents = filteredCartGroceries[indexPath.section][indexPath.row]
-        //cell.updateCell(with: cellContents)
+        cell.updateCell(with: cellContents)
 
         cell.delegate = self
         
