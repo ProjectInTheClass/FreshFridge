@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="ELG-Gh-XXw">
+                        <view key="tableHeaderView" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ELG-Gh-XXw">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -75,7 +75,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="40.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TRi-wV-w6j">
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="TRi-wV-w6j">
                                             <rect key="frame" x="20" y="5" width="374" height="30.5"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ib1-Pa-ivl">
@@ -84,6 +84,7 @@
                                                         <constraint firstAttribute="width" constant="30" id="Z8M-Tw-kCD"/>
                                                         <constraint firstAttribute="height" constant="30" id="rud-2E-u2E"/>
                                                     </constraints>
+                                                    <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                     <state key="normal" title="Button" image="favorite-Icon"/>
                                                     <state key="selected" image="favorite-Icon.fill"/>
                                                     <connections>
@@ -91,8 +92,8 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Krg-VZ-UnG">
-                                                    <rect key="frame" x="40" y="0.0" width="334" height="30.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <rect key="frame" x="32" y="0.0" width="342" height="30.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
