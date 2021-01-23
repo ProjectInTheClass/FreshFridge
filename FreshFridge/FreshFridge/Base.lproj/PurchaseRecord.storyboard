@@ -84,6 +84,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="rud-2E-u2E"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="favorite-Icon"/>
+                                                    <state key="selected" image="favorite-Icon.fill"/>
                                                     <connections>
                                                         <action selector="FavoriteButtonTapped:" destination="0jO-oe-uXx" eventType="touchUpInside" id="GQS-aR-Zzj"/>
                                                     </connections>
@@ -152,6 +153,7 @@
     </scenes>
     <resources>
         <image name="favorite-Icon" width="94" height="90"/>
+        <image name="favorite-Icon.fill" width="94" height="90"/>
         <image name="purchaseList_Icon" width="33.333332061767578" height="33.333332061767578"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
