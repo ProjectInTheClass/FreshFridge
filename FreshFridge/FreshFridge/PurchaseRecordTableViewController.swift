@@ -212,12 +212,12 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     // 즐겨찾기 별표 버튼을 누르면 반응
     func fovoriteCheckMarkTapped(sender: PurchaseRecordTableViewCell) {
         if let indexPath = tableView.indexPath(for: sender) {
-            var thisGrocery = filteredGroceries[indexPath.section][indexPath.row]
+            let thisGrocery = filteredGroceries[indexPath.section][indexPath.row]
             thisGrocery.favorite = !thisGrocery.favorite
             filteredGroceries[indexPath.section][indexPath.row] = thisGrocery
         }
-        updateTableView()
-        
+//        updateTableView()
+        tableView.reloadData()
     }
         
     /*
