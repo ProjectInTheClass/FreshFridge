@@ -10,13 +10,10 @@
 import UIKit
 
 class ShopingCartTableViewController: UITableViewController, ShopingCartCellDelegate{
-    
-    
-    
-    
+ 
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var latestButton: UIButton!
-   
+    
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
     var numbersOfRowInSection: [Int] = []
@@ -81,13 +78,39 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         return numbersOfRowInSection[section]
     }
 
-  
-
         func countButtonTapped(sender: ShopingCartTableViewCell) {
             if let indexPath = tableView.indexPath(for: sender) {
                 let cartGrocery = filteredGroceries[indexPath.section][indexPath.row]
+                
                 filteredGroceries[indexPath.section][indexPath.row] = cartGrocery
         }
 }
+    
+ 
+    
+    @IBAction func CartegorySortButtonTapped(_ sender: UIButton) {
+        categoryButtonOn = !categoryButtonOn
+        updateButtons()
+        updateTableView()
+        tableView.reloadData()
+    }
+    
+    @IBAction func RecentSortButtonTapped(_ sender: UIButton) {
+        latestButtonOn = !latestButtonOn
+        updateButtons()
+        updateTableView()
+        tableView.reloadData()
+    }
+    
+    func checkCartTapped(sender: ShopingCartTableViewCell) {
+        if let indexPath = tableView.indexPath(for: sender) {
+            var checkGrocery = filteredGroceries[indexPath.section][indexPath.row]
+            checkGrocery.isPurchased = !checkGrocery.isPurchased
+            filteredGroceries[indexPath.section][indexPath.row] = checkGrocery
+        }
+        updateTableView()
+    }
 
 }
+
+

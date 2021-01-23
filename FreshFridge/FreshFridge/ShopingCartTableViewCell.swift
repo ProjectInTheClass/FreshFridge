@@ -1,43 +1,45 @@
-//
 //  ShopingCartTableViewCell.swift
 //  FreshFridge
-//
+
 //  Created by Park Youngeun on 2021/01/20.
 //
+// var cartGroceries = [CartGrocery]()
+// class CartGrocery
+
 
 import UIKit
 
-//protocol GroceryListCellDelegate: class {
-//    func countButtonTapped(sender: GroceryListTableViewCell)}
 protocol ShopingCartCellDelegate: class {
-    func countButtonTapped(sender: ShopingCartTableViewCell)
-    
-    
+    func checkCartTapped(sender: ShopingCartTableViewCell)
 }
 
 class ShopingCartTableViewCell : UITableViewCell
 {
     weak var delegate: ShopingCartCellDelegate?
     
-    @IBOutlet weak var titleLabel: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var CheckCartButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-}
-/*
- override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
 
-    // Configure the view for the selected state
-}
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    func updateCell(with inCell:CartGrocery) {
+    CheckCartButton.isSelected = inCell.isPurchased
+    
+   // titleLabel.text
+    }
+    
+    
+    @IBAction func CheckCartButtonTapped(_ sender: UIButton) {
+        delegate?.checkCartTapped(sender: self)
+    }
+    
 
-func updateCell(with inCell: GroceryHistory) {
-    FavoriteMarkButton.isSelected = inCell.favorite
-    PurchaseRecordListLabel.text = inCell.title
 }
-*/
-
 
 class ShopingCartTableViewPictureCell : ShopingCartTableViewCell
 {
