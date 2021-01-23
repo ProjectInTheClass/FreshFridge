@@ -89,7 +89,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as! ShopingCartTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartCell", for: indexPath) as! ShopingCartTableViewCell
         
         let cellContents = filteredGroceries[indexPath.section][indexPath.row]
         cell.updateCell(with: cellContents)
