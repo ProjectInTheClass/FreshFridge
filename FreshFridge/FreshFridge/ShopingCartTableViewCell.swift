@@ -29,8 +29,7 @@ class ShopingCartTableViewCell : UITableViewCell
     }
     func updateCell(with inCell:CartGrocery) {
     CheckCartButton.isSelected = inCell.isPurchased
-    
-   // titleLabel.text
+        titleLabel.text = inCell
     }
     
     
