@@ -166,7 +166,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         let cellContents = filteredGroceries[indexPath.section][indexPath.row]
         cell.updateCell(with: cellContents)
 
-       
+        cell.delegate = self
         
 
         return cell
