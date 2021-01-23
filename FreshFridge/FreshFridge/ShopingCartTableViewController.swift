@@ -4,34 +4,71 @@
 //
 //  Created by Park Youngeun on 2021/01/20.
 //
+// var cartGroceries = [CartGrocery]()
+
 
 import UIKit
 
-class ShopingCartTableViewController: UITableViewController{
+class ShopingCartTableViewController: UITableViewController, ShopingCartCellDelegate{
+    
+    
+    
+    
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var latestButton: UIButton!
    
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
     var numbersOfRowInSection: [Int] = []
-    var filteredGroceries: [[CartGrocery]] = []
     
-    //var filtersInFridgeView: [Bool] = [true, true, true]   // FridgeViewFilter순서
+    
+    //처음에는 아래 기본값이지만 차후에 사용자가 바꿀수 있고 바뀐 그 값은 저장되어 있어야 한다.
+    
     var categoryButtonOn = true
     var latestButtonOn = true
+        
+    // 섹션을 나누지 않을 때는 아래 어레이를 가지고 만든다.
+    var shopingCartTableViewArray: [CartGrocery] = []
     
+    // 섹션을 나눌 때는 아래 네스팅된 어레이를 가지고 만든다.
+    var filteredGroceries: [[CartGrocery]] = []
     
+    // 최신순 또는 가나다 순으로 정렬된 어레이
+    var sortedArray: [CartGrocery] = []
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        updateButtons()
+        updateTableView()
     }
 
+    func updateButtons() {
+        categoryButton.switchOnOff(isOn: (categoryButton != nil))
+        latestButton.switchOnOff(isOn: (latestButton != nil))
+    }
+    
+    
+    func updateTableView() {
+        numberOfSections = 0
+        numbersOfRowInSection.removeAll()
+        filteredGroceries.removeAll()
+        sectionNames.removeAll()
+        
+        // 최신순 버튼이 켜져 있으면 CartGrocery 어레이를 그대로 담는다. 기본 어레이는 사용자가 추가한 순서대로 어팬드 되니까 어짜피 최신순 일 것이다.
+        if latestButtonOn == true {
+            sortedArray = cartGroceries
+        }
+        // 최신순 버튼이 꺼져 있으면 타이틀의 가나다 순으로 정렬해서 다음 어레이에 담는다.
+      //  else {
+            //sortedArray = cartGroceries.sorted { $0.title < $1.title }
+        }
+        
+    
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -44,81 +81,13 @@ class ShopingCartTableViewController: UITableViewController{
         return numbersOfRowInSection[section]
     }
 
-  /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: ShopingCartTableViewCell! = nil
-    
-        if(filteredGroceries.count > indexPath.section){
-            let groceries = filteredGroceries[indexPath.section]
-            let grocery = groceries[indexPath.row]
-         /*
-           if(gorcery.info.image == nil)
-            {
-                cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartCell", for indexPath) as? ShopingCartTableViewCell
-            }else{
-                cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartPictureCell", for: indexPath) as? ShopingCartTableViewCell
-                let pictureCell = cell as? ShopingCartTableViewPictureCell
-                pictureCell?.titleImage.image = grocery.info.image?.image()
-            }
+  
+
+        func countButtonTapped(sender: ShopingCartTableViewCell) {
+            if let indexPath = tableView.indexPath(for: sender) {
+                let cartGrocery = filteredGroceries[indexPath.section][indexPath.row]
+                filteredGroceries[indexPath.section][indexPath.row] = cartGrocery
         }
-        */
-        
-        
-        /*
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-*/
-        return cell
-        }
-    }
- 
- */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+}
 
 }
