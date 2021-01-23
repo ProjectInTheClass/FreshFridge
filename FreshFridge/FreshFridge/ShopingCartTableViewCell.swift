@@ -27,12 +27,12 @@ class ShopingCartTableViewCell : UITableViewCell
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+ 
     func updateCell(with inCell:CartGrocery) {
     CheckCartButton.isSelected = inCell.isPurchased
-        titleLabel.text = inCell
+        titleLabel.text = inCell.info.title
     }
-    
-    
     @IBAction func CheckCartButtonTapped(_ sender: UIButton) {
         delegate?.checkCartTapped(sender: self)
     }
@@ -44,3 +44,4 @@ class ShopingCartTableViewPictureCell : ShopingCartTableViewCell
 {
     @IBOutlet weak var titleImage: UIImageView!
 }
+
