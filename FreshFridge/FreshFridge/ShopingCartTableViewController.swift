@@ -150,4 +150,31 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         tableView.reloadData()
     }
     
+    override func tableView(_ tableView: UITableView,
+                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+     {
+        let modifyAction = UIContextualAction(style: .destructive, title:  "Trash", handler:
+            { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+             
+                print("Trash action ...")
+                
+                let selectedGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
+                
+                if let selectedIndex = findGroceryIndex(grocery: selectedGrocery)
+                {
+                    groceries.remove(at: selectedIndex.offset)
+                    updateTableView()
+                    tableView.reloadData()
+                    
+                    Grocery.saveGrocery(groceries)
+                }
+            
+                success(true)
+         })
+        
+         modifyAction.image = UIImage(systemName: "trash")
+         modifyAction.backgroundColor = .red
+     
+         return UISwipeActionsConfiguration(actions: [modifyAction])
+     }
 }
