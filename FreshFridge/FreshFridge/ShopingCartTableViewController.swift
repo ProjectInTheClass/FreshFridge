@@ -10,20 +10,15 @@
 import UIKit
 
 class ShopingCartTableViewController: UITableViewController, ShopingCartCellDelegate{
-    
-    
-    
+    //상품추가 씬으로 전환 코드
     @IBAction func addItemClicked(_ sender: UIBarButtonItem) {
         let menuScreen = self.storyboard!.instantiateViewController(withIdentifier: "AddItem")
         menuScreen.modalTransitionStyle = .coverVertical
         self.present(menuScreen, animated: true, completion: nil)
     }
     
- 
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var latestButton: UIButton!
-    
-    
     
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
@@ -41,7 +36,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
 
     // 최종 테이블 뷰는 필터드그로서리즈로 만든다. 카네고리별로 분류 될수 있다.
     var filteredCartGroceries: [[CartGrocery]] = []
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

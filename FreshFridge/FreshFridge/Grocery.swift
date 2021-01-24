@@ -241,6 +241,19 @@ class CartGrocery: Codable
             CartGrocery(info: getGroceryHistory(title: "양파", category: .Vegetable)),
             CartGrocery(info: getGroceryHistory(title: "고등어", category: .MarineProducts)),
             CartGrocery(info: getGroceryHistory(title: "김치", category: .CookingAndSidedishes)),
+            CartGrocery(info: getGroceryHistory(title: "양파", category: .Vegetable)),
+            CartGrocery(info: getGroceryHistory(title: "사과", category: .Fruits)),
+            CartGrocery(info: getGroceryHistory(title: "바나나", category: .Fruits)),
+            CartGrocery(info: getGroceryHistory(title: "요거트", category: .DrinksAndSnacks)),
+            CartGrocery(info: getGroceryHistory(title: "당근", category: .Vegetable)),
+            CartGrocery(info: getGroceryHistory(title: "바닐라 아이스크림", category: .DrinksAndSnacks)),
+            CartGrocery(info: getGroceryHistory(title: "진간장", category: .SeasonedAndOilAndSauce)),
+            CartGrocery(info: getGroceryHistory(title: "멸치액젓", category: .SeasonedAndOilAndSauce)),
+            CartGrocery(info: getGroceryHistory(title: "토마토케찹", category: .SeasonedAndOilAndSauce)),
+            CartGrocery(info: getGroceryHistory(title: "냉동 돈까스", category: .MeatsAndEggs)),
+            CartGrocery(info: getGroceryHistory(title: "냉동 돈까스", category: .MeatsAndEggs)),
+            CartGrocery(info: getGroceryHistory(title: "참치캔", category: .MeatsAndEggs)),
+            CartGrocery(info: getGroceryHistory(title: "쌀", category: .ETC))
         ]
     }
 }
