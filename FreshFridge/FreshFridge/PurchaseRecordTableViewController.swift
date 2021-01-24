@@ -55,7 +55,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+         self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -189,12 +189,33 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     // 셀을 오른쪽에서 왼쪽으로 스와이프 했을 때 냉장고로 보내는 이밴트
     override func tableView(_ tableView: UITableView,
                     trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let modifyAction = UIContextualAction(style: .destructive, title:  "Trash", handler:
+            { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+             
+                print("Trash action ...")
+                
+//            let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+                filteredGroceries.remove(at: indexPath.section, indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                Grocery.saveGrocery(groceries)
+                
+                success(true)
+         })
+        
+         modifyAction.image = UIImage(systemName: "trash")
+         modifyAction.backgroundColor = .red
+        
+        
+        
         let toFridgeAction = UIContextualAction(style: .destructive, title:  "Fridge", handler:
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
                 
                 let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
                 
                 let fridgeGrocery = Grocery(info: GroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, favorite: selectedGrocery.favorite, lastestPurchaseDate: Date()), count: 1, isPercentageCount: false, dueDate: DueDate(3), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
+                
+                print(fridgeGrocery)
                 
                 groceries.append(fridgeGrocery)
                 Grocery.saveGrocery(groceries)
@@ -205,7 +226,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         toFridgeAction.image = UIImage(systemName: "fridge")
         toFridgeAction.backgroundColor = .systemBlue
      
-         return UISwipeActionsConfiguration(actions: [toFridgeAction])
+         return UISwipeActionsConfiguration(actions: [modifyAction, toFridgeAction])
      }
    
 
@@ -224,13 +245,15 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            filteredGroceries.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
+//          GroceryHistory.saveGroceryHistory(filteredGroceries)
+        }
+//        else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+//        }
     }
-    */
+   */
 
     /*
     // Override to support rearranging the table view.
@@ -255,7 +278,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             thisGrocery.favorite = !thisGrocery.favorite
             filteredGroceries[indexPath.section][indexPath.row] = thisGrocery
         }
-//        updateTableView()
+        updateTableView()
         tableView.reloadData()
     }
         
