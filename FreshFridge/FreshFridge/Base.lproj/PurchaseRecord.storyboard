@@ -118,7 +118,9 @@
                             <outlet property="delegate" destination="Xx5-TJ-k4i" id="RjP-AU-Tz3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="구입 기록" id="c2J-dA-Cow"/>
+                    <navigationItem key="navigationItem" title="구입 기록" id="c2J-dA-Cow">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="YRg-g6-suc"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="CategorySortButton" destination="HcI-Qf-RSX" id="gdp-H8-E28"/>
                         <outlet property="FavoriteSortButton" destination="kul-z3-o9U" id="rAe-kq-EEy"/>

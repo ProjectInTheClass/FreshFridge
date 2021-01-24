@@ -23,12 +23,13 @@ class ShopingCartTableViewCell : UITableViewCell
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    //awakeFromNib : 인터페이스 빌더에서 만든 객체의 인스턴스 변수를 사용할려고 할때 사용
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
- 
+    //setSelected : 버튼 눌림 효과 
+
     func updateCell(with inCell:CartGrocery) {
     CheckCartButton.isSelected = inCell.isPurchased
         titleLabel.text = inCell.info.title
@@ -36,12 +37,18 @@ class ShopingCartTableViewCell : UITableViewCell
     @IBAction func CheckCartButtonTapped(_ sender: UIButton) {
         delegate?.checkCartTapped(sender: self)
     }
-    
-
 }
 
 class ShopingCartTableViewPictureCell : ShopingCartTableViewCell
 {
     @IBOutlet weak var titleImage: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        titleImage.contentMode = .scaleAspectFit
+    }
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
 }
 

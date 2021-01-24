@@ -282,7 +282,7 @@
         <!--상품 추가-->
         <scene sceneID="YJ4-8K-1wo">
             <objects>
-                <tableViewController id="bIZ-Js-LAB" customClass="AddGroceryTableViewController" customModule="FreshFridge" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddItem" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bIZ-Js-LAB" customClass="AddGroceryTableViewController" customModule="FreshFridge" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="5" sectionFooterHeight="5" id="aVt-WJ-YPX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1146"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1025,7 +1025,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7O8-GD-tnp"/>
+        <segue reference="frF-Of-ENu"/>
         <segue reference="z0t-Z5-I7d"/>
         <segue reference="DMT-S1-uLM"/>
     </inferredMetricsTieBreakers>

@@ -26,18 +26,17 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     var favoriteSortButtonOn = true
     var recentSortButtonOn = false
     
-    
-    // 즐겨찾기가 상단에 위치하도록 먼저 걸러거나 아니거나 한 어레이
-    var purchaseRecordTableViewArray: [GroceryHistory] = []
-    
-    // 최종 테이블 뷰는 필터드그로서리즈로 만든다. 카네고리별로 분류 될수 있다.
-    var filteredGroceries: [[GroceryHistory]] = []
-    
     // 서치바를 위한 어레이
     var searchbarGroceries: [GroceryHistory] = groceryHistories
     
     // 최신순 또는 가나다 순으로 정렬된 어레이
     var sortedArray: [GroceryHistory] = []
+        
+    // 즐겨찾기가 상단에 위치하도록 먼저 걸러거나 아니거나 한 어레이
+    var purchaseRecordTableViewArray: [GroceryHistory] = []
+    
+    // 최종 테이블 뷰는 필터드그로서리즈로 만든다. 카네고리별로 분류 될수 있다.
+    var filteredGroceries: [[GroceryHistory]] = []
     
 
 //    var favoriteFirstArray: [GroceryHistory] = []
@@ -56,7 +55,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+         self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -70,8 +69,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         self.tableView.reloadData()
     }
  
-    
-    
     
     func updateButtons() {
         CategorySortButton.switchOnOff(isOn: categorySortButtonOn)
@@ -125,15 +122,14 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 numberOfSections += 1 // 섹션은 0에서 하나씩 추가된다.
                 filteredGroceries.append(sectionGroceries) //
                 sectionNames.append(category.rawValue) // rawValue 는 enum Category의 case 뒤에 붙은 "스트링" 값을 가져다준다.
+                }
             }
-        }
-    }
-        else {  // 분류별이 아니면 섹션 나누지 않고 그대로 진행한다.
-        numbersOfRowInSection.append(purchaseRecordTableViewArray.count)
-        numberOfSections = 1
-        filteredGroceries.append(purchaseRecordTableViewArray)
-        sectionNames.append("")
-        }
+        } else {  // 분류별이 아니면 섹션 나누지 않고 그대로 진행한다.
+            numbersOfRowInSection.append(purchaseRecordTableViewArray.count)
+            numberOfSections = 1
+            filteredGroceries.append(purchaseRecordTableViewArray)
+            sectionNames.append("")
+            }
     }
 
 
@@ -159,20 +155,81 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         return sectionNames[section]
     }
 
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as! PurchaseRecordTableViewCell
-        
         let cellContents = filteredGroceries[indexPath.section][indexPath.row]
         cell.updateCell(with: cellContents)
-
         cell.delegate = self
         
-
         return cell
     }
     
+    // 셀의 왼쪽에서 오른쪽으로 스와이프 했을 때 카트로 보내는 이밴트
+    override func tableView(_ tableView: UITableView,
+                    leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let toCartAction = UIContextualAction(style: .destructive, title:  "Cart", handler:
+        { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+            let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category))
+            
+            cartGroceries.append(cartGrocery)
+            CartGrocery.saveCartGrocery(cartGroceries)
+            
+            success(true)
+        })
+        
+        toCartAction.image = UIImage(systemName: "cart")
+        toCartAction.backgroundColor = .systemGreen
+     
+        return UISwipeActionsConfiguration(actions: [toCartAction])
+     }
+    
+    
+    // 셀을 오른쪽에서 왼쪽으로 스와이프 했을 때 냉장고로 보내는 이밴트
+    override func tableView(_ tableView: UITableView,
+                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let modifyAction = UIContextualAction(style: .destructive, title:  "Trash", handler:
+            { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+             
+//            let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+                filteredGroceries.remove(at: indexPath.row )
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                success(true)
+         })
+        
+         modifyAction.image = UIImage(systemName: "trash")
+         modifyAction.backgroundColor = .red
+        
+        
+        
+        let toFridgeAction = UIContextualAction(style: .destructive, title:  "Fridge", handler:
+            { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+                
+                let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+                
+                let fridgeGrocery = Grocery(info: GroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, favorite: selectedGrocery.favorite, lastestPurchaseDate: Date()), count: 1, isPercentageCount: false, dueDate: DueDate(3), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
+                
+                print(fridgeGrocery)
+                
+                groceries.append(fridgeGrocery)
+                Grocery.saveGrocery(groceries)
+                
+                success(true)
+         })
+        
+        toFridgeAction.image = UIImage(systemName: "fridge")
+        toFridgeAction.backgroundColor = .systemBlue
+     
+         return UISwipeActionsConfiguration(actions: [modifyAction, toFridgeAction])
+     }
+   
 
+    
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -185,13 +242,15 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            filteredGroceries.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
+//          GroceryHistory.saveGroceryHistory(filteredGroceries)
+        }
+//        else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+//        }
     }
-    */
+   */
 
     /*
     // Override to support rearranging the table view.
@@ -216,7 +275,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             thisGrocery.favorite = !thisGrocery.favorite
             filteredGroceries[indexPath.section][indexPath.row] = thisGrocery
         }
-//        updateTableView()
+        updateTableView()
         tableView.reloadData()
     }
         
@@ -236,7 +295,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         updateButtons()
         updateTableView()
         tableView.reloadData()
-        
     }
     
     @IBAction func FavoriteSortButtonTapped(_ sender: UIButton) {
@@ -252,5 +310,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         updateTableView()
         tableView.reloadData()
     }
+    
+    
+    
     
 }
