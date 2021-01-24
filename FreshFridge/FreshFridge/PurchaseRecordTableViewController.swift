@@ -26,18 +26,17 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     var favoriteSortButtonOn = true
     var recentSortButtonOn = false
     
-    
-    // 즐겨찾기가 상단에 위치하도록 먼저 걸러거나 아니거나 한 어레이
-    var purchaseRecordTableViewArray: [GroceryHistory] = []
-    
-    // 최종 테이블 뷰는 필터드그로서리즈로 만든다. 카네고리별로 분류 될수 있다.
-    var filteredGroceries: [[GroceryHistory]] = []
-    
     // 서치바를 위한 어레이
     var searchbarGroceries: [GroceryHistory] = groceryHistories
     
     // 최신순 또는 가나다 순으로 정렬된 어레이
     var sortedArray: [GroceryHistory] = []
+        
+    // 즐겨찾기가 상단에 위치하도록 먼저 걸러거나 아니거나 한 어레이
+    var purchaseRecordTableViewArray: [GroceryHistory] = []
+    
+    // 최종 테이블 뷰는 필터드그로서리즈로 만든다. 카네고리별로 분류 될수 있다.
+    var filteredGroceries: [[GroceryHistory]] = []
     
 
 //    var favoriteFirstArray: [GroceryHistory] = []
@@ -70,8 +69,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         self.tableView.reloadData()
     }
  
-    
-    
     
     func updateButtons() {
         CategorySortButton.switchOnOff(isOn: categorySortButtonOn)
@@ -125,15 +122,14 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 numberOfSections += 1 // 섹션은 0에서 하나씩 추가된다.
                 filteredGroceries.append(sectionGroceries) //
                 sectionNames.append(category.rawValue) // rawValue 는 enum Category의 case 뒤에 붙은 "스트링" 값을 가져다준다.
+                }
             }
-        }
-    }
-        else {  // 분류별이 아니면 섹션 나누지 않고 그대로 진행한다.
-        numbersOfRowInSection.append(purchaseRecordTableViewArray.count)
-        numberOfSections = 1
-        filteredGroceries.append(purchaseRecordTableViewArray)
-        sectionNames.append("")
-        }
+        } else {  // 분류별이 아니면 섹션 나누지 않고 그대로 진행한다.
+            numbersOfRowInSection.append(purchaseRecordTableViewArray.count)
+            numberOfSections = 1
+            filteredGroceries.append(purchaseRecordTableViewArray)
+            sectionNames.append("")
+            }
     }
 
 
@@ -159,16 +155,12 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         return sectionNames[section]
     }
 
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as! PurchaseRecordTableViewCell
-        
         let cellContents = filteredGroceries[indexPath.section][indexPath.row]
         cell.updateCell(with: cellContents)
-
         cell.delegate = self
         
-
         return cell
     }
     
@@ -181,7 +173,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
             let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category))
             cartGroceries.append(cartGrocery)
-            
             CartGrocery.saveCartGrocery(cartGroceries)
             
             success(true)
@@ -283,7 +274,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         updateButtons()
         updateTableView()
         tableView.reloadData()
-        
     }
     
     @IBAction func FavoriteSortButtonTapped(_ sender: UIButton) {
@@ -299,5 +289,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         updateTableView()
         tableView.reloadData()
     }
+    
+    
+    
     
 }
