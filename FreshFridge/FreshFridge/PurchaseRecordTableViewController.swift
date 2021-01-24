@@ -193,12 +193,9 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         let modifyAction = UIContextualAction(style: .destructive, title:  "Trash", handler:
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
              
-                print("Trash action ...")
-                
 //            let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-                filteredGroceries.remove(at: indexPath.section, indexPath.row)
+                filteredGroceries.remove(at: indexPath.row )
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                Grocery.saveGrocery(groceries)
                 
                 success(true)
          })
