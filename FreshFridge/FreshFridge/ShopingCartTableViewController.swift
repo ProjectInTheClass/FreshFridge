@@ -107,14 +107,23 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartCell", for: indexPath) as! ShopingCartTableViewCell
+        
         
         let cellContents = filteredCartGroceries[indexPath.section][indexPath.row]
-        cell.updateCell(with: cellContents)
-
-        cell.delegate = self
-        
-        return cell
+        if(cellContents.info.image == nil)
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartCell", for: indexPath) as! ShopingCartTableViewCell
+            cell.updateCell(with: cellContents)
+            cell.delegate = self
+            return cell
+        }
+        else
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartPictureCell", for: indexPath) as! ShopingCartTableViewPictureCell
+            cell.updateCell(with: cellContents)
+            cell.delegate = self
+            return cell
+        }
     }
 
 // 장바구니 체크 박스 누르면 반응
@@ -122,9 +131,9 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         if let indexPath = tableView.indexPath(for: sender) {
             let checkGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
             checkGrocery.isPurchased = !checkGrocery.isPurchased
-            filteredCartGroceries[indexPath.section][indexPath.row] = checkGrocery
         }
         updateTableView()
+        tableView.reloadData()
     }
     
  
@@ -189,15 +198,18 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 let image = sourceViewController.groceryImage
                 
                 // adding
-                let newCartGrocery = CartGrocery(info: getGroceryHistory(title: title, category: category))
-                newCartGrocery.info.image = image
-                cartGroceries.append(newCartGrocery)
-                
-                updateTableView()
-                tableView.reloadData()
-                
-                GroceryHistory.saveGroceryHistory(groceryHistories)
-                CartGrocery.saveCartGrocery(cartGroceries)
+                if(title.isEmpty == false)
+                {
+                    let newCartGrocery = CartGrocery(info: getGroceryHistory(title: title, category: category))
+                    newCartGrocery.info.image = image
+                    cartGroceries.append(newCartGrocery)
+                    
+                    updateTableView()
+                    tableView.reloadData()
+                    
+                    GroceryHistory.saveGroceryHistory(groceryHistories)
+                    CartGrocery.saveCartGrocery(cartGroceries)
+                }
             }
         }
     }

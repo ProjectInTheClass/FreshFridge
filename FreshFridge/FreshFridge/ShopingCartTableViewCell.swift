@@ -30,8 +30,17 @@ class ShopingCartTableViewCell : UITableViewCell
     }
     //setSelected : 버튼 눌림 효과 
 
-    func updateCell(with inCell:CartGrocery) {
-    CheckCartButton.isSelected = inCell.isPurchased
+    func updateCell(with inCell:CartGrocery)
+    {
+        if(inCell.isPurchased)
+        {
+            CheckCartButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        }
+        else
+        {
+            CheckCartButton.setImage(UIImage(systemName: "circle"), for: .normal)
+        }
+        
         titleLabel.text = inCell.info.title
     }
     @IBAction func CheckCartButtonTapped(_ sender: UIButton) {
@@ -49,6 +58,16 @@ class ShopingCartTableViewPictureCell : ShopingCartTableViewCell
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    override func updateCell(with inCell:CartGrocery)
+    {
+        super.updateCell(with: inCell)
+        
+        if((inCell.info.image) != nil)
+        {
+            titleImage.image = inCell.info.image?.image()
+        }
     }
 }
 

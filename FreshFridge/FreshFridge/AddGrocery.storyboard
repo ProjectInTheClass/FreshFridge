@@ -501,7 +501,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="상품 추가" id="Flv-cH-eWD">
-                        <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="PVE-zM-oK8"/>
+                        <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="PVE-zM-oK8">
+                            <connections>
+                                <action selector="completeButtonTapped:" destination="sDW-H2-BPf" id="2k0-6W-49r"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="완료" id="C2g-Kk-idQ">
                             <connections>
                                 <action selector="completeButtonTapped:" destination="sDW-H2-BPf" id="8ck-hy-L3v"/>

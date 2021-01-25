@@ -541,60 +541,63 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 let notes = sourceViewController.noteTextField.text
                 let image = sourceViewController.groceryImage
                 
-                if let grocery = sourceViewController.grocery
+                if(title.isEmpty == false)
                 {
-                    // editing
-                    grocery.info.title = title
-                    grocery.info.category = category
-                    grocery.info.image = image
-                    grocery.count = count
-                    grocery.isPercentageCount = isPercentageCount
-                    grocery.dueDate = dueDate
-                    grocery.storage = storage
-                    grocery.fridgeName = fridgeName
-                    grocery.notes = notes
-                    
-                    if(grocery.info.image == nil)
+                    if let grocery = sourceViewController.grocery
                     {
-                        if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewCell
+                        // editing
+                        grocery.info.title = title
+                        grocery.info.category = category
+                        grocery.info.image = image
+                        grocery.count = count
+                        grocery.isPercentageCount = isPercentageCount
+                        grocery.dueDate = dueDate
+                        grocery.storage = storage
+                        grocery.fridgeName = fridgeName
+                        grocery.notes = notes
+                        
+                        if(grocery.info.image == nil)
                         {
-                            cell.titleLabel.text = title
-                            cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
-                            cell.countButton.setTitle("\(grocery.count)", for: .normal)
+                            if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewCell
+                            {
+                                cell.titleLabel.text = title
+                                cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
+                                cell.countButton.setTitle("\(grocery.count)", for: .normal)
+                            }
+                            else
+                            {
+                                tableView.reloadData()
+                            }
                         }
                         else
                         {
-                            tableView.reloadData()
+                            if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewPictureCell
+                            {
+                                cell.titleLabel.text = title
+                                cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
+                                cell.countButton.setTitle("\(grocery.count)", for: .normal)
+                            }
+                            else
+                            {
+                                tableView.reloadData()
+                            }
                         }
                     }
                     else
                     {
-                        if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewPictureCell
-                        {
-                            cell.titleLabel.text = title
-                            cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
-                            cell.countButton.setTitle("\(grocery.count)", for: .normal)
-                        }
-                        else
-                        {
-                            tableView.reloadData()
-                        }
+                        // adding
+                        let newGrocery = Grocery(info: getGroceryHistory(title: title, category: category), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
+                        newGrocery.info.image = image
+                        groceries.append(newGrocery)
+                        
+                        updateTableView()
                     }
-                }
-                else
-                {
-                    // adding
-                    let newGrocery = Grocery(info: getGroceryHistory(title: title, category: category), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
-                    newGrocery.info.image = image
-                    groceries.append(newGrocery)
+                
+                    tableView.reloadData()
                     
-                    updateTableView()
+                    Grocery.saveGrocery(groceries)
+                    GroceryHistory.saveGroceryHistory(groceryHistories)
                 }
-                
-                tableView.reloadData()
-                
-                Grocery.saveGrocery(groceries)
-                GroceryHistory.saveGroceryHistory(groceryHistories)
             }
         }
         else if(unwindSegue.identifier == "ToGroceryList")
