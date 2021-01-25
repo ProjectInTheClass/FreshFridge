@@ -11,11 +11,7 @@ import UIKit
 
 class ShopingCartTableViewController: UITableViewController, ShopingCartCellDelegate{
     //상품추가 씬으로 전환 코드
-    @IBAction func addItemClicked(_ sender: UIBarButtonItem) {
-        let menuScreen = self.storyboard!.instantiateViewController(withIdentifier: "AddItem")
-        menuScreen.modalTransitionStyle = .coverVertical
-        self.present(menuScreen, animated: true, completion: nil)
-    }
+    
     
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var latestButton: UIButton!

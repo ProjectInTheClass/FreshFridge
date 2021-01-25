@@ -170,7 +170,6 @@
                     <navigationItem key="navigationItem" title="장바구니" id="hBn-rY-psi">
                         <barButtonItem key="rightBarButtonItem" title="추가" id="qrZ-7Q-MUh">
                             <connections>
-                                <action selector="addItemClicked:" destination="xCs-Wd-AV3" id="Cxp-un-xH5"/>
                                 <segue destination="Ga8-Al-37H" kind="presentation" identifier="AddShoppingCart" id="suS-0e-o39"/>
                             </connections>
                         </barButtonItem>
