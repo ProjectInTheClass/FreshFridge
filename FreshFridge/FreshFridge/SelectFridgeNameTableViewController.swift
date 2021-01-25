@@ -38,7 +38,6 @@ class SelectFridgeNameTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return fridgeNames.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FridgeNameCell", for: indexPath)
@@ -49,7 +48,7 @@ class SelectFridgeNameTableViewController: UITableViewController {
         cell.textLabel?.font = systemFont15
         if(isFromAddGrocery)
         {
-            let groceryFridgeName = grocery != nil ? grocery!.fridgeName : selectedfrideName
+            let groceryFridgeName = fridgeName//grocery != nil ? grocery!.fridgeName : selectedfrideName
             if( groceryFridgeName == fridgeNames[indexPath.row] )
             {
                 cell.accessoryType = .checkmark

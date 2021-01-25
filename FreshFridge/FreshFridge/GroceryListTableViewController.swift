@@ -21,7 +21,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     var filteredGroceries: [[Grocery]] = []
     
     //var filtersInFridgeView: [Bool] = [true, true, true]   // FridgeViewFilter순서
-    var categoryButtonOn = true
+    var categoryButtonOn = false
     var refrigerationButtonOn = true
     var freezingButtonOn = true
     var outdoorButtonOn = true
@@ -45,8 +45,6 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         tableView.dragInteractionEnabled = true
         tableView.dragDelegate = self
@@ -467,12 +465,18 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             }
         }
     }
+ 
 
     // Override to support conditional rearranging of the table view.
     /*
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
     }
     */
+    
+    func selectedCell()
+    {
+        performSegue(withIdentifier: "EditCell", sender: self)
+    }
     
     @IBAction func categoryButtonTapped(_ sender: Any)
     {
@@ -518,7 +522,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     @IBAction func unwindToGroceryListTableView(_ unwindSegue: UIStoryboardSegue) {
         //let sourceViewController = unwindSegue.source
         // Use data from the view controller which initiated the unwind segue
-        if(unwindSegue.identifier == "SaveUnwind")
+        if(unwindSegue.identifier == "UnwindGroceryListFromAddGrocery")
         {
         
             if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
@@ -606,13 +610,15 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         // Pass the selected object to the new view controller.
         if segue.identifier == "EditCell"
         {
-            let indexPath = tableView.indexPathForSelectedRow!
-            let groceries = filteredGroceries[indexPath.section]
-            let grocery = groceries[indexPath.row]
-            let navigationController = segue.destination as! UINavigationController
-            let addGroceryTableViewController = navigationController.topViewController as! AddGroceryTableViewController
-            
-            addGroceryTableViewController.grocery = grocery
+            if let indexPath = tableView.indexPathForSelectedRow
+            {
+                let groceries = filteredGroceries[indexPath.section]
+                let grocery = groceries[indexPath.row]
+                let navigationController = segue.destination as! UINavigationController
+                let addGroceryTableViewController = navigationController.topViewController as! AddGroceryTableViewController
+                
+                addGroceryTableViewController.grocery = grocery
+            }
         }
     }
     

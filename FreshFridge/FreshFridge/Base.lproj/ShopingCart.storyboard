@@ -171,6 +171,7 @@
                         <barButtonItem key="rightBarButtonItem" title="추가" id="qrZ-7Q-MUh">
                             <connections>
                                 <action selector="addItemClicked:" destination="xCs-Wd-AV3" id="Cxp-un-xH5"/>
+                                <segue destination="Ga8-Al-37H" kind="presentation" identifier="AddShoppingCart" id="suS-0e-o39"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -182,6 +183,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yuX-NB-S2W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1241" y="1401"/>
+        </scene>
+        <!--AddGrocery-->
+        <scene sceneID="WUC-77-O2Q">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddGrocery" id="Ga8-Al-37H" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fpL-pb-uj7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1873" y="1218"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5Q6-2b-Vun">

@@ -37,6 +37,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     var dueDate: DueDate = DueDate(0)   // 추가 버튼으로 들어온 경우 사용됨
     var groceryImage: GroceryImage?
     
+    var isFromShoppingCart: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -112,6 +114,31 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             self.title = "상품 추가"
         }
         
+        if(isFromShoppingCart)
+        {
+            storageSegment.isHidden = true
+            dueDateTitleLabel.isHidden = true
+            dueDateButton.isHidden = true
+            dueDateIncreaseWeek.isHidden = true
+            dueDateIncreaseMonth.isHidden = true
+            dueDatePicker.isHidden = true
+            fridgeSelectButton.isHidden = true
+            noteTextField.isHidden = true
+            barcodeScanButton.isHidden = true
+        }
+        else
+        {
+            storageSegment.isHidden = false
+            dueDateTitleLabel.isHidden = false
+            dueDateButton.isHidden = false
+            dueDateIncreaseWeek.isHidden = false
+            dueDateIncreaseMonth.isHidden = false
+            dueDatePicker.isHidden = false
+            fridgeSelectButton.isHidden = false
+            noteTextField.isHidden = false
+            barcodeScanButton.isHidden = false
+        }
+        
         enableCompletButton()
     }
     
@@ -136,7 +163,13 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     let dueDatePickerIndexPath = IndexPath(row: 1, section: 4)
     let pictureButtonIndexPath = IndexPath(row: 0, section: 7)
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+    let storageSegmentedIndexPath = IndexPath(row: 0, section: 0)
+    let dueDateLabelIndexPath = IndexPath(row: 0, section: 4)
+    let selectFridgeNameIndexPath = IndexPath(row: 0, section: 5)
+    let notesIndexPath = IndexPath(row: 0, section: 6)
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
         if(indexPath == dueDatePickerIndexPath)
         {
             if(isDueDatePickerShown)
@@ -157,6 +190,30 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             else
             {
                 return view.frame.width * 3.0 / 4.0
+            }
+        }
+        else
+        {
+            if(isFromShoppingCart)
+            {
+                switch indexPath {
+                case storageSegmentedIndexPath:
+                    return 0.0
+                case dueDateLabelIndexPath:
+                    return 0.0
+                case dueDatePickerIndexPath:
+                    return 0.0
+                case selectFridgeNameIndexPath:
+                    return 0.0
+                case notesIndexPath:
+                    return 0.0
+                default:
+                    return 44.0
+                }
+            }
+            else
+            {
+                return 44.0
             }
         }
         
@@ -422,6 +479,17 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         }
     }
     
+    @IBAction func completeButtonTapped(_ sender: Any)
+    {
+        if(isFromShoppingCart)
+        {
+            performSegue(withIdentifier: "UnwindShopingCartFromAddGrocery", sender: self)
+        }
+        else
+        {
+            performSegue(withIdentifier: "UnwindGroceryListFromAddGrocery", sender: self)
+        }
+    }
     // MARK: - Table view data source
 /*
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -485,12 +553,28 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        if(segue.identifier == "FromAddGrocerySeque")
+        if(segue.identifier == "SelectFridgeNameSeque")
         {
             let navController = segue.destination as! UINavigationController
             let controller = navController.topViewController as! SelectFridgeNameTableViewController
             controller.grocery = grocery
             controller.isFromAddGrocery = true
+            
+            if(grocery == nil)
+            {
+                if(fridgeSelectButton.title(for: .normal) != nil)
+                {
+                    controller.fridgeName = fridgeSelectButton.title(for: .normal)!
+                }
+                else
+                {
+                    controller.fridgeName = selectedfrideName
+                }
+            }
+            else
+            {
+                controller.fridgeName = grocery!.fridgeName
+            }
         }
     }
     

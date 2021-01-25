@@ -177,4 +177,43 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
      
          return UISwipeActionsConfiguration(actions: [modifyAction])
      }
+    
+    @IBAction func unwindToShopingCart(_ unwindSegue: UIStoryboardSegue)
+    {
+        
+        // Use data from the view controller which initiated the unwind segue
+        if(unwindSegue.identifier == "UnwindShopingCartFromAddGrocery")
+        {
+            if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
+            {
+                let title = sourceViewController.nameTextField.text ?? ""
+                let category = GroceryHistory.Category(rawValue: sourceViewController.categoryButton.title(for: .normal) ?? "")!
+                let count = sourceViewController.count
+                let isPercentageCount = sourceViewController.percentageSwitch.isOn
+                let image = sourceViewController.groceryImage
+                
+                // adding
+                let newCartGrocery = CartGrocery(info: getGroceryHistory(title: title, category: category))
+                newCartGrocery.info.image = image
+                cartGroceries.append(newCartGrocery)
+                
+                updateTableView()
+                tableView.reloadData()
+                
+                GroceryHistory.saveGroceryHistory(groceryHistories)
+                CartGrocery.saveCartGrocery(cartGroceries)
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "AddShoppingCart"
+        {
+            let navigationController = segue.destination as! UINavigationController
+            let addGroceryTableViewController = navigationController.topViewController as! AddGroceryTableViewController
+            addGroceryTableViewController.isFromShoppingCart = true
+        }
+    }
 }
+

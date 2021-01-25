@@ -9,6 +9,7 @@ import UIKit
 
 protocol GroceryListCellDelegate: class {
     func countButtonTapped(sender: GroceryListTableViewCell)
+    func selectedCell()
 }
 
 class GroceryListTableViewCell: UITableViewCell {
@@ -30,6 +31,10 @@ class GroceryListTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        if(selected)
+        {
+            delegate?.selectedCell()
+        }
     }
 
     @IBAction func countButtonTapped(_ sender: Any) {
@@ -62,5 +67,6 @@ class GroceryListTableViewPictureCell : GroceryListTableViewCell
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        
     }
 }
