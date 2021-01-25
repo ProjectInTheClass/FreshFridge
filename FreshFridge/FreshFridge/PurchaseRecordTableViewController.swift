@@ -194,8 +194,10 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
              
 //            let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-                filteredGroceries.remove(at: indexPath.row )
+                groceryHistories.remove(at: indexPath.row )
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                updateTableView()
                 
                 success(true)
          })
@@ -220,7 +222,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 success(true)
          })
         
-        toFridgeAction.image = UIImage(systemName: "fridge")
+        toFridgeAction.image = UIImage(named: "freshFridge_icon")?.withTintColor( .white)
         toFridgeAction.backgroundColor = .systemBlue
      
          return UISwipeActionsConfiguration(actions: [modifyAction, toFridgeAction])
@@ -238,7 +240,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -250,7 +252,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
 //        }
     }
-   */
+   
 
     /*
     // Override to support rearranging the table view.
