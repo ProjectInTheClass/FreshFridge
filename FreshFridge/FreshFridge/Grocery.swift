@@ -307,6 +307,11 @@ func findGroceryIndex(grocery: Grocery) -> EnumeratedSequence<[Grocery]>.Element
     return groceries.enumerated().first(where: {$0.element === grocery})
 }
 
+func findGroceryIndex(grocery: CartGrocery) -> EnumeratedSequence<[CartGrocery]>.Element?
+{
+    return cartGroceries.enumerated().first(where: {$0.element === grocery})
+}
+
 func getDocumentsDirectory() -> URL
 {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
