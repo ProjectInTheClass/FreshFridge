@@ -10,6 +10,7 @@
 import UIKit
 
 class ShopingCartTableViewController: UITableViewController, ShopingCartCellDelegate{
+
     //상품추가 씬으로 전환 코드
     
     
@@ -136,6 +137,41 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         tableView.reloadData()
     }
     
+    func countButtonTapped(sender: ShopingCartTableViewCell) {
+        if let indexPath = tableView.indexPath(for: sender)
+        {
+            let grocery = filteredCartGroceries[indexPath.section][indexPath.row]
+            if var count = Int(sender.countTextField.text ?? "")
+            {
+                
+                
+                if(grocery.isPercentageCount)
+                {
+                    if(count < 0)
+                    {
+                        count = 0
+                    }
+                    if(count > 100)
+                    {
+                        count = 100
+                    }
+                }
+                else
+                {
+                    if(count < 0)
+                    {
+                        count = 0
+                    }
+                }
+                
+                grocery.count = count
+                
+            }
+         
+            sender.countTextField.updatePieChart(count: grocery.count, isPercentage: grocery.isPercentageCount)
+        }
+    }
+    
  
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
         categoryButtonOn = !categoryButtonOn
@@ -154,6 +190,8 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         updateTableView()
         tableView.reloadData()
     }
+    
+    
     
     override func tableView(_ tableView: UITableView,
                     trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
@@ -202,6 +240,8 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 {
                     let newCartGrocery = CartGrocery(info: getGroceryHistory(title: title, category: category))
                     newCartGrocery.info.image = image
+                    newCartGrocery.count = count
+                    newCartGrocery.isPercentageCount = isPercentageCount
                     cartGroceries.append(newCartGrocery)
                     
                     updateTableView()

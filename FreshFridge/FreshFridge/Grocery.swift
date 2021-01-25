@@ -213,6 +213,8 @@ class CartGrocery: Codable
 {
     var info: GroceryHistory
     var isPurchased: Bool = false
+    var count: Int = 1
+    var isPercentageCount: Bool = false
     
     init(info: GroceryHistory) {
         self.info = info

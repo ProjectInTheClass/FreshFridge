@@ -44,3 +44,29 @@ extension UIButton
         }
     }
 }
+
+extension UITextField
+{
+    func updatePieChart(count: Int, isPercentage: Bool)
+    {
+        if(isPercentage == false)
+        {
+            self.text = "\(Int(count))"
+            if(count > 0)
+            {
+                self.background = UIImage(named: "gray")
+            }
+            else
+            {
+                self.background = UIImage(named: "0percent")
+            }
+        }
+        else
+        {
+            self.text = "\(Int(count))%"
+            let countPercent : Int = (count / 10) * 10
+            let imageName: String = "\(countPercent)percent"
+            self.background = UIImage(named: imageName)
+        }
+    }
+}

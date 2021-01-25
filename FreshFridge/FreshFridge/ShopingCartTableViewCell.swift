@@ -11,6 +11,7 @@ import UIKit
 
 protocol ShopingCartCellDelegate: class {
     func checkCartTapped(sender: ShopingCartTableViewCell)
+    func countButtonTapped(sender: ShopingCartTableViewCell)
 }
 
 class ShopingCartTableViewCell : UITableViewCell
@@ -19,6 +20,7 @@ class ShopingCartTableViewCell : UITableViewCell
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var CheckCartButton: UIButton!
+    @IBOutlet weak var countTextField: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,10 +44,17 @@ class ShopingCartTableViewCell : UITableViewCell
         }
         
         titleLabel.text = inCell.info.title
+        countTextField.updatePieChart(count: inCell.count, isPercentage: inCell.isPercentageCount)
     }
     @IBAction func CheckCartButtonTapped(_ sender: UIButton) {
         delegate?.checkCartTapped(sender: self)
     }
+    
+    @IBAction func countTextFieldEdited(_ sender: Any) {
+        delegate?.countButtonTapped(sender: self)
+    }
+    
+    
 }
 
 class ShopingCartTableViewPictureCell : ShopingCartTableViewCell

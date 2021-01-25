@@ -195,9 +195,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 }
             }
             
-            filteredGroceries[indexPath.section] = groceries
-            
-            sender.countButton.updatePieChart(count: groceries[indexPath.row].count, isPercentage: groceries[indexPath.row].isPercentageCount)
+            sender.countButton.updatePieChart(count:grocery.count, isPercentage: grocery.isPercentageCount)
         }
     }
 
