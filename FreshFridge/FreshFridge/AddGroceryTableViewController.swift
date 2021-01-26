@@ -270,6 +270,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     @IBAction func nameTextFieldEdited(_ sender: Any)
     {
+        enableCompletButton()
     }
     
     @IBAction func defaultNameButtonTapped(_ sender: Any)
