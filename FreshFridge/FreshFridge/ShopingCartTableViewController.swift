@@ -211,11 +211,11 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 
                 if let selectedIndex = findGroceryIndex(grocery: selectedGrocery)
                 {
-                    groceries.remove(at: selectedIndex.offset)
+                    cartGroceries.remove(at: selectedIndex.offset)
                     updateTableView()
                     tableView.reloadData()
                     
-                    Grocery.saveGrocery(groceries)
+                    CartGrocery.saveCartGrocery(cartGroceries)
                 }
             
                 success(true)

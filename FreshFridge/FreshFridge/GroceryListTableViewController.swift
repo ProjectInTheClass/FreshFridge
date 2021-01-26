@@ -382,7 +382,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             // goto the cart
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
             let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.info.title, category: selectedGrocery.info.category))
-            cartGroceries.append(cartGrocery)
+            cartGroceries.insert(cartGrocery, at: 0)
             
             CartGrocery.saveCartGrocery(cartGroceries)
             
