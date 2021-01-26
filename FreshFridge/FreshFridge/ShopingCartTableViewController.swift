@@ -16,6 +16,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var latestButton: UIButton!
+    var fridgeTabBarController: FridgeTabBarController!
     
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
@@ -36,9 +37,18 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //tabBarItem.tag = TabbarItemTag.thirdViewController.rawValue
+        fridgeTabBarController = tabBarController as? FridgeTabBarController
+        
         sortedArray = cartGroceries
         updateButtons() 
         updateTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateTableView()
+        tableView.reloadData()
     }
 
     func updateButtons() {
@@ -88,9 +98,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     }
         
     
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
-    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

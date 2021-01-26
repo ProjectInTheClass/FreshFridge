@@ -281,10 +281,10 @@
         <!--AddGrocery-->
         <scene sceneID="5OZ-gA-aBD">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u5m-5W-qP0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="AddGrocery" id="iyP-8D-cf7" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="RK2-x6-2A4"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u5m-5W-qP0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1951" y="-147"/>
         </scene>
@@ -292,7 +292,9 @@
         <scene sceneID="dOP-kj-HxD">
             <objects>
                 <navigationController id="TG5-xT-Abw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="fridge" id="1ND-Yz-l96"/>
+                    <tabBarItem key="tabBarItem" title="" image="fridge" id="1ND-Yz-l96">
+                        <color key="badgeColor" systemColor="systemOrangeColor"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3vZ-Ba-jIG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -18128,6 +18130,9 @@ gXYADoF7AA6BgwAOgYYADoGLAA6BkwAAAAAAAAQBAAAAAAAAAFYAAAAAAAAAAAAAAAAADoGWA
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -31,6 +31,7 @@
 		8EA2CC6C25BE7E3400D80622 /* SelectFridgeName.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EA2CC6B25BE7E3400D80622 /* SelectFridgeName.storyboard */; };
 		8EA2CC7025C0223000D80622 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC6F25C0223000D80622 /* ScannerViewController.swift */; };
 		8EA2CC7325C0267C00D80622 /* WebScrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC7225C0267C00D80622 /* WebScrapper.swift */; };
+		8EA2CC7A25C06CA700D80622 /* FridgeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC7925C06CA700D80622 /* FridgeTabBarController.swift */; };
 		EE281C6925B7E8D40017AF54 /* ShopingCartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */; };
 		EE281C7725B837300017AF54 /* ShopingCartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */; };
 		F701FB6425B88779006906E8 /* PurchaseRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F701FB6225B88779006906E8 /* PurchaseRecordTableViewCell.swift */; };
@@ -64,6 +65,7 @@
 		8EA2CC6B25BE7E3400D80622 /* SelectFridgeName.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectFridgeName.storyboard; sourceTree = "<group>"; };
 		8EA2CC6F25C0223000D80622 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		8EA2CC7225C0267C00D80622 /* WebScrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebScrapper.swift; sourceTree = "<group>"; };
+		8EA2CC7925C06CA700D80622 /* FridgeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeTabBarController.swift; sourceTree = "<group>"; };
 		EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopingCartTableViewController.swift; sourceTree = "<group>"; };
 		EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopingCartTableViewCell.swift; sourceTree = "<group>"; };
 		F701FB6225B88779006906E8 /* PurchaseRecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseRecordTableViewCell.swift; sourceTree = "<group>"; };
@@ -104,9 +106,10 @@
 				8E4B99D025AD4AF500F2B0BF /* AppDelegate.swift */,
 				8E4B99D225AD4AF500F2B0BF /* SceneDelegate.swift */,
 				8E4B99D425AD4AF500F2B0BF /* ViewController.swift */,
+				8EA2CC7925C06CA700D80622 /* FridgeTabBarController.swift */,
+				8E4B99FD25AD4EFE00F2B0BF /* UIButtonExtension.swift */,
 				8E4B99FA25AD4EFE00F2B0BF /* Grocery.swift */,
 				8EA2CC2B25B55A2500D80622 /* GroceryImge.swift */,
-				8E4B99FD25AD4EFE00F2B0BF /* UIButtonExtension.swift */,
 				8E4B99E925AD4BE100F2B0BF /* FridgeMain.storyboard */,
 				8E4B99FB25AD4EFE00F2B0BF /* GroceryListTableViewController.swift */,
 				8E4B99FC25AD4EFE00F2B0BF /* GroceryListTableViewCell.swift */,
@@ -225,6 +228,7 @@
 				8EA2CC7025C0223000D80622 /* ScannerViewController.swift in Sources */,
 				8E4B99D325AD4AF500F2B0BF /* SceneDelegate.swift in Sources */,
 				8EA2CC2C25B55A2500D80622 /* GroceryImge.swift in Sources */,
+				8EA2CC7A25C06CA700D80622 /* FridgeTabBarController.swift in Sources */,
 				8EA2CC2825B4201600D80622 /* SelectFridgeNameTableViewController.swift in Sources */,
 				8EA2CC7325C0267C00D80622 /* WebScrapper.swift in Sources */,
 				8E4B99FF25AD4EFE00F2B0BF /* Grocery.swift in Sources */,

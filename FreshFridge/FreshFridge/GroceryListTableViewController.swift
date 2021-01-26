@@ -13,7 +13,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     @IBOutlet weak var refrigerationButton: UIButton!
     @IBOutlet weak var freezingButton: UIButton!
     @IBOutlet weak var outdoorButton: UIButton!
-
+    var fridgeTabBarController: FridgeTabBarController!
     
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
@@ -49,6 +49,11 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         tableView.dragInteractionEnabled = true
         tableView.dragDelegate = self
         tableView.dropDelegate = self
+        
+        fridgeTabBarController = tabBarController as? FridgeTabBarController
+        
+        //tabBarItem.tag = TabbarItemTag.firstViewController.rawValue
+        
         
         GroceryImage.viewSize = CGSize(width: view.frame.width, height: view.frame.height)
 
@@ -93,6 +98,11 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         
         updateFilteringButtons()
         updateTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateTableView()
+        tableView.reloadData()
     }
     
     func updateFilteringButtons()
@@ -339,6 +349,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         contentOffset = CGPoint(x: scrollView.contentOffset.x, y: scrollView.contentOffset.y + 92)
     }
     
+    
     // editing
     override func tableView(_ tableView: UITableView,
                     leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
@@ -347,6 +358,9 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
         
             print("Going to the cart ...")
+            fridgeTabBarController.animateBadge(tabBarIndex: .shopingCartTabBar)
+            
+            
             /*
             if let cell = tableView.cellForRow(at: indexPath) as? GroceryListTableViewCell
             {

@@ -16,6 +16,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     @IBOutlet weak var CategorySortButton: UIButton!
     @IBOutlet weak var FavoriteSortButton: UIButton!
     @IBOutlet weak var RecentSortButton: UIButton!
+    var fridgeTabBarController: FridgeTabBarController!
     
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
@@ -46,6 +47,9 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                       
         SearchBar.delegate = self
         
+        //tabBarItem.tag = TabbarItemTag.secondViewController.rawValue
+        fridgeTabBarController = tabBarController as? FridgeTabBarController
+        
         searchbarGroceries = groceryHistories
         updateButtons()
         updateTableView()
@@ -56,6 +60,11 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
          self.navigationItem.leftBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateTableView()
+        tableView.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -136,10 +145,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     
     
     // MARK: - Table view data source
-    
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
-    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -170,6 +175,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         let toCartAction = UIContextualAction(style: .destructive, title:  "Cart", handler:
         { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
+            fridgeTabBarController.animateBadge(tabBarIndex: .shopingCartTabBar)
+            
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
             let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category))
             
@@ -192,7 +199,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         
         let modifyAction = UIContextualAction(style: .destructive, title:  "Trash", handler:
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-             
+            
 //            let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
                 groceryHistories.remove(at: indexPath.row )
                 tableView.deleteRows(at: [indexPath], with: .fade)
@@ -209,6 +216,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         
         let toFridgeAction = UIContextualAction(style: .destructive, title:  "Fridge", handler:
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+                
+                fridgeTabBarController.animateBadge(tabBarIndex: .fridgeTabBar)
                 
                 let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
                 
