@@ -174,7 +174,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
             let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category))
             
-            cartGroceries.append(cartGrocery)
+            cartGroceries.insert(cartGrocery, at: 0)
             CartGrocery.saveCartGrocery(cartGroceries)
             
             success(true)
@@ -225,11 +225,11 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 
                 print(selectedGrocery)
                 
-                let fridgeGrocery = Grocery(info: GroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, favorite: selectedGrocery.favorite, lastestPurchaseDate: Date()), count: 1, isPercentageCount: false, dueDate: DueDate(3), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
+                let fridgeGrocery = Grocery(info: GroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, favorite: selectedGrocery.favorite, lastestPurchaseDate: Date()), count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
                 
                 print(fridgeGrocery)
                 
-                groceries.append(fridgeGrocery)
+                groceries.insert(fridgeGrocery, at: 0)
                 Grocery.saveGrocery(groceries)
                 
                 success(true)
