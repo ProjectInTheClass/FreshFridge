@@ -47,14 +47,10 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                       
         SearchBar.delegate = self
         
-<<<<<<< HEAD
-        //tabBarItem.tag = TabbarItemTag.secondViewController.rawValue
         fridgeTabBarController = tabBarController as? FridgeTabBarController
         
         searchbarGroceries = groceryHistories
-=======
-        
->>>>>>> 9241a7037334d65d2264f63fc4bd91188594e06f
+
         updateButtons()
         updateTableView()
         

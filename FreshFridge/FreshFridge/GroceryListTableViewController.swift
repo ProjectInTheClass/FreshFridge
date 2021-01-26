@@ -52,9 +52,6 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         
         fridgeTabBarController = tabBarController as? FridgeTabBarController
         
-        //tabBarItem.tag = TabbarItemTag.firstViewController.rawValue
-        
-        
         GroceryImage.viewSize = CGSize(width: view.frame.width, height: view.frame.height)
 
         // Uncomment the following line to preserve selection between presentations

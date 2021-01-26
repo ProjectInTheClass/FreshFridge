@@ -38,7 +38,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //tabBarItem.tag = TabbarItemTag.thirdViewController.rawValue
         fridgeTabBarController = tabBarController as? FridgeTabBarController
         
         sortedArray = cartGroceries
