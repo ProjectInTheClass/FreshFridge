@@ -22,6 +22,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     
+    var lineView: UIImageView! = nil
+    var imageView: UIImageView! = nil
+    var opaqueView: UIView! = nil
     var labelView: UILabel! = nil
     var resultLabel: UILabel! = nil
     
@@ -72,7 +75,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         let centerY = view.bounds.height * 0.4
         
         let cgRect = CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5), y: Int(centerY) - Int(Double(boxHeight) * 0.5), width: boxWidth, height: boxHeight)
-        let lineView = UIImageView()
+        
+        lineView = UIImageView()
         lineView.frame = cgRect
         lineView.backgroundColor = UIColor.clear
         lineView.isOpaque = false
@@ -80,21 +84,19 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         lineView.layer.borderColor =  UIColor.white.cgColor
         lineView.layer.borderWidth = 3
         lineView.layer.masksToBounds = true
-        
-        //previewLayer.addSublayer(lineView.layer)
         view.addSubview(lineView)
         
-        let opaqueView = UIView(frame: view.bounds)
-        previewLayer.addSublayer(opaqueView.layer)
+        opaqueView = UIView()
+        opaqueView.frame = view.bounds
         opaqueView.layer.backgroundColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.2)
         mask(viewToMask: opaqueView, maskRect: cgRect, invert: true)
+        previewLayer.addSublayer(opaqueView.layer)
         
-        
-        let imageView = UIImageView(frame: CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5), y: Int(centerY) + Int(Double(boxHeight) * 0.5), width: 44, height: 44))
+        imageView = UIImageView()
+        imageView.frame = CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5), y: Int(centerY) + Int(Double(boxHeight) * 0.5), width: 44, height: 44)
         imageView.image = UIImage(systemName: "barcode")
         imageView.tintColor = UIColor.white
         imageView.contentMode = .scaleAspectFit
-        
         view.addSubview(imageView)
         
         labelView = UILabel()
@@ -111,10 +113,41 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         resultLabel.textAlignment = .center
         view.addSubview(resultLabel)
         
-        
-        
         captureSession.startRunning()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+
+    deinit {
+       NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+
+    @objc func rotated()
+    {
+        if UIDevice.current.orientation.isLandscape
+        {
+            print("Landscape")
+        }
+        else
+        {
+            print("Portrait")
+        }
+        
+        previewLayer.frame = view.layer.bounds
+    
+        // adding box
+        let boxWidth = 300
+        let boxHeight = 180
+        let centerX = view.bounds.width * 0.5
+        let centerY = view.bounds.height * 0.4
+        
+        let cgRect = CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5), y: Int(centerY) - Int(Double(boxHeight) * 0.5), width: boxWidth, height: boxHeight)
+        lineView.frame = cgRect
+        opaqueView.frame = view.bounds
+        mask(viewToMask: opaqueView, maskRect: cgRect, invert: true)
+        imageView.frame = CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5), y: Int(centerY) + Int(Double(boxHeight) * 0.5), width: 44, height: 44)
+        labelView.frame = CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5) + 44, y: Int(centerY) + Int(Double(boxHeight) * 0.5), width: boxWidth, height: 44)
+        resultLabel.frame = CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5), y: Int(centerY) - Int(Double(boxHeight) * 0.5) - 44, width: boxWidth, height: 44)
     }
     
     func mask(viewToMask: UIView, maskRect: CGRect, invert: Bool = false) {

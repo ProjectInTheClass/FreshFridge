@@ -140,7 +140,39 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         }
         
         enableCompletButton()
-    }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        }
+
+        deinit {
+           NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+        }
+
+        @objc func rotated()
+        {
+            if UIDevice.current.orientation.isLandscape
+            {
+                print("Landscape")
+            }
+            else
+            {
+                print("Portrait")
+            }
+        
+            barcodeScanButton.frame = CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50)
+        }
+    
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//
+//        if UIDevice.current.orientation.isLandscape {
+//            print("Landscape")
+//        } else {
+//            print("Portrait")
+//        }
+//
+//        barcodeScanButton.frame = CGRect(x: 5, y: size.height - barcodeScanButtonOffset, width: size.width - 10, height: 50)
+//    }
     
     @objc func dismissKeyboard()
     {
