@@ -7,8 +7,8 @@
 
 import UIKit
 
-class AddGroceryTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITextFieldDelegate {
-
+class AddGroceryTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITextFieldDelegate, BarcodeDataDelegate {
+    
     @IBOutlet weak var completeButton: UIBarButtonItem!
     @IBOutlet weak var storageSegment: UISegmentedControl!
     @IBOutlet weak var nameTextField: UITextField!
@@ -441,8 +441,67 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     @IBAction func barcodeScanButtonTapped(_ sender: Any)
     {
         // 구현 필요
+        let scannerViewController = ScannerViewController()
+        scannerViewController.delegate = self
+        present(scannerViewController, animated: true, completion: nil )
         
         dismissKeyboard()
+    }
+    
+    func sendBarcode(_ barcode: String)
+    {
+        guard barcode.isEmpty == false else { return }
+        
+        let webAddress = String(format: "http://www.koreannet.or.kr/home/hpisSrchGtin.gs1?gtin=%@", barcode)
+        let searchTerm = [("<div class=\"productTit\">","</div>"),
+                          ("<div class=\"imgArea\">","</div>")]
+        
+        WebScrapper.shared.scrapingInfo(webAddress: webAddress, searchStartEnd: searchTerm)
+        { [self] (resultString, isSuccess) in
+            if(isSuccess)
+            {
+                // getting title
+                if(resultString.count > 0)
+                {
+                    var trimmedString = resultString[0]
+                    trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: "&nbsp;")
+                    print(trimmedString)
+                    
+                    trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: barcode)
+                    print(trimmedString)
+                    
+                    trimmedString = trimmedString.trimmingCharacters(in: .whitespacesAndNewlines)
+                    print(trimmedString)
+                    
+                    self.nameTextField.text = trimmedString
+                }
+                
+                // getting image
+                if(resultString.count > 1)
+                {
+                    var trimmedString = resultString[1]
+                    trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: "<img src=\"")
+                    print(trimmedString)
+                    
+                    trimmedString = WebScrapper.shared.trimmingAfterString(in: trimmedString, trim: " width=\"392\" height=\"260\" id=\"detailImage\" />")
+                    print(trimmedString)
+                    
+                    trimmedString = trimmedString.trimmingCharacters(in: .whitespacesAndNewlines)
+                    print(trimmedString)
+                    
+                    let link = trimmedString
+                    if let url = URL(string: link)
+                    {
+                        WebScrapper.shared.downloadImage(from: url, ui: pictureButton)
+                    }
+                }
+            }
+            else
+            {
+                // 바코드 정보를 가져오지 못했습니다.
+                print("바코드 정보를 가져오지 못했습니다.")
+            }
+        } // end of closer
     }
     
     @IBAction func unwindToAddGrocery(_ unwindSegue: UIStoryboardSegue)

@@ -58,30 +58,67 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
+        view.layer.addSublayer(previewLayer)
+        
         
         // adding box
         let boxWidth = 300
-        let boxHeight = 225
+        let boxHeight = 180
         let centerX = view.bounds.width * 0.5
-        let centerY = view.bounds.height * 0.5
+        let centerY = view.bounds.height * 0.4
         
         let cgRect = CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5), y: Int(centerY) - Int(Double(boxHeight) * 0.5), width: boxWidth, height: boxHeight)
-        let myView = UIImageView()
-        myView.frame = cgRect
-        myView.backgroundColor = UIColor.clear
-        myView.isOpaque = false
-        myView.layer.cornerRadius = 3
-        myView.layer.borderColor =  UIColor.orange.cgColor
-        myView.layer.borderWidth = 3
-        myView.layer.masksToBounds = true
-        previewLayer.addSublayer(myView.layer)
+        let lineView = UIImageView()
+        lineView.frame = cgRect
+        lineView.backgroundColor = UIColor.clear
+        lineView.isOpaque = false
+        lineView.layer.cornerRadius = 3
+        lineView.layer.borderColor =  UIColor.white.cgColor
+        lineView.layer.borderWidth = 3
+        lineView.layer.masksToBounds = true
         
-        view.addSubview(myView)
+        //previewLayer.addSublayer(lineView.layer)
+        view.addSubview(lineView)
         
-        view.layer.addSublayer(previewLayer)
-
+        let opaqueView = UIView(frame: view.bounds)
+        previewLayer.addSublayer(opaqueView.layer)
+        opaqueView.layer.backgroundColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.2)
+        mask(viewToMask: opaqueView, maskRect: cgRect, invert: true)
+        
+        
+        let imageView = UIImageView(frame: CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5), y: Int(centerY) + Int(Double(boxHeight) * 0.5), width: 44, height: 44))
+        imageView.image = UIImage(systemName: "barcode")
+        imageView.tintColor = UIColor.white
+        imageView.contentMode = .scaleAspectFit
+        
+        view.addSubview(imageView)
+        
+        let labelView = UILabel(frame: CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5) + 44, y: Int(centerY) + Int(Double(boxHeight) * 0.5), width: boxWidth, height: 44))
+        labelView.text = "프레임 안에 바코드를 위치시키세요"
+        labelView.textColor = UIColor.white
+        labelView.textAlignment = .left
+        view.addSubview(labelView)
+        
+        
         captureSession.startRunning()
 
+    }
+    
+    func mask(viewToMask: UIView, maskRect: CGRect, invert: Bool = false) {
+        let maskLayer = CAShapeLayer()
+        let path = CGMutablePath()
+        if (invert) {
+            path.addRect(viewToMask.bounds)
+        }
+        path.addRect(maskRect)
+
+        maskLayer.path = path
+        if (invert) {
+            maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
+        }
+
+        // Set the mask of the view.
+        viewToMask.layer.mask = maskLayer;
     }
     
     func failed() {
