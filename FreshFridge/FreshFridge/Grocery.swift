@@ -299,7 +299,7 @@ func getGroceryHistory(title: String, category: GroceryHistory.Category) -> Groc
     else
     {
         let groceryHistory = GroceryHistory(title: title, category: category, favorite: .init(), lastestPurchaseDate: Date())
-        groceryHistories.append(groceryHistory)
+        groceryHistories.insert(groceryHistory, at: 0)
         return groceryHistory
     }
 }

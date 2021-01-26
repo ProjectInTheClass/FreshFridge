@@ -10,6 +10,8 @@
 import UIKit
 
 class ShopingCartTableViewController: UITableViewController, ShopingCartCellDelegate{
+    
+    
 
     //상품추가 씬으로 전환 코드
     
@@ -43,6 +45,10 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         sortedArray = cartGroceries
         updateButtons() 
         updateTableView()
+        
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false // for selecting the rows, didSelectRowAtIndex path could not be fired until pressed long.
+        view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -178,7 +184,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         }
     }
     
- 
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
         categoryButtonOn = !categoryButtonOn
         updateButtons()
@@ -248,7 +253,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                     newCartGrocery.info.image = image
                     newCartGrocery.count = count
                     newCartGrocery.isPercentageCount = isPercentageCount
-                    cartGroceries.append(newCartGrocery)
+                    cartGroceries.insert(newCartGrocery, at: 0)
                     
                     updateTableView()
                     tableView.reloadData()

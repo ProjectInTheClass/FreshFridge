@@ -72,7 +72,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PurchaseRecordCell" id="0jO-oe-uXx" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordCell" id="0jO-oe-uXx" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="136" width="414" height="40.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0jO-oe-uXx" id="SeZ-YD-VoW">
@@ -116,7 +116,7 @@
                                     <outlet property="PurchaseRecordListLabel" destination="Krg-VZ-UnG" id="wfa-dO-TYI"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PurchaseRecordWithPictureCell" id="FkW-eM-jEp" userLabel="PurchaseRecordWithPictureCell" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordWithPictureCell" id="FkW-eM-jEp" userLabel="PurchaseRecordWithPictureCell" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="176.5" width="414" height="40.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FkW-eM-jEp" id="OnM-fb-p62">

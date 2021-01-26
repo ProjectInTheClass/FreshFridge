@@ -24,6 +24,8 @@ class ShopingCartTableViewCell : UITableViewCell
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        
     }
     //awakeFromNib : 인터페이스 빌더에서 만든 객체의 인스턴스 변수를 사용할려고 할때 사용
 

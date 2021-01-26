@@ -597,7 +597,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                         // adding
                         let newGrocery = Grocery(info: getGroceryHistory(title: title, category: category), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
                         newGrocery.info.image = image
-                        groceries.append(newGrocery)
+                        groceries.insert(newGrocery, at: 0)
                         
                         updateTableView()
                     }
