@@ -47,10 +47,14 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                       
         SearchBar.delegate = self
         
+<<<<<<< HEAD
         //tabBarItem.tag = TabbarItemTag.secondViewController.rawValue
         fridgeTabBarController = tabBarController as? FridgeTabBarController
         
         searchbarGroceries = groceryHistories
+=======
+        
+>>>>>>> 9241a7037334d65d2264f63fc4bd91188594e06f
         updateButtons()
         updateTableView()
         
@@ -59,7 +63,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         self.navigationItem.leftBarButtonItem = self.editButtonItem
+//         self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +91,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     
     
     func updateTableView() {
+        searchbarGroceries = groceryHistories
         numberOfSections = 0
         numbersOfRowInSection.removeAll()
         sortedArray.removeAll()
@@ -180,7 +185,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
             let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category))
             
-            cartGroceries.append(cartGrocery)
+            cartGroceries.insert(cartGrocery, at: 0)
             CartGrocery.saveCartGrocery(cartGroceries)
             
             success(true)
@@ -201,10 +206,20 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
 //            let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-                groceryHistories.remove(at: indexPath.row )
-                tableView.deleteRows(at: [indexPath], with: .fade)
+//                groceryHistories.remove(at: indexPath.row )
+//                tableView.deleteRows(at: [indexPath], with: .fade)
+                let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
                 
-                updateTableView()
+                if let selectedIndex = findGroceryHistoryIndex(groceryHistory: selectedGrocery) {
+                    
+                    print(selectedIndex)
+                    
+                    groceryHistories.remove(at: selectedIndex.offset)
+                    updateTableView()
+                    tableView.reloadData()
+                    
+                    Grocery.saveGrocery(groceries)
+                }
                 
                 success(true)
          })
@@ -221,11 +236,13 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 
                 let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
                 
-                let fridgeGrocery = Grocery(info: GroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, favorite: selectedGrocery.favorite, lastestPurchaseDate: Date()), count: 1, isPercentageCount: false, dueDate: DueDate(3), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
+                print(selectedGrocery)
+                
+                let fridgeGrocery = Grocery(info: GroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, favorite: selectedGrocery.favorite, lastestPurchaseDate: Date()), count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
                 
                 print(fridgeGrocery)
                 
-                groceries.append(fridgeGrocery)
+                groceries.insert(fridgeGrocery, at: 0)
                 Grocery.saveGrocery(groceries)
                 
                 success(true)
@@ -249,7 +266,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     }
     */
 
-    
+/*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -261,7 +278,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
 //        }
     }
-   
+     */
 
     /*
     // Override to support rearranging the table view.

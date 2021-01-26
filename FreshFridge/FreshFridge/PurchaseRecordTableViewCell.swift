@@ -39,9 +39,9 @@ class PurchaseRecordTableViewCell: UITableViewCell {
         PurchaseRecordListLabel.text = inCell.title
         
         if inCell.favorite == true {
-            FavoriteMarkButton.setImage(UIImage(named: "favorite-Icon.fill"), for: .normal)
+            FavoriteMarkButton.setImage(UIImage(named: "favorite-Icon.fill")?.withTintColor(.lightGray) , for: .normal)
         } else {
-            FavoriteMarkButton.setImage(UIImage(named: "favorite-Icon"), for: .normal)
+            FavoriteMarkButton.setImage(UIImage(named: "favorite-Icon")?.withTintColor(.lightGray), for: .normal)
         }
     }
     
@@ -53,21 +53,24 @@ class PurchaseRecordTableViewCell: UITableViewCell {
     
 }
 
-/*
-class PurchaseRecordPictureCell: UITableViewCell
-{
-//    @IBOutlet weak var titleImage: UIImageView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
 
-        titleImage.contentMode = .scaleAspectFit
-    }
+//class PurchaseRecordWithPictureCell: UITableViewCell
+//{
+////    @IBOutlet weak var titleImage: UIImageView!
+//
+//
+//
+//
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//
+//        titleImage.contentMode = .scaleAspectFit
+//    }
+//
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//
+//        // Configure the view for the selected state
+//    }
+//}
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-}
-*/
