@@ -55,7 +55,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         self.navigationItem.leftBarButtonItem = self.editButtonItem
+//         self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -194,10 +194,17 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
              
 //            let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-                groceryHistories.remove(at: indexPath.row )
-                tableView.deleteRows(at: [indexPath], with: .fade)
+//                groceryHistories.remove(at: indexPath.row )
+//                tableView.deleteRows(at: [indexPath], with: .fade)
+                let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
                 
-                updateTableView()
+                if let selectedIndex = findGroceryHistoryIndex(groceryHistory: selectedGrocery) {
+                    groceryHistories.remove(at: selectedIndex.offset)
+                    updateTableView()
+                    tableView.reloadData()
+                    
+                    Grocery.saveGrocery(groceries)
+                }
                 
                 success(true)
          })
@@ -211,6 +218,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
                 
                 let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+                
+                print(selectedGrocery)
                 
                 let fridgeGrocery = Grocery(info: GroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, favorite: selectedGrocery.favorite, lastestPurchaseDate: Date()), count: 1, isPercentageCount: false, dueDate: DueDate(3), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
                 
@@ -240,7 +249,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     }
     */
 
-    
+/*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -252,7 +261,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
 //        }
     }
-   
+     */
 
     /*
     // Override to support rearranging the table view.

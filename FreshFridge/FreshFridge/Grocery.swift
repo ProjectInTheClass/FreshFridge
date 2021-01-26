@@ -309,6 +309,10 @@ func findGroceryIndex(grocery: Grocery) -> EnumeratedSequence<[Grocery]>.Element
     return groceries.enumerated().first(where: {$0.element === grocery})
 }
 
+func findGroceryHistoryIndex(groceryHistory: GroceryHistory) -> EnumeratedSequence<[GroceryHistory]>.Element? {
+    return groceryHistories.enumerated().first(where: {$0.element === groceryHistory})
+}
+
 func findGroceryIndex(grocery: CartGrocery) -> EnumeratedSequence<[CartGrocery]>.Element?
 {
     return cartGroceries.enumerated().first(where: {$0.element === grocery})

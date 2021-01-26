@@ -23,9 +23,13 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="GSs-4k-O9W">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
                                     <subviews>
-                                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="YgP-pg-bjE">
+                                        <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YgP-pg-bjE">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <scopeButtonTitles>
+                                                <string>Title</string>
+                                                <string>Title</string>
+                                            </scopeButtonTitles>
                                         </searchBar>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="L1P-pk-KpV">
                                             <rect key="frame" x="0.0" y="54" width="414" height="54"/>
@@ -112,15 +116,63 @@
                                     <outlet property="PurchaseRecordListLabel" destination="Krg-VZ-UnG" id="wfa-dO-TYI"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PurchaseRecordWithPictureCell" id="FkW-eM-jEp" userLabel="PurchaseRecordWithPictureCell" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="176.5" width="414" height="40.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FkW-eM-jEp" id="OnM-fb-p62">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="40.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="IXv-t9-CZR">
+                                            <rect key="frame" x="20" y="5" width="374" height="30.5"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lnd-zx-8XP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="30.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="1E5-8b-q5d"/>
+                                                        <constraint firstAttribute="width" constant="30" id="CxP-YM-Rf9"/>
+                                                    </constraints>
+                                                    <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                                    <state key="normal" title="Button" image="favorite-Icon"/>
+                                                    <state key="selected" image="favorite-Icon.fill"/>
+                                                    <connections>
+                                                        <action selector="FavoriteButtonTapped:" destination="FkW-eM-jEp" eventType="touchUpInside" id="br3-oP-xRu"/>
+                                                    </connections>
+                                                </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="syc-zn-QX3">
+                                                    <rect key="frame" x="32" y="0.0" width="44" height="30.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="44" id="mOG-us-HMp"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6I9-sQ-lyF">
+                                                    <rect key="frame" x="78" y="0.0" width="296" height="30.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="IXv-t9-CZR" firstAttribute="top" secondItem="OnM-fb-p62" secondAttribute="top" constant="5" id="1EC-CN-mTv"/>
+                                        <constraint firstAttribute="trailing" secondItem="IXv-t9-CZR" secondAttribute="trailing" constant="20" id="2iz-ND-Bxz"/>
+                                        <constraint firstItem="IXv-t9-CZR" firstAttribute="leading" secondItem="OnM-fb-p62" secondAttribute="leading" constant="20" id="mUT-DU-hPc"/>
+                                        <constraint firstAttribute="bottom" secondItem="IXv-t9-CZR" secondAttribute="bottom" constant="5" id="ujh-AU-Sh6"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="FavoriteMarkButton" destination="Lnd-zx-8XP" id="RVf-8J-dzW"/>
+                                    <outlet property="PurchaseRecordListLabel" destination="6I9-sQ-lyF" id="CCk-DT-eaO"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="Xx5-TJ-k4i" id="LLA-6Y-eiS"/>
                             <outlet property="delegate" destination="Xx5-TJ-k4i" id="RjP-AU-Tz3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="구입 기록" id="c2J-dA-Cow">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="YRg-g6-suc"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="구입 기록" id="c2J-dA-Cow"/>
                     <connections>
                         <outlet property="CategorySortButton" destination="HcI-Qf-RSX" id="gdp-H8-E28"/>
                         <outlet property="FavoriteSortButton" destination="kul-z3-o9U" id="rAe-kq-EEy"/>
@@ -140,9 +192,10 @@
                         <inset key="imageInsets" minX="0.0" minY="3" maxX="0.0" maxY="3"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="QkG-BZ-LFK">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QkG-BZ-LFK">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
                         <segue destination="Xx5-TJ-k4i" kind="relationship" relationship="rootViewController" id="j01-ci-gg5"/>
