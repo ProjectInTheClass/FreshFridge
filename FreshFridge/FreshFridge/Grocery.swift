@@ -282,10 +282,16 @@ struct DueDate: Codable
         date = nextMonthDate ?? date
     }
     
-    func getExpirationDay() -> String
+    func getExpiration() -> Int
     {
         let diffDate = date.timeIntervalSinceNow
         let diffDay = Int(diffDate/(DueDate.secondOfDay))
+        return diffDay
+    }
+    
+    func getExpirationDay() -> String
+    {
+        let diffDay = getExpiration()
         return diffDay>=0 ? String("D-\(diffDay+1)") : String("D+\(-diffDay)")
     }
 }
