@@ -249,7 +249,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 // adding
                 if(title.isEmpty == false)
                 {
-                    let newCartGrocery = CartGrocery(info: getGroceryHistory(title: title, category: category))
+                    let newCartGrocery = CartGrocery(info: getGroceryHistory(title: title, category: category, updateDate: true))
                     newCartGrocery.info.image = image
                     newCartGrocery.count = count
                     newCartGrocery.isPercentageCount = isPercentageCount

@@ -81,7 +81,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         // link groceries and groceryHistories
         for grocery in groceries
         {
-            grocery.info = getGroceryHistory(title: grocery.info.title, category: grocery.info.category)
+            grocery.info = getGroceryHistory(title: grocery.info.title, category: grocery.info.category, updateDate: false)
         }
         
         if let savedCartGroceries = CartGrocery.loadCartGrocery()
@@ -381,7 +381,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             */
             // goto the cart
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-            let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.info.title, category: selectedGrocery.info.category))
+            let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.info.title, category: selectedGrocery.info.category, updateDate: true))
             cartGroceries.insert(cartGrocery, at: 0)
             
             CartGrocery.saveCartGrocery(cartGroceries)
@@ -557,7 +557,10 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                         // editing
                         grocery.info.title = title
                         grocery.info.category = category
-                        grocery.info.image = image
+                        if(image != nil)
+                        {
+                            grocery.info.image = image
+                        }
                         grocery.count = count
                         grocery.isPercentageCount = isPercentageCount
                         grocery.dueDate = dueDate
@@ -595,10 +598,13 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     else
                     {
                         // adding
-                        let newGrocery = Grocery(info: getGroceryHistory(title: title, category: category), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
-                        newGrocery.info.image = image
-                        groceries.insert(newGrocery, at: 0)
+                        let newGrocery = Grocery(info: getGroceryHistory(title: title, category: category, updateDate: true), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
+                        if(image != nil)
+                        {
+                            newGrocery.info.image = image
+                        }
                         
+                        groceries.insert(newGrocery, at: 0)
                         updateTableView()
                     }
                 

@@ -179,7 +179,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             fridgeTabBarController.animateBadge(tabBarIndex: .shopingCartTabBar)
             
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-            let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category))
+            let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, updateDate: true))
             
             cartGroceries.insert(cartGrocery, at: 0)
             CartGrocery.saveCartGrocery(cartGroceries)
