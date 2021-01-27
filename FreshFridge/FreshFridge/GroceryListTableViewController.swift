@@ -327,7 +327,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             fridgeTabBarController.animateBadge(tabBarIndex: .shopingCartTabBar)
             
             
-            /*
+            
             if let cell = tableView.cellForRow(at: indexPath) as? GroceryListTableViewCell
             {
                 let screenRect = UIScreen.main.bounds
@@ -341,13 +341,16 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 
                 let systemName: String = "cart"
                 let size = CGSize(width: 30, height: 25)
-                let originFrom = CGPoint(x: cell.frame.origin.x + tableView.contentOffset.x, y: cell.frame.origin.y + tableView.contentOffset.y)//CGPoint(x: 100, y: 50)
+                
+                let originFrame = view.window!.convert(cell.frame, from: nil) //tableView.convert(cell.frame, from: nil)
+                
+                let originFrom = originFrame.origin //CGPoint(  )  //CGPoint(x: cell.frame.origin.x + tableView.contentOffset.x, y: cell.frame.origin.y + tableView.contentOffset.y)//CGPoint(x: 100, y: 50)
                 let originTo = CGPoint(x: cartTabCenter + tableView.contentOffset.x, y: screenHeight + tableView.contentOffset.y)
                 let color: UIColor = UIColor.systemGreen
                 let duration: TimeInterval = 1
                 curveAnimation(from: originFrom, to: originTo, size: size, systemName: systemName, color: color, duration: duration)
             }
-            */
+            
             // goto the cart
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
             let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.info.title, category: selectedGrocery.info.category, updateDate: true))

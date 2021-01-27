@@ -18,6 +18,8 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var latestButton: UIButton!
+    @IBOutlet weak var toFridgeButton: UIButton!
+    
     var fridgeTabBarController: FridgeTabBarController!
     
     var numberOfSections: Int = 0
@@ -201,6 +203,12 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         updateTableView()
         tableView.reloadData()
     }
+  
+    @IBAction func ToFridgeButtonTapped(_ sender: UIButton) {
+        
+        
+    }
+    
     
     
     
