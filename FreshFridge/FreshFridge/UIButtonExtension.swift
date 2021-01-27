@@ -29,7 +29,7 @@ extension UIButton
             self.setTitle("\(Int(count))", for: .normal)
             if(count > 0)
             {
-                self.setBackgroundImage(UIImage(named: "gray"), for: .normal)
+                self.setBackgroundImage(UIImage(named: "gray-stroke"), for: .normal)
             }
             else
             {
@@ -54,7 +54,7 @@ extension UITextField
             self.text = "\(Int(count))"
             if(count > 0)
             {
-                self.background = UIImage(named: "gray")
+                self.background = UIImage(named: "gray-stroke")
             }
             else
             {

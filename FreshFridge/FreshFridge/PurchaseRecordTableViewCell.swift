@@ -39,9 +39,9 @@ class PurchaseRecordTableViewCell: UITableViewCell {
         PurchaseRecordListLabel.text = inCell.title
         
         if inCell.favorite == true {
-            FavoriteMarkButton.setImage(UIImage(named: "favorite-Icon.fill")?.withTintColor(.lightGray) , for: .normal)
+            FavoriteMarkButton.setImage(UIImage(named: "favorite.fill")?.withTintColor(.lightGray) , for: .normal)
         } else {
-            FavoriteMarkButton.setImage(UIImage(named: "favorite-Icon")?.withTintColor(.lightGray), for: .normal)
+            FavoriteMarkButton.setImage(UIImage(named: "favorite-icon")?.withTintColor(.lightGray), for: .normal)
         }
     }
     

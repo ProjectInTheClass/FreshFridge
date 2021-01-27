@@ -46,6 +46,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                       
         SearchBar.delegate = self
         
+        searchbarGroceries = groceryHistories
         
         updateButtons()
         updateTableView()
@@ -78,7 +79,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     
     
     func updateTableView() {
-        searchbarGroceries = groceryHistories
+
         numberOfSections = 0
         numbersOfRowInSection.removeAll()
         sortedArray.removeAll()
@@ -204,6 +205,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                     print(selectedIndex)
                     
                     groceryHistories.remove(at: selectedIndex.offset)
+                    searchbarGroceries = groceryHistories
                     updateTableView()
                     tableView.reloadData()
                     
