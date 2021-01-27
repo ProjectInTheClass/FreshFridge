@@ -52,7 +52,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         searchbarGroceries = groceryHistories
 
         updateButtons()
-        updateTableView()
+        updateTableView(groceryHistoryArray: groceryHistories)
         
         
         // Uncomment the following line to preserve selection between presentations
@@ -63,7 +63,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        updateTableView()
+        updateTableView(groceryHistoryArray: groceryHistories)
         tableView.reloadData()
     }
     
@@ -74,7 +74,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         } else {
             searchbarGroceries = groceryHistories.filter { $0.title.contains(searchText)}
             }
-        updateTableView()
+        updateTableView(groceryHistoryArray: searchbarGroceries)
         self.tableView.reloadData()
     }
  
@@ -86,8 +86,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     }
     
     
-    func updateTableView() {
-        searchbarGroceries = groceryHistories
+    func updateTableView( groceryHistoryArray: [GroceryHistory]) {
+        //searchbarGroceries = groceryHistories
         numberOfSections = 0
         numbersOfRowInSection.removeAll()
         sortedArray.removeAll()
@@ -97,11 +97,11 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         
         // 최신순 버튼이 켜져 있으면 서치바에서 넘어온 어레이를 그대로 담는다. 기본 어레이는 사용자가 추가한 순서대로 어팬드 되니까 어짜피 최신순 일 것이다.
         if recentSortButtonOn == true {
-            sortedArray = searchbarGroceries
+            sortedArray = groceryHistoryArray
         }
         // 최신순 버튼이 꺼져 있으면 타이틀의 가나다 순으로 정렬해서 다음 어레이에 담는다.
         else {
-            sortedArray = searchbarGroceries.sorted { $0.title < $1.title }
+            sortedArray = groceryHistoryArray.sorted { $0.title < $1.title }
         }
         
         
@@ -211,7 +211,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                     print(selectedIndex)
                     
                     groceryHistories.remove(at: selectedIndex.offset)
-                    updateTableView()
+                    updateTableView(groceryHistoryArray: groceryHistories)
                     tableView.reloadData()
                     
                     Grocery.saveGrocery(groceries)
@@ -299,7 +299,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             thisGrocery.favorite = !thisGrocery.favorite
             filteredGroceries[indexPath.section][indexPath.row] = thisGrocery
         }
-        updateTableView()
+        updateTableView(groceryHistoryArray: groceryHistories)
         tableView.reloadData()
     }
         
@@ -317,21 +317,21 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     @IBAction func CategorySortButtonTapped(_ sender: UIButton) {
         categorySortButtonOn = !categorySortButtonOn
         updateButtons()
-        updateTableView()
+        updateTableView(groceryHistoryArray: groceryHistories)
         tableView.reloadData()
     }
     
     @IBAction func FavoriteSortButtonTapped(_ sender: UIButton) {
         favoriteSortButtonOn = !favoriteSortButtonOn
         updateButtons()
-        updateTableView()
+        updateTableView(groceryHistoryArray: groceryHistories)
         tableView.reloadData()
     }
     
     @IBAction func RecentSortButtonTapped(_ sender: UIButton) {
         recentSortButtonOn = !recentSortButtonOn
         updateButtons()
-        updateTableView()
+        updateTableView(groceryHistoryArray: groceryHistories)
         tableView.reloadData()
     }
     
