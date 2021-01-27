@@ -16,19 +16,20 @@ class DefaultNameViewController: UIViewController {
 
         self.title = ""
         // Do any additional setup after loading the view.
-        let margin: CGFloat = 5.0
+        let marginHeight: CGFloat = navigationController?.navigationBar.frame.height ?? 0.0
+        let spacing: CGFloat = 5.0
         let countOfRowButtons: Int = 4
         let viewWidth = view.frame.width
         
-        let buttonWidth: CGFloat = (viewWidth - 2 * margin) / CGFloat(countOfRowButtons)
+        let buttonWidth: CGFloat = (viewWidth - 2 * spacing) / CGFloat(countOfRowButtons)
         let buttonHeight: CGFloat = 44.0
         var x = 0, y = 0, index = 0
         for name in defaultNames
         {
             x = index % 4
             y = index / 4
-            let button = UIButton(frame: CGRect(x: CGFloat(x) * buttonWidth + margin,
-                                                y: CGFloat(y) * buttonHeight + margin,
+            let button = UIButton(frame: CGRect(x: CGFloat(x) * buttonWidth + spacing,
+                                                y: CGFloat(y) * buttonHeight + spacing + marginHeight,
                                                 width: buttonWidth, height: buttonHeight))
             button.backgroundColor = .white
             button.setTitle(name, for: .normal)

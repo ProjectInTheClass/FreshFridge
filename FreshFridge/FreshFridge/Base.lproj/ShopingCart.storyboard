@@ -22,15 +22,22 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hiG-8y-Ach">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ld-gx-Liw" userLabel="AllCheck">
+                                            <rect key="frame" x="0.0" y="0.0" width="138" height="44"/>
+                                            <state key="normal" title="담기"/>
+                                            <connections>
+                                                <action selector="ToFridgeButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="Nxe-FD-x3N"/>
+                                            </connections>
+                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y3m-mM-dz1">
-                                            <rect key="frame" x="0.0" y="0.0" width="207" height="44"/>
+                                            <rect key="frame" x="138" y="0.0" width="138" height="44"/>
                                             <state key="normal" title="분류별"/>
                                             <connections>
                                                 <action selector="categoryButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="8lM-7V-4RF"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSf-JB-LAc">
-                                            <rect key="frame" x="207" y="0.0" width="207" height="44"/>
+                                            <rect key="frame" x="276" y="0.0" width="138" height="44"/>
                                             <state key="normal" title="최신순"/>
                                             <connections>
                                                 <action selector="RecentSortButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="9qX-9C-2E9"/>
@@ -48,7 +55,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="shopingCartCell" rowHeight="54" id="gUr-1M-w14" customClass="ShopingCartTableViewCell" customModule="FreshFridge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="shopingCartCell" rowHeight="54" id="gUr-1M-w14" customClass="ShopingCartTableViewCell" customModule="FreshFridge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gUr-1M-w14" id="RmL-Bl-rn3">
@@ -106,7 +113,7 @@
                                     <outlet property="titleLabel" destination="cqg-is-4gC" id="GwP-mR-fGw"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="shopingCartPictureCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="shopingCartPictureCell" rowHeight="54" id="0B6-hM-wAu" customClass="ShopingCartTableViewPictureCell" customModule="FreshFridge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="shopingCartPictureCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="shopingCartPictureCell" rowHeight="54" id="0B6-hM-wAu" customClass="ShopingCartTableViewPictureCell" customModule="FreshFridge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="126" width="414" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0B6-hM-wAu" id="zN6-Zp-qay">

@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,7 +11,7 @@
         <scene sceneID="WG3-Yz-NbS">
             <objects>
                 <tableViewController id="Xx5-TJ-k4i" customClass="PurchaseRecordTableViewController" customModule="FreshFridge" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" id="h2B-vn-ask">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" id="h2B-vn-ask">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -23,7 +22,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="GSs-4k-O9W">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
                                     <subviews>
-                                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="YgP-pg-bjE">
+                                        <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YgP-pg-bjE">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <scopeButtonTitles>
@@ -72,7 +71,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PurchaseRecordCell" id="0jO-oe-uXx" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordCell" id="0jO-oe-uXx" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="136" width="414" height="40.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0jO-oe-uXx" id="SeZ-YD-VoW">
@@ -116,7 +115,7 @@
                                     <outlet property="PurchaseRecordListLabel" destination="Krg-VZ-UnG" id="wfa-dO-TYI"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PurchaseRecordWithPictureCell" id="FkW-eM-jEp" userLabel="PurchaseRecordWithPictureCell" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordWithPictureCell" id="FkW-eM-jEp" userLabel="PurchaseRecordWithPictureCell" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="176.5" width="414" height="40.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FkW-eM-jEp" id="OnM-fb-p62">
@@ -189,12 +188,14 @@
             <objects>
                 <navigationController id="YxD-Xb-Gsp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="purchaseList_Icon" id="h36-6n-zHz">
-                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="3"/>
+                        <inset key="imageInsets" minX="0.0" minY="3" maxX="0.0" maxY="3"/>
+                        <color key="badgeColor" systemColor="systemOrangeColor"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QkG-BZ-LFK">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
                         <segue destination="Xx5-TJ-k4i" kind="relationship" relationship="rootViewController" id="j01-ci-gg5"/>
@@ -204,58 +205,6 @@
             </objects>
             <point key="canvasLocation" x="373" y="711"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="gte-xq-AZ4">
-            <objects>
-                <viewController id="Cxd-Dn-g7U" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="R3F-ac-BL5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yqP-6f-ss2">
-                                <rect key="frame" x="15" y="289" width="385" height="526"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="gF9-OI-DmU" kind="embed" id="Cqd-s0-vLJ"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="0Dz-ko-zUS"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DCo-LC-Bn8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2263.768115942029" y="709.82142857142856"/>
-        </scene>
-        <!--Table View Controller-->
-        <scene sceneID="9sZ-KL-w6U">
-            <objects>
-                <tableViewController id="gF9-OI-DmU" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="k3p-N4-I4E">
-                        <rect key="frame" x="0.0" y="0.0" width="385" height="526"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VRD-Rn-3Gt">
-                                <rect key="frame" x="0.0" y="28" width="385" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VRD-Rn-3Gt" id="xUH-cP-mEu">
-                                    <rect key="frame" x="0.0" y="0.0" width="385" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="gF9-OI-DmU" id="IBk-jO-19K"/>
-                            <outlet property="delegate" destination="gF9-OI-DmU" id="l9Y-y5-pbf"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="P85-nE-uWa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3019" y="698"/>
-        </scene>
     </scenes>
     <resources>
         <image name="favorite-Icon" width="94" height="90"/>
@@ -263,6 +212,9 @@
         <image name="purchaseList_Icon" width="33.333332061767578" height="33.333332061767578"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

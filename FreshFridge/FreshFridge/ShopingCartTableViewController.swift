@@ -10,12 +10,17 @@
 import UIKit
 
 class ShopingCartTableViewController: UITableViewController, ShopingCartCellDelegate{
+    
+    
 
     //상품추가 씬으로 전환 코드
     
     
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var latestButton: UIButton!
+    @IBOutlet weak var toFridgeButton: UIButton!
+    
+    var fridgeTabBarController: FridgeTabBarController!
     
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
@@ -36,9 +41,21 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fridgeTabBarController = tabBarController as? FridgeTabBarController
+        
         sortedArray = cartGroceries
         updateButtons() 
         updateTableView()
+        
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false // for selecting the rows, didSelectRowAtIndex path could not be fired until pressed long.
+        view.addGestureRecognizer(tap)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateTableView()
+        tableView.reloadData()
     }
 
     func updateButtons() {
@@ -88,9 +105,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     }
         
     
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
-    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -172,7 +186,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         }
     }
     
- 
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
         categoryButtonOn = !categoryButtonOn
         updateButtons()
@@ -190,6 +203,12 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         updateTableView()
         tableView.reloadData()
     }
+  
+    @IBAction func ToFridgeButtonTapped(_ sender: UIButton) {
+        
+        
+    }
+    
     
     
     
@@ -205,11 +224,11 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 
                 if let selectedIndex = findGroceryIndex(grocery: selectedGrocery)
                 {
-                    groceries.remove(at: selectedIndex.offset)
+                    cartGroceries.remove(at: selectedIndex.offset)
                     updateTableView()
                     tableView.reloadData()
                     
-                    Grocery.saveGrocery(groceries)
+                    CartGrocery.saveCartGrocery(cartGroceries)
                 }
             
                 success(true)
@@ -238,11 +257,11 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 // adding
                 if(title.isEmpty == false)
                 {
-                    let newCartGrocery = CartGrocery(info: getGroceryHistory(title: title, category: category))
+                    let newCartGrocery = CartGrocery(info: getGroceryHistory(title: title, category: category, updateDate: true))
                     newCartGrocery.info.image = image
                     newCartGrocery.count = count
                     newCartGrocery.isPercentageCount = isPercentageCount
-                    cartGroceries.append(newCartGrocery)
+                    cartGroceries.insert(newCartGrocery, at: 0)
                     
                     updateTableView()
                     tableView.reloadData()

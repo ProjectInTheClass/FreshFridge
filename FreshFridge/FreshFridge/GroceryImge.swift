@@ -15,14 +15,20 @@ class GroceryImage: Codable
     var fileExtension: String = "png"
     static var viewSize: CGSize = CGSize(width: 192, height: 108)
     
-    init(image: UIImage?)
+    static func getHashName() -> String
     {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM_dd_yyyy_HH_mm_ss_SSS"
         let currentTimeString = dateFormatter.string(from: Date())
         let currentTimeData = Data(currentTimeString.utf8)
         let hashed = Insecure.MD5.hash(data: currentTimeData)//let hashed = SHA256.hash(data: currentTimeData)
-        filename = hashed.compactMap { String(format: "%02x", $0) }.joined()
+        let name = hashed.compactMap { String(format: "%02x", $0) }.joined()
+        return name
+    }
+    
+    init(image: UIImage?)
+    {
+        filename = GroceryImage.getHashName()
         
         print(filename)
         

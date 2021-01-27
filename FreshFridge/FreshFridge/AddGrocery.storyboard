@@ -81,6 +81,9 @@
                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <textInputTraits key="textInputTraits"/>
+                                                            <connections>
+                                                                <action selector="nameTextFieldEdited:" destination="sDW-H2-BPf" eventType="editingChanged" id="3MW-8M-706"/>
+                                                            </connections>
                                                         </textField>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QyG-h7-g1K">
                                                             <rect key="frame" x="325" y="0.0" width="44" height="43.5"/>
@@ -181,7 +184,6 @@
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4zd-w4-eza">
                                                                     <rect key="frame" x="0.0" y="2" width="35" height="39"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="35.5" id="Pbr-83-B4l"/>
                                                                         <constraint firstAttribute="width" constant="35" id="UeS-8z-gqU"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -262,9 +264,6 @@
                                                                 </switch>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="51" id="qGl-TB-5qf"/>
-                                                            </constraints>
                                                         </view>
                                                     </subviews>
                                                 </stackView>

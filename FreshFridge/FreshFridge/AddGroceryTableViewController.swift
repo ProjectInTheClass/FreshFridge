@@ -140,7 +140,39 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         }
         
         enableCompletButton()
-    }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+        }
+
+        deinit {
+           NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+        }
+
+        @objc func rotated()
+        {
+            if UIDevice.current.orientation.isLandscape
+            {
+                print("Landscape")
+            }
+            else
+            {
+                print("Portrait")
+            }
+        
+            barcodeScanButton.frame = CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50)
+        }
+    
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//
+//        if UIDevice.current.orientation.isLandscape {
+//            print("Landscape")
+//        } else {
+//            print("Portrait")
+//        }
+//
+//        barcodeScanButton.frame = CGRect(x: 5, y: size.height - barcodeScanButtonOffset, width: size.width - 10, height: 50)
+//    }
     
     @objc func dismissKeyboard()
     {
@@ -216,8 +248,6 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 return 44.0
             }
         }
-        
-        return 44.0
     }
     
     func updateTableView()
@@ -251,6 +281,11 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 completeButton.isEnabled = true
             }
         }
+        
+        if(pictureButton.image(for: .normal) != nil)
+        {
+            completeButton.isEnabled = true
+        }
     }
     
     @IBAction func countTableCellTapped(_ sender: Any)
@@ -270,6 +305,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     @IBAction func nameTextFieldEdited(_ sender: Any)
     {
+        enableCompletButton()
     }
     
     @IBAction func defaultNameButtonTapped(_ sender: Any)
@@ -427,6 +463,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         
         present(alertController, animated: true, completion: nil)
         dismissKeyboard()
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -434,6 +471,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         
         groceryImage = GroceryImage(image: selectedImage)
         pictureButton.setImage(groceryImage?.image(), for: .normal)
+        
+        enableCompletButton()
 
         dismiss(animated: true, completion: nil)
     }

@@ -46,10 +46,10 @@
             </objects>
             <point key="canvasLocation" x="-747" y="951"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Fridge Tab Bar Controller-->
         <scene sceneID="ugf-8l-zlI">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="dq0-wI-PMK" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="dq0-wI-PMK" customClass="FridgeTabBarController" customModule="FreshFridge" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="05K-d4-Ic1">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
