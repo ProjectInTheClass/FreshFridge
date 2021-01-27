@@ -248,8 +248,6 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 return 44.0
             }
         }
-        
-        return 44.0
     }
     
     func updateTableView()
@@ -282,6 +280,11 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             {
                 completeButton.isEnabled = true
             }
+        }
+        
+        if(pictureButton.image(for: .normal) != nil)
+        {
+            completeButton.isEnabled = true
         }
     }
     
@@ -460,6 +463,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         
         present(alertController, animated: true, completion: nil)
         dismissKeyboard()
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -467,6 +471,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         
         groceryImage = GroceryImage(image: selectedImage)
         pictureButton.setImage(groceryImage?.image(), for: .normal)
+        
+        enableCompletButton()
 
         dismiss(animated: true, completion: nil)
     }

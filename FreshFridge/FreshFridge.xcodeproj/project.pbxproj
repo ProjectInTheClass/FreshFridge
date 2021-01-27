@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8E4B99D125AD4AF500F2B0BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B99D025AD4AF500F2B0BF /* AppDelegate.swift */; };
 		8E4B99D325AD4AF500F2B0BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B99D225AD4AF500F2B0BF /* SceneDelegate.swift */; };
-		8E4B99D525AD4AF500F2B0BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B99D425AD4AF500F2B0BF /* ViewController.swift */; };
 		8E4B99D825AD4AF500F2B0BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E4B99D625AD4AF500F2B0BF /* Main.storyboard */; };
 		8E4B99DA25AD4AF700F2B0BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E4B99D925AD4AF700F2B0BF /* Assets.xcassets */; };
 		8E4B99DD25AD4AF700F2B0BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E4B99DB25AD4AF700F2B0BF /* LaunchScreen.storyboard */; };
@@ -42,7 +41,6 @@
 		8E4B99CD25AD4AF500F2B0BF /* FreshFridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreshFridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E4B99D025AD4AF500F2B0BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E4B99D225AD4AF500F2B0BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8E4B99D425AD4AF500F2B0BF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8E4B99D725AD4AF500F2B0BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8E4B99D925AD4AF700F2B0BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E4B99DC25AD4AF700F2B0BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -104,7 +102,6 @@
 			children = (
 				8E4B99D025AD4AF500F2B0BF /* AppDelegate.swift */,
 				8E4B99D225AD4AF500F2B0BF /* SceneDelegate.swift */,
-				8E4B99D425AD4AF500F2B0BF /* ViewController.swift */,
 				8EA2CC7E25C0809A00D80622 /* BezierCurveHelper.swift */,
 				8EA2CC7925C06CA700D80622 /* FridgeTabBarController.swift */,
 				8E4B99FD25AD4EFE00F2B0BF /* UIButtonExtension.swift */,
@@ -213,7 +210,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EA2CC7F25C0809A00D80622 /* BezierCurveHelper.swift in Sources */,
-				8E4B99D525AD4AF500F2B0BF /* ViewController.swift in Sources */,
 				8E4B9A0225AD4EFE00F2B0BF /* UIButtonExtension.swift in Sources */,
 				EE281C7725B837300017AF54 /* ShopingCartTableViewCell.swift in Sources */,
 				F701FB6525B88779006906E8 /* PurchaseRecordTableViewController.swift in Sources */,

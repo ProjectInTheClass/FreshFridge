@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GroceryListTableViewController: UITableViewController, GroceryListCellDelegate, UITableViewDragDelegate, UITableViewDropDelegate
+class GroceryListTableViewController: UITableViewController, GroceryListCellDelegate, UITableViewDragDelegate, UITableViewDropDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate
 {
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var refrigerationButton: UIButton!
@@ -492,8 +492,45 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     }
     
     
+    @IBAction func addByPictures(_ sender: UIButton)
+    {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        let alertController = UIAlertController(title: "Choose Image Source", message: nil, preferredStyle: .actionSheet)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera)
+        {
+            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { [self] action in
+                //print("User selected Camera Action")
+                imagePicker.sourceType = .camera
+                
+                self.present(imagePicker, animated: true, completion: nil)
+            })
+            
+            alertController.addAction(cameraAction)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        alertController.popoverPresentationController?.sourceView = sender
+        
+        present(alertController, animated: true, completion: nil)
+        
+    }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        //guard let image = info[.originalImage] as? UIImage else { return }
+        
+
+        dismiss(animated: true, completion: nil)
+    }
     
+    @objc func dismissImagePicker()
+    {
+        dismiss(animated: true, completion: nil)
+    }
 
     
     // MARK: - Navigation
@@ -505,7 +542,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         
             if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
             {
-                let title = sourceViewController.nameTextField.text ?? ""
+                var title = sourceViewController.nameTextField.text ?? ""
                 let category = GroceryHistory.Category(rawValue: sourceViewController.categoryButton.title(for: .normal) ?? "")!
                 //grocery.info.image =
                 
@@ -519,69 +556,79 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 let notes = sourceViewController.noteTextField.text
                 let image = sourceViewController.groceryImage
                 
-                if(title.isEmpty == false)
+                if(title.isEmpty == true)
                 {
-                    if let grocery = sourceViewController.grocery
+                    if( image != nil )
                     {
-                        // editing
-                        grocery.info.title = title
-                        grocery.info.category = category
-                        if(image != nil)
+                        title = image!.filename
+                    }
+                    else
+                    {
+                        title = GroceryImage.getHashName()
+                    }
+                }
+                
+                if let grocery = sourceViewController.grocery
+                {
+                    // editing
+                    grocery.info.title = title
+                    grocery.info.category = category
+                    if(image != nil)
+                    {
+                        grocery.info.image = image
+                    }
+                    grocery.count = count
+                    grocery.isPercentageCount = isPercentageCount
+                    grocery.dueDate = dueDate
+                    grocery.storage = storage
+                    grocery.fridgeName = fridgeName
+                    grocery.notes = notes
+                    
+                    if(grocery.info.image == nil)
+                    {
+                        if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewCell
                         {
-                            grocery.info.image = image
-                        }
-                        grocery.count = count
-                        grocery.isPercentageCount = isPercentageCount
-                        grocery.dueDate = dueDate
-                        grocery.storage = storage
-                        grocery.fridgeName = fridgeName
-                        grocery.notes = notes
-                        
-                        if(grocery.info.image == nil)
-                        {
-                            if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewCell
-                            {
-                                cell.titleLabel.text = title
-                                cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
-                                cell.countButton.setTitle("\(grocery.count)", for: .normal)
-                            }
-                            else
-                            {
-                                tableView.reloadData()
-                            }
+                            cell.titleLabel.text = title
+                            cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
+                            cell.countButton.setTitle("\(grocery.count)", for: .normal)
                         }
                         else
                         {
-                            if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewPictureCell
-                            {
-                                cell.titleLabel.text = title
-                                cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
-                                cell.countButton.setTitle("\(grocery.count)", for: .normal)
-                            }
-                            else
-                            {
-                                tableView.reloadData()
-                            }
+                            tableView.reloadData()
                         }
                     }
                     else
                     {
-                        // adding
-                        let newGrocery = Grocery(info: getGroceryHistory(title: title, category: category, updateDate: true), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
-                        if(image != nil)
+                        if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewPictureCell
                         {
-                            newGrocery.info.image = image
+                            cell.titleLabel.text = title
+                            cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
+                            cell.countButton.setTitle("\(grocery.count)", for: .normal)
                         }
-                        
-                        groceries.insert(newGrocery, at: 0)
-                        updateTableView()
+                        else
+                        {
+                            tableView.reloadData()
+                        }
                     }
-                
-                    tableView.reloadData()
-                    
-                    Grocery.saveGrocery(groceries)
-                    GroceryHistory.saveGroceryHistory(groceryHistories)
                 }
+                else
+                {
+                    // adding
+                    let newGrocery = Grocery(info: getGroceryHistory(title: title, category: category, updateDate: true), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
+                    if(image != nil)
+                    {
+                        newGrocery.info.image = image
+                    }
+                    
+                    groceries.insert(newGrocery, at: 0)
+                    updateTableView()
+                }
+            
+                tableView.reloadData()
+                
+                Grocery.saveGrocery(groceries)
+                GroceryHistory.saveGroceryHistory(groceryHistories)
+                
             }
         }
         else if(unwindSegue.identifier == "ToGroceryList")
