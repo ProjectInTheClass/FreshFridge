@@ -97,7 +97,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         
         // 최신순 버튼이 켜져 있으면 서치바에서 넘어온 어레이를 그대로 담는다. 기본 어레이는 사용자가 추가한 순서대로 인서트 at:0 되니까 어짜피 최신순 일 것이다.
         if recentSortButtonOn == true {
-            sortedArray = groceryHistoryArray
+            sortedArray = groceryHistoryArray.sorted { $0.lastestPurchaseDate > $1.lastestPurchaseDate }
         }
         // 최신순 버튼이 꺼져 있으면 타이틀의 가나다 순으로 정렬해서 다음 어레이에 담는다.
         else {
