@@ -213,7 +213,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         {
             if(isDueDatePickerShown)
             {
-                return 300.0
+                return 350.0
             }
             else
             {
