@@ -14,7 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // date loading
+        // 테스트용 sample date loading
+        /*
+        groceryHistories = GroceryHistory.loadSampleGroceryHistory()
+        groceries = Grocery.loadSampleGrocery()
+        cartGroceries = CartGrocery.loadSampleCartGrocery()
+        */
+        
         if let savedGroceryHistories = GroceryHistory.loadGroceryHistory()
         {
             groceryHistories = savedGroceryHistories
@@ -32,21 +38,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         {
             groceries = Grocery.loadSampleGrocery()
         }
+         
+         if let savedCartGroceries = CartGrocery.loadCartGrocery()
+         {
+             cartGroceries = savedCartGroceries
+         }
+         else
+         {
+             cartGroceries = CartGrocery.loadSampleCartGrocery()
+         }
+         
         
         // link groceries and groceryHistories
         for grocery in groceries.reversed()
         {
-            grocery.info = getGroceryHistory(title: grocery.info.title, category: grocery.info.category, updateDate: false)
+            grocery.info = GroceryHistory.getGroceryHistory(title: grocery.info.title, category: grocery.info.category, updateDate: false)
         }
         
-        if let savedCartGroceries = CartGrocery.loadCartGrocery()
+        // link cartGroceries and groceryHistories
+        for cartGrocery in cartGroceries.reversed()
         {
-            cartGroceries = savedCartGroceries
+            cartGrocery.info = GroceryHistory.getGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: false)
         }
-        else
-        {
-            cartGroceries = CartGrocery.loadSampleCartGrocery()
-        }
+        
+        
         // Override point for customization after application launch.
         let center = UNUserNotificationCenter.current()
         center.delegate = self // Don't forgot to set delegate
@@ -109,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UNUserNotificationCenter.current().add(request)
         }
         
-        if(expiration > -1)
+        if(expiration < 3)
         {
             //let n = -1
             let content = UNMutableNotificationContent()

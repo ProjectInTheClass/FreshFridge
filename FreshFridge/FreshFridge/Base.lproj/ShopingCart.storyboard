@@ -19,32 +19,30 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ens-ro-v3F">
+                                    <rect key="frame" x="20" y="0.0" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="44" id="RZK-bK-HvJ"/>
+                                    </constraints>
+                                    <state key="normal" image="circle" catalog="system"/>
+                                    <connections>
+                                        <action selector="allCheckButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="Ug6-zq-cue"/>
+                                    </connections>
+                                </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hiG-8y-Ach">
-                                    <rect key="frame" x="20" y="0.0" width="394" height="44"/>
+                                    <rect key="frame" x="69" y="0.0" width="283" height="44"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ens-ro-v3F">
-                                            <rect key="frame" x="0.0" y="0.0" width="98.5" height="44"/>
-                                            <state key="normal" image="circle" catalog="system"/>
-                                            <connections>
-                                                <action selector="allCheckButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="Ug6-zq-cue"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ld-gx-Liw" userLabel="AllCheck">
-                                            <rect key="frame" x="98.5" y="0.0" width="98.5" height="44"/>
-                                            <state key="normal" title="담기"/>
-                                            <connections>
-                                                <action selector="ToFridgeButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="Nxe-FD-x3N"/>
-                                            </connections>
-                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y3m-mM-dz1">
-                                            <rect key="frame" x="197" y="0.0" width="98.5" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="141.5" height="44"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal" title="분류별"/>
                                             <connections>
                                                 <action selector="categoryButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="8lM-7V-4RF"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSf-JB-LAc">
-                                            <rect key="frame" x="295.5" y="0.0" width="98.5" height="44"/>
+                                            <rect key="frame" x="141.5" y="0.0" width="141.5" height="44"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal" title="최신순"/>
                                             <connections>
                                                 <action selector="RecentSortButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="9qX-9C-2E9"/>
@@ -52,13 +50,31 @@
                                         </button>
                                     </subviews>
                                 </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ld-gx-Liw" userLabel="AllCheck">
+                                    <rect key="frame" x="352" y="0.0" width="50" height="44"/>
+                                    <color key="backgroundColor" systemColor="linkColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="tre-5z-XWF"/>
+                                    </constraints>
+                                    <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                    <state key="normal" title="" image="freshFridge_icon"/>
+                                    <connections>
+                                        <action selector="ToFridgeButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="Nxe-FD-x3N"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstItem="hiG-8y-Ach" firstAttribute="leading" secondItem="eN9-3t-pwY" secondAttribute="leading" constant="20" id="M0b-vc-PXD"/>
                                 <constraint firstItem="hiG-8y-Ach" firstAttribute="top" secondItem="eN9-3t-pwY" secondAttribute="top" id="XoE-3y-7vw"/>
-                                <constraint firstAttribute="trailing" secondItem="hiG-8y-Ach" secondAttribute="trailing" id="j5w-sN-iyy"/>
+                                <constraint firstItem="hiG-8y-Ach" firstAttribute="leading" secondItem="ens-ro-v3F" secondAttribute="trailing" constant="5" id="dQY-y1-pdD"/>
+                                <constraint firstItem="ens-ro-v3F" firstAttribute="top" secondItem="eN9-3t-pwY" secondAttribute="top" id="gcp-wS-She"/>
+                                <constraint firstItem="ens-ro-v3F" firstAttribute="leading" secondItem="eN9-3t-pwY" secondAttribute="leading" constant="20" id="jVM-K8-OHF"/>
+                                <constraint firstAttribute="bottom" secondItem="ens-ro-v3F" secondAttribute="bottom" id="kcu-ai-L8U"/>
+                                <constraint firstItem="4ld-gx-Liw" firstAttribute="top" secondItem="eN9-3t-pwY" secondAttribute="top" id="liG-zu-gzK"/>
+                                <constraint firstAttribute="bottom" secondItem="4ld-gx-Liw" secondAttribute="bottom" id="roa-qP-3WF"/>
                                 <constraint firstAttribute="bottom" secondItem="hiG-8y-Ach" secondAttribute="bottom" id="tIu-LM-CLc"/>
+                                <constraint firstAttribute="trailing" secondItem="4ld-gx-Liw" secondAttribute="trailing" constant="12" id="v7l-s1-KwA"/>
+                                <constraint firstItem="4ld-gx-Liw" firstAttribute="leading" secondItem="hiG-8y-Ach" secondAttribute="trailing" id="vOR-bZ-GYD"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -142,7 +158,6 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:gh3-Ep-HRa:image" translatesAutoresizingMaskIntoConstraints="NO" id="gh3-Ep-HRa">
                                                     <rect key="frame" x="44" y="0.0" width="50" height="44"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="QRB-6h-msa"/>
                                                         <constraint firstAttribute="height" constant="50" id="lG3-A0-RLS"/>
                                                         <constraint firstAttribute="width" constant="50" id="tho-xx-wkY"/>
                                                     </constraints>
@@ -221,7 +236,7 @@
         <scene sceneID="5Q6-2b-Vun">
             <objects>
                 <navigationController id="6ej-XU-0UW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="cart" catalog="system" id="e8d-fU-I8c"/>
+                    <tabBarItem key="tabBarItem" title="" image="icons8-shopping-cart-64-2" id="e8d-fU-I8c"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mr2-Gj-1lP">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -238,9 +253,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cart" catalog="system" width="128" height="102"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
+        <image name="freshFridge_icon" width="18.666666030883789" height="24.666666030883789"/>
+        <image name="icons8-shopping-cart-64-2" width="21.333333969116211" height="21.333333969116211"/>
         <image name="imageView:gh3-Ep-HRa:image" width="115" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
@@ -16098,6 +16114,9 @@ gXYADoF7AA6BgwAOgYYADoGLAA6BkwAAAAAAAAQBAAAAAAAAAFYAAAAAAAAAAAAAAAAADoGWA
         </image>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -355,7 +355,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             
             // goto the cart
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-            let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.info.title, category: selectedGrocery.info.category, updateDate: true))
+            let cartGrocery = CartGrocery(info: GroceryHistory.getGroceryHistory(title: selectedGrocery.info.title, category: selectedGrocery.info.category, updateDate: true))
             cartGroceries.insert(cartGrocery, at: 0)
             
             CartGrocery.saveCartGrocery(cartGroceries)
@@ -377,8 +377,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
              
                 print("Trash action ...")
-                if let cell = tableView.cellForRow(at: indexPath) as? GroceryListTableViewCell
-                {
+//                if let cell = tableView.cellForRow(at: indexPath) as? GroceryListTableViewCell
+//                {
 //                    let translate = CATransform3DTranslate(CATransform3DIdentity, -1000, 0, 0)
 //
 //                    UIView.animate(withDuration: 0.5, animations: {cell.layer.transform = translate})
@@ -398,7 +398,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     }
                     
                     success(true)
-                }
+//                }
          })
         
          modifyAction.image = UIImage(systemName: "trash")
@@ -622,7 +622,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 else
                 {
                     // adding
-                    let newGrocery = Grocery(info: getGroceryHistory(title: title, category: category, updateDate: true), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
+                    let newGrocery = Grocery(info: GroceryHistory.getGroceryHistory(title: title, category: category, updateDate: true), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
                     if(image != nil)
                     {
                         newGrocery.info.image = image
