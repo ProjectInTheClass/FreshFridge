@@ -284,15 +284,16 @@ struct DueDate: Codable
     
     func getExpiration() -> Int
     {
-        let diffDate = date.timeIntervalSinceNow
-        let diffDay = Int(diffDate/(DueDate.secondOfDay))
-        return diffDay
+        let todayMidnight = Calendar.current.startOfDay(for: Date())//.date(bySettingHour: 9, minute: 0, second: 0, of: date)!
+        let diffDate = date.timeIntervalSince(todayMidnight)
+        let diffDay : Double = (diffDate/(DueDate.secondOfDay))
+        return Int(-diffDay)
     }
     
     func getExpirationDay() -> String
     {
         let diffDay = getExpiration()
-        return diffDay>=0 ? String("D-\(diffDay+1)") : String("D+\(-diffDay)")
+        return diffDay<0 ? String("D\(diffDay)") : String("D+\(diffDay)")
     }
 }
 
@@ -381,6 +382,4 @@ enum FridgeViewSort: Int, CaseIterable
 var groceryHistories = [GroceryHistory]()
 var groceries = [Grocery]()
 var cartGroceries = [CartGrocery]()
-
-
 

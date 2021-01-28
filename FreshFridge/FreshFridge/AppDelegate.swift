@@ -59,70 +59,87 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if granted
             {
                 self.grantedAuthorization = granted
-                if(self.grantedAuthorization)
-                {
-                    center.removeAllPendingNotificationRequests()
-                 
-                    for grocery in groceries
-                    {
-                        let dueDateTimeIntervalSinceNow = grocery.dueDate.date.timeIntervalSinceNow
-                        let diffDay = Int(dueDateTimeIntervalSinceNow/(DueDate.secondOfDay))
-                        
-                        if(dueDateTimeIntervalSinceNow >= DueDate.secondOfDay * 2)
-                        {
-                            let content = UNMutableNotificationContent()
-                            content.title = "기간 만료 알림"
-                            content.body = "\(grocery.info.title)의 보관 기간이 \(diffDay) 남았습니다."
-                            content.categoryIdentifier = "alarm"
-                            content.sound = .default
-                            
-                            let n = -2
-                            let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-                            let comps = Calendar.current.dateComponents([.year, .month, .day], from: nextTriggerDate)
-                            let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
-                            
-                            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                            center.add(request)
-                        }
-                        else if(dueDateTimeIntervalSinceNow >= DueDate.secondOfDay)
-                        {
-                            let content = UNMutableNotificationContent()
-                            content.title = "기간 만료 알림"
-                            content.body = "\(grocery.info.title)의 보관 기간이 \(diffDay) 남았습니다."
-                            content.categoryIdentifier = "alarm"
-                            content.sound = .default
-                            
-                            let n = -1
-                            let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-                            let comps = Calendar.current.dateComponents([.year, .month, .day], from: nextTriggerDate)
-                            let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
-                            
-                            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                            center.add(request)
-                        }
-                        else
-                        {
-                            let content = UNMutableNotificationContent()
-                            content.title = "기간 만료 알림"
-                            content.body = "\(grocery.info.title)의 보관 기간이 만료 되었습니다."
-                            content.categoryIdentifier = "alarm"
-                            content.sound = .default
-                            
-                            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-                            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                            center.add(request)
-                            
-                            let timeInterval : TimeInterval = DueDate.secondOfDay
-                            let repeatTrigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: true)
-                            let repeatRequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: repeatTrigger)
-                            center.add(repeatRequest)
-                        }
-                    }
-                }
+//
+//                {
+//                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+//
+//
+//                }
             }
         }
         
         return true
+    }
+    
+    func setAlarm(grocery : Grocery)
+    {
+        let expiration = grocery.dueDate.getExpiration()
+       
+        if(expiration <= -2)
+        {
+            let n = -2
+            let content = UNMutableNotificationContent()
+            content.title = "기간 만료 알림"
+            content.body = "\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            content.categoryIdentifier = "alarm"
+            content.sound = .default
+            
+            let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
+            let comps = Calendar.current.dateComponents([.year, .month, .day], from: nextTriggerDate)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request)
+        }
+        
+        if(expiration <= -1)
+        {
+            let n = -1
+            let content = UNMutableNotificationContent()
+            content.title = "기간 만료 알림"
+            content.body = "\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            content.categoryIdentifier = "alarm"
+            content.sound = .default
+            
+            let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
+            let comps = Calendar.current.dateComponents([.year, .month, .day], from: nextTriggerDate)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request)
+        }
+        
+        if(expiration > -1)
+        {
+            //let n = -1
+            let content = UNMutableNotificationContent()
+            content.title = "기간 만료 알림"
+            content.body = "\(grocery.info.title)의 보관 기간이 만료되었습니다.."
+            content.categoryIdentifier = "alarm"
+            content.sound = .default
+            
+            for n in 0...2
+            {
+                let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
+                let comps = Calendar.current.dateComponents([.year, .month, .day], from: nextTriggerDate)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
+                
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request)
+            }
+        }
+    }
+    
+    func resetAllAlarms()
+    {
+        guard  self.grantedAuthorization == true else { return }
+        
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        
+        for grocery in groceries
+        {
+            setAlarm(grocery: grocery)
+        }
     }
 
     // MARK: UISceneSession Lifecycle

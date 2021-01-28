@@ -102,7 +102,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         else
         {
             count = 1
-            dueDate.date = Date()
+            dueDate.date = Calendar.current.startOfDay(for: Date())
             
             storageSegment.selectedSegmentIndex = 0
             categoryButton.setTitle(GroceryHistory.Category.ETC.rawValue, for: .normal)
@@ -257,6 +257,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         dateFormatter.timeStyle = .none
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dueDateButton.setTitle(dateFormatter.string(from: dueDate.date), for: .normal)
+        print(dueDate.getExpirationDay())
         
         countTextField.text = "\(Int(count))"
         
@@ -330,6 +331,19 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         {
             count = Int(text) ?? 0
         }
+        
+        if(count < 0)
+        {
+            count = 0
+        }
+        
+        if(percentageSwitch.isOn)
+        {
+            if(count > 100)
+            {
+                count = 100
+            }
+        }
     
         updateTableView()
     }
@@ -390,6 +404,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     @IBAction func dueDateButtonTapped(_ sender: Any)
     {
+        dueDatePicker.date = dueDate.date
+        
         isDueDatePickerShown.toggle()
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -398,14 +414,27 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     @IBAction func dueDatePickerChanged(_ sender: Any)
     {
-        dueDate.date = dueDatePicker.date
+        dueDate.date = Calendar.current.startOfDay(for: dueDatePicker.date)
+    
         updateTableView()
         dismissKeyboard()
     }
     
+    @IBAction func dueDateToday(_ sender: Any)
+    {
+        dueDatePicker.date = Calendar.current.startOfDay(for: Date())
+        dueDate.date = Calendar.current.startOfDay(for: Date())
+    
+        updateTableView()
+        dismissKeyboard()
+    }
+    
+    
     @IBAction func dueDateIncreaseWeekTapped(_ sender: Any)
     {
         dueDate.addDays(7)
+        dueDatePicker.date = Calendar.current.startOfDay(for: dueDate.date)
+        
         updateTableView()
         dismissKeyboard()
     }
@@ -413,6 +442,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     @IBAction func dueDateIncreaseMonthTapped(_ sender: Any)
     {
         dueDate.addMonth()
+        dueDatePicker.date = Calendar.current.startOfDay(for: dueDate.date)
+        
         updateTableView()
         dismissKeyboard()
     }

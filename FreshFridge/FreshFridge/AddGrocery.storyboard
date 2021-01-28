@@ -247,6 +247,9 @@
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="% 입력" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TbQ-Hz-gDK">
                                                             <rect key="frame" x="0.0" y="0.0" width="44" height="43.5"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="44" id="anO-BS-nyE"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -264,6 +267,9 @@
                                                                 </switch>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="51" id="e51-qy-cBN"/>
+                                                            </constraints>
                                                         </view>
                                                     </subviews>
                                                 </stackView>
@@ -324,10 +330,20 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ic1-oW-YWo">
-                                                    <rect key="frame" x="274" y="0.0" width="100" height="43.5"/>
+                                                    <rect key="frame" x="224" y="0.0" width="150" height="43.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUY-9x-321">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NWp-Cp-Edv">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="43.5"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="50" id="hFb-7K-gjK"/>
+                                                            </constraints>
+                                                            <state key="normal" title="오늘"/>
+                                                            <connections>
+                                                                <action selector="dueDateToday:" destination="sDW-H2-BPf" eventType="touchUpInside" id="0xC-uy-oC7"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUY-9x-321">
+                                                            <rect key="frame" x="50" y="0.0" width="50" height="43.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="50" id="ECZ-Ot-B6o"/>
                                                             </constraints>
@@ -337,7 +353,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Dz-kc-eXg">
-                                                            <rect key="frame" x="50" y="0.0" width="50" height="43.5"/>
+                                                            <rect key="frame" x="100" y="0.0" width="50" height="43.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="50" id="2jz-RI-95w"/>
                                                             </constraints>
@@ -371,17 +387,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGU-au-lIl">
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="oGU-au-lIl">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="341"/>
-                                                    <date key="date" timeIntervalSinceReferenceDate="632684160.76684999">
-                                                        <!--2021-01-18 17:36:00 +0000-->
-                                                    </date>
-                                                    <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
-                                                        <!--1970-01-01 11:00:00 +0000-->
-                                                    </date>
-                                                    <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
-                                                        <!--2037-12-31 11:00:00 +0000-->
-                                                    </date>
                                                     <connections>
                                                         <action selector="dueDatePickerChanged:" destination="sDW-H2-BPf" eventType="valueChanged" id="hyS-4b-gVU"/>
                                                     </connections>
