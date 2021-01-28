@@ -135,6 +135,7 @@
                                                         <constraint firstAttribute="height" constant="50" id="sWF-qF-0sP"/>
                                                         <constraint firstAttribute="width" constant="50" id="utT-qG-L90"/>
                                                     </constraints>
+                                                    <inset key="contentEdgeInsets" minX="1" minY="1" maxX="1" maxY="1"/>
                                                     <state key="normal" backgroundImage="button:Qsm-Vz-TEa:backgroundImage">
                                                         <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
@@ -230,6 +231,7 @@
                                                         <constraint firstAttribute="width" constant="50" id="Wl5-zN-DxQ"/>
                                                         <constraint firstAttribute="height" constant="50" id="sOK-oY-9Ei"/>
                                                     </constraints>
+                                                    <inset key="contentEdgeInsets" minX="1" minY="1" maxX="1" maxY="1"/>
                                                     <state key="normal" backgroundImage="button:Qsm-Vz-TEa:backgroundImage">
                                                         <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
