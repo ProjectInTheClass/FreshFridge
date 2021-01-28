@@ -24,7 +24,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5K-YJ-Xmq">
-                                            <rect key="frame" x="0.0" y="0.0" width="83" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="103.5" height="44"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="분류별"/>
                                             <connections>
@@ -32,7 +32,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccY-1T-3mc">
-                                            <rect key="frame" x="83" y="0.0" width="82.5" height="44"/>
+                                            <rect key="frame" x="103.5" y="0.0" width="103.5" height="44"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="냉장"/>
                                             <connections>
@@ -40,7 +40,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTS-JF-eWw">
-                                            <rect key="frame" x="165.5" y="0.0" width="83" height="44"/>
+                                            <rect key="frame" x="207" y="0.0" width="103.5" height="44"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="냉동"/>
                                             <connections>
@@ -48,20 +48,11 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ePx-zD-F6d">
-                                            <rect key="frame" x="248.5" y="0.0" width="82.5" height="44"/>
+                                            <rect key="frame" x="310.5" y="0.0" width="103.5" height="44"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="실외"/>
                                             <connections>
                                                 <action selector="outdoorButtonTapped:" destination="FWd-TQ-AyV" eventType="touchUpInside" id="og7-XJ-Id5"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIM-af-CEK">
-                                            <rect key="frame" x="331" y="0.0" width="83" height="44"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <state key="normal" title="사진으로 추가"/>
-                                            <connections>
-                                                <action selector="addByPictures:" destination="FWd-TQ-AyV" eventType="touchUpInside" id="dkK-7I-M6P"/>
-                                                <action selector="outdoorButtonTapped:" destination="FWd-TQ-AyV" eventType="touchUpInside" id="cvP-aM-KOd"/>
                                             </connections>
                                         </button>
                                     </subviews>
