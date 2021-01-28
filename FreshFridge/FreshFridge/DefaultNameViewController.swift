@@ -31,9 +31,9 @@ class DefaultNameViewController: UIViewController {
             let button = UIButton(frame: CGRect(x: CGFloat(x) * buttonWidth + spacing,
                                                 y: CGFloat(y) * buttonHeight + spacing + marginHeight,
                                                 width: buttonWidth, height: buttonHeight))
-            button.backgroundColor = .white
+            button.backgroundColor = .clear
             button.setTitle(name, for: .normal)
-            button.setTitleColor(.darkGray, for: .normal)
+            button.setTitleColor(.label, for: .normal)
             button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             button.titleLabel?.font = systemFont15
             

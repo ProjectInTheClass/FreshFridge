@@ -16,6 +16,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     @IBOutlet weak var CategorySortButton: UIButton!
     @IBOutlet weak var FavoriteSortButton: UIButton!
     @IBOutlet weak var RecentSortButton: UIButton!
+    
     var fridgeTabBarController: FridgeTabBarController!
     
     var numberOfSections: Int = 0
@@ -94,7 +95,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         filteredGroceries.removeAll()
         sectionNames.removeAll()
         
-        // 최신순 버튼이 켜져 있으면 서치바에서 넘어온 어레이를 그대로 담는다. 기본 어레이는 사용자가 추가한 순서대로 어팬드 되니까 어짜피 최신순 일 것이다.
+        // 최신순 버튼이 켜져 있으면 서치바에서 넘어온 어레이를 그대로 담는다. 기본 어레이는 사용자가 추가한 순서대로 인서트 at:0 되니까 어짜피 최신순 일 것이다.
         if recentSortButtonOn == true {
             sortedArray = groceryHistoryArray
         }
@@ -160,6 +161,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         return sectionNames[section]
     }
 
+    // 테이블뷰 cellForRowAt
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as! PurchaseRecordTableViewCell
         let cellContents = filteredGroceries[indexPath.section][indexPath.row]
@@ -180,7 +182,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         }
 */
         
-        
+
         
         
         
@@ -215,7 +217,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         return UISwipeActionsConfiguration(actions: [toCartAction])
      }
     
-    
     // 셀을 오른쪽에서 왼쪽으로 스와이프 했을 때 냉장고로 보내는 이밴트
     override func tableView(_ tableView: UITableView,
                     trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -226,14 +227,12 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
                 
                 if let selectedIndex = findGroceryHistoryIndex(groceryHistory: selectedGrocery) {
-                    
-                    print(selectedIndex)
+                    // print(selectedIndex)
                     
                     groceryHistories.remove(at: selectedIndex.offset)
                     updateTableView(groceryHistoryArray: groceryHistories)
-                    tableView.reloadData()
-                    
-                    GroceryHistory.saveGroceryHistory(groceryHistories)
+                    tableView.reloadData() // cellForRowAt 을 호출
+                    GroceryHistory.saveGroceryHistory(groceryHistories) // 로컬에 저장하기
                 }
                 
                 success(true)
@@ -255,9 +254,13 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 
                 let fridgeGrocery = Grocery(info: GroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, favorite: selectedGrocery.favorite, lastestPurchaseDate: Date()), count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
                 
+                //        GroceryHistory(title: "바나나우유", category: .DrinksAndSnacks, favorite: false, lastestPurchaseDate: Date(), image: GroceryImage(image: UIImage(named: "dumyPicture1")))
+                
+                
                 print(fridgeGrocery)
                 
                 groceries.insert(fridgeGrocery, at: 0)
+                (UIApplication.shared.delegate as! AppDelegate).setAlarm(grocery: fridgeGrocery)
                 Grocery.saveGrocery(groceries)
                 
                 success(true)
@@ -269,48 +272,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
          return UISwipeActionsConfiguration(actions: [modifyAction, toFridgeAction])
      }
    
-
-    
-    
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-/*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            filteredGroceries.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-//          GroceryHistory.saveGroceryHistory(filteredGroceries)
-        }
-//        else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//        }
-    }
-     */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    
     // 즐겨찾기 별표 버튼을 누르면 반응
     func fovoriteCheckMarkTapped(sender: PurchaseRecordTableViewCell) {
         if let indexPath = tableView.indexPath(for: sender) {
@@ -322,7 +283,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         tableView.reloadData()
         
         GroceryHistory.saveGroceryHistory(groceryHistories)
-        
     }
         
     /*
@@ -335,7 +295,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     }
     */
 
-    
     @IBAction func CategorySortButtonTapped(_ sender: UIButton) {
         categorySortButtonOn = !categorySortButtonOn
         updateButtons()

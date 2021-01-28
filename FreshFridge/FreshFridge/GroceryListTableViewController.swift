@@ -9,6 +9,8 @@ import UIKit
 
 class GroceryListTableViewController: UITableViewController, GroceryListCellDelegate, UITableViewDragDelegate, UITableViewDropDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate
 {
+    
+    @IBOutlet weak var alarmButton: UIBarButtonItem!
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var refrigerationButton: UIButton!
     @IBOutlet weak var freezingButton: UIButton!
@@ -25,6 +27,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     var refrigerationButtonOn = true
     var freezingButtonOn = true
     var outdoorButtonOn = true
+    var isAlarmButtonOn = false
     
     func isFridgeViewFilterSelected(_ filter: FridgeViewFilter) -> Bool
     {
@@ -230,7 +233,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             let diffDay = Int(diffDate/(DueDate.secondOfDay))
             cell.expirationLabel?.text = grocery.dueDate.getExpirationDay()
             cell.expirationLabel?.backgroundColor = diffDay>=3 ? UIColor.systemGray5 : .red
-            cell.expirationLabel?.textColor = diffDay>=3 ? UIColor.darkGray : .white
+            cell.expirationLabel?.textColor = diffDay>=3 ? UIColor.label : .white
             
             cell.countButton.updatePieChart(count: grocery.count, isPercentage: grocery.isPercentageCount)
         }
@@ -459,6 +462,23 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         performSegue(withIdentifier: "EditCell", sender: self)
     }
     
+    
+    @IBAction func alarmButtonTapped(_ sender: Any)
+    {
+        isAlarmButtonOn.toggle()
+        if(isAlarmButtonOn)
+        {
+            alarmButton.image = UIImage(systemName: "alarm.fill")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.resetAllAlarms()
+        }
+        else
+        {
+            alarmButton.image = UIImage(systemName: "alarm")
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        }
+    }
+    
     @IBAction func categoryButtonTapped(_ sender: Any)
     {
         categoryButtonOn.toggle()
@@ -542,10 +562,9 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         // Use data from the view controller which initiated the unwind segue
         if(unwindSegue.identifier == "UnwindGroceryListFromAddGrocery")
         {
-        
             if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
             {
-                var title = sourceViewController.nameTextField.text ?? ""
+                let title = sourceViewController.nameTextField.text ?? ""
                 let category = GroceryHistory.Category(rawValue: sourceViewController.categoryButton.title(for: .normal) ?? "")!
                 //grocery.info.image =
                 
@@ -558,18 +577,6 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 let fridgeName = sourceViewController.fridgeSelectButton.title(for: .normal) ?? ""
                 let notes = sourceViewController.noteTextField.text
                 let image = sourceViewController.groceryImage
-                
-                if(title.isEmpty == true)
-                {
-                    if( image != nil )
-                    {
-                        title = image!.filename
-                    }
-                    else
-                    {
-                        title = GroceryImage.getHashName()
-                    }
-                }
                 
                 if let grocery = sourceViewController.grocery
                 {
@@ -624,6 +631,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     }
                     
                     groceries.insert(newGrocery, at: 0)
+                    (UIApplication.shared.delegate as! AppDelegate).setAlarm(grocery: newGrocery)
                     updateTableView()
                 }
             

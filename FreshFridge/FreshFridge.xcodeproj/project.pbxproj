@@ -119,8 +119,8 @@
 				8EA2CC6B25BE7E3400D80622 /* SelectFridgeName.storyboard */,
 				8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */,
 				8E4B99F125AD4C5900F2B0BF /* PurchaseRecord.storyboard */,
-				F701FB6225B88779006906E8 /* PurchaseRecordTableViewCell.swift */,
 				F701FB6325B88779006906E8 /* PurchaseRecordTableViewController.swift */,
+				F701FB6225B88779006906E8 /* PurchaseRecordTableViewCell.swift */,
 				8E4B99F525AD4C9200F2B0BF /* ShopingCart.storyboard */,
 				EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */,
 				EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */,
@@ -407,7 +407,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CVB9BVV9PT;
+				DEVELOPMENT_TEAM = 4U2X9NNZ52;
 				INFOPLIST_FILE = FreshFridge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -426,7 +426,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CVB9BVV9PT;
+				DEVELOPMENT_TEAM = 4U2X9NNZ52;
 				INFOPLIST_FILE = FreshFridge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

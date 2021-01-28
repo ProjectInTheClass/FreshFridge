@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tPo-MV-sYh">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -15,7 +15,6 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="5" sectionFooterHeight="5" id="jdR-xr-i61">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="vST-NI-nza">
@@ -36,7 +35,6 @@
                                                                 <constraint firstAttribute="width" constant="60" id="jVa-4u-Zdy"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uVO-g2-iMN">
@@ -53,7 +51,6 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="TSw-fK-Fwb" firstAttribute="leading" secondItem="KBU-PU-4Ms" secondAttribute="leading" constant="5" id="ApH-z2-qIK"/>
                                                 <constraint firstAttribute="trailing" secondItem="TSw-fK-Fwb" secondAttribute="trailing" id="Ckv-5S-cRi"/>
@@ -78,7 +75,6 @@
                                                     <subviews>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이름" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="poE-ax-Gew">
                                                             <rect key="frame" x="0.0" y="0.0" width="325" height="43.5"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                             <connections>
@@ -99,7 +95,6 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemGray5Color"/>
                                             <constraints>
                                                 <constraint firstItem="Rjk-p9-PIx" firstAttribute="top" secondItem="x7h-Vq-bFJ" secondAttribute="top" id="D31-v6-idM"/>
                                                 <constraint firstAttribute="trailing" secondItem="Rjk-p9-PIx" secondAttribute="trailing" id="LAS-nu-c1P"/>
@@ -125,7 +120,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9m-Fe-mnM">
                                                             <rect key="frame" x="0.0" y="0.0" width="325" height="43.5"/>
                                                             <state key="normal" title="분류">
-                                                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="titleColor" systemColor="labelColor"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="categoryButtonTapped:" destination="sDW-H2-BPf" eventType="touchUpInside" id="gb9-1f-pXq"/>
@@ -146,7 +141,6 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemGray5Color"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Byq-bQ-YBS" secondAttribute="trailing" id="FRC-5D-9vW"/>
                                                 <constraint firstItem="Byq-bQ-YBS" firstAttribute="leading" secondItem="P5P-Gy-BuO" secondAttribute="leading" constant="5" id="GUL-6l-fjv"/>
@@ -175,7 +169,6 @@
                                                                 <constraint firstAttribute="width" constant="60" id="L3j-TH-ij4"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xSP-9o-npp">
@@ -187,9 +180,9 @@
                                                                         <constraint firstAttribute="width" constant="35" id="UeS-8z-gqU"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                    <color key="tintColor" systemColor="systemGray5Color"/>
+                                                                    <color key="tintColor" systemColor="systemFillColor"/>
                                                                     <state key="normal" title="-" backgroundImage="arrowtriangle.left.fill" catalog="system">
-                                                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="titleColor" systemColor="labelColor"/>
                                                                     </state>
                                                                     <connections>
                                                                         <action selector="countDecreaseButtonTapped:" destination="sDW-H2-BPf" eventType="touchUpInside" id="jne-b9-A8T"/>
@@ -200,8 +193,7 @@
                                                                     <subviews>
                                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WgT-m6-BLC">
                                                                             <rect key="frame" x="0.0" y="2" width="50" height="39.5"/>
-                                                                            <color key="backgroundColor" systemColor="systemGray5Color"/>
-                                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="backgroundColor" systemColor="systemFillColor"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                                                                             <connections>
@@ -209,7 +201,6 @@
                                                                             </connections>
                                                                         </textField>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="50" id="1Dl-ho-aMP"/>
                                                                         <constraint firstItem="WgT-m6-BLC" firstAttribute="leading" secondItem="xeY-er-yOp" secondAttribute="leading" id="Ca1-vt-i7A"/>
@@ -224,9 +215,9 @@
                                                                         <constraint firstAttribute="width" constant="35" id="Rsl-w0-jMq"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                    <color key="tintColor" systemColor="systemGray5Color"/>
+                                                                    <color key="tintColor" systemColor="systemFillColor"/>
                                                                     <state key="normal" title="+" backgroundImage="arrowtriangle.right.fill" catalog="system">
-                                                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color key="titleColor" systemColor="labelColor"/>
                                                                     </state>
                                                                     <connections>
                                                                         <action selector="countIncreaseButtonTapped:" destination="sDW-H2-BPf" eventType="touchUpInside" id="pTz-SR-x6V"/>
@@ -247,8 +238,10 @@
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="% 입력" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TbQ-Hz-gDK">
                                                             <rect key="frame" x="0.0" y="0.0" width="44" height="43.5"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="44" id="anO-BS-nyE"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GWg-Ob-SRc">
@@ -263,12 +256,14 @@
                                                                     </connections>
                                                                 </switch>
                                                             </subviews>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="51" id="e51-qy-cBN"/>
+                                                            </constraints>
                                                         </view>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="bhd-rM-xrO" firstAttribute="centerY" secondItem="Haq-74-8kU" secondAttribute="centerY" id="9hh-aZ-RPa"/>
                                                 <constraint firstAttribute="bottom" secondItem="vrH-7h-nLt" secondAttribute="bottom" id="Bn1-t2-j2W"/>
@@ -300,22 +295,19 @@
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="보관기간" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wob-UQ-VW7">
                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="43.5"/>
-                                                            <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="60" id="nTK-tV-5kI"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4m-jJ-Mah">
                                                             <rect key="frame" x="60" y="0.0" width="120" height="43.5"/>
-                                                            <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="120" id="Ckx-MX-Nlb"/>
                                                             </constraints>
                                                             <state key="normal" title="2021.1.31">
-                                                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="titleColor" systemColor="labelColor"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="dueDateButtonTapped:" destination="sDW-H2-BPf" eventType="touchUpInside" id="OXc-32-S31"/>
@@ -324,10 +316,20 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ic1-oW-YWo">
-                                                    <rect key="frame" x="274" y="0.0" width="100" height="43.5"/>
+                                                    <rect key="frame" x="224" y="0.0" width="150" height="43.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUY-9x-321">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NWp-Cp-Edv">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="43.5"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="50" id="hFb-7K-gjK"/>
+                                                            </constraints>
+                                                            <state key="normal" title="오늘"/>
+                                                            <connections>
+                                                                <action selector="dueDateToday:" destination="sDW-H2-BPf" eventType="touchUpInside" id="0xC-uy-oC7"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUY-9x-321">
+                                                            <rect key="frame" x="50" y="0.0" width="50" height="43.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="50" id="ECZ-Ot-B6o"/>
                                                             </constraints>
@@ -337,7 +339,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Dz-kc-eXg">
-                                                            <rect key="frame" x="50" y="0.0" width="50" height="43.5"/>
+                                                            <rect key="frame" x="100" y="0.0" width="50" height="43.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="50" id="2jz-RI-95w"/>
                                                             </constraints>
@@ -349,7 +351,6 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="Ic1-oW-YWo" firstAttribute="top" secondItem="x0e-j6-8qb" secondAttribute="top" id="HQV-9N-8DH"/>
                                                 <constraint firstItem="xgt-IZ-w0I" firstAttribute="leading" secondItem="x0e-j6-8qb" secondAttribute="leading" id="Iul-Re-Pg2"/>
@@ -371,17 +372,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGU-au-lIl">
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="oGU-au-lIl">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="341"/>
-                                                    <date key="date" timeIntervalSinceReferenceDate="632684160.76684999">
-                                                        <!--2021-01-18 17:36:00 +0000-->
-                                                    </date>
-                                                    <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
-                                                        <!--1970-01-01 11:00:00 +0000-->
-                                                    </date>
-                                                    <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
-                                                        <!--2037-12-31 11:00:00 +0000-->
-                                                    </date>
                                                     <connections>
                                                         <action selector="dueDatePickerChanged:" destination="sDW-H2-BPf" eventType="valueChanged" id="hyS-4b-gVU"/>
                                                     </connections>
@@ -409,7 +401,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDC-S5-F8g">
                                                     <rect key="frame" x="5" y="0.0" width="369" height="43.5"/>
                                                     <state key="normal" title="냉장고 선택">
-                                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="titleColor" systemColor="labelColor"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="fridgeSelectButtonTapped:" destination="sDW-H2-BPf" eventType="touchUpInside" id="rg9-Td-JOi"/>
@@ -417,7 +409,6 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemGray5Color"/>
                                             <constraints>
                                                 <constraint firstItem="vDC-S5-F8g" firstAttribute="top" secondItem="3eR-ST-IYB" secondAttribute="top" id="1I1-La-Ssw"/>
                                                 <constraint firstItem="vDC-S5-F8g" firstAttribute="leading" secondItem="3eR-ST-IYB" secondAttribute="leading" constant="5" id="5rf-am-AM5"/>
@@ -442,14 +433,12 @@
                                                     <subviews>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="메모" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxl-7K-ig2">
                                                             <rect key="frame" x="0.0" y="0.0" width="369" height="43.5"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemGray5Color"/>
                                             <constraints>
                                                 <constraint firstItem="Cc5-gK-V19" firstAttribute="top" secondItem="7rU-AA-bpk" secondAttribute="top" id="ay9-ww-Gt7"/>
                                                 <constraint firstItem="Cc5-gK-V19" firstAttribute="leading" secondItem="7rU-AA-bpk" secondAttribute="leading" constant="5" id="ctO-3c-UwD"/>
@@ -471,17 +460,17 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T41-fZ-1vc">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="280"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <state key="normal" title="사진 추가">
-                                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="titleColor" systemColor="labelColor"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="pictureButtonTapped:" destination="sDW-H2-BPf" eventType="touchUpInside" id="6tk-P9-rDn"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="T41-fZ-1vc" secondAttribute="bottom" id="M0F-Wh-kjf"/>
                                                 <constraint firstItem="T41-fZ-1vc" firstAttribute="leading" secondItem="QZI-9Z-6Or" secondAttribute="leading" id="V3l-B5-rlp"/>
@@ -502,7 +491,7 @@
                     <navigationItem key="navigationItem" title="상품 추가" id="Flv-cH-eWD">
                         <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="PVE-zM-oK8">
                             <connections>
-                                <action selector="completeButtonTapped:" destination="sDW-H2-BPf" id="2k0-6W-49r"/>
+                                <segue destination="r72-NC-VZF" kind="unwind" unwindAction="unwindToGroceryListTableView:" id="wLh-bD-mgV"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="완료" id="C2g-Kk-idQ">
@@ -599,10 +588,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="b8G-Mf-nPF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="AEW-qN-Sd4" kind="relationship" relationship="rootViewController" id="6Pu-4F-Ydg"/>
@@ -619,10 +604,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6aS-Nc-ozq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="hWg-oA-I8R" kind="relationship" relationship="rootViewController" id="zUB-GE-inz"/>
@@ -663,10 +644,6 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="sDW-H2-BPf" kind="relationship" relationship="rootViewController" id="dW1-wL-Aki"/>
@@ -687,14 +664,23 @@
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemFillColor">
+            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
