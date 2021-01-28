@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "gray-stroke.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "gray-stroke.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
