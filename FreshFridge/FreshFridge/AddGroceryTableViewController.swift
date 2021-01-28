@@ -46,7 +46,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         //if #available(iOS 13.0, *)
         //{
             //overrideUserInterfaceStyle = .dark
-        dueDatePicker.backgroundColor = .systemBackground
+        dueDatePicker.backgroundColor = .secondarySystemGroupedBackground
         //}
         //else
         //{
@@ -157,14 +157,14 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
 
         @objc func rotated()
         {
-            if UIDevice.current.orientation.isLandscape
-            {
-                print("Landscape")
-            }
-            else
-            {
-                print("Portrait")
-            }
+//            if UIDevice.current.orientation.isLandscape
+//            {
+//                print("Landscape")
+//            }
+//            else
+//            {
+//                print("Portrait")
+//            }
         
             barcodeScanButton.frame = CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50)
         }

@@ -124,14 +124,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     @objc func rotated()
     {
-        if UIDevice.current.orientation.isLandscape
-        {
-            print("Landscape")
-        }
-        else
-        {
-            print("Portrait")
-        }
+//        if UIDevice.current.orientation.isLandscape
+//        {
+//            print("Landscape")
+//        }
+//        else
+//        {
+//            print("Portrait")
+//        }
         
         previewLayer.frame = view.layer.bounds
     
