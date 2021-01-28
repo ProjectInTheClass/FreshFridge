@@ -590,6 +590,10 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             {
                 // Use data from the view controller which initiated the unwind segue
                 nameTextField.text = sourceViewController.selectedName
+                if let category = defaultNames[sourceViewController.selectedName]
+                {
+                    categoryButton.setTitle(category.rawValue, for: .normal)
+                }
                 enableCompletButton()
             }
         }

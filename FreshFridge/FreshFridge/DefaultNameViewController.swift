@@ -24,7 +24,8 @@ class DefaultNameViewController: UIViewController {
         let buttonWidth: CGFloat = (viewWidth - 2 * spacing) / CGFloat(countOfRowButtons)
         let buttonHeight: CGFloat = 44.0
         var x = 0, y = 0, index = 0
-        for name in defaultNames
+        let sorted = defaultNames.sorted(by: {$0.0 < $1.0}).sorted(by: {$0.1.rawValue < $1.1.rawValue})
+        for (key,_) in sorted
         {
             x = index % 4
             y = index / 4
@@ -32,7 +33,7 @@ class DefaultNameViewController: UIViewController {
                                                 y: CGFloat(y) * buttonHeight + spacing + marginHeight,
                                                 width: buttonWidth, height: buttonHeight))
             button.backgroundColor = .clear
-            button.setTitle(name, for: .normal)
+            button.setTitle(key, for: .normal)
             button.setTitleColor(.label, for: .normal)
             button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             button.titleLabel?.font = systemFont15

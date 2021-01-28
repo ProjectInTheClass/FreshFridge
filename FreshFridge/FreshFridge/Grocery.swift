@@ -373,17 +373,18 @@ var fridgeNames = ["신선한냉장고", "김치냉장고", "추가냉장고1", 
 var selectedFridgeIndex: [Int] = [0] // 다중 선택가능, fridgeNames index를 배열로 저장한다.
 var selectedfrideName = fridgeNames[selectedFridgeIndex[0]] // 다중선택된 selectedFridgeIndex중 첫번째 것으로 할당
 
-let defaultNames = [
-    "소고기", "돼지고기", "닭고기", "생선",
-    "양파", "김치", "대파", "고추",
-    "마늘", "무", "당근", "애호박",
-    "가지", "브로콜리", "상추", "양배추",
-    "파프리카", "시금치", "감자", "고구마",
-    "두부", "라면", "소면", "햄",
-    "계란", "참치", "김", "밀가루",
-    "우유", "소금", "참기름", "마요네즈",
-    "진간장", "국간장", "후추", "올리브유",
-    "포도씨유", "카놀라유", "식용유", "물엿"]
+let defaultNames : [String:GroceryHistory.Category] = [
+    "소고기":.MeatsAndEggs, "돼지고기":.MeatsAndEggs, "닭고기":.MeatsAndEggs, "생선":.MeatsAndEggs,
+    "양파":.Vegetable, "김치":.CookingAndSidedishes, "대파":.Vegetable, "고추":.Vegetable,
+    "마늘":.Vegetable, "무":.Vegetable, "당근":.Vegetable, "애호박":.Vegetable,
+    "가지":.Vegetable, "브로콜리":.Vegetable, "상추":.Vegetable, "양배추":.Vegetable,
+    "파프리카":.Vegetable, "시금치":.Vegetable, "감자":.Vegetable, "고구마":.Vegetable,
+    "두부":.ETC, "라면소면":.SeasonedAndOilAndSauce, "햄":.MeatsAndEggs,
+    "계란":.MeatsAndEggs, "참치":.MarineProducts, "김":.MarineProducts, "밀가루":.ETC,
+    "우유":.DrinksAndSnacks, "소금":.SeasonedAndOilAndSauce, "참기름":.SeasonedAndOilAndSauce, "마요네즈":.SeasonedAndOilAndSauce,
+    "진간장":.SeasonedAndOilAndSauce, "국간장":.SeasonedAndOilAndSauce, "후추":.SeasonedAndOilAndSauce, "올리브유":.SeasonedAndOilAndSauce,
+    "포도씨유":.SeasonedAndOilAndSauce, "카놀라유":.SeasonedAndOilAndSauce, "식용유":.SeasonedAndOilAndSauce, "물엿":.SeasonedAndOilAndSauce
+]
 
 // 메인뷰의 필터링
 typealias FridgeViewFilter = Grocery.Storage
