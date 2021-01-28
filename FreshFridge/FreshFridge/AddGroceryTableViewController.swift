@@ -331,6 +331,19 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         {
             count = Int(text) ?? 0
         }
+        
+        if(count < 0)
+        {
+            count = 0
+        }
+        
+        if(percentageSwitch.isOn)
+        {
+            if(count > 100)
+            {
+                count = 100
+            }
+        }
     
         updateTableView()
     }
@@ -391,10 +404,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     @IBAction func dueDateButtonTapped(_ sender: Any)
     {
-        if(grocery != nil)
-        {
-            dueDatePicker.date = grocery!.dueDate.date
-        }
+        dueDatePicker.date = dueDate.date
+        
         isDueDatePickerShown.toggle()
         tableView.beginUpdates()
         tableView.endUpdates()

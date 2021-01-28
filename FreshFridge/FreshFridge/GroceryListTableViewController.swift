@@ -9,6 +9,8 @@ import UIKit
 
 class GroceryListTableViewController: UITableViewController, GroceryListCellDelegate, UITableViewDragDelegate, UITableViewDropDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate
 {
+    
+    @IBOutlet weak var alarmButton: UIBarButtonItem!
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var refrigerationButton: UIButton!
     @IBOutlet weak var freezingButton: UIButton!
@@ -25,6 +27,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     var refrigerationButtonOn = true
     var freezingButtonOn = true
     var outdoorButtonOn = true
+    var isAlarmButtonOn = false
     
     func isFridgeViewFilterSelected(_ filter: FridgeViewFilter) -> Bool
     {
@@ -459,6 +462,23 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         performSegue(withIdentifier: "EditCell", sender: self)
     }
     
+    
+    @IBAction func alarmButtonTapped(_ sender: Any)
+    {
+        isAlarmButtonOn.toggle()
+        if(isAlarmButtonOn)
+        {
+            alarmButton.image = UIImage(systemName: "alarm.fill")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.resetAllAlarms()
+        }
+        else
+        {
+            alarmButton.image = UIImage(systemName: "alarm")
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        }
+    }
+    
     @IBAction func categoryButtonTapped(_ sender: Any)
     {
         categoryButtonOn.toggle()
@@ -624,6 +644,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     }
                     
                     groceries.insert(newGrocery, at: 0)
+                    (UIApplication.shared.delegate as! AppDelegate).setAlarm(grocery: newGrocery)
                     updateTableView()
                 }
             

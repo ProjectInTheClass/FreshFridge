@@ -287,13 +287,13 @@ struct DueDate: Codable
         let todayMidnight = Calendar.current.startOfDay(for: Date())//.date(bySettingHour: 9, minute: 0, second: 0, of: date)!
         let diffDate = date.timeIntervalSince(todayMidnight)
         let diffDay : Double = (diffDate/(DueDate.secondOfDay))
-        return Int(diffDay)
+        return Int(-diffDay)
     }
     
     func getExpirationDay() -> String
     {
         let diffDay = getExpiration()
-        return diffDay>0 ? String("D-\(diffDay)") : diffDay == 0 ? String("D+\(diffDay)") : String("D+\(-diffDay)")
+        return diffDay<0 ? String("D\(diffDay)") : String("D+\(diffDay)")
     }
 }
 

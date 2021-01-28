@@ -258,6 +258,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 print(fridgeGrocery)
                 
                 groceries.insert(fridgeGrocery, at: 0)
+                (UIApplication.shared.delegate as! AppDelegate).setAlarm(grocery: fridgeGrocery)
                 Grocery.saveGrocery(groceries)
                 
                 success(true)
