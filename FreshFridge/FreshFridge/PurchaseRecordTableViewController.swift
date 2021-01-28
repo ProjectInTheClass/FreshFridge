@@ -87,7 +87,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     
     
     func updateTableView( groceryHistoryArray: [GroceryHistory]) {
-        //searchbarGroceries = groceryHistories
         numberOfSections = 0
         numbersOfRowInSection.removeAll()
         sortedArray.removeAll()
@@ -201,9 +200,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         let modifyAction = UIContextualAction(style: .destructive, title:  "Trash", handler:
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
-//            let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-//                groceryHistories.remove(at: indexPath.row )
-//                tableView.deleteRows(at: [indexPath], with: .fade)
                 let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
                 
                 if let selectedIndex = findGroceryHistoryIndex(groceryHistory: selectedGrocery) {
@@ -214,7 +210,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                     updateTableView(groceryHistoryArray: groceryHistories)
                     tableView.reloadData()
                     
-                    Grocery.saveGrocery(groceries)
+                    GroceryHistory.saveGroceryHistory(groceryHistories)
                 }
                 
                 success(true)
