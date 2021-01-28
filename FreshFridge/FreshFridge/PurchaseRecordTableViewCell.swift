@@ -54,23 +54,24 @@ class PurchaseRecordTableViewCell: UITableViewCell {
 }
 
 
-//class PurchaseRecordWithPictureCell: UITableViewCell
-//{
-////    @IBOutlet weak var titleImage: UIImageView!
-//
-//
-//
-//
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//
-//        titleImage.contentMode = .scaleAspectFit
-//    }
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-//}
+class PurchaseRecordWithPictureCell: UITableViewCell
+{
+
+
+    @IBOutlet weak var titleImage: UIImageView!
+    
+
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        titleImage.contentMode = .scaleAspectFit
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+}
 

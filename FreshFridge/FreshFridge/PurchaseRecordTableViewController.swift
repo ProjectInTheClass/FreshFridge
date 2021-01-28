@@ -164,10 +164,33 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as! PurchaseRecordTableViewCell
         let cellContents = filteredGroceries[indexPath.section][indexPath.row]
         cell.updateCell(with: cellContents)
+        
+        
+        /*
+        if(grocery.info.image == nil)
+        {
+            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as! PurchaseRecordTableViewCell
+            let cellContents = filteredGroceries[indexPath.section][indexPath.row]
+        }
+        else
+        {
+            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordWithPictureCell", for: indexPath) as! PurchaseRecordTableViewCell
+            let pictureCell = cell as? PurchaseRecordWithPictureCell
+            pictureCell?.titleImage.image = grocery.info.image?.image()
+        }
+*/
+        
+        
+        
+        
+        
+        
         cell.delegate = self
         
         return cell
     }
+    
+    
     
     // 셀의 왼쪽에서 오른쪽으로 스와이프 했을 때 카트로 보내는 이밴트
     override func tableView(_ tableView: UITableView,
