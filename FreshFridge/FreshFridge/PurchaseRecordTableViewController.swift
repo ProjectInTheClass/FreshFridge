@@ -297,6 +297,9 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         }
         updateTableView(groceryHistoryArray: groceryHistories)
         tableView.reloadData()
+        
+        GroceryHistory.saveGroceryHistory(groceryHistories)
+        
     }
         
     /*
