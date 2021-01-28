@@ -564,7 +564,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         {
             if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
             {
-                var title = sourceViewController.nameTextField.text ?? ""
+                let title = sourceViewController.nameTextField.text ?? ""
                 let category = GroceryHistory.Category(rawValue: sourceViewController.categoryButton.title(for: .normal) ?? "")!
                 //grocery.info.image =
                 

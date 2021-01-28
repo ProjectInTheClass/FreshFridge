@@ -75,7 +75,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Pj9-DE-Yss">
                                             <rect key="frame" x="20" y="5" width="374" height="44"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="ZXK-qs-qXV">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZXK-qs-qXV">
                                                     <rect key="frame" x="0.0" y="0.0" width="324" height="44"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9q-jb-fia">
@@ -95,7 +95,6 @@
                                                                     <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="65" id="Myn-25-PHD"/>
-                                                                        <constraint firstAttribute="height" constant="20" id="PKj-G6-HuB"/>
                                                                         <constraint firstAttribute="height" constant="20" id="Y4F-20-MjW"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -171,7 +170,7 @@
                                                         <constraint firstAttribute="height" constant="50" id="fs9-t4-bte"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="y2x-rN-07h">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="y2x-rN-07h">
                                                     <rect key="frame" x="50" y="0.0" width="274" height="44"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyN-Se-9pY">
@@ -191,7 +190,6 @@
                                                                     <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="65" id="2DG-vk-yEU"/>
-                                                                        <constraint firstAttribute="height" constant="20" id="BdI-0n-nBG"/>
                                                                         <constraint firstAttribute="height" constant="20" id="Lcd-Jd-g6I"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
