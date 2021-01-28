@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         // link groceries and groceryHistories
-        for grocery in groceries
+        for grocery in groceries.reversed()
         {
             grocery.info = getGroceryHistory(title: grocery.info.title, category: grocery.info.category, updateDate: false)
         }

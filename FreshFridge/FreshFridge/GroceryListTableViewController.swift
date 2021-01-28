@@ -327,10 +327,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
         
             print("Going to the cart ...")
-            fridgeTabBarController.animateBadge(tabBarIndex: .shopingCartTabBar)
             
-            
-            
+            /*
             if let cell = tableView.cellForRow(at: indexPath) as? GroceryListTableViewCell
             {
                 let screenRect = UIScreen.main.bounds
@@ -353,6 +351,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 let duration: TimeInterval = 1
                 curveAnimation(from: originFrom, to: originTo, size: size, systemName: systemName, color: color, duration: duration)
             }
+            */
             
             // goto the cart
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
@@ -360,6 +359,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             cartGroceries.insert(cartGrocery, at: 0)
             
             CartGrocery.saveCartGrocery(cartGroceries)
+            fridgeTabBarController.animateBadge(tabBarIndex: .shopingCartTabBar)
             
             success(true)
         })
@@ -379,24 +379,22 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 print("Trash action ...")
                 if let cell = tableView.cellForRow(at: indexPath) as? GroceryListTableViewCell
                 {
-                    let translate = CATransform3DTranslate(CATransform3DIdentity, -1000, 0, 0)
+//                    let translate = CATransform3DTranslate(CATransform3DIdentity, -1000, 0, 0)
+//
+//                    UIView.animate(withDuration: 0.5, animations: {cell.layer.transform = translate})
+//                    {_ in
+//                        cell.layer.transform = CATransform3DIdentity
+//                    }
                     
-                    UIView.animate(withDuration: 0.5, animations: {cell.layer.transform = translate})
-                    {_ in
-                        cell.layer.transform = CATransform3DIdentity
-                        
-                        let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-                        
-                        if let selectedIndex = findGroceryIndex(grocery: selectedGrocery)
-                        {
-                            groceries.remove(at: selectedIndex.offset)
-                            updateTableView()
-                            tableView.reloadData()
-                            
-                            Grocery.saveGrocery(groceries)
-                        }
+                    let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
                     
+                    if let selectedIndex = findGroceryIndex(grocery: selectedGrocery)
+                    {
+                        groceries.remove(at: selectedIndex.offset)
+                        updateTableView()
+                        tableView.reloadData()
                         
+                        Grocery.saveGrocery(groceries)
                     }
                     
                     success(true)

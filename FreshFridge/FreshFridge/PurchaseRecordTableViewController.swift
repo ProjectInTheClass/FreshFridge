@@ -200,13 +200,12 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         let toCartAction = UIContextualAction(style: .destructive, title:  "Cart", handler:
         { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
-            fridgeTabBarController.animateBadge(tabBarIndex: .shopingCartTabBar)
-            
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
             let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, updateDate: true))
             
             cartGroceries.insert(cartGrocery, at: 0)
             CartGrocery.saveCartGrocery(cartGroceries)
+            fridgeTabBarController.animateBadge(tabBarIndex: .shopingCartTabBar)
             
             success(true)
         })
@@ -246,13 +245,14 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         let toFridgeAction = UIContextualAction(style: .destructive, title:  "Fridge", handler:
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
                 
-                fridgeTabBarController.animateBadge(tabBarIndex: .fridgeTabBar)
+                
                 
                 let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
                 
                 print(selectedGrocery)
                 
-                let fridgeGrocery = Grocery(info: GroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, favorite: selectedGrocery.favorite, lastestPurchaseDate: Date()), count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
+                let groceryHistory = getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, updateDate: true)
+                let fridgeGrocery = Grocery(info: groceryHistory, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
                 
                 //        GroceryHistory(title: "바나나우유", category: .DrinksAndSnacks, favorite: false, lastestPurchaseDate: Date(), image: GroceryImage(image: UIImage(named: "dumyPicture1")))
                 
@@ -262,6 +262,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 groceries.insert(fridgeGrocery, at: 0)
                 (UIApplication.shared.delegate as! AppDelegate).setAlarm(grocery: fridgeGrocery)
                 Grocery.saveGrocery(groceries)
+                
+                fridgeTabBarController.animateBadge(tabBarIndex: .fridgeTabBar)
                 
                 success(true)
          })

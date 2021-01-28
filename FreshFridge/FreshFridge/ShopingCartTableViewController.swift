@@ -19,6 +19,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var latestButton: UIButton!
     @IBOutlet weak var toFridgeButton: UIButton!
+    @IBOutlet weak var allCheckMarkButton: UIButton!
     
     var fridgeTabBarController: FridgeTabBarController!
     
@@ -31,7 +32,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     
     var categoryButtonOn = false
     var latestButtonOn = true
-    
+    var isAllCheckMarkButtonOn = false
     
     // 최신순 또는 가나다 순으로 정렬된 어레이
     var sortedArray: [CartGrocery] = []
@@ -147,8 +148,15 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
             let checkGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
             checkGrocery.isPurchased = !checkGrocery.isPurchased
         }
-        updateTableView()
+        //updateTableView()
         tableView.reloadData()
+        
+        //
+        if(isAllCheckMarkButtonOn)
+        {
+            isAllCheckMarkButtonOn.toggle()
+            updateAllCheckMarkButton()
+        }
     }
     
     func countButtonTapped(sender: ShopingCartTableViewCell) {
@@ -186,16 +194,36 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         }
     }
     
+    func updateAllCheckMarkButton()
+    {
+        if(isAllCheckMarkButtonOn)
+        {
+            allCheckMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        }
+        else
+        {
+            allCheckMarkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+        }
+    }
+    
+    @IBAction func allCheckButtonTapped(_ sender: Any)
+    {
+        isAllCheckMarkButtonOn.toggle()
+        updateAllCheckMarkButton()
+        
+        for cartGrocery in cartGroceries
+        {
+            cartGrocery.isPurchased = isAllCheckMarkButtonOn
+        }
+        tableView.reloadData()
+    }
+    
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
         categoryButtonOn = !categoryButtonOn
         updateButtons()
         updateTableView()
         tableView.reloadData()
     }
-    
-    
-    
-    
     
     @IBAction func RecentSortButtonTapped(_ sender: UIButton) {
         latestButtonOn = !latestButtonOn
@@ -206,7 +234,25 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
   
     @IBAction func ToFridgeButtonTapped(_ sender: UIButton) {
         
+        var isMoved = false
+        for cartGrocery in cartGroceries.reversed()
+        {
+            if(cartGrocery.isPurchased)
+            {
+                isMoved = true
+                let groceryHistory = getGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: true)
+                let fridgeGrocery = Grocery(info: groceryHistory, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
+                
+                groceries.insert(fridgeGrocery, at: 0)
+                (UIApplication.shared.delegate as! AppDelegate).setAlarm(grocery: fridgeGrocery)
+            }
+        }
         
+        if(isMoved)
+        {
+            Grocery.saveGrocery(groceries)
+            fridgeTabBarController.animateBadge(tabBarIndex: .fridgeTabBar)
+        }
     }
     
     
