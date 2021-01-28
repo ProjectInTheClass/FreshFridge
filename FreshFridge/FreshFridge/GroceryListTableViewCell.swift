@@ -23,7 +23,7 @@ class GroceryListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        expirationLabel.layer.cornerRadius = 3
+        expirationLabel.layer.cornerRadius = 5
         expirationLabel.clipsToBounds = true
     }
 
