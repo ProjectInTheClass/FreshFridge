@@ -23,7 +23,7 @@
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5K-YJ-Xmq">
                                             <rect key="frame" x="0.0" y="0.0" width="103.5" height="44"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal" title="분류별"/>
                                             <connections>
                                                 <action selector="categoryButtonTapped:" destination="FWd-TQ-AyV" eventType="touchUpInside" id="OLj-Fe-wiD"/>
@@ -31,7 +31,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccY-1T-3mc">
                                             <rect key="frame" x="103.5" y="0.0" width="103.5" height="44"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal" title="냉장"/>
                                             <connections>
                                                 <action selector="refrigerationButtonTapped:" destination="FWd-TQ-AyV" eventType="touchUpInside" id="sP8-Yh-zFX"/>
@@ -39,7 +39,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTS-JF-eWw">
                                             <rect key="frame" x="207" y="0.0" width="103.5" height="44"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal" title="냉동"/>
                                             <connections>
                                                 <action selector="freezingButtonTapped:" destination="FWd-TQ-AyV" eventType="touchUpInside" id="oBS-Fs-yeo"/>
@@ -47,7 +47,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ePx-zD-F6d">
                                             <rect key="frame" x="310.5" y="0.0" width="103.5" height="44"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal" title="실외"/>
                                             <connections>
                                                 <action selector="outdoorButtonTapped:" destination="FWd-TQ-AyV" eventType="touchUpInside" id="og7-XJ-Id5"/>

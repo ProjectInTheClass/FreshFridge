@@ -3,39 +3,11 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--가족 공유-->
-        <scene sceneID="Fz4-SB-xsv">
-            <objects>
-                <tableViewController id="trR-m5-4AJ" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bcK-uV-JXv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FamilyShareCell" id="mjc-Lp-jU9">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mjc-Lp-jU9" id="t63-uT-ans">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="trR-m5-4AJ" id="aaI-rp-7xu"/>
-                            <outlet property="delegate" destination="trR-m5-4AJ" id="2mK-pO-YNk"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="가족 공유" id="pol-4g-jyg"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2Kq-tp-dbF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1238" y="2100"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="dT9-Eu-uy6">
             <objects>
@@ -48,18 +20,74 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="trR-m5-4AJ" kind="relationship" relationship="rootViewController" id="t4r-6q-Pwf"/>
+                        <segue destination="Ga2-xJ-rlK" kind="relationship" relationship="rootViewController" id="bwG-p6-7AQ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MRO-Hy-FIE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="347" y="2100"/>
         </scene>
+        <!--가족 공유-->
+        <scene sceneID="mup-mv-j33">
+            <objects>
+                <viewController id="Ga2-xJ-rlK" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lgk-3l-UjM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="sBm-Ww-KRd">
+                                <rect key="frame" x="20" y="313" width="374" height="270"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBb-7M-akn">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemFillColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="4LW-gr-6dm"/>
+                                        </constraints>
+                                        <state key="normal" title="공유 코드 생성"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cn5-nq-0E6">
+                                        <rect key="frame" x="0.0" y="110" width="374" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemFillColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="mrv-eQ-WMR"/>
+                                        </constraints>
+                                        <state key="normal" title="코드 입력"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eki-Kk-gf9">
+                                        <rect key="frame" x="0.0" y="220" width="374" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemFillColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Ejv-tR-iV7"/>
+                                        </constraints>
+                                        <state key="normal" title="가족 공유 기능 활성 (준비중)"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5J1-Gb-W8m"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="5J1-Gb-W8m" firstAttribute="trailing" secondItem="sBm-Ww-KRd" secondAttribute="trailing" constant="20" id="G7p-Ao-osO"/>
+                            <constraint firstItem="sBm-Ww-KRd" firstAttribute="leading" secondItem="5J1-Gb-W8m" secondAttribute="leading" constant="20" id="Ndh-a4-Y0w"/>
+                            <constraint firstItem="sBm-Ww-KRd" firstAttribute="centerX" secondItem="Lgk-3l-UjM" secondAttribute="centerX" id="RYE-bR-fiU"/>
+                            <constraint firstItem="sBm-Ww-KRd" firstAttribute="centerY" secondItem="Lgk-3l-UjM" secondAttribute="centerY" id="yEo-aL-rZE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="가족 공유" id="MHn-rC-Dyd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x7k-ba-llS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1064" y="2100"/>
+        </scene>
     </scenes>
     <resources>
         <image name="icons8-family-64" width="21.333333969116211" height="21.333333969116211"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemFillColor">
+            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

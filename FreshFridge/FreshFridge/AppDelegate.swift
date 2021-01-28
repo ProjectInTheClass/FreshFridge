@@ -14,7 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // date loading
+        // 테스트용 sample date loading
+        /*
+        groceryHistories = GroceryHistory.loadSampleGroceryHistory()
+        groceries = Grocery.loadSampleGrocery()
+        cartGroceries = CartGrocery.loadSampleCartGrocery()
+        */
+        
         if let savedGroceryHistories = GroceryHistory.loadGroceryHistory()
         {
             groceryHistories = savedGroceryHistories
@@ -32,6 +38,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         {
             groceries = Grocery.loadSampleGrocery()
         }
+         
+         if let savedCartGroceries = CartGrocery.loadCartGrocery()
+         {
+             cartGroceries = savedCartGroceries
+         }
+         else
+         {
+             cartGroceries = CartGrocery.loadSampleCartGrocery()
+         }
+         
         
         // link groceries and groceryHistories
         for grocery in groceries.reversed()
@@ -39,14 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             grocery.info = GroceryHistory.getGroceryHistory(title: grocery.info.title, category: grocery.info.category, updateDate: false)
         }
         
-        if let savedCartGroceries = CartGrocery.loadCartGrocery()
-        {
-            cartGroceries = savedCartGroceries
-        }
-        else
-        {
-            cartGroceries = CartGrocery.loadSampleCartGrocery()
-        }
         // link cartGroceries and groceryHistories
         for cartGrocery in cartGroceries.reversed()
         {
