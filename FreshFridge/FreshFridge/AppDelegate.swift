@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // link groceries and groceryHistories
         for grocery in groceries.reversed()
         {
-            grocery.info = getGroceryHistory(title: grocery.info.title, category: grocery.info.category, updateDate: false)
+            grocery.info = GroceryHistory.getGroceryHistory(title: grocery.info.title, category: grocery.info.category, updateDate: false)
         }
         
         if let savedCartGroceries = CartGrocery.loadCartGrocery()
@@ -47,6 +47,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         {
             cartGroceries = CartGrocery.loadSampleCartGrocery()
         }
+        // link cartGroceries and groceryHistories
+        for cartGrocery in cartGroceries.reversed()
+        {
+            cartGrocery.info = GroceryHistory.getGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: false)
+        }
+        
+        
         // Override point for customization after application launch.
         let center = UNUserNotificationCenter.current()
         center.delegate = self // Don't forgot to set delegate
@@ -109,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UNUserNotificationCenter.current().add(request)
         }
         
-        if(expiration > -1)
+        if(expiration < 3)
         {
             //let n = -1
             let content = UNMutableNotificationContent()

@@ -201,7 +201,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-            let cartGrocery = CartGrocery(info: getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, updateDate: true))
+            let cartGrocery = CartGrocery(info: GroceryHistory.getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, updateDate: true))
             
             cartGroceries.insert(cartGrocery, at: 0)
             CartGrocery.saveCartGrocery(cartGroceries)
@@ -220,10 +220,11 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     override func tableView(_ tableView: UITableView,
                     trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
         let modifyAction = UIContextualAction(style: .destructive, title:  "Trash", handler:
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
-                let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+                
                 
                 if let selectedIndex = findGroceryHistoryIndex(groceryHistory: selectedGrocery) {
                     // print(selectedIndex)
@@ -241,7 +242,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
          modifyAction.backgroundColor = .red
         
         
-        
         let toFridgeAction = UIContextualAction(style: .destructive, title:  "Fridge", handler:
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
                 
@@ -251,7 +251,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 
                 print(selectedGrocery)
                 
-                let groceryHistory = getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, updateDate: true)
+                let groceryHistory = GroceryHistory.getGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, updateDate: true)
                 let fridgeGrocery = Grocery(info: groceryHistory, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
                 
                 //        GroceryHistory(title: "바나나우유", category: .DrinksAndSnacks, favorite: false, lastestPurchaseDate: Date(), image: GroceryImage(image: UIImage(named: "dumyPicture1")))
@@ -271,7 +271,15 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         toFridgeAction.image = UIImage(named: "freshFridge_icon")?.withTintColor( .white)
         toFridgeAction.backgroundColor = .systemBlue
      
-         return UISwipeActionsConfiguration(actions: [modifyAction, toFridgeAction])
+        if(isExistGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false
+            && isExistCartGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false)
+        {
+            return UISwipeActionsConfiguration(actions: [modifyAction, toFridgeAction])
+        }
+        else
+        {
+            return UISwipeActionsConfiguration(actions: [toFridgeAction])
+        }
      }
    
     // 즐겨찾기 별표 버튼을 누르면 반응
