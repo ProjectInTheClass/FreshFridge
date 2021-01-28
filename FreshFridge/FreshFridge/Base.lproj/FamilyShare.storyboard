@@ -40,7 +40,7 @@
         <scene sceneID="dT9-Eu-uy6">
             <objects>
                 <navigationController storyboardIdentifier="FamilyShare" id="eZ0-QG-DPB" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="person.2" catalog="system" id="Ige-bu-3e7"/>
+                    <tabBarItem key="tabBarItem" title="" image="icons8-family-64" id="Ige-bu-3e7"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zH4-qy-ubz">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -57,7 +57,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="person.2" catalog="system" width="128" height="81"/>
+        <image name="icons8-family-64" width="21.333333969116211" height="21.333333969116211"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
