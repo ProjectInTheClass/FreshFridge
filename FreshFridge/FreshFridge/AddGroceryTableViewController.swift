@@ -42,9 +42,16 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        storageSegment.setTitleTextAttributes([NSAttributedString.Key.font: systemFont15], for: .normal)
-        storageSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .selected)
-        storageSegment.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .normal)
+        // Date Picker Darkmode에서 잘나오지 않는 문제
+        //if #available(iOS 13.0, *)
+        //{
+            //overrideUserInterfaceStyle = .dark
+        dueDatePicker.backgroundColor = .systemBackground
+        //}
+        //else
+        //{
+        //    dueDatePicker.backgroundColor = .white
+        //}
         
         nameTextField.delegate = self
         

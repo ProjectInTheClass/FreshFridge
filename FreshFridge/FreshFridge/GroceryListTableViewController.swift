@@ -233,7 +233,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             let diffDay = Int(diffDate/(DueDate.secondOfDay))
             cell.expirationLabel?.text = grocery.dueDate.getExpirationDay()
             cell.expirationLabel?.backgroundColor = diffDay>=3 ? UIColor.systemGray5 : .red
-            cell.expirationLabel?.textColor = diffDay>=3 ? UIColor.darkGray : .white
+            cell.expirationLabel?.textColor = diffDay>=3 ? UIColor.label : .white
             
             cell.countButton.updatePieChart(count: grocery.count, isPercentage: grocery.isPercentageCount)
         }
@@ -562,7 +562,6 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         // Use data from the view controller which initiated the unwind segue
         if(unwindSegue.identifier == "UnwindGroceryListFromAddGrocery")
         {
-        
             if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
             {
                 var title = sourceViewController.nameTextField.text ?? ""
@@ -578,18 +577,6 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 let fridgeName = sourceViewController.fridgeSelectButton.title(for: .normal) ?? ""
                 let notes = sourceViewController.noteTextField.text
                 let image = sourceViewController.groceryImage
-                
-                if(title.isEmpty == true)
-                {
-                    if( image != nil )
-                    {
-                        title = image!.filename
-                    }
-                    else
-                    {
-                        title = GroceryImage.getHashName()
-                    }
-                }
                 
                 if let grocery = sourceViewController.grocery
                 {
