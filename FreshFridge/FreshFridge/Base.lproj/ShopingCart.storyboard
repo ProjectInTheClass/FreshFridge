@@ -236,7 +236,9 @@
         <scene sceneID="5Q6-2b-Vun">
             <objects>
                 <navigationController id="6ej-XU-0UW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="icons8-shopping-cart-64-2" id="e8d-fU-I8c"/>
+                    <tabBarItem key="tabBarItem" title="" image="cart_icon" id="e8d-fU-I8c">
+                        <inset key="imageInsets" minX="0.0" minY="1" maxX="0.0" maxY="1"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mr2-Gj-1lP">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -253,10 +255,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cart_icon" width="29.333333969116211" height="24.666666030883789"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
         <image name="freshFridge_icon" width="18.666666030883789" height="24.666666030883789"/>
-        <image name="icons8-shopping-cart-64-2" width="21.333333969116211" height="21.333333969116211"/>
         <image name="imageView:gh3-Ep-HRa:image" width="115" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
