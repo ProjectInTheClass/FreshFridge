@@ -244,13 +244,20 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 let fridgeGrocery = Grocery(info: groceryHistory, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
                 
                 groceries.insert(fridgeGrocery, at: 0)
+                if let selectedIndex = findCartGroceryIndex(cartGrocery: cartGrocery)
+                {
+                    cartGroceries.remove(at: selectedIndex.offset)
+                }
                 (UIApplication.shared.delegate as! AppDelegate).setAlarm(grocery: fridgeGrocery)
             }
         }
         
         if(isMoved)
         {
+            updateTableView()
+            tableView.reloadData()
             Grocery.saveGrocery(groceries)
+            CartGrocery.saveCartGrocery(cartGroceries)
             fridgeTabBarController.animateBadge(tabBarIndex: .fridgeTabBar)
         }
     }
@@ -268,7 +275,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 
                 let selectedGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
                 
-                if let selectedIndex = findGroceryIndex(grocery: selectedGrocery)
+                if let selectedIndex = findCartGroceryIndex(cartGrocery: selectedGrocery)
                 {
                     cartGroceries.remove(at: selectedIndex.offset)
                     updateTableView()

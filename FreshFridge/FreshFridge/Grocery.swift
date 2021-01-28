@@ -354,9 +354,9 @@ func findGroceryHistoryIndex(groceryHistory: GroceryHistory) -> EnumeratedSequen
     return groceryHistories.enumerated().first(where: {$0.element === groceryHistory})
 }
 
-func findGroceryIndex(grocery: CartGrocery) -> EnumeratedSequence<[CartGrocery]>.Element?
+func findCartGroceryIndex(cartGrocery: CartGrocery) -> EnumeratedSequence<[CartGrocery]>.Element?
 {
-    return cartGroceries.enumerated().first(where: {$0.element === grocery})
+    return cartGroceries.enumerated().first(where: {$0.element === cartGrocery})
 }
 
 func getDocumentsDirectory() -> URL
