@@ -176,16 +176,12 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         }
         else
         {
-//            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordWithPictureCell", for: indexPath) as? PurchaseRecordWithPictureTableViewCell
-//            let pictureCell = cell as? PurchaseRecordWithPictureTableViewCell
-//            pictureCell?.titleImage.image = cellContents.image?.image()
+            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordWithPictureCell", for: indexPath) as? PurchaseRecordWithPictureTableViewCell
+            let pictureCell = cell as? PurchaseRecordWithPictureTableViewCell
+            pictureCell?.titleImage.image = cellContents.image?.image()
             
         }
 
-        
-
-        
-        
         
         cell.updateCell(with: cellContents)
         cell.delegate = self

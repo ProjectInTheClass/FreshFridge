@@ -54,7 +54,7 @@ class PurchaseRecordTableViewCell: UITableViewCell {
 }
 
 
-class PurchaseRecordWithPictureTableViewCell: UITableViewCell
+class PurchaseRecordWithPictureTableViewCell: PurchaseRecordTableViewCell
 {
 
 
