@@ -271,7 +271,7 @@
                                     <segue destination="iyP-8D-cf7" kind="presentation" identifier="" id="GgX-Dt-4f6"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="alarm" catalog="system" id="Rdx-cK-1i3">
+                            <barButtonItem title="Item" image="bell" catalog="system" id="Rdx-cK-1i3">
                                 <connections>
                                     <action selector="alarmButtonTapped:" destination="FWd-TQ-AyV" id="IBo-vw-t44"/>
                                 </connections>
@@ -384,7 +384,7 @@
         <segue reference="Q1T-a6-IbF"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="alarm" catalog="system" width="124" height="128"/>
+        <image name="bell" catalog="system" width="128" height="124"/>
         <image name="button:Qsm-Vz-TEa:backgroundImage" width="29" height="29">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
