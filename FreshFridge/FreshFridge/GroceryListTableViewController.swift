@@ -568,7 +568,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         // Use data from the view controller which initiated the unwind segue
         if(unwindSegue.identifier == "UnwindGroceryListFromAddGrocery")
         {
-            if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
+            if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController,
+               let selectedRow = tableView.indexPathForSelectedRow
             {
                 let title = sourceViewController.nameTextField.text ?? ""
                 let category = GroceryHistory.Category(rawValue: sourceViewController.categoryButton.title(for: .normal) ?? "")!
@@ -602,7 +603,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     
                     if(grocery.info.image == nil)
                     {
-                        if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewCell
+                        if let cell = tableView.cellForRow(at: selectedRow) as? GroceryListTableViewCell
                         {
                             cell.titleLabel.text = title
                             cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
@@ -615,7 +616,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     }
                     else
                     {
-                        if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewPictureCell
+                        if let cell = tableView.cellForRow(at: selectedRow) as? GroceryListTableViewPictureCell
                         {
                             cell.titleLabel.text = title
                             cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
