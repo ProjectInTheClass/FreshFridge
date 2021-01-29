@@ -78,11 +78,11 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         
         if(isFridgeAlarmButtonOn)
         {
-            alarmButton.image = UIImage(systemName: "alarm.fill")
+            alarmButton.image = UIImage(systemName: "bell.fill")
         }
         else
         {
-            alarmButton.image = UIImage(systemName: "alarm")
+            alarmButton.image = UIImage(systemName: "bell")
         }
     }
     
