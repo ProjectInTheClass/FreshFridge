@@ -38,11 +38,13 @@ class ShopingCartTableViewCell : UITableViewCell
     {
         if(inCell.isPurchased)
         {
-            CheckCartButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            //CheckCartButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            CheckCartButton.setImage(UIImage(named: "check_fill"), for: .normal)
         }
         else
         {
-            CheckCartButton.setImage(UIImage(systemName: "circle"), for: .normal)
+            //CheckCartButton.setImage(UIImage(systemName: "circle"), for: .normal)
+            CheckCartButton.setImage(UIImage(named: "check"), for: .normal)
         }
         
         titleLabel.text = inCell.info.title
