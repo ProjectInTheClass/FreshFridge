@@ -291,7 +291,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xgt-IZ-w0I">
-                                                    <rect key="frame" x="0.0" y="0.0" width="180" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="43.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="보관기간" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wob-UQ-VW7">
                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="43.5"/>
@@ -302,9 +302,9 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4m-jJ-Mah">
-                                                            <rect key="frame" x="60" y="0.0" width="120" height="43.5"/>
+                                                            <rect key="frame" x="60" y="0.0" width="90" height="43.5"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="120" id="Ckx-MX-Nlb"/>
+                                                                <constraint firstAttribute="width" constant="90" id="Ckx-MX-Nlb"/>
                                                             </constraints>
                                                             <state key="normal" title="2021.1.31">
                                                                 <color key="titleColor" systemColor="labelColor"/>

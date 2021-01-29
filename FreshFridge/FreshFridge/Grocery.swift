@@ -420,5 +420,5 @@ var isPurchaseRecordCategorySortButtonOn = false
 var isPurchaseRecordFavoriteSortButtonOn = true
 var isPurchaseRecordRecentSortButtonOn = false
 
-var isShopingCartCategoryButtonOn = false
-var isShopingCartLatestButtonOn = true
+var isShopingCartCategoryButtonOn = true
+var isShopingCartLatestButtonOn = false
