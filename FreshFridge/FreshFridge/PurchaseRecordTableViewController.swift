@@ -163,30 +163,33 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
 
     // 테이블뷰 cellForRowAt
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as! PurchaseRecordTableViewCell
+        
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as! PurchaseRecordTableViewCell
+        
+        var cell: PurchaseRecordTableViewCell! = nil
         let cellContents = filteredGroceries[indexPath.section][indexPath.row]
-        cell.updateCell(with: cellContents)
-        
-        
-        /*
-        if(grocery.info.image == nil)
+         
+        if cellContents.image == nil
         {
-            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as! PurchaseRecordTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as? PurchaseRecordTableViewCell
             let cellContents = filteredGroceries[indexPath.section][indexPath.row]
+            
         }
         else
         {
-            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordWithPictureCell", for: indexPath) as! PurchaseRecordTableViewCell
-            let pictureCell = cell as? PurchaseRecordWithPictureCell
-            pictureCell?.titleImage.image = grocery.info.image?.image()
+            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordWithPictureCell", for: indexPath) as? PurchaseRecordWithPictureCell
+            let pictureCell = cell as? PurchaseRecordWithPictureTableViewCell
+            
+            pictureCell?.titleImage.image = cellContents.image?.image()
+            
         }
-*/
+
         
 
         
         
         
-        
+        cell.updateCell(with: cellContents)
         cell.delegate = self
         
         return cell

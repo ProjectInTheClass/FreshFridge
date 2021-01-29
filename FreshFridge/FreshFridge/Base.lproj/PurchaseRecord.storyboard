@@ -115,7 +115,7 @@
                                     <outlet property="PurchaseRecordListLabel" destination="Krg-VZ-UnG" id="wfa-dO-TYI"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordWithPictureCell" rowHeight="60" id="FkW-eM-jEp" userLabel="PurchaseRecordWithPictureCell" customClass="PurchaseRecordWithPictureCell" customModule="FreshFridge" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordWithPictureCell" rowHeight="60" id="FkW-eM-jEp" userLabel="PurchaseRecordWithPictureCell" customClass="PurchaseRecordWithPictureTableViewCell" customModule="FreshFridge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="176.5" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FkW-eM-jEp" id="OnM-fb-p62">
