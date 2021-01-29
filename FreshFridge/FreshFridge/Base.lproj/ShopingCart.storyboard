@@ -232,12 +232,12 @@
             </objects>
             <point key="canvasLocation" x="1873" y="1218"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--장바구니-->
         <scene sceneID="5Q6-2b-Vun">
             <objects>
                 <navigationController id="6ej-XU-0UW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="cart_icon" id="e8d-fU-I8c">
-                        <inset key="imageInsets" minX="0.0" minY="1" maxX="0.0" maxY="1"/>
+                    <tabBarItem key="tabBarItem" title="장바구니" image="cart_icon" id="e8d-fU-I8c">
+                        <inset key="imageInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mr2-Gj-1lP">
