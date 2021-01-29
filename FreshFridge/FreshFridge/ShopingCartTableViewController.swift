@@ -150,6 +150,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         }
         //updateTableView()
         tableView.reloadData()
+        CartGrocery.saveCartGrocery(cartGroceries)
         
         //
         if(isAllCheckMarkButtonOn)
@@ -217,6 +218,8 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         {
             cartGrocery.isPurchased = isAllCheckMarkButtonOn
         }
+        
+        CartGrocery.saveCartGrocery(cartGroceries)
         tableView.reloadData()
     }
     
