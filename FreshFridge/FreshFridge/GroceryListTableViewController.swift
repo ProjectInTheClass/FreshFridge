@@ -200,7 +200,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             //view.backgroundView?.backgroundColor = UIColor.blue
             //view.textLabel?.backgroundColor = UIColor.clear
             //view.textLabel?.textColor = UIColor.darkGray
-            view.textLabel?.font = .systemFont(ofSize: 17)
+            //view.textLabel?.font = .systemFont(ofSize: 17)
         }
     }
     
