@@ -207,7 +207,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="favorite-Icon" width="27.666666030883789" height="26.666666030883789"/>
+        <image name="favorite-Icon" width="247.33332824707031" height="237"/>
         <image name="favorite-Icon.fill" width="94" height="90"/>
         <image name="purchaseList_Icon" width="33.333332061767578" height="33.333332061767578"/>
         <systemColor name="systemBackgroundColor">

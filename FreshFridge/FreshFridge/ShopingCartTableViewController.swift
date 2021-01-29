@@ -198,11 +198,13 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     {
         if(isAllCheckMarkButtonOn)
         {
-            allCheckMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            //allCheckMarkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            allCheckMarkButton.setImage(UIImage(named: "check_fill"), for: .normal)
         }
         else
         {
-            allCheckMarkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+            //allCheckMarkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+            allCheckMarkButton.setImage(UIImage(named: "check"), for: .normal)
         }
     }
     
