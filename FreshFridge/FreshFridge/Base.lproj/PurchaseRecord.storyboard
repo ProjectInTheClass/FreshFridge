@@ -36,7 +36,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcI-Qf-RSX">
                                                     <rect key="frame" x="0.0" y="0.0" width="138" height="54"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <state key="normal" title="종류별"/>
+                                                    <state key="normal" title="분류별"/>
                                                     <connections>
                                                         <action selector="CategorySortButtonTapped:" destination="Xx5-TJ-k4i" eventType="touchUpInside" id="iWg-Nr-e3f"/>
                                                     </connections>
