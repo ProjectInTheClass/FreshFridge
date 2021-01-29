@@ -81,6 +81,9 @@ class ShopingCartTableViewPictureCell : ShopingCartTableViewCell
         {
             titleImage.image = inCell.info.image?.image()
         }
+        titleImage.layer.cornerRadius = 3
+        titleImage.clipsToBounds = true
+        
     }
 }
 
