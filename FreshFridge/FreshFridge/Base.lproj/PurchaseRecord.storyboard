@@ -184,11 +184,11 @@
             </objects>
             <point key="canvasLocation" x="1258" y="711"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--구입기록-->
         <scene sceneID="peJ-rX-e71">
             <objects>
                 <navigationController id="YxD-Xb-Gsp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="purchaseList_Icon" id="h36-6n-zHz">
+                    <tabBarItem key="tabBarItem" title="구입기록" image="purchaseList_Icon" id="h36-6n-zHz">
                         <inset key="imageInsets" minX="0.0" minY="3" maxX="0.0" maxY="3"/>
                         <color key="badgeColor" systemColor="systemOrangeColor"/>
                     </tabBarItem>
