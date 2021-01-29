@@ -172,15 +172,13 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         if cellContents.image == nil
         {
             cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as? PurchaseRecordTableViewCell
-            let cellContents = filteredGroceries[indexPath.section][indexPath.row]
             
         }
         else
         {
-            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordWithPictureCell", for: indexPath) as? PurchaseRecordWithPictureCell
-            let pictureCell = cell as? PurchaseRecordWithPictureTableViewCell
-            
-            pictureCell?.titleImage.image = cellContents.image?.image()
+//            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordWithPictureCell", for: indexPath) as? PurchaseRecordWithPictureTableViewCell
+//            let pictureCell = cell as? PurchaseRecordWithPictureTableViewCell
+//            pictureCell?.titleImage.image = cellContents.image?.image()
             
         }
 
