@@ -39,7 +39,7 @@ class ShopingCartTableViewCell : UITableViewCell
         if(inCell.isPurchased)
         {
             //CheckCartButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-            CheckCartButton.setImage(UIImage(named: "check_fill"), for: .normal)
+            CheckCartButton.setImage(UIImage(named: "check_fill")?.withTintColor(.systemBlue), for: .normal)
         }
         else
         {
