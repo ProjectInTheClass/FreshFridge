@@ -60,7 +60,9 @@ class GroceryListTableViewPictureCell : GroceryListTableViewCell
         titleImage.clipsToBounds = true
         */
         // cornerRadius와 scaleAspectFit이 동시에 안됨
-        titleImage.contentMode = .scaleAspectFit
+        //titleImage.contentMode = .scaleAspectFill
+        titleImage.layer.cornerRadius = 3
+        titleImage.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

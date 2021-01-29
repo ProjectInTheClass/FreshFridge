@@ -167,7 +167,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8E4B99C825AD4AF500F2B0BF /* Build configuration list for PBXProject "FreshFridge" */;
+			buildConfigurationList = 8E4B99C825AD4AF500F2B0BF /* Build configuration list for PBXProject " FreshFridge" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -442,7 +442,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8E4B99C825AD4AF500F2B0BF /* Build configuration list for PBXProject "FreshFridge" */ = {
+		8E4B99C825AD4AF500F2B0BF /* Build configuration list for PBXProject " FreshFridge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E4B99DF25AD4AF700F2B0BF /* Debug */,
