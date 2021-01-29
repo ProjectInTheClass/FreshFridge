@@ -75,7 +75,7 @@
                                                     <subviews>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이름" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="poE-ax-Gew">
                                                             <rect key="frame" x="0.0" y="0.0" width="324" height="33.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                             <connections>
                                                                 <action selector="nameTextFieldEdited:" destination="sDW-H2-BPf" eventType="editingChanged" id="3MW-8M-706"/>
@@ -125,6 +125,7 @@
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9m-Fe-mnM">
                                                             <rect key="frame" x="35" y="0.0" width="279" height="33.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <state key="normal" title="분류">
                                                                 <color key="titleColor" systemColor="labelColor"/>
                                                             </state>
@@ -180,7 +181,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="45" id="L3j-TH-ij4"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="xSP-9o-npp">
@@ -240,18 +241,18 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vrH-7h-nLt">
-                                                    <rect key="frame" x="264" y="0.0" width="100" height="43.5"/>
+                                                    <rect key="frame" x="261" y="0.0" width="103" height="43.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="% 입력" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TbQ-Hz-gDK">
                                                             <rect key="frame" x="0.0" y="0.0" width="44" height="43.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="44" id="anO-BS-nyE"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GWg-Ob-SRc">
-                                                            <rect key="frame" x="49" y="0.0" width="51" height="43.5"/>
+                                                            <rect key="frame" x="49" y="0.0" width="54" height="43.5"/>
                                                             <subviews>
                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KFH-nL-9m9">
                                                                     <rect key="frame" x="2" y="6" width="51" height="31"/>
@@ -301,7 +302,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="xgt-IZ-w0I">
-                                                    <rect key="frame" x="10" y="0.0" width="177" height="43.5"/>
+                                                    <rect key="frame" x="10" y="0.0" width="182" height="43.5"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="calender" translatesAutoresizingMaskIntoConstraints="NO" id="fHh-YI-fu0">
                                                             <rect key="frame" x="0.0" y="0.0" width="25" height="43.5"/>
@@ -310,15 +311,15 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="보관기간" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wob-UQ-VW7">
-                                                            <rect key="frame" x="31" y="0.0" width="60" height="43.5"/>
+                                                            <rect key="frame" x="31" y="0.0" width="65" height="43.5"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="60" id="nTK-tV-5kI"/>
+                                                                <constraint firstAttribute="width" constant="65" id="nTK-tV-5kI"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4m-jJ-Mah">
-                                                            <rect key="frame" x="97" y="0.0" width="80" height="43.5"/>
+                                                            <rect key="frame" x="102" y="0.0" width="80" height="43.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="80" id="Ckx-MX-Nlb"/>
                                                             </constraints>
@@ -424,6 +425,7 @@
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDC-S5-F8g">
                                                             <rect key="frame" x="35" y="0.0" width="319" height="33.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <state key="normal" title="냉장고 선택">
                                                                 <color key="titleColor" systemColor="labelColor"/>
                                                             </state>
@@ -459,7 +461,7 @@
                                                     <subviews>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="메모" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxl-7K-ig2">
                                                             <rect key="frame" x="0.0" y="0.0" width="354" height="43.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
                                                     </subviews>
@@ -487,7 +489,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T41-fZ-1vc">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="280"/>
                                                     <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="사진 추가">
                                                         <color key="titleColor" systemColor="labelColor"/>
                                                     </state>
