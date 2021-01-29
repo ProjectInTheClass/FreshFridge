@@ -27,11 +27,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     var sectionNames: [String] = []
     var numbersOfRowInSection: [Int] = []
     
-    
-    //처음에는 아래 기본값이지만 차후에 사용자가 바꿀수 있고 바뀐 그 값은 저장되어 있어야 한다.
-    
-    var categoryButtonOn = false
-    var latestButtonOn = true
     var isAllCheckMarkButtonOn = false
     
     // 최신순 또는 가나다 순으로 정렬된 어레이
@@ -60,8 +55,8 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     }
 
     func updateButtons() {
-        categoryButton.switchOnOff(isOn: categoryButtonOn)
-        latestButton.switchOnOff(isOn: latestButtonOn)
+        categoryButton.switchOnOff(isOn: isShopingCartCategoryButtonOn)
+        latestButton.switchOnOff(isOn: isShopingCartLatestButtonOn)
     }
     
     
@@ -72,7 +67,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         sectionNames.removeAll()
         
         // 최신순 버튼이 켜져 있으면 CartGrocery 어레이를 그대로 담는다. 기본 어레이는 사용자가 추가한 순서대로 어팬드 되니까 어짜피 최신순 일 것이다.
-        if latestButtonOn == true {
+        if isShopingCartLatestButtonOn == true {
             sortedArray = cartGroceries
         }
         // 최신순 버튼이 꺼져 있으면 타이틀의 가나다 순으로 정렬해서 다음 어레이에 담는다.
@@ -81,7 +76,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
             
         }
         // 분류별 버튼이 켜져 있으면 테이블 뷰를 섹션으로 나누어서 카테고리별로 정렬한다.
-        if categoryButtonOn == true {
+        if isShopingCartCategoryButtonOn == true {
         for category in GroceryHistory.Category.allCases {
             var sectionGroceries: [CartGrocery] = []
             for grocery in sortedArray {
@@ -224,14 +219,18 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     }
     
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
-        categoryButtonOn = !categoryButtonOn
+        isShopingCartCategoryButtonOn = !isShopingCartCategoryButtonOn
+        UserDefaults.standard.set(isShopingCartCategoryButtonOn, forKey: "isShopingCartCategoryButtonOn")
+        
         updateButtons()
         updateTableView()
         tableView.reloadData()
     }
     
     @IBAction func RecentSortButtonTapped(_ sender: UIButton) {
-        latestButtonOn = !latestButtonOn
+        isShopingCartLatestButtonOn = !isShopingCartLatestButtonOn
+        UserDefaults.standard.set(isShopingCartLatestButtonOn, forKey: "isShopingCartLatestButtonOn")
+        
         updateButtons()
         updateTableView()
         tableView.reloadData()

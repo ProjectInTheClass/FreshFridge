@@ -408,3 +408,17 @@ var groceryHistories = [GroceryHistory]()
 var groceries = [Grocery]()
 var cartGroceries = [CartGrocery]()
 
+// 저장을 쉽게 하기위해 전역 변수로 옮김
+var isFridgeCategoryButtonOn = false
+var isFridgeFrigerationButtonOn = true
+var isFridgeFreezingButtonOn = true
+var isFridgeOutdoorButtonOn = true
+var isFridgeAlarmButtonOn = true
+
+//처음에는 아래 기본값이지만 사용자가 바꿀수 있고 바뀐 그 값은 저장됨
+var isPurchaseRecordCategorySortButtonOn = false
+var isPurchaseRecordFavoriteSortButtonOn = true
+var isPurchaseRecordRecentSortButtonOn = false
+
+var isShopingCartCategoryButtonOn = false
+var isShopingCartLatestButtonOn = true

@@ -22,28 +22,23 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     var numbersOfRowInSection: [Int] = []
     var filteredGroceries: [[Grocery]] = []
     
-    //var filtersInFridgeView: [Bool] = [true, true, true]   // FridgeViewFilter순서
-    var categoryButtonOn = false
-    var refrigerationButtonOn = true
-    var freezingButtonOn = true
-    var outdoorButtonOn = true
-    var isAlarmButtonOn = false
+    
     
     func isFridgeViewFilterSelected(_ filter: FridgeViewFilter) -> Bool
     {
         switch filter {
         case .Refrigeration:
-            return refrigerationButtonOn
+            return isFridgeFrigerationButtonOn
         case .Freezing:
-            return freezingButtonOn
+            return isFridgeFreezingButtonOn
         case .Outdoor:
-            return outdoorButtonOn
+            return isFridgeOutdoorButtonOn
         }
     }
     
     func isFridgeViewCategorySelected() -> Bool
     {
-        return categoryButtonOn
+        return isFridgeCategoryButtonOn
     }
     
     override func viewDidLoad() {
@@ -76,10 +71,19 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     func updateFilteringButtons()
     {
-        categoryButton.switchOnOff(isOn: categoryButtonOn)
-        refrigerationButton.switchOnOff(isOn: refrigerationButtonOn)
-        freezingButton.switchOnOff(isOn: freezingButtonOn)
-        outdoorButton.switchOnOff(isOn: outdoorButtonOn)
+        categoryButton.switchOnOff(isOn: isFridgeCategoryButtonOn)
+        refrigerationButton.switchOnOff(isOn: isFridgeFrigerationButtonOn)
+        freezingButton.switchOnOff(isOn: isFridgeFreezingButtonOn)
+        outdoorButton.switchOnOff(isOn: isFridgeOutdoorButtonOn)
+        
+        if(isFridgeAlarmButtonOn)
+        {
+            alarmButton.image = UIImage(systemName: "alarm.fill")
+        }
+        else
+        {
+            alarmButton.image = UIImage(systemName: "alarm")
+        }
     }
     
     func updateTableViewCell()
@@ -112,9 +116,9 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         // 냉장, 냉동, 실외 선택으로 보여지는 groceries를 필터링해서 showGroceries에 추가한다.
         let showGroceries = groceries.filter
         {
-            (((refrigerationButtonOn == true && $0.storage == .Refrigeration)
-            || (freezingButtonOn == true && $0.storage == .Freezing)
-            || (outdoorButtonOn == true && $0.storage == .Outdoor))
+            (((isFridgeFrigerationButtonOn == true && $0.storage == .Refrigeration)
+            || (isFridgeFreezingButtonOn == true && $0.storage == .Freezing)
+            || (isFridgeOutdoorButtonOn == true && $0.storage == .Outdoor))
                 && isEnableFridgeName(name: $0.fridgeName))
         }
         
@@ -196,12 +200,12 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     override public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
 
-        if let view = view as? UITableViewHeaderFooterView {
+        //if let view = view as? UITableViewHeaderFooterView {
             //view.backgroundView?.backgroundColor = UIColor.blue
             //view.textLabel?.backgroundColor = UIColor.clear
             //view.textLabel?.textColor = UIColor.darkGray
             //view.textLabel?.font = .systemFont(ofSize: 17)
-        }
+        //}
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -463,23 +467,24 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     @IBAction func alarmButtonTapped(_ sender: Any)
     {
-        isAlarmButtonOn.toggle()
-        if(isAlarmButtonOn)
+        isFridgeAlarmButtonOn.toggle()
+        if(isFridgeAlarmButtonOn)
         {
-            alarmButton.image = UIImage(systemName: "alarm.fill")
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.resetAllAlarms()
         }
         else
         {
-            alarmButton.image = UIImage(systemName: "alarm")
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         }
+        
+        updateFilteringButtons()
     }
     
     @IBAction func categoryButtonTapped(_ sender: Any)
     {
-        categoryButtonOn.toggle()
+        isFridgeCategoryButtonOn.toggle()
+        UserDefaults.standard.set(isFridgeCategoryButtonOn, forKey: "isFridgeCategoryButtonOn")
         updateFilteringButtons()
         updateTableView()
         tableView.reloadData()
@@ -488,7 +493,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     @IBAction func refrigerationButtonTapped(_ sender: Any)
     {
-        refrigerationButtonOn.toggle()
+        isFridgeFrigerationButtonOn.toggle()
+        UserDefaults.standard.set(isFridgeFrigerationButtonOn, forKey: "isFridgeFrigerationButtonOn")
         updateFilteringButtons()
         updateTableView()
         tableView.reloadData()
@@ -497,7 +503,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     @IBAction func freezingButtonTapped(_ sender: Any)
     {
-        freezingButtonOn.toggle()
+        isFridgeFreezingButtonOn.toggle()
+        UserDefaults.standard.set(isFridgeFreezingButtonOn, forKey: "isFridgeFreezingButtonOn")
         updateFilteringButtons()
         updateTableView()
         tableView.reloadData()
@@ -506,7 +513,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     @IBAction func outdoorButtonTapped(_ sender: Any)
     {
-        outdoorButtonOn.toggle()
+        isFridgeOutdoorButtonOn.toggle()
+        UserDefaults.standard.set(isFridgeOutdoorButtonOn, forKey: "isFridgeOutdoorButtonOn")
         updateFilteringButtons()
         updateTableView()
         tableView.reloadData()
