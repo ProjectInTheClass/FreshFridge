@@ -23,10 +23,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     var sectionNames: [String] = []
     var numbersOfRowInSection: [Int] = []
         
-    //처음에는 아래 기본값이지만 차후에 사용자가 바꿀수 있고 바뀐 그 값은 저장되어 있어야 한다.
-    var categorySortButtonOn = false
-    var favoriteSortButtonOn = true
-    var recentSortButtonOn = false
+    
     
     // 서치바를 위한 어레이
     var searchbarGroceries: [GroceryHistory] = groceryHistories
@@ -45,7 +42,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                      
+        
         SearchBar.delegate = self
         
         fridgeTabBarController = tabBarController as? FridgeTabBarController
@@ -81,9 +78,9 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
  
     
     func updateButtons() {
-        CategorySortButton.switchOnOff(isOn: categorySortButtonOn)
-        FavoriteSortButton.switchOnOff(isOn: favoriteSortButtonOn)
-        RecentSortButton.switchOnOff(isOn: recentSortButtonOn)
+        CategorySortButton.switchOnOff(isOn: isPurchaseRecordCategorySortButtonOn)
+        FavoriteSortButton.switchOnOff(isOn: isPurchaseRecordFavoriteSortButtonOn)
+        RecentSortButton.switchOnOff(isOn: isPurchaseRecordRecentSortButtonOn)
     }
     
     
@@ -96,7 +93,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         sectionNames.removeAll()
         
         // 최신순 버튼이 켜져 있으면 서치바에서 넘어온 어레이를 그대로 담는다. 기본 어레이는 사용자가 추가한 순서대로 인서트 at:0 되니까 어짜피 최신순 일 것이다.
-        if recentSortButtonOn == true {
+        if isPurchaseRecordRecentSortButtonOn == true {
             sortedArray = groceryHistoryArray.sorted { $0.lastestPurchaseDate > $1.lastestPurchaseDate }
         }
         // 최신순 버튼이 꺼져 있으면 타이틀의 가나다 순으로 정렬해서 다음 어레이에 담는다.
@@ -106,7 +103,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         
         
         // 즐겨찾기 버튼이 켜져 있으면 어레이 값 중에서 즐겨찾기 값이 참인 것 먼저 상단에 위치하도록 정렬한다.
-        if favoriteSortButtonOn == true {
+        if isPurchaseRecordFavoriteSortButtonOn == true {
             let favoriteGroceries = sortedArray.filter { $0.favorite == true }
             purchaseRecordTableViewArray.append(contentsOf: favoriteGroceries)
             let notFavoriteGroceries = sortedArray.filter { $0.favorite == false }
@@ -119,7 +116,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
          
         
         // 분류별 버튼이 켜져 있으면 테이블 뷰를 섹션으로 나누어서 카테고리별로 정렬한다.
-        if categorySortButtonOn == true {
+        if isPurchaseRecordCategorySortButtonOn == true {
         for category in GroceryHistory.Category.allCases {
             var sectionGroceries: [GroceryHistory] = []
             for grocery in purchaseRecordTableViewArray {
@@ -303,21 +300,27 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     */
 
     @IBAction func CategorySortButtonTapped(_ sender: UIButton) {
-        categorySortButtonOn = !categorySortButtonOn
+        isPurchaseRecordCategorySortButtonOn = !isPurchaseRecordCategorySortButtonOn
+        UserDefaults.standard.set(isPurchaseRecordCategorySortButtonOn, forKey: "isPurchaseRecordCategorySortButtonOn")
+        
         updateButtons()
         updateTableView(groceryHistoryArray: groceryHistories)
         tableView.reloadData()
     }
     
     @IBAction func FavoriteSortButtonTapped(_ sender: UIButton) {
-        favoriteSortButtonOn = !favoriteSortButtonOn
+        isPurchaseRecordFavoriteSortButtonOn = !isPurchaseRecordFavoriteSortButtonOn
+        UserDefaults.standard.set(isPurchaseRecordFavoriteSortButtonOn, forKey: "isPurchaseRecordFavoriteSortButtonOn")
+        
         updateButtons()
         updateTableView(groceryHistoryArray: groceryHistories)
         tableView.reloadData()
     }
     
     @IBAction func RecentSortButtonTapped(_ sender: UIButton) {
-        recentSortButtonOn = !recentSortButtonOn
+        isPurchaseRecordRecentSortButtonOn = !isPurchaseRecordRecentSortButtonOn
+        UserDefaults.standard.set(isPurchaseRecordRecentSortButtonOn, forKey: "isPurchaseRecordRecentSortButtonOn")
+        
         updateButtons()
         updateTableView(groceryHistoryArray: groceryHistories)
         tableView.reloadData()

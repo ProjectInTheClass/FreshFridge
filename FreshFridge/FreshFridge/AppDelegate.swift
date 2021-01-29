@@ -14,6 +14,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        if(UserDefaults.isFirstLaunch())
+        {
+            UserDefaults.standard.set(isFridgeCategoryButtonOn, forKey: "isFridgeCategoryButtonOn")
+            UserDefaults.standard.set(isFridgeFrigerationButtonOn, forKey: "isFridgeFrigerationButtonOn")
+            UserDefaults.standard.set(isFridgeFreezingButtonOn, forKey: "isFridgeFreezingButtonOn")
+            UserDefaults.standard.set(isFridgeOutdoorButtonOn, forKey: "isFridgeOutdoorButtonOn")
+            UserDefaults.standard.set(isFridgeAlarmButtonOn, forKey: "isFridgeAlarmButtonOn")
+            
+            UserDefaults.standard.set(isPurchaseRecordCategorySortButtonOn, forKey: "isPurchaseRecordCategorySortButtonOn")
+            UserDefaults.standard.set(isPurchaseRecordFavoriteSortButtonOn, forKey: "isPurchaseRecordFavoriteSortButtonOn")
+            UserDefaults.standard.set(isPurchaseRecordRecentSortButtonOn, forKey: "isPurchaseRecordRecentSortButtonOn")
+            
+            UserDefaults.standard.set(isShopingCartCategoryButtonOn, forKey: "isShopingCartCategoryButtonOn")
+            UserDefaults.standard.set(isShopingCartLatestButtonOn, forKey: "isShopingCartLatestButtonOn")
+        }
+        else
+        {
+            isFridgeCategoryButtonOn = UserDefaults.standard.bool(forKey: "isFridgeCategoryButtonOn")
+            isFridgeFrigerationButtonOn = UserDefaults.standard.bool(forKey: "isFridgeFrigerationButtonOn")
+            isFridgeFreezingButtonOn = UserDefaults.standard.bool(forKey: "isFridgeFreezingButtonOn")
+            isFridgeOutdoorButtonOn = UserDefaults.standard.bool(forKey: "isFridgeOutdoorButtonOn")
+            isFridgeAlarmButtonOn = UserDefaults.standard.bool(forKey: "isFridgeAlarmButtonOn")
+            
+            isPurchaseRecordCategorySortButtonOn = UserDefaults.standard.bool(forKey: "isPurchaseRecordCategorySortButtonOn")
+            isPurchaseRecordFavoriteSortButtonOn = UserDefaults.standard.bool(forKey: "isPurchaseRecordFavoriteSortButtonOn")
+            isPurchaseRecordRecentSortButtonOn = UserDefaults.standard.bool(forKey: "isPurchaseRecordRecentSortButtonOn")
+            
+            isShopingCartCategoryButtonOn = UserDefaults.standard.bool(forKey: "isShopingCartCategoryButtonOn")
+            isShopingCartLatestButtonOn = UserDefaults.standard.bool(forKey: "isShopingCartLatestButtonOn")
+        }
+        
         // 테스트용 sample date loading
         /*
         groceryHistories = GroceryHistory.loadSampleGroceryHistory()
@@ -183,3 +214,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 }
 
+extension UserDefaults {
+    // check for is first launch - only true on first invocation after app install, false on all further invocations
+    // Note: Store this value in AppDelegate if you have multiple places where you are checking for this flag
+    static func isFirstLaunch() -> Bool {
+        let hasBeenLaunchedBeforeFlag = "hasBeenLaunchedBeforeFlag"
+        let isFirstLaunch = !UserDefaults.standard.bool(forKey: hasBeenLaunchedBeforeFlag)
+        if (isFirstLaunch) {
+            UserDefaults.standard.set(true, forKey: hasBeenLaunchedBeforeFlag)
+            UserDefaults.standard.synchronize()
+        }
+        return isFirstLaunch
+    }
+}
