@@ -298,7 +298,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="xgt-IZ-w0I">
-                                                    <rect key="frame" x="10" y="0.0" width="177" height="43.5"/>
+                                                    <rect key="frame" x="10" y="0.0" width="182" height="43.5"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="calender" translatesAutoresizingMaskIntoConstraints="NO" id="fHh-YI-fu0">
                                                             <rect key="frame" x="0.0" y="0.0" width="25" height="43.5"/>
@@ -315,9 +315,9 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4m-jJ-Mah">
-                                                            <rect key="frame" x="97" y="0.0" width="80" height="43.5"/>
+                                                            <rect key="frame" x="97" y="0.0" width="85" height="43.5"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="80" id="Ckx-MX-Nlb"/>
+                                                                <constraint firstAttribute="width" constant="85" id="Ckx-MX-Nlb"/>
                                                             </constraints>
                                                             <state key="normal" title="2021.1.31">
                                                                 <color key="titleColor" systemColor="labelColor"/>
@@ -329,7 +329,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Ic1-oW-YWo">
-                                                    <rect key="frame" x="220" y="0.0" width="144" height="43.5"/>
+                                                    <rect key="frame" x="225" y="0.0" width="144" height="43.5"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NWp-Cp-Edv">
                                                             <rect key="frame" x="0.0" y="0.0" width="45" height="43.5"/>
@@ -367,7 +367,7 @@
                                             <constraints>
                                                 <constraint firstItem="Ic1-oW-YWo" firstAttribute="top" secondItem="x0e-j6-8qb" secondAttribute="top" id="HQV-9N-8DH"/>
                                                 <constraint firstItem="xgt-IZ-w0I" firstAttribute="leading" secondItem="x0e-j6-8qb" secondAttribute="leading" constant="10" id="Iul-Re-Pg2"/>
-                                                <constraint firstAttribute="trailing" secondItem="Ic1-oW-YWo" secondAttribute="trailing" constant="10" id="KcJ-So-JYD"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ic1-oW-YWo" secondAttribute="trailing" constant="5" id="KcJ-So-JYD"/>
                                                 <constraint firstAttribute="bottom" secondItem="xgt-IZ-w0I" secondAttribute="bottom" id="Rrj-TH-Hgd"/>
                                                 <constraint firstAttribute="bottom" secondItem="Ic1-oW-YWo" secondAttribute="bottom" id="Ujh-3A-lU5"/>
                                                 <constraint firstItem="xgt-IZ-w0I" firstAttribute="top" secondItem="x0e-j6-8qb" secondAttribute="top" id="XKo-pB-gtG"/>
