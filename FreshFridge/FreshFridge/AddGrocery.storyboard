@@ -278,7 +278,9 @@
                                                         </switch>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="KFH-nL-9m9" firstAttribute="centerY" secondItem="vrH-7h-nLt" secondAttribute="centerY" id="3qz-Qn-Vlj"/>
                                                         <constraint firstItem="GWg-Ob-SRc" firstAttribute="centerY" secondItem="vrH-7h-nLt" secondAttribute="centerY" id="QlY-wc-DIq"/>
+                                                        <constraint firstItem="GWg-Ob-SRc" firstAttribute="centerY" secondItem="vrH-7h-nLt" secondAttribute="centerY" id="QqW-i6-YUX"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
