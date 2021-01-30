@@ -20,10 +20,10 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="GSs-4k-O9W">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
+                                    <rect key="frame" x="10" y="0.0" width="394" height="108"/>
                                     <subviews>
                                         <searchBar contentMode="redraw" placeholder="검색" translatesAutoresizingMaskIntoConstraints="NO" id="YgP-pg-bjE">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="54"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <scopeButtonTitles>
                                                 <string>Title</string>
@@ -31,10 +31,10 @@
                                             </scopeButtonTitles>
                                         </searchBar>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="L1P-pk-KpV">
-                                            <rect key="frame" x="0.0" y="54" width="414" height="54"/>
+                                            <rect key="frame" x="0.0" y="54" width="394" height="54"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcI-Qf-RSX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="138" height="54"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="131.5" height="54"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <state key="normal" title="분류별"/>
                                                     <connections>
@@ -42,7 +42,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kul-z3-o9U">
-                                                    <rect key="frame" x="138" y="0.0" width="138" height="54"/>
+                                                    <rect key="frame" x="131.5" y="0.0" width="131" height="54"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <state key="normal" title="즐겨찾기"/>
                                                     <connections>
@@ -50,7 +50,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ix-xb-XdR">
-                                                    <rect key="frame" x="276" y="0.0" width="138" height="54"/>
+                                                    <rect key="frame" x="262.5" y="0.0" width="131.5" height="54"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <state key="normal" title="최신순"/>
                                                     <connections>
@@ -64,9 +64,9 @@
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="GSs-4k-O9W" secondAttribute="trailing" id="AYq-5y-oFx"/>
+                                <constraint firstAttribute="trailing" secondItem="GSs-4k-O9W" secondAttribute="trailing" constant="10" id="AYq-5y-oFx"/>
                                 <constraint firstAttribute="bottom" secondItem="GSs-4k-O9W" secondAttribute="bottom" id="Aj1-3B-lUv"/>
-                                <constraint firstItem="GSs-4k-O9W" firstAttribute="leading" secondItem="ELG-Gh-XXw" secondAttribute="leading" id="RLO-3M-3VU"/>
+                                <constraint firstItem="GSs-4k-O9W" firstAttribute="leading" secondItem="ELG-Gh-XXw" secondAttribute="leading" constant="10" id="RLO-3M-3VU"/>
                                 <constraint firstItem="GSs-4k-O9W" firstAttribute="top" secondItem="ELG-Gh-XXw" secondAttribute="top" id="ypD-Og-SZ4"/>
                             </constraints>
                         </view>
@@ -122,7 +122,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="IXv-t9-CZR">
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="IXv-t9-CZR">
                                             <rect key="frame" x="20" y="5" width="374" height="50"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lnd-zx-8XP">
@@ -139,13 +139,13 @@
                                                     </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="syc-zn-QX3">
-                                                    <rect key="frame" x="32" y="0.0" width="44" height="50"/>
+                                                    <rect key="frame" x="33" y="0.0" width="44" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="44" id="mOG-us-HMp"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6I9-sQ-lyF">
-                                                    <rect key="frame" x="78" y="0.0" width="296" height="50"/>
+                                                    <rect key="frame" x="80" y="0.0" width="294" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

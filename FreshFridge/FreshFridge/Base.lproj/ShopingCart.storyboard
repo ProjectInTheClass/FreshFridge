@@ -268,7 +268,7 @@
     <resources>
         <image name="cart_icon" width="29.333333969116211" height="24.666666030883789"/>
         <image name="check" width="90.666664123535156" height="90.666664123535156"/>
-        <image name="freshFridge_icon.fill" width="28" height="37"/>
+        <image name="freshFridge_icon.fill" width="18.666666030883789" height="24.666666030883789"/>
         <image name="imageView:gh3-Ep-HRa:image" width="115" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
