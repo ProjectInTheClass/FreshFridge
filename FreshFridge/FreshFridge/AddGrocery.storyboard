@@ -256,7 +256,7 @@
                                                             <subviews>
                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KFH-nL-9m9">
                                                                     <rect key="frame" x="0.0" y="6" width="51" height="32"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
                                                                     <color key="onTintColor" systemColor="linkColor"/>
                                                                     <connections>
                                                                         <action selector="percentageSwitchChanged:" destination="sDW-H2-BPf" eventType="valueChanged" id="p8Q-cl-Z9E"/>
@@ -264,6 +264,9 @@
                                                                 </switch>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="51" id="6vv-NU-G1h"/>
+                                                            </constraints>
                                                         </view>
                                                     </subviews>
                                                 </stackView>
