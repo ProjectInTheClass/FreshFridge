@@ -574,9 +574,17 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                     let link = trimmedString
                     if let url = URL(string: link)
                     {
-                        WebScrapper.shared.downloadImage(from: url, ui: pictureButton)
+                        WebScrapper.shared.downloadImage(from: url, ui: pictureButton,
+                                                         completion: {
+                                                            if let image = pictureButton.image(for: .normal)
+                                                            {
+                                                                self.groceryImage = GroceryImage(image: image)
+                                                            }
+                                                         })
                     }
                 }
+                
+                self.enableCompletButton()
             }
             else
             {

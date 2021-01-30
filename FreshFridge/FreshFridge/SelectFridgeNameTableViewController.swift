@@ -115,6 +115,8 @@ class SelectFridgeNameTableViewController: UITableViewController {
                 selectedFridgeIndex.sort(by:{$0<$1})
                 cell?.accessoryType = .checkmark
             }
+            
+            UserDefaults.standard.set(selectedFridgeIndex, forKey: "selectedFridgeIndex")
         }
 
         if(selectedFridgeIndex.count == 0)

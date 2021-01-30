@@ -28,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             
             UserDefaults.standard.set(isShopingCartCategoryButtonOn, forKey: "isShopingCartCategoryButtonOn")
             UserDefaults.standard.set(isShopingCartLatestButtonOn, forKey: "isShopingCartLatestButtonOn")
+            
+            UserDefaults.standard.set(selectedFridgeIndex, forKey: "selectedFridgeIndex")
         }
         else
         {
@@ -43,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             
             isShopingCartCategoryButtonOn = UserDefaults.standard.bool(forKey: "isShopingCartCategoryButtonOn")
             isShopingCartLatestButtonOn = UserDefaults.standard.bool(forKey: "isShopingCartLatestButtonOn")
+            selectedFridgeIndex = UserDefaults.standard.array(forKey: "selectedFridgeIndex") as? [Int] ?? [0,1,2,3]
         }
         
         // 테스트용 sample date loading
