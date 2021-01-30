@@ -36,12 +36,14 @@ class GroceryHistory : Codable
     enum Category: String, CaseIterable, Codable
     {
         case MeatsAndEggs = "정육.계란"
+        case Milk = "우유.유제품"
         case MarineProducts = "수산.해산물.건어물"
         case CookingAndSidedishes = "국.반찬.메인요리"
         case Vegetable = "채소"
         case Fruits = "과일"
         case DrinksAndSnacks = "음료.간식"
         case SeasonedAndOilAndSauce = "면.양념.오일"
+        case Rice = "쌀.잡곡"
         case ETC = "기타"
     }
     
@@ -383,7 +385,8 @@ let defaultNames : [String:GroceryHistory.Category] = [
     "계란":.MeatsAndEggs, "참치":.MarineProducts, "김":.MarineProducts, "밀가루":.ETC,
     "우유":.DrinksAndSnacks, "소금":.SeasonedAndOilAndSauce, "참기름":.SeasonedAndOilAndSauce, "마요네즈":.SeasonedAndOilAndSauce,
     "진간장":.SeasonedAndOilAndSauce, "국간장":.SeasonedAndOilAndSauce, "후추":.SeasonedAndOilAndSauce, "올리브유":.SeasonedAndOilAndSauce,
-    "포도씨유":.SeasonedAndOilAndSauce, "카놀라유":.SeasonedAndOilAndSauce, "식용유":.SeasonedAndOilAndSauce, "물엿":.SeasonedAndOilAndSauce
+    "포도씨유":.SeasonedAndOilAndSauce, "카놀라유":.SeasonedAndOilAndSauce, "식용유":.SeasonedAndOilAndSauce, "물엿":.SeasonedAndOilAndSauce,
+    "사과":.Fruits,"수박":.Fruits,"포도":.Fruits,"귤":.Fruits,"복숭아":.Fruits,"배":.Fruits,"바나나":.Fruits
 ]
 
 // 메인뷰의 필터링

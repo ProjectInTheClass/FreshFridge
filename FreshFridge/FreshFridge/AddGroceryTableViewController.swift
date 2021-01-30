@@ -594,6 +594,11 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 {
                     categoryButton.setTitle(category.rawValue, for: .normal)
                 }
+                if let image = UIImage(named: sourceViewController.selectedName)
+                {
+                    groceryImage = GroceryImage(image: image)
+                    pictureButton.setImage(groceryImage?.image(), for: .normal)
+                }
                 enableCompletButton()
             }
         }

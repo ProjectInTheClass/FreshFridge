@@ -568,8 +568,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         // Use data from the view controller which initiated the unwind segue
         if(unwindSegue.identifier == "UnwindGroceryListFromAddGrocery")
         {
-            if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController,
-               let selectedRow = tableView.indexPathForSelectedRow
+            if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
             {
                 let title = sourceViewController.nameTextField.text ?? ""
                 let category = GroceryHistory.Category(rawValue: sourceViewController.categoryButton.title(for: .normal) ?? "")!
@@ -585,7 +584,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 let notes = sourceViewController.noteTextField.text
                 let image = sourceViewController.groceryImage
                 
-                if let grocery = sourceViewController.grocery
+                if let grocery = sourceViewController.grocery,
+                   let selectedRow = tableView.indexPathForSelectedRow
                 {
                     // editing
                     grocery.info.title = title

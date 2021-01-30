@@ -18,27 +18,49 @@ class DefaultNameViewController: UIViewController {
         // Do any additional setup after loading the view.
         let marginHeight: CGFloat = navigationController?.navigationBar.frame.height ?? 0.0
         let spacing: CGFloat = 5.0
+        
         let countOfRowButtons: Int = 4
         let viewWidth = view.frame.width
         
-        let buttonWidth: CGFloat = (viewWidth - 2 * spacing) / CGFloat(countOfRowButtons)
+        let buttonWidth: CGFloat = 44.0//(viewWidth - 2 * spacing) / CGFloat(countOfRowButtons)
         let buttonHeight: CGFloat = 44.0
+        let widthSpacing: CGFloat = ( viewWidth - buttonWidth * CGFloat(countOfRowButtons) ) / CGFloat(countOfRowButtons + 1)
+        
+        let labelWidth: CGFloat = 60.0//(viewWidth - 2 * spacing) / CGFloat(countOfRowButtons)
+        let lableHeight: CGFloat = 44.0
+        
         var x = 0, y = 0, index = 0
         let sorted = defaultNames.sorted(by: {$0.0 < $1.0}).sorted(by: {$0.1.rawValue < $1.1.rawValue})
         for (key,_) in sorted
         {
             x = index % 4
             y = index / 4
-            let button = UIButton(frame: CGRect(x: CGFloat(x) * buttonWidth + spacing,
-                                                y: CGFloat(y) * buttonHeight + spacing + marginHeight,
+            let button = UIButton(frame: CGRect(x: CGFloat(x) * (buttonWidth+widthSpacing) + widthSpacing,
+                                                y: CGFloat(y) * buttonHeight + CGFloat(y) * lableHeight + spacing + marginHeight,
                                                 width: buttonWidth, height: buttonHeight))
             button.backgroundColor = .clear
+            //button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             button.setTitle(key, for: .normal)
-            button.setTitleColor(.label, for: .normal)
+            button.setTitleColor(.clear, for: .normal)
+            button.setImage(UIImage(named: key), for: .normal)
+            button.imageView?.contentMode = .scaleAspectFill
             button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-            button.titleLabel?.font = systemFont15
-            
+            //button.titleLabel?.font = systemFont15
+            button.imageView?.layer.cornerRadius = 3
+            button.imageView?.clipsToBounds = true
             view.addSubview(button)
+            
+            let lableButton = UIButton(frame: CGRect(x: CGFloat(x) * (buttonWidth+widthSpacing) + widthSpacing - (labelWidth - buttonWidth) * 0.5,
+                                                y: CGFloat(y) * buttonHeight + CGFloat(y) * lableHeight + buttonHeight + spacing + marginHeight,
+                                                width: labelWidth, height: lableHeight))
+            lableButton.backgroundColor = .clear
+            lableButton.setTitle(key, for: .normal)
+            lableButton.setTitleColor(.label, for: .normal)
+            lableButton.contentVerticalAlignment = .top
+            lableButton.contentHorizontalAlignment = .center
+            lableButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+            lableButton.titleLabel?.font = systemFont15
+            view.addSubview(lableButton)
             
             index += 1
         }

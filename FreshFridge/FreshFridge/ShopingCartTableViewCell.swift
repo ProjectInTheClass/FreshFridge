@@ -67,7 +67,9 @@ class ShopingCartTableViewPictureCell : ShopingCartTableViewCell
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleImage.contentMode = .scaleAspectFit
+        //titleImage.contentMode = .scaleAspectFit
+        titleImage.layer.cornerRadius = 3
+        titleImage.clipsToBounds = true
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -81,9 +83,6 @@ class ShopingCartTableViewPictureCell : ShopingCartTableViewCell
         {
             titleImage.image = inCell.info.image?.image()
         }
-        titleImage.layer.cornerRadius = 3
-        titleImage.clipsToBounds = true
-        
     }
 }
 
