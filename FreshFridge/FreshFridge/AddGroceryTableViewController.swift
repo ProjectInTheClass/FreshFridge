@@ -28,6 +28,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     var barcodeScanButton: UIButton!
     let barcodeScanButtonOffset: CGFloat = 100.0
+    
+    
 
     var isDueDatePickerShown = false
     
@@ -57,6 +59,9 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         
         countTextField.layer.cornerRadius = 8
         countTextField.clipsToBounds = true
+        
+        countDecreaseButton.tintColor = .systemGray5
+        countIncreaseButton.tintColor = .systemGray5
         
         dueDateTitleLabel.layer.cornerRadius = 10
         dueDateTitleLabel.clipsToBounds = true
