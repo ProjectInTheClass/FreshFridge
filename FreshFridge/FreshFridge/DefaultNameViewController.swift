@@ -30,7 +30,7 @@ class DefaultNameViewController: UIViewController {
         let lableHeight: CGFloat = 44.0
         
         var x = 0, y = 0, index = 0
-        let sorted = defaultNames.sorted(by: {$0.0 < $1.0}).sorted(by: {$0.1.rawValue < $1.1.rawValue})
+        let sorted = defaultNames.sorted(by: {$0.0 < $1.0}).sorted(by: {$0.1.description < $1.1.description})
         for (key,_) in sorted
         {
             x = index % 4
@@ -45,7 +45,6 @@ class DefaultNameViewController: UIViewController {
             button.setImage(UIImage(named: key), for: .normal)
             button.imageView?.contentMode = .scaleAspectFill
             button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-            //button.titleLabel?.font = systemFont15
             button.imageView?.layer.cornerRadius = 3
             button.imageView?.clipsToBounds = true
             view.addSubview(button)
@@ -60,6 +59,9 @@ class DefaultNameViewController: UIViewController {
             lableButton.contentHorizontalAlignment = .center
             lableButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             lableButton.titleLabel?.font = systemFont15
+            lableButton.titleLabel?.numberOfLines = 0
+            button.titleLabel?.lineBreakMode = .byWordWrapping
+            button.titleLabel?.textAlignment = .center
             view.addSubview(lableButton)
             
             index += 1

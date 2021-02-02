@@ -1,0 +1,66 @@
+
+/* Class = "UIButton"; normalTitle = "-"; ObjectID = "4zd-w4-eza"; */
+"4zd-w4-eza.normalTitle" = "-";
+
+/* Class = "UIButton"; normalTitle = "+한달"; ObjectID = "5Dz-kc-eXg"; */
+"5Dz-kc-eXg.normalTitle" = "+한달";
+
+/* Class = "UIBarButtonItem"; title = "완료"; ObjectID = "C2g-Kk-idQ"; */
+"C2g-Kk-idQ.title" = "완료";
+
+/* Class = "UINavigationItem"; title = "상품 추가"; ObjectID = "Flv-cH-eWD"; */
+"Flv-cH-eWD.title" = "상품 추가";
+
+/* Class = "UINavigationItem"; title = "카테고리 선택"; ObjectID = "NMp-c5-umt"; */
+"NMp-c5-umt.title" = "카테고리 선택";
+
+/* Class = "UIButton"; normalTitle = "오늘"; ObjectID = "NWp-Cp-Edv"; */
+"NWp-Cp-Edv.normalTitle" = "오늘";
+
+/* Class = "UIButton"; normalTitle = "2021.1.31"; ObjectID = "Q4m-jJ-Mah"; */
+"Q4m-jJ-Mah.normalTitle" = "2021.1.31";
+
+/* Class = "UIButton"; normalTitle = "사진 추가"; ObjectID = "T41-fZ-1vc"; */
+"T41-fZ-1vc.normalTitle" = "사진 추가";
+
+/* Class = "UILabel"; text = "% 입력"; ObjectID = "TbQ-Hz-gDK"; */
+"TbQ-Hz-gDK.text" = "% 입력";
+
+/* Class = "UITextField"; placeholder = "메모"; ObjectID = "Uxl-7K-ig2"; */
+"Uxl-7K-ig2.placeholder" = "메모";
+
+/* Class = "UIButton"; normalTitle = "+일주일"; ObjectID = "aUY-9x-321"; */
+"aUY-9x-321.normalTitle" = "+일주일";
+
+/* Class = "UILabel"; text = "수량"; ObjectID = "epI-z0-DvP"; */
+"epI-z0-DvP.text" = "수량";
+
+/* Class = "UIButton"; normalTitle = "+"; ObjectID = "hCK-Dz-O95"; */
+"hCK-Dz-O95.normalTitle" = "+";
+
+/* Class = "UIButton"; normalTitle = "분류"; ObjectID = "m9m-Fe-mnM"; */
+"m9m-Fe-mnM.normalTitle" = "분류";
+
+/* Class = "UITextField"; placeholder = "이름"; ObjectID = "poE-ax-Gew"; */
+"poE-ax-Gew.placeholder" = "이름";
+
+/* Class = "UISegmentedControl"; uVO-g2-iMN.segmentTitles[0] = "냉장"; ObjectID = "uVO-g2-iMN"; */
+"uVO-g2-iMN.segmentTitles[0]" = "냉장";
+
+/* Class = "UISegmentedControl"; uVO-g2-iMN.segmentTitles[1] = "냉동"; ObjectID = "uVO-g2-iMN"; */
+"uVO-g2-iMN.segmentTitles[1]" = "냉동";
+
+/* Class = "UISegmentedControl"; uVO-g2-iMN.segmentTitles[2] = "실외"; ObjectID = "uVO-g2-iMN"; */
+"uVO-g2-iMN.segmentTitles[2]" = "실외";
+
+/* Class = "UILabel"; text = "위치"; ObjectID = "uxf-VN-JF3"; */
+"uxf-VN-JF3.text" = "위치";
+
+/* Class = "UIButton"; normalTitle = "냉장고 선택"; ObjectID = "vDC-S5-F8g"; */
+"vDC-S5-F8g.normalTitle" = "냉장고 선택";
+
+/* Class = "UINavigationItem"; title = "디폴트 이름 선택"; ObjectID = "vTz-1J-12D"; */
+"vTz-1J-12D.title" = "디폴트 이름 선택";
+
+/* Class = "UILabel"; text = "보관기간"; ObjectID = "wob-UQ-VW7"; */
+"wob-UQ-VW7.text" = "보관기간";

@@ -43,8 +43,35 @@ class GroceryHistory : Codable
         case Fruits = "과일"
         case DrinksAndSnacks = "음료.간식"
         case SeasonedAndOilAndSauce = "면.양념.오일"
-        case Rice = "쌀.잡곡"
+        case GrainAndNuts = "쌀.잡곡.견과류"
         case ETC = "기타"
+        
+        var description: String
+        {
+            switch self
+            {
+            case .MeatsAndEggs:
+                return "정육.계란".localized()
+            case .Milk:
+                return "우유.유제품".localized()
+            case .MarineProducts:
+                return "수산.해산물.건어물".localized()
+            case .CookingAndSidedishes:
+                return "국.반찬.메인요리".localized()
+            case .Vegetable:
+                return "채소".localized()
+            case .Fruits:
+                return "과일".localized()
+            case .DrinksAndSnacks:
+                return "음료.간식".localized()
+            case .SeasonedAndOilAndSauce:
+                return "면.양념.오일".localized()
+            case .GrainAndNuts:
+                return "쌀.잡곡.견과류".localized()
+            case .ETC:
+                return "기타".localized()
+            }
+        }
     }
     
     static func getGroceryHistory(title: String, category: GroceryHistory.Category, updateDate: Bool) -> GroceryHistory
@@ -182,11 +209,11 @@ class Grocery : Codable
             switch self
             {
             case .Refrigeration:
-                return "냉장"
+                return "냉장".localized()
             case .Freezing:
-                return "냉동"
+                return "냉동".localized()
             case .Outdoor:
-                return "실외"
+                return "실외".localized()
             }
         }
     }
@@ -368,26 +395,63 @@ func getDocumentsDirectory() -> URL
 }
 
 let systemFont15 = UIFont.systemFont(ofSize: 15)
+let systemFont10 = UIFont.systemFont(ofSize: 10)
 
 
 // 메인뷰 냉장고 이름 선택
-var fridgeNames = ["신선한냉장고", "김치냉장고", "추가냉장고1", "추가냉장고2"]
+var fridgeNames = ["신선한냉장고".localized(), "김치냉장고".localized(), "추가냉장고1".localized(), "추가냉장고2".localized()]
 var selectedFridgeIndex: [Int] = [0, 1, 2, 3] // 다중 선택가능, fridgeNames index를 배열로 저장한다.
 var selectedfrideName = fridgeNames[selectedFridgeIndex[0]] // 다중선택된 selectedFridgeIndex중 첫번째 것으로 할당
 
-let defaultNames : [String:GroceryHistory.Category] = [
-    "소고기":.MeatsAndEggs, "돼지고기":.MeatsAndEggs, "닭고기":.MeatsAndEggs, "생선":.MeatsAndEggs,
-    "양파":.Vegetable, "김치":.CookingAndSidedishes, "대파":.Vegetable, "고추":.Vegetable,
-    "마늘":.Vegetable, "무":.Vegetable, "당근":.Vegetable, "애호박":.Vegetable,
-    "가지":.Vegetable, "브로콜리":.Vegetable, "상추":.Vegetable, "양배추":.Vegetable,
-    "파프리카":.Vegetable, "시금치":.Vegetable, "감자":.Vegetable, "고구마":.Vegetable,
-    "두부":.ETC, "라면소면":.SeasonedAndOilAndSauce, "햄":.MeatsAndEggs,
-    "계란":.MeatsAndEggs, "참치":.MarineProducts, "김":.MarineProducts, "밀가루":.ETC,
-    "우유":.DrinksAndSnacks, "소금":.SeasonedAndOilAndSauce, "참기름":.SeasonedAndOilAndSauce, "마요네즈":.SeasonedAndOilAndSauce,
-    "진간장":.SeasonedAndOilAndSauce, "국간장":.SeasonedAndOilAndSauce, "후추":.SeasonedAndOilAndSauce, "올리브유":.SeasonedAndOilAndSauce,
-    "포도씨유":.SeasonedAndOilAndSauce, "카놀라유":.SeasonedAndOilAndSauce, "식용유":.SeasonedAndOilAndSauce, "물엿":.SeasonedAndOilAndSauce,
-    "사과":.Fruits,"수박":.Fruits,"포도":.Fruits,"귤":.Fruits,"복숭아":.Fruits,"배":.Fruits,"바나나":.Fruits
-]
+var defaultNames : [String:GroceryHistory.Category] = [:]
+func getDefaultNames() -> [String:GroceryHistory.Category]
+{
+    let langStr = Locale.current.languageCode
+    switch(langStr)
+    {
+    case "en": // reference : https://www.loveandlemons.com/what-is-fennel/
+        return [
+            "Soda":.DrinksAndSnacks, "Milk":.DrinksAndSnacks, "Bread":.DrinksAndSnacks, "Beer":.DrinksAndSnacks,
+            "Olive oil":.SeasonedAndOilAndSauce, "Flour":.GrainAndNuts, "Butter":.Milk, "Chicken":.MeatsAndEggs,
+            "Sugar":.SeasonedAndOilAndSauce, "Salt":.SeasonedAndOilAndSauce, "Egg":.MeatsAndEggs, "Rice":.GrainAndNuts,
+            "Pork":.MeatsAndEggs, "Beef":.MeatsAndEggs, "Cheese":.Milk, "Garlic":.Vegetable,
+            "Orange":.Fruits, "Turkey":.MeatsAndEggs, "Onion":.Vegetable, "Corn":.Vegetable,
+            "Whole milk":.Milk, "Mayonnaise":.SeasonedAndOilAndSauce, "Chiles":.SeasonedAndOilAndSauce,
+            "Almonds":.GrainAndNuts, "Bacon":.MeatsAndEggs, "Mushrooms":.Vegetable, "Coconut":.Vegetable,
+            "Beets":.Vegetable, "Strawberries":.Fruits, "Fennel":.Vegetable, "Lamb":.MeatsAndEggs,
+            "Apple":.Fruits, "Shrimp":.MarineProducts, "Vegetable oil":.SeasonedAndOilAndSauce, "Fish":.MarineProducts
+        ]
+    case "ko":
+        return [
+        "소고기":.MeatsAndEggs, "돼지고기":.MeatsAndEggs, "닭고기":.MeatsAndEggs, "생선":.MeatsAndEggs,
+        "양파":.Vegetable, "김치":.CookingAndSidedishes, "대파":.Vegetable, "고추":.Vegetable,
+        "마늘":.Vegetable, "무":.Vegetable, "당근":.Vegetable, "애호박":.Vegetable,
+        "가지":.Vegetable, "브로콜리":.Vegetable, "상추":.Vegetable, "양배추":.Vegetable,
+        "파프리카":.Vegetable, "시금치":.Vegetable, "감자":.Vegetable, "고구마":.Vegetable,
+        "두부":.ETC, "라면소면":.SeasonedAndOilAndSauce, "햄":.MeatsAndEggs,
+        "계란":.MeatsAndEggs, "참치":.MarineProducts, "김":.MarineProducts, "밀가루":.ETC,
+        "우유":.DrinksAndSnacks, "소금":.SeasonedAndOilAndSauce, "참기름":.SeasonedAndOilAndSauce, "마요네즈":.SeasonedAndOilAndSauce,
+        "진간장":.SeasonedAndOilAndSauce, "국간장":.SeasonedAndOilAndSauce, "후추":.SeasonedAndOilAndSauce, "올리브유":.SeasonedAndOilAndSauce,
+        "포도씨유":.SeasonedAndOilAndSauce, "카놀라유":.SeasonedAndOilAndSauce, "식용유":.SeasonedAndOilAndSauce, "물엿":.SeasonedAndOilAndSauce,
+        "사과":.Fruits,"수박":.Fruits,"포도":.Fruits,"귤":.Fruits,"복숭아":.Fruits,"배":.Fruits,"바나나":.Fruits
+        ]
+    default:
+        return [
+            "Soda":.DrinksAndSnacks, "Milk":.DrinksAndSnacks, "Bread":.DrinksAndSnacks, "Beer":.DrinksAndSnacks,
+            "Olive oil":.SeasonedAndOilAndSauce, "Flour":.GrainAndNuts, "Butter":.Milk, "Chicken":.MeatsAndEggs,
+            "Sugar":.SeasonedAndOilAndSauce, "Salt":.SeasonedAndOilAndSauce, "Egg":.MeatsAndEggs, "Rice":.GrainAndNuts,
+            "Pork":.MeatsAndEggs, "Beef":.MeatsAndEggs, "Cheese":.Milk, "Garlic":.Vegetable,
+            "Orange":.Fruits, "Turkey":.MeatsAndEggs, "Onion":.Vegetable, "Corn":.Vegetable,
+            "Whole milk":.Milk, "Mayonnaise":.SeasonedAndOilAndSauce, "Chiles":.SeasonedAndOilAndSauce,
+            "Almonds":.GrainAndNuts, "Bacon":.MeatsAndEggs, "Mushrooms":.Vegetable, "Coconut":.Vegetable,
+            "Beets":.Vegetable, "Strawberries":.Fruits, "Fennel":.Vegetable, "Lamb":.MeatsAndEggs,
+            "Apple":.Fruits, "Shrimp":.MarineProducts, "Vegetable oil":.SeasonedAndOilAndSauce, "Fish":.MarineProducts
+        ]
+    }
+        
+}
+
+
 
 // 메인뷰의 필터링
 typealias FridgeViewFilter = Grocery.Storage
@@ -402,7 +466,7 @@ enum FridgeViewSort: Int, CaseIterable
         switch self
         {
         case .CategoryFilter:
-            return "분류별"
+            return "분류별".localized()
         }
     }
 }

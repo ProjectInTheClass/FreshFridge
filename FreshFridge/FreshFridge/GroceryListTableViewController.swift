@@ -141,7 +141,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     numbersOfRowInSection.append(sectionGroceries.count)
                     numberOfSections += 1
                     filteredGroceries.append(sectionGroceries)
-                    sectionNames.append(category.rawValue)
+                    sectionNames.append(category.description)
                 }
             }
         }

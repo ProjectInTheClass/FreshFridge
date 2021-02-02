@@ -1,0 +1,36 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6I9-sQ-lyF"; */
+"6I9-sQ-lyF.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "최신순"; ObjectID = "6ix-xb-XdR"; */
+"6ix-xb-XdR.normalTitle" = "최신순";
+
+/* Class = "UIButton"; normalTitle = "분류별"; ObjectID = "HcI-Qf-RSX"; */
+"HcI-Qf-RSX.normalTitle" = "분류별";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Ib1-Pa-ivl"; */
+"Ib1-Pa-ivl.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Krg-VZ-UnG"; */
+"Krg-VZ-UnG.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Lnd-zx-8XP"; */
+"Lnd-zx-8XP.normalTitle" = "Button";
+
+/* Class = "UISearchBar"; placeholder = "검색"; ObjectID = "YgP-pg-bjE"; */
+"YgP-pg-bjE.placeholder" = "검색";
+
+/* Class = "UISearchBar"; YgP-pg-bjE.scopeButtonTitles[0] = "Title"; ObjectID = "YgP-pg-bjE"; */
+"YgP-pg-bjE.scopeButtonTitles[0]" = "Title";
+
+/* Class = "UISearchBar"; YgP-pg-bjE.scopeButtonTitles[1] = "Title"; ObjectID = "YgP-pg-bjE"; */
+"YgP-pg-bjE.scopeButtonTitles[1]" = "Title";
+
+/* Class = "UINavigationItem"; title = "구입 기록"; ObjectID = "c2J-dA-Cow"; */
+"c2J-dA-Cow.title" = "구입 기록";
+
+/* Class = "UITabBarItem"; title = "구입기록"; ObjectID = "h36-6n-zHz"; */
+"h36-6n-zHz.title" = "구입기록";
+
+/* Class = "UIButton"; normalTitle = "즐겨찾기"; ObjectID = "kul-z3-o9U"; */
+"kul-z3-o9U.normalTitle" = "즐겨찾기";

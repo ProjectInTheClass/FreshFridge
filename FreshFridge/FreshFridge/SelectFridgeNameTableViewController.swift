@@ -25,6 +25,7 @@ class SelectFridgeNameTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.title = "냉장고 선택".localized()
     }
 
     // MARK: - Table view data source

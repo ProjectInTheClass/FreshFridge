@@ -101,7 +101,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         labelView = UILabel()
         labelView.frame = CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5) + 44, y: Int(centerY) + Int(Double(boxHeight) * 0.5), width: boxWidth, height: 44)
-        labelView.text = "프레임 안에 바코드를 위치시키세요"
+        labelView.text = "프레임 안에 바코드를 위치시키세요".localized()
         labelView.textColor = UIColor.white
         labelView.textAlignment = .left
         view.addSubview(labelView)
@@ -202,7 +202,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             
             if(stringValue.isEmpty == true)
             {
-                resultLabel.text = "바코드를 인식하지 못했습니다."
+                resultLabel.text = "The barcode was not recognized."
                 return
             }
             else

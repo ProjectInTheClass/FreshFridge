@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TG5-xT-Abw">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -308,8 +309,8 @@
                         <color key="badgeColor" systemColor="systemOrangeColor"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="3vZ-Ba-jIG">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3vZ-Ba-jIG">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -343,7 +344,7 @@
                             <outlet property="delegate" destination="X8K-qm-GQ0" id="WPA-ha-lfd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="냉장고 선택" id="AYj-rL-Ab6">
+                    <navigationItem key="navigationItem" title="냉장고 선택" largeTitleDisplayMode="never" id="AYj-rL-Ab6">
                         <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="mEd-gM-woR">
                             <connections>
                                 <action selector="backButtonTapped:" destination="X8K-qm-GQ0" id="cZG-ll-z84"/>

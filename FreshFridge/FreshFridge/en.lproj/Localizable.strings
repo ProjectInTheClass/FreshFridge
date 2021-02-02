@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  FreshFridge
+
+  Created by changae choi on 2021/02/01.
+  
+*/
+"기간 만료 알림" = "Expiration notification";
+"%@의 보관 기간이 %@일 남았습니다." = "%@ has %@ days left to expire.";
+
+//Grocery.swift
+"정육.계란" = "Meat, Eggs";
+"우유.유제품" = "Milk, Dairy products";
+"수산.해산물.건어물" = "Marine products";
+"국.반찬.메인요리" = "Main dish, Side dishes";
+"채소" = "vegetable";
+"과일" = "Fruit";
+"음료.간식" = "Drinks, Snacks";
+"면.양념.오일" = "Noodles, Seasoning, Oil";
+"쌀.잡곡.견과류" = "Grains, Nuts";
+"기타" = "etc.";
+
+"냉장" = "Refrigerator";
+"냉동" = "Freezer";
+"실외" = "Storage";
+
+"신선한냉장고" = "Fresh Fridge";
+"김치냉장고" = "First extra refrigerator";
+"추가냉장고1" = "Second extra refrigerator.";
+"추가냉장고2" = "Third extra refrigerator.";
+
+"분류별" = "Category";
+
+"프레임 안에 바코드를 위치시키세요" = "Place the barcode in the frame";
+
+"냉장고 선택" = "Select Fridge";
+"상품 추가" = "Add Grocery";

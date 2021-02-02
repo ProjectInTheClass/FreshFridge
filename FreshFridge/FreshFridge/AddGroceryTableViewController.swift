@@ -28,16 +28,15 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     var barcodeScanButton: UIButton!
     let barcodeScanButtonOffset: CGFloat = 100.0
-    
-    
 
     var isDueDatePickerShown = false
     
     var grocery: Grocery?
-    
     var count: Int = 0  // 추가 버튼으로 들어온 경우 사용됨
     var dueDate: DueDate = DueDate(0)   // 추가 버튼으로 들어온 경우 사용됨
     var groceryImage: GroceryImage?
+    var category: GroceryHistory.Category = GroceryHistory.Category.ETC
+    var storage: Grocery.Storage = Grocery.Storage.Refrigeration
     
     var isFromShoppingCart: Bool = false
     
@@ -93,19 +92,17 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             count = grocery.count
             dueDate.date = grocery.dueDate.date
             
-            storageSegment.selectedSegmentIndex = grocery.storage.rawValue
+            //storageSegment.selectedSegmentIndex = grocery.storage.rawValue
+            storage = grocery.storage
             nameTextField.text = grocery.info.title
-            categoryButton.setTitle(grocery.info.category.rawValue, for: .normal)
+            //categoryButton.setTitle(grocery.info.category.description, for: .normal)
+            category = grocery.info.category
             countTextField.text = "\(Int(grocery.count))"
             percentageSwitch.isOn = grocery.isPercentageCount
             fridgeSelectButton.setTitle(grocery.fridgeName, for: .normal)
             noteTextField.text = grocery.notes
             groceryImage = grocery.info.image
-            if(groceryImage != nil)
-            {
-                pictureButton.setImage(groceryImage?.image(), for: .normal)
-                
-            }
+            
             updateTableView()
             
             self.title = ""
@@ -116,14 +113,17 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             count = 1
             dueDate.date = Calendar.current.startOfDay(for: Date())
             
-            storageSegment.selectedSegmentIndex = 0
-            categoryButton.setTitle(GroceryHistory.Category.ETC.rawValue, for: .normal)
+            //storageSegment.selectedSegmentIndex = 0
+            storage = Grocery.Storage.Refrigeration
+            //categoryButton.setTitle(GroceryHistory.Category.ETC.description, for: .normal)
+            category = GroceryHistory.Category.ETC
             countTextField.text = "\(Int(count))"
             percentageSwitch.isOn = false
             fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
+            
             updateTableView()
             
-            self.title = "상품 추가"
+            self.title = "상품 추가".localized()
         }
         
         if(isFromShoppingCart)
@@ -281,6 +281,14 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         {
             fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
         }
+        
+        if(groceryImage != nil)
+        {
+            pictureButton.setImage(groceryImage?.image(), for: .normal)
+        }
+        
+        storageSegment.selectedSegmentIndex = storage.rawValue
+        categoryButton.setTitle(category.description, for: .normal)
     }
     
     func enableCompletButton()
@@ -589,7 +597,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             else
             {
                 // 바코드 정보를 가져오지 못했습니다.
-                print("바코드 정보를 가져오지 못했습니다.")
+                print("getting barcode information failed")
             }
         } // end of closer
     }
@@ -603,25 +611,30 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             {
                 // Use data from the view controller which initiated the unwind segue
                 nameTextField.text = sourceViewController.selectedName
-                if let category = defaultNames[sourceViewController.selectedName]
+                if let selectedCategory = defaultNames[sourceViewController.selectedName]
                 {
-                    categoryButton.setTitle(category.rawValue, for: .normal)
+                    //categoryButton.setTitle(category.description, for: .normal)
+                    category = selectedCategory
                 }
                 if let image = UIImage(named: sourceViewController.selectedName)
                 {
                     groceryImage = GroceryImage(image: image)
                     pictureButton.setImage(groceryImage?.image(), for: .normal)
                 }
+                
+                updateTableView()
                 enableCompletButton()
             }
         }
         else if(unwindSegue.identifier == "CategorySegue")
         {
             let sourceViewController = unwindSegue.source as! CategoryTableViewController
-            if(sourceViewController.categoryName != "")
-            {
-                categoryButton.setTitle(sourceViewController.categoryName, for: .normal)
-            }
+            //if(sourceViewController.categoryName != "")
+            //{
+                //categoryButton.setTitle(sourceViewController.categoryName, for: .normal)
+                category = sourceViewController.category
+                updateTableView()
+            //}
         }
         else if(unwindSegue.identifier == "ToAddGrocery")
         {

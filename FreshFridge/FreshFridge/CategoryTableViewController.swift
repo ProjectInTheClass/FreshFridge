@@ -9,7 +9,8 @@ import UIKit
 
 class CategoryTableViewController: UITableViewController {
 
-    var categoryName = ""
+    //var categoryName = ""
+    var category: GroceryHistory.Category = GroceryHistory.Category.ETC
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,7 +19,7 @@ class CategoryTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // s elf.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -38,17 +39,19 @@ class CategoryTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = GroceryHistory.Category.allCases[indexPath.row].rawValue
+        cell.textLabel?.text = GroceryHistory.Category.allCases[indexPath.row].description
         cell.textLabel?.textColor = .label
         cell.textLabel?.font = systemFont15
+        cell.tag = indexPath.row
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let cell = tableView.cellForRow(at: indexPath)
-        categoryName = cell?.textLabel?.text ?? ""
+        //let cell = tableView.cellForRow(at: indexPath)
+        //categoryName = cell?.textLabel?.text ?? ""
+        category = GroceryHistory.Category.allCases[indexPath.row]
         
         performSegue(withIdentifier: "CategorySegue", sender: self)
     }

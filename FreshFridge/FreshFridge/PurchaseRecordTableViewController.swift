@@ -128,7 +128,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 numbersOfRowInSection.append(sectionGroceries.count) // 몇개 담겨있는지 세서 Row 갯수를 정한다.
                 numberOfSections += 1 // 섹션은 0에서 하나씩 추가된다.
                 filteredGroceries.append(sectionGroceries) //
-                sectionNames.append(category.rawValue) // rawValue 는 enum Category의 case 뒤에 붙은 "스트링" 값을 가져다준다.
+                sectionNames.append(category.description) // rawValue 는 enum Category의 case 뒤에 붙은 "스트링" 값을 가져다준다.
                 }
             }
         } else {  // 분류별이 아니면 섹션 나누지 않고 그대로 진행한다.

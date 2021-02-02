@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        defaultNames = getDefaultNames()
+        
         if(UserDefaults.isFirstLaunch())
         {
             UserDefaults.standard.set(isFridgeCategoryButtonOn, forKey: "isFridgeCategoryButtonOn")
@@ -55,13 +57,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         cartGroceries = CartGrocery.loadSampleCartGrocery()
         */
         
+        let langStr = Locale.current.languageCode
+        
         if let savedGroceryHistories = GroceryHistory.loadGroceryHistory()
         {
             groceryHistories = savedGroceryHistories
         }
         else
         {
-            groceryHistories = GroceryHistory.loadSampleGroceryHistory()
+            if(langStr == "ko")
+            {
+                groceryHistories = GroceryHistory.loadSampleGroceryHistory()
+            }
         }
         
         if let savedGroceries = Grocery.loadGrocery()
@@ -70,7 +77,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         else
         {
-            groceries = Grocery.loadSampleGrocery()
+            if(langStr == "ko")
+            {
+                groceries = Grocery.loadSampleGrocery()
+            }
         }
          
          if let savedCartGroceries = CartGrocery.loadCartGrocery()
@@ -79,7 +89,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
          }
          else
          {
-             cartGroceries = CartGrocery.loadSampleCartGrocery()
+            if(langStr == "ko")
+            {
+                cartGroceries = CartGrocery.loadSampleCartGrocery()
+            }
          }
          
         
@@ -128,8 +141,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         {
             let n = -2
             let content = UNMutableNotificationContent()
-            content.title = "기간 만료 알림"
-            content.body = "\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            content.title = "기간 만료 알림".localized()
+            content.body = "%@의 보관 기간이 %@일 남았습니다.".localized(with: [grocery.info.title, -n])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
             content.categoryIdentifier = "alarm"
             content.sound = .default
             
@@ -145,8 +158,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         {
             let n = -1
             let content = UNMutableNotificationContent()
-            content.title = "기간 만료 알림"
-            content.body = "\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            content.title = "기간 만료 알림".localized()
+            content.body = "%@의 보관 기간이 %@일 남았습니다.".localized(with: [grocery.info.title, -n])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
             content.categoryIdentifier = "alarm"
             content.sound = .default
             
@@ -162,8 +175,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         {
             //let n = -1
             let content = UNMutableNotificationContent()
-            content.title = "기간 만료 알림"
-            content.body = "\(grocery.info.title)의 보관 기간이 만료되었습니다.."
+            content.title = "기간 만료 알림".localized()
+            //content.body = "\(grocery.info.title)의 보관 기간이 만료되었습니다.."
+            content.body = "%@의 보관 기간이 만료되었습니다.".localized(with: [grocery.info.title])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
             content.categoryIdentifier = "alarm"
             content.sound = .default
             
