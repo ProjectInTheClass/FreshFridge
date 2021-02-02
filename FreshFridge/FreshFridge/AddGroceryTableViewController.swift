@@ -41,6 +41,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     var isFromShoppingCart: Bool = false
     
     var isSupportBarcode: Bool = false
+    var contentOffset: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,12 +175,22 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     deinit {
        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        updateBarcodeButton()
+    }
 
     @objc func rotated()
     {
+        updateBarcodeButton()
+    }
+    
+    func updateBarcodeButton()
+    {
         if(isSupportBarcode)
         {
-            barcodeScanButton.frame = CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50)
+            barcodeScanButton.frame.origin.y = self.view.frame.height - barcodeScanButtonOffset + contentOffset
         }
     }
     
@@ -191,10 +202,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
-        if(isSupportBarcode)
-        {
-            barcodeScanButton.frame.origin.y = scrollView.frame.height - barcodeScanButtonOffset + scrollView.contentOffset.y
-        }
+        contentOffset = scrollView.contentOffset.y
+        updateBarcodeButton()        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.
