@@ -40,6 +40,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     var isFromShoppingCart: Bool = false
     
+    var isSupportBarcode: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +55,12 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         //{
         //    dueDatePicker.backgroundColor = .white
         //}
+        
+        let langStr = Locale.current.languageCode
+        if(langStr == "ko")
+        {
+            isSupportBarcode = true
+        }
         
         nameTextField.delegate = self
         
@@ -74,13 +82,16 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         
         pictureButton.imageView?.contentMode = .scaleAspectFit
         
-        barcodeScanButton = UIButton(frame: CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50))
-        barcodeScanButton.backgroundColor = .orange
-        barcodeScanButton.setTitle("Barcode Scan", for: .normal)
-        barcodeScanButton.addTarget(self, action: #selector(barcodeScanButtonTapped(_:)), for: .touchUpInside)
-        barcodeScanButton.layer.cornerRadius = 20
-        barcodeScanButton.clipsToBounds = true
-        self.view.addSubview(barcodeScanButton)
+        if(isSupportBarcode)
+        {
+            barcodeScanButton = UIButton(frame: CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50))
+            barcodeScanButton.backgroundColor = .orange
+            barcodeScanButton.setTitle("Barcode Scan", for: .normal)
+            barcodeScanButton.addTarget(self, action: #selector(barcodeScanButtonTapped(_:)), for: .touchUpInside)
+            barcodeScanButton.layer.cornerRadius = 20
+            barcodeScanButton.clipsToBounds = true
+            self.view.addSubview(barcodeScanButton)
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -136,7 +147,10 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             dueDatePicker.isHidden = true
             fridgeSelectButton.isHidden = true
             noteTextField.isHidden = true
-            barcodeScanButton.isHidden = true
+            if(isSupportBarcode)
+            {
+                barcodeScanButton.isHidden = true
+            }
         }
         else
         {
@@ -148,43 +162,28 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             dueDatePicker.isHidden = false
             fridgeSelectButton.isHidden = false
             noteTextField.isHidden = false
-            barcodeScanButton.isHidden = false
+            if(isSupportBarcode)
+            {
+                barcodeScanButton.isHidden = false
+            }
         }
         
         enableCompletButton()
         
         NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
-        }
+    }
 
-        deinit {
-           NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
-        }
+    deinit {
+       NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
 
-        @objc func rotated()
+    @objc func rotated()
+    {
+        if(isSupportBarcode)
         {
-//            if UIDevice.current.orientation.isLandscape
-//            {
-//                print("Landscape")
-//            }
-//            else
-//            {
-//                print("Portrait")
-//            }
-        
             barcodeScanButton.frame = CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50)
         }
-    
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//
-//        if UIDevice.current.orientation.isLandscape {
-//            print("Landscape")
-//        } else {
-//            print("Portrait")
-//        }
-//
-//        barcodeScanButton.frame = CGRect(x: 5, y: size.height - barcodeScanButtonOffset, width: size.width - 10, height: 50)
-//    }
+    }
     
     @objc func dismissKeyboard()
     {
@@ -194,7 +193,10 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
-        barcodeScanButton.frame.origin.y = scrollView.frame.height - barcodeScanButtonOffset + scrollView.contentOffset.y
+        if(isSupportBarcode)
+        {
+            barcodeScanButton.frame.origin.y = scrollView.frame.height - barcodeScanButtonOffset + scrollView.contentOffset.y
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.

@@ -571,7 +571,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
             {
                 let title = sourceViewController.nameTextField.text ?? ""
-                let category = GroceryHistory.Category(rawValue: sourceViewController.categoryButton.title(for: .normal) ?? "")!
+                let category = sourceViewController.category
                 //grocery.info.image =
                 
                 let count = sourceViewController.count
@@ -579,7 +579,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 
                 let dueDate = sourceViewController.dueDate
                 
-                let storage = Grocery.Storage(rawValue: sourceViewController.storageSegment.selectedSegmentIndex)!
+                let storage = sourceViewController.storage
                 let fridgeName = sourceViewController.fridgeSelectButton.title(for: .normal) ?? ""
                 let notes = sourceViewController.noteTextField.text
                 let image = sourceViewController.groceryImage

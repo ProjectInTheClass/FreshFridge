@@ -58,7 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         */
         
         let langStr = Locale.current.languageCode
-        
         if let savedGroceryHistories = GroceryHistory.loadGroceryHistory()
         {
             groceryHistories = savedGroceryHistories
