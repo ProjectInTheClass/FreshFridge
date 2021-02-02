@@ -661,6 +661,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     @IBAction func completeButtonTapped(_ sender: Any)
     {
+        dismissKeyboard()
         if(isFromShoppingCart)
         {
             performSegue(withIdentifier: "UnwindShopingCartFromAddGrocery", sender: self)
@@ -670,6 +671,19 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             performSegue(withIdentifier: "UnwindGroceryListFromAddGrocery", sender: self)
         }
     }
+    
+    @IBAction func backButtonTapped(_ sender: Any)
+    {
+        if(isFromShoppingCart)
+        {
+            performSegue(withIdentifier: "UnwindShopingCartFromAddGrocery", sender: self)
+        }
+        else
+        {
+            performSegue(withIdentifier: "UnwindGroceryListFromAddGrocery", sender: self)
+        }
+    }
+    
     // MARK: - Table view data source
 /*
     override func numberOfSections(in tableView: UITableView) -> Int {
