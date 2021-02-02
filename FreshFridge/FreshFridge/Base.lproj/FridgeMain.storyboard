@@ -305,7 +305,7 @@
         <scene sceneID="dOP-kj-HxD">
             <objects>
                 <navigationController id="TG5-xT-Abw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="fridge" id="1ND-Yz-l96">
+                    <tabBarItem key="tabBarItem" title="" image="freshFridge_icon" id="1ND-Yz-l96">
                         <color key="badgeColor" systemColor="systemOrangeColor"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -2271,7 +2271,7 @@ AAAEAQAAAAAAAABoAAAAAAAAAAAAAAAAAAG2/A
 </mutableData>
         </image>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
-        <image name="fridge" width="57" height="57"/>
+        <image name="freshFridge_icon" width="18.666666030883789" height="24.666666030883789"/>
         <image name="imageView:mqN-eC-TPh:image" width="115" height="128">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
