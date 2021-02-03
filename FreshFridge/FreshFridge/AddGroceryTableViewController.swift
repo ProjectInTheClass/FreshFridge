@@ -103,10 +103,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             count = grocery.count
             dueDate.date = grocery.dueDate.date
             
-            //storageSegment.selectedSegmentIndex = grocery.storage.rawValue
             storage = grocery.storage
             nameTextField.text = grocery.info.title
-            //categoryButton.setTitle(grocery.info.category.description, for: .normal)
             category = grocery.info.category
             countTextField.text = "\(Int(grocery.count))"
             percentageSwitch.isOn = grocery.isPercentageCount
