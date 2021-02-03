@@ -516,7 +516,7 @@
                     <navigationItem key="navigationItem" title="상품 추가" id="Flv-cH-eWD">
                         <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="PVE-zM-oK8">
                             <connections>
-                                <segue destination="r72-NC-VZF" kind="unwind" unwindAction="unwindToGroceryListTableView:" id="wLh-bD-mgV"/>
+                                <action selector="backButtonTapped:" destination="sDW-H2-BPf" id="Pe7-E3-nml"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="완료" id="C2g-Kk-idQ">
