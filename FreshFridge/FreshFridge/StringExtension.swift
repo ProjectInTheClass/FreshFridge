@@ -24,7 +24,7 @@ extension String {
     /// - Returns: localized string
     public func localized(with arguments: [CVarArg]) -> String
     {
-        return String(format: self.localized(), locale: nil, arguments: arguments)
+        return String(format: self.localized(), arguments: arguments)
     }
     
     

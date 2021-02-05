@@ -141,12 +141,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let n = -2
             let content = UNMutableNotificationContent()
             content.title = "기간 만료 알림".localized()
-            content.body = "%@의 보관 기간이 %@일 남았습니다.".localized(with: [grocery.info.title, -n])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            content.body = "%@의 보관 기간이 %d일 남았습니다.".localized(with: [grocery.info.title, -n])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
             content.categoryIdentifier = "alarm"
+            content.userInfo = ["customData": "fizzbuzz"]
             content.sound = .default
             
             let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-            let comps = Calendar.current.dateComponents([.year, .month, .day], from: nextTriggerDate)
+            print(nextTriggerDate)
+            let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
             let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
             
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
@@ -158,12 +160,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let n = -1
             let content = UNMutableNotificationContent()
             content.title = "기간 만료 알림".localized()
-            content.body = "%@의 보관 기간이 %@일 남았습니다.".localized(with: [grocery.info.title, -n])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            content.body = "%@의 보관 기간이 %d일 남았습니다.".localized(with: [grocery.info.title, -n])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
             content.categoryIdentifier = "alarm"
+            content.userInfo = ["customData": "fizzbuzz"]
             content.sound = .default
             
             let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-            let comps = Calendar.current.dateComponents([.year, .month, .day], from: nextTriggerDate)
+            print(nextTriggerDate)
+            let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
             let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
             
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
@@ -178,12 +182,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             //content.body = "\(grocery.info.title)의 보관 기간이 만료되었습니다.."
             content.body = "%@의 보관 기간이 만료되었습니다.".localized(with: [grocery.info.title])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
             content.categoryIdentifier = "alarm"
+            content.userInfo = ["customData": "fizzbuzz"]
             content.sound = .default
             
             for n in 0...2
             {
                 let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-                let comps = Calendar.current.dateComponents([.year, .month, .day], from: nextTriggerDate)
+                print(nextTriggerDate)
+                let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
                 
                 let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)

@@ -6,7 +6,8 @@
   
 */
 "기간 만료 알림" = "Expiration notification";
-"%@의 보관 기간이 %@일 남았습니다." = "%@ has %@ days left to expire.";
+"%@의 보관 기간이 %d일 남았습니다." = "%@ has %d days left to expire.";
+"%@의 보관 기간이 만료되었습니다." = "%@ has expired.";
 
 //Grocery.swift
 "정육.계란" = "Meat, Eggs";

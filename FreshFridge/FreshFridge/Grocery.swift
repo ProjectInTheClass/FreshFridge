@@ -321,7 +321,9 @@ struct DueDate: Codable
         
     init(_ addingDay: Int)
     {
-        date = Date().addingTimeInterval(DueDate.secondOfDay*Double(addingDay))
+        date = Calendar.current.startOfDay(for: Date())
+        //date.addingTimeInterval(DueDate.secondOfDay*Double(addingDay))
+        self.addDays(addingDay)
     }
     
     mutating func addDays(_ addingDay: Int)
