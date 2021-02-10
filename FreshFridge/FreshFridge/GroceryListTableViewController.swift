@@ -44,6 +44,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        
         tableView.dragInteractionEnabled = true
         tableView.dragDelegate = self
         tableView.dropDelegate = self
@@ -493,7 +495,17 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     @IBAction func refrigerationButtonTapped(_ sender: Any)
     {
-        isFridgeFrigerationButtonOn.toggle()
+//        isFridgeFrigerationButtonOn.toggle()
+        if isFridgeFrigerationButtonOn == true {
+            isFridgeFreezingButtonOn.toggle()
+            isFridgeOutdoorButtonOn.toggle()
+            
+        } else {
+            isFridgeFrigerationButtonOn = true
+            isFridgeFreezingButtonOn = false
+            isFridgeOutdoorButtonOn = false
+        }
+                
         UserDefaults.standard.set(isFridgeFrigerationButtonOn, forKey: "isFridgeFrigerationButtonOn")
         updateFilteringButtons()
         updateTableView()
@@ -503,7 +515,16 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     @IBAction func freezingButtonTapped(_ sender: Any)
     {
-        isFridgeFreezingButtonOn.toggle()
+//        isFridgeFreezingButtonOn.toggle()
+        if isFridgeFreezingButtonOn == true {
+            isFridgeFrigerationButtonOn.toggle()
+            isFridgeOutdoorButtonOn.toggle()
+        } else {
+            isFridgeFrigerationButtonOn = false
+            isFridgeFreezingButtonOn = true
+            isFridgeOutdoorButtonOn = false
+        }
+        
         UserDefaults.standard.set(isFridgeFreezingButtonOn, forKey: "isFridgeFreezingButtonOn")
         updateFilteringButtons()
         updateTableView()
@@ -513,7 +534,16 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     @IBAction func outdoorButtonTapped(_ sender: Any)
     {
-        isFridgeOutdoorButtonOn.toggle()
+//        isFridgeOutdoorButtonOn.toggle()
+        if isFridgeOutdoorButtonOn == true {
+            isFridgeFrigerationButtonOn.toggle()
+            isFridgeFreezingButtonOn.toggle()
+        } else {
+            isFridgeFrigerationButtonOn = false
+            isFridgeFreezingButtonOn = false
+            isFridgeOutdoorButtonOn = true
+        }
+        
         UserDefaults.standard.set(isFridgeOutdoorButtonOn, forKey: "isFridgeOutdoorButtonOn")
         updateFilteringButtons()
         updateTableView()
@@ -672,6 +702,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 addGroceryTableViewController.grocery = grocery
             }
         }
+        
     }
     
 
