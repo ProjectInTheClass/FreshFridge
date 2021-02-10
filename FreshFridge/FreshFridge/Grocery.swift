@@ -36,11 +36,11 @@ class GroceryHistory : Codable
     enum Category: Int, CaseIterable, Codable
     {
         case MeatsAndEggs = 0
-        case Milk = 1
-        case MarineProducts = 2
-        case CookingAndSidedishes = 3
-        case Vegetable = 4
-        case Fruits = 5
+        case MarineProducts = 1
+        case CookingAndSidedishes = 2
+        case Vegetable = 3
+        case Fruits = 4
+        case Milk = 5
         case DrinksAndSnacks = 6
         case SeasonedAndOilAndSauce = 7
         case GrainAndNuts = 8

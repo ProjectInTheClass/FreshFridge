@@ -43,6 +43,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        
         SearchBar.delegate = self
         
         fridgeTabBarController = tabBarController as? FridgeTabBarController
@@ -51,6 +53,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
 
         updateButtons()
         updateTableView(groceryHistoryArray: groceryHistories)
+        
+        
         
         
         // Uncomment the following line to preserve selection between presentations
@@ -65,6 +69,11 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         tableView.reloadData()
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+//            print("end searching --> Close Keyboard") 검색키(엔터키)를 누르면 키보드가 사라진다.
+            self.SearchBar.endEditing(true)
+        }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
                 
         if searchText == "" {
@@ -74,8 +83,14 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             }
         updateTableView(groceryHistoryArray: searchbarGroceries)
         self.tableView.reloadData()
+        
     }
- 
+    
+ /*
+    @IBAction func returnPressed (_ sender: Any) {
+        SearchBar.resignFirstResponder()
+    }
+  */
     
     func updateButtons() {
         CategorySortButton.switchOnOff(isOn: isPurchaseRecordCategorySortButtonOn)
@@ -298,6 +313,10 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    
+    
 
     @IBAction func CategorySortButtonTapped(_ sender: UIButton) {
         isPurchaseRecordCategorySortButtonOn = !isPurchaseRecordCategorySortButtonOn
