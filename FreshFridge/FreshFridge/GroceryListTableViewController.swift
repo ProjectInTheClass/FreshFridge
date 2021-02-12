@@ -612,6 +612,12 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 if let grocery = sourceViewController.grocery,
                    let selectedRow = tableView.indexPathForSelectedRow
                 {
+                    var bUpdateTableView : Bool = false
+                    if(grocery.info.category != category)
+                    {
+                        bUpdateTableView = true
+                    }
+                    
                     // editing
                     grocery.info.title = title
                     grocery.info.category = category
@@ -651,6 +657,11 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                         {
                             tableView.reloadData()
                         }
+                    }
+                    
+                    if(bUpdateTableView)
+                    {
+                        updateTableView()
                     }
                 }
                 else
