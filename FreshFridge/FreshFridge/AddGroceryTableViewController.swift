@@ -330,6 +330,17 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     @IBAction func storageSegmentedControlTapped(_ sender: Any)
     {
+        switch storageSegment.selectedSegmentIndex {
+        case 0:
+            storage = Grocery.Storage.Refrigeration
+        case 1:
+            storage = Grocery.Storage.Freezing
+        case 2:
+            storage = Grocery.Storage.Outdoor
+        default:
+            storage = Grocery.Storage.Refrigeration
+        }
+        
         dismissKeyboard()
     }
     
