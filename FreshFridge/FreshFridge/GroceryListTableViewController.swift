@@ -416,7 +416,12 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     // Rearranging
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem]
     {
-        return [UIDragItem(itemProvider: NSItemProvider())]
+        if(numberOfSections == 1)
+        {
+            return [UIDragItem(itemProvider: NSItemProvider())]
+        }
+        
+        return []
     }
 
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal
@@ -431,6 +436,18 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
 
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator)
     {
+    }
+    
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool
+    {
+        if(numberOfSections == 1)
+        {
+            return true
+        }
+        
+        return false
+        
     }
     
     // Override to support rearranging the table view.
@@ -455,11 +472,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     }
  
 
-    // Override to support conditional rearranging of the table view.
-    /*
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-    }
-    */
+    
+    
     
     func selectedCell()
     {
