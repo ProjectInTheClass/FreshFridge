@@ -609,9 +609,20 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         {
             if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
             {
+                guard sourceViewController.groceryImage != nil
+                        || sourceViewController.nameTextField.text?.isEmpty == false else { return }
+                
                 let title = sourceViewController.nameTextField.text ?? ""
-                let category = sourceViewController.category
-                //grocery.info.image =
+                
+                var category: GroceryHistory.Category
+                if(sourceViewController.category == nil)
+                {
+                    category = GroceryHistory.Category.ETC
+                }
+                else
+                {
+                    category = sourceViewController.category!
+                }
                 
                 let count = sourceViewController.count
                 let isPercentageCount = sourceViewController.percentageSwitch.isOn

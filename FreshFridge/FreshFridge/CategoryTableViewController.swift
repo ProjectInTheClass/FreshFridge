@@ -10,7 +10,7 @@ import UIKit
 class CategoryTableViewController: UITableViewController {
 
     //var categoryName = ""
-    var category: GroceryHistory.Category = GroceryHistory.Category.ETC
+    var category: GroceryHistory.Category? = nil// = GroceryHistory.Category.ETC
     override func viewDidLoad() {
         super.viewDidLoad()
 

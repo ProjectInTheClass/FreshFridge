@@ -306,7 +306,16 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
             if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
             {
                 let title = sourceViewController.nameTextField.text ?? ""
-                let category = sourceViewController.category
+                var category : GroceryHistory.Category
+                if(sourceViewController.category == nil)
+                {
+                    category = GroceryHistory.Category.ETC
+                }
+                else
+                {
+                    category = sourceViewController.category!
+                }
+                
                 let count = sourceViewController.count
                 let isPercentageCount = sourceViewController.percentageSwitch.isOn
                 let image = sourceViewController.groceryImage

@@ -35,7 +35,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     var count: Int = 0  // 추가 버튼으로 들어온 경우 사용됨
     var dueDate: DueDate = DueDate(0)   // 추가 버튼으로 들어온 경우 사용됨
     var groceryImage: GroceryImage?
-    var category: GroceryHistory.Category = GroceryHistory.Category.ETC
+    var category: GroceryHistory.Category? = nil// = GroceryHistory.Category.ETC
     var storage: Grocery.Storage = Grocery.Storage.Refrigeration
     
     var isFromShoppingCart: Bool = false
@@ -123,10 +123,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             count = 1
             dueDate.date = Calendar.current.startOfDay(for: Date())
             
-            //storageSegment.selectedSegmentIndex = 0
             storage = Grocery.Storage.Refrigeration
-            //categoryButton.setTitle(GroceryHistory.Category.ETC.description, for: .normal)
-            category = GroceryHistory.Category.ETC
+            //category = GroceryHistory.Category.ETC
             countTextField.text = "\(Int(count))"
             percentageSwitch.isOn = false
             fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
@@ -297,7 +295,11 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         }
         
         storageSegment.selectedSegmentIndex = storage.rawValue
-        categoryButton.setTitle(category.description, for: .normal)
+        
+        if let category = category
+        {
+            categoryButton.setTitle(category.description, for: .normal)
+        }
     }
     
     func enableCompletButton()
