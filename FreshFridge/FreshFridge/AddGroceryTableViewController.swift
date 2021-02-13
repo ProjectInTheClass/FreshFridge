@@ -86,7 +86,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         
         if(isSupportBarcode)
         {
-            barcodeScanButton = UIButton(frame: CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50))
+            barcodeScanButton = UIButton()//frame: CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50))
             barcodeScanButton.backgroundColor = .orange
             barcodeScanButton.setTitle("Barcode Scan", for: .normal)
             barcodeScanButton.addTarget(self, action: #selector(barcodeScanButtonTapped(_:)), for: .touchUpInside)
@@ -200,7 +200,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     {
         if(isSupportBarcode)
         {
-            barcodeScanButton.frame.origin.y = self.view.frame.height - barcodeScanButtonOffset + contentOffset
+            barcodeScanButton.frame = CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset + contentOffset, width: self.view.frame.width - 10, height: 50)
         }
     }
     

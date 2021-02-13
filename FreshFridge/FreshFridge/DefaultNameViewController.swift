@@ -7,15 +7,42 @@
 
 import UIKit
 
-class DefaultNameViewController: UIViewController {
+class DefaultNameViewController: UIViewController, UIScrollViewDelegate {
+    
+    lazy var scrollView: UIScrollView = {
+           let scroll = UIScrollView()
+           scroll.translatesAutoresizingMaskIntoConstraints = false
+           scroll.delegate = self
+           
+           return scroll
+       }()
     
     var selectedName = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(scrollView)
+        
 
         self.title = ""
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidLayoutSubviews() {
+            super.viewDidLayoutSubviews()
+            let layout = view.safeAreaLayoutGuide
+            scrollView.centerXAnchor.constraint(equalTo: layout.centerXAnchor).isActive = true
+            scrollView.centerYAnchor.constraint(equalTo: layout.centerYAnchor).isActive = true
+            scrollView.widthAnchor.constraint(equalTo: layout.widthAnchor).isActive = true
+            scrollView.heightAnchor.constraint(equalTo: layout.heightAnchor).isActive = true
+        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+        
+        //
         let marginHeight: CGFloat = navigationController?.navigationBar.frame.height ?? 0.0
         let spacing: CGFloat = 5.0
         
@@ -47,7 +74,8 @@ class DefaultNameViewController: UIViewController {
             button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             button.imageView?.layer.cornerRadius = 3
             button.imageView?.clipsToBounds = true
-            view.addSubview(button)
+            //view.addSubview(button)
+            scrollView.addSubview(button)
             
             let lableButton = UIButton(frame: CGRect(x: CGFloat(x) * (buttonWidth+widthSpacing) + widthSpacing - (labelWidth - buttonWidth) * 0.5,
                                                 y: CGFloat(y) * buttonHeight + CGFloat(y) * lableHeight + buttonHeight + spacing + marginHeight,
@@ -60,12 +88,15 @@ class DefaultNameViewController: UIViewController {
             lableButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             lableButton.titleLabel?.font = systemFont15
             lableButton.titleLabel?.numberOfLines = 0
-            button.titleLabel?.lineBreakMode = .byWordWrapping
-            button.titleLabel?.textAlignment = .center
-            view.addSubview(lableButton)
+            lableButton.titleLabel?.lineBreakMode = .byWordWrapping
+            lableButton.titleLabel?.textAlignment = .center
+            //view.addSubview(lableButton)
+            scrollView.addSubview(lableButton)
             
             index += 1
         }
+
+        scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: (buttonHeight + lableHeight + spacing) * CGFloat(y + 1) + marginHeight)
     }
     
     @IBAction func buttonTapped(_ sender: UIButton)
