@@ -46,7 +46,7 @@ class SelectFridgeNameTableViewController: UITableViewController {
         // Configure the cell...
         cell.textLabel?.text = fridgeNames[indexPath.row]
         cell.textLabel?.textColor = .label
-        cell.textLabel?.font = systemFont15
+        cell.textLabel?.font = systemFont18
         if(isFromAddGrocery)
         {
             let groceryFridgeName = fridgeName//grocery != nil ? grocery!.fridgeName : selectedfrideName

@@ -86,7 +86,7 @@ class DefaultNameViewController: UIViewController, UIScrollViewDelegate {
             lableButton.contentVerticalAlignment = .top
             lableButton.contentHorizontalAlignment = .center
             lableButton.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-            lableButton.titleLabel?.font = systemFont15
+            lableButton.titleLabel?.font = systemFont18
             lableButton.titleLabel?.numberOfLines = 0
             lableButton.titleLabel?.lineBreakMode = .byWordWrapping
             lableButton.titleLabel?.textAlignment = .center

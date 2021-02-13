@@ -41,7 +41,7 @@ class CategoryTableViewController: UITableViewController {
         // Configure the cell...
         cell.textLabel?.text = GroceryHistory.Category.allCases[indexPath.row].description
         cell.textLabel?.textColor = .label
-        cell.textLabel?.font = systemFont15
+        cell.textLabel?.font = systemFont18
         cell.tag = indexPath.row
 
         return cell
