@@ -24,7 +24,7 @@
 "T41-fZ-1vc.normalTitle" = "사진 추가";
 
 /* Class = "UILabel"; text = "% 입력"; ObjectID = "TbQ-Hz-gDK"; */
-"TbQ-Hz-gDK.text" = "% 입력";
+"TbQ-Hz-gDK.text" = "%";
 
 /* Class = "UITextField"; placeholder = "메모"; ObjectID = "Uxl-7K-ig2"; */
 "Uxl-7K-ig2.placeholder" = "메모";
@@ -63,4 +63,4 @@
 "vTz-1J-12D.title" = "디폴트 이름 선택";
 
 /* Class = "UILabel"; text = "보관기간"; ObjectID = "wob-UQ-VW7"; */
-"wob-UQ-VW7.text" = "보관기간";
+"wob-UQ-VW7.text" = "기간";

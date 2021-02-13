@@ -38,6 +38,8 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        
         fridgeTabBarController = tabBarController as? FridgeTabBarController
         
         sortedArray = cartGroceries
