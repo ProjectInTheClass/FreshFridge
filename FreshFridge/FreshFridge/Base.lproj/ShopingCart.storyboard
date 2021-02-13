@@ -141,6 +141,7 @@
                                     <outlet property="CheckCartButton" destination="y5m-9V-DOS" id="S8q-of-hIP"/>
                                     <outlet property="countTextField" destination="47h-4d-RwG" id="7c3-qN-R0B"/>
                                     <outlet property="titleLabel" destination="cqg-is-4gC" id="GwP-mR-fGw"/>
+                                    <segue destination="Ga8-Al-37H" kind="presentation" identifier="EditShoppingCart" trigger="accessoryAction" id="ixG-Gd-AVa"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="shopingCartPictureCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="shopingCartPictureCell" rowHeight="60" id="0B6-hM-wAu" customClass="ShopingCartTableViewPictureCell" customModule="FreshFridge" customModuleProvider="target">
@@ -212,6 +213,7 @@
                                     <outlet property="countTextField" destination="OWS-Ci-PkK" id="d3J-jV-FC9"/>
                                     <outlet property="titleImage" destination="gh3-Ep-HRa" id="JzW-tm-KSb"/>
                                     <outlet property="titleLabel" destination="ewp-u0-1xQ" id="tdF-zf-JwX"/>
+                                    <segue destination="Ga8-Al-37H" kind="presentation" identifier="EditShoppingCart" trigger="accessoryAction" id="egs-BS-gFt"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -266,6 +268,9 @@
             <point key="canvasLocation" x="356" y="1401"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="egs-BS-gFt"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="cart_icon" width="29.333333969116211" height="24.666666030883789"/>
         <image name="check" width="90.666664123535156" height="90.666664123535156"/>

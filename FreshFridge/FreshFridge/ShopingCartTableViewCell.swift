@@ -12,6 +12,7 @@ import UIKit
 protocol ShopingCartCellDelegate: class {
     func checkCartTapped(sender: ShopingCartTableViewCell)
     func countButtonTapped(sender: ShopingCartTableViewCell)
+    func selectedCell()
 }
 
 class ShopingCartTableViewCell : UITableViewCell
@@ -31,6 +32,11 @@ class ShopingCartTableViewCell : UITableViewCell
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
+        if(selected)
+        {
+            delegate?.selectedCell()
+        }
     }
     //setSelected : 버튼 눌림 효과 
 

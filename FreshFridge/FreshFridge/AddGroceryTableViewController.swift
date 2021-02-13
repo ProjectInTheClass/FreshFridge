@@ -32,6 +32,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     var isDueDatePickerShown = false
     
     var grocery: Grocery?
+    var cartGrocery: CartGrocery? = nil
     var count: Int = 0  // 추가 버튼으로 들어온 경우 사용됨
     var dueDate: DueDate = DueDate(0)   // 추가 버튼으로 들어온 경우 사용됨
     var groceryImage: GroceryImage?
@@ -117,6 +118,17 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             
             self.title = ""
             
+        }
+        else if let cartGrocery = cartGrocery
+        {
+            nameTextField.text = cartGrocery.info.title
+            category = cartGrocery.info.category
+            count = cartGrocery.count
+            countTextField.text = "\(Int(cartGrocery.count))"
+            percentageSwitch.isOn = cartGrocery.isPercentageCount
+            groceryImage = cartGrocery.info.image
+            
+            updateTableView()
         }
         else
         {
