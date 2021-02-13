@@ -132,6 +132,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
     
+    func removeAlarm(grocery: Grocery)
+    {
+        for n in -2...2
+        {
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [grocery.id.uuidString + "_\(n)"])
+        }
+    }
+    
     func setAlarm(grocery : Grocery)
     {
         let expiration = grocery.dueDate.getExpiration()
@@ -142,16 +150,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let content = UNMutableNotificationContent()
             content.title = "기간 만료 알림".localized()
             content.body = "%@의 보관 기간이 %d일 남았습니다.".localized(with: [grocery.info.title, -n])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            //print(content.body+grocery.id.uuidString+"_\(n)")
             content.categoryIdentifier = "alarm"
             content.userInfo = ["customData": "fizzbuzz"]
             content.sound = .default
             
             let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-            print(nextTriggerDate)
+            //print(nextTriggerDate)
             let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
             let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
             
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: grocery.id.uuidString + "_\(n)", content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request)
         }
         
@@ -161,38 +170,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let content = UNMutableNotificationContent()
             content.title = "기간 만료 알림".localized()
             content.body = "%@의 보관 기간이 %d일 남았습니다.".localized(with: [grocery.info.title, -n])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            //print(content.body+grocery.id.uuidString + "_\(n)")
             content.categoryIdentifier = "alarm"
             content.userInfo = ["customData": "fizzbuzz"]
             content.sound = .default
             
             let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-            print(nextTriggerDate)
+            //print(nextTriggerDate)
             let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
             let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
             
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: grocery.id.uuidString + "_\(n)", content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request)
         }
         
         if(expiration < 3)
         {
-            //let n = -1
             let content = UNMutableNotificationContent()
             content.title = "기간 만료 알림".localized()
             //content.body = "\(grocery.info.title)의 보관 기간이 만료되었습니다.."
             content.body = "%@의 보관 기간이 만료되었습니다.".localized(with: [grocery.info.title])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            
             content.categoryIdentifier = "alarm"
             content.userInfo = ["customData": "fizzbuzz"]
             content.sound = .default
             
             for n in 0...2
             {
+                //print(content.body+grocery.id.uuidString + "_\(n)")
+                
                 let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-                print(nextTriggerDate)
+                //sprint(nextTriggerDate)
                 let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
                 
-                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                let request = UNNotificationRequest(identifier: grocery.id.uuidString + "_\(n)", content: content, trigger: trigger)
                 UNUserNotificationCenter.current().add(request)
             }
         }
@@ -208,6 +220,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         {
             setAlarm(grocery: grocery)
         }
+    }
+    
+    func resetAlarm(grocery: Grocery)
+    {
+        removeAlarm(grocery: grocery)
+        setAlarm(grocery: grocery)
     }
 
     // MARK: UISceneSession Lifecycle
