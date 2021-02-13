@@ -407,7 +407,7 @@ func getDocumentsDirectory() -> URL
     return paths[0]
 }
 
-let systemFont15 = UIFont.systemFont(ofSize: 15)
+let systemFont18 = UIFont.systemFont(ofSize: 18)
 let systemFont10 = UIFont.systemFont(ofSize: 10)
 
 

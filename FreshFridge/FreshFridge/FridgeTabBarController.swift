@@ -24,7 +24,7 @@ class FridgeTabBarController: UITabBarController {
     
     func animateBadge(tabBarIndex: TabBarIndex)
     {
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 1.2, animations: {
             let tabBarItem: UITabBarItem = (self.viewControllers?[tabBarIndex.rawValue].tabBarItem)!
             
             

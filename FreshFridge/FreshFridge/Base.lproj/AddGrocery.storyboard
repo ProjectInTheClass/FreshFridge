@@ -115,7 +115,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Byq-bQ-YBS">
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Byq-bQ-YBS">
                                                     <rect key="frame" x="10" y="5" width="354" height="33.5"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="tJq-dr-Z7e">
@@ -125,7 +125,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9m-Fe-mnM">
-                                                            <rect key="frame" x="35" y="0.0" width="279" height="33.5"/>
+                                                            <rect key="frame" x="31" y="0.0" width="287" height="33.5"/>
                                                             <state key="normal" title="분류">
                                                                 <color key="titleColor" systemColor="labelColor"/>
                                                             </state>
@@ -167,8 +167,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="bhd-rM-xrO">
-                                                    <rect key="frame" x="10" y="0.0" width="166" height="43.5"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bhd-rM-xrO">
+                                                    <rect key="frame" x="10" y="0.0" width="172" height="43.5"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="memo" translatesAutoresizingMaskIntoConstraints="NO" id="RZY-Jx-psh">
                                                             <rect key="frame" x="0.0" y="0.0" width="25" height="43.5"/>
@@ -177,7 +177,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="수량" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epI-z0-DvP">
-                                                            <rect key="frame" x="27" y="0.0" width="30" height="43.5"/>
+                                                            <rect key="frame" x="30" y="0.0" width="30" height="43.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="L3j-TH-ij4"/>
                                                             </constraints>
@@ -185,7 +185,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="xSP-9o-npp">
-                                                            <rect key="frame" x="59" y="0.0" width="107" height="43.5"/>
+                                                            <rect key="frame" x="65" y="0.0" width="107" height="43.5"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4zd-w4-eza">
                                                                     <rect key="frame" x="0.0" y="2" width="35" height="39"/>
@@ -299,8 +299,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="xgt-IZ-w0I">
-                                                    <rect key="frame" x="10" y="0.0" width="139" height="43.5"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xgt-IZ-w0I">
+                                                    <rect key="frame" x="10" y="0.0" width="165" height="43.5"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="calender" translatesAutoresizingMaskIntoConstraints="NO" id="fHh-YI-fu0">
                                                             <rect key="frame" x="0.0" y="0.0" width="25" height="43.5"/>
@@ -309,7 +309,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="기간" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wob-UQ-VW7">
-                                                            <rect key="frame" x="27" y="0.0" width="30" height="43.5"/>
+                                                            <rect key="frame" x="30" y="0.0" width="30" height="43.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="nTK-tV-5kI"/>
                                                             </constraints>
@@ -317,9 +317,9 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4m-jJ-Mah">
-                                                            <rect key="frame" x="59" y="0.0" width="80" height="43.5"/>
+                                                            <rect key="frame" x="65" y="0.0" width="100" height="43.5"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="80" id="Ckx-MX-Nlb"/>
+                                                                <constraint firstAttribute="width" constant="100" id="Ckx-MX-Nlb"/>
                                                             </constraints>
                                                             <state key="normal" title="2021.1.31">
                                                                 <color key="titleColor" systemColor="labelColor"/>
@@ -412,7 +412,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0s3-QM-X36">
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="0s3-QM-X36">
                                                     <rect key="frame" x="10" y="5" width="354" height="33.5"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="refrigerator" translatesAutoresizingMaskIntoConstraints="NO" id="Pst-nC-CZL">
@@ -422,7 +422,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDC-S5-F8g">
-                                                            <rect key="frame" x="35" y="0.0" width="319" height="33.5"/>
+                                                            <rect key="frame" x="31" y="0.0" width="323" height="33.5"/>
                                                             <state key="normal" title="냉장고 선택">
                                                                 <color key="titleColor" systemColor="labelColor"/>
                                                             </state>
@@ -636,7 +636,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QtU-v1-920" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3752" y="-818"/>
+            <point key="canvasLocation" x="3921" y="-820"/>
         </scene>
         <!--디폴트 이름 선택-->
         <scene sceneID="8yP-rs-B74">
@@ -659,7 +659,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fGB-2U-Dnf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="NH8-W8-r2d" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4530" y="-818"/>
+            <point key="canvasLocation" x="4663" y="-819"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FhP-6R-xYt">
