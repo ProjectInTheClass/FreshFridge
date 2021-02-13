@@ -23,7 +23,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="GSs-4k-O9W">
                                     <rect key="frame" x="10" y="0.0" width="408" height="108"/>
                                     <subviews>
-                                        <searchBar contentMode="redraw" text="" placeholder="검색" translatesAutoresizingMaskIntoConstraints="NO" id="YgP-pg-bjE">
+                                        <searchBar contentMode="redraw" verticalHuggingPriority="251" text="" placeholder="검색" translatesAutoresizingMaskIntoConstraints="NO" id="YgP-pg-bjE">
                                             <rect key="frame" x="0.0" y="0.0" width="408" height="54"/>
                                             <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                             <scopeButtonTitles>

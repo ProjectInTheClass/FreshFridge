@@ -47,6 +47,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         
         SearchBar.delegate = self
         
+        self.SearchBar.backgroundImage = UIImage()
+        
         fridgeTabBarController = tabBarController as? FridgeTabBarController
         
         searchbarGroceries = groceryHistories
