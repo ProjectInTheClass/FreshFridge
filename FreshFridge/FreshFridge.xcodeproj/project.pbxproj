@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E3E4AEB25D82FA30056B65C /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E4AE925D82FA30056B65C /* CHCSVParser.m */; };
+		8E3E4AEE25D830CD0056B65C /* BarcodeData.csv in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4AED25D830CD0056B65C /* BarcodeData.csv */; };
 		8E4B99D125AD4AF500F2B0BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B99D025AD4AF500F2B0BF /* AppDelegate.swift */; };
 		8E4B99D325AD4AF500F2B0BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4B99D225AD4AF500F2B0BF /* SceneDelegate.swift */; };
 		8E4B99D825AD4AF500F2B0BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E4B99D625AD4AF500F2B0BF /* Main.storyboard */; };
@@ -40,6 +42,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E3E4AE825D82FA20056B65C /* FreshFridge-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreshFridge-Bridging-Header.h"; sourceTree = "<group>"; };
+		8E3E4AE925D82FA30056B65C /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHCSVParser.m; path = CSV/CHCSVParser.m; sourceTree = "<group>"; };
+		8E3E4AEA25D82FA30056B65C /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHCSVParser.h; path = CSV/CHCSVParser.h; sourceTree = "<group>"; };
+		8E3E4AED25D830CD0056B65C /* BarcodeData.csv */ = {isa = PBXFileReference; lastKnownFileType = file; path = BarcodeData.csv; sourceTree = SOURCE_ROOT; };
 		8E4B99CD25AD4AF500F2B0BF /* FreshFridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreshFridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E4B99D025AD4AF500F2B0BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E4B99D225AD4AF500F2B0BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +121,9 @@
 		8E4B99CF25AD4AF500F2B0BF /* FreshFridge */ = {
 			isa = PBXGroup;
 			children = (
+				8E3E4AED25D830CD0056B65C /* BarcodeData.csv */,
+				8E3E4AEA25D82FA30056B65C /* CHCSVParser.h */,
+				8E3E4AE925D82FA30056B65C /* CHCSVParser.m */,
 				8E4B99D025AD4AF500F2B0BF /* AppDelegate.swift */,
 				8E4B99D225AD4AF500F2B0BF /* SceneDelegate.swift */,
 				8EA2CC7E25C0809A00D80622 /* BezierCurveHelper.swift */,
@@ -146,6 +155,7 @@
 				8E4B99D625AD4AF500F2B0BF /* Main.storyboard */,
 				8E4B99E525AD4B8400F2B0BF /* FamilyShare.storyboard */,
 				8E4B99DE25AD4AF700F2B0BF /* Info.plist */,
+				8E3E4AE825D82FA20056B65C /* FreshFridge-Bridging-Header.h */,
 			);
 			path = FreshFridge;
 			sourceTree = "<group>";
@@ -181,6 +191,7 @@
 				TargetAttributes = {
 					8E4B99CC25AD4AF500F2B0BF = {
 						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1240;
 					};
 				};
 			};
@@ -217,6 +228,7 @@
 				8E4B99DA25AD4AF700F2B0BF /* Assets.xcassets in Resources */,
 				8E4B99E725AD4B8400F2B0BF /* FamilyShare.storyboard in Resources */,
 				8E4B99D825AD4AF500F2B0BF /* Main.storyboard in Resources */,
+				8E3E4AEE25D830CD0056B65C /* BarcodeData.csv in Resources */,
 				8E4B99F725AD4C9200F2B0BF /* ShopingCart.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +254,7 @@
 				8EA2CC2425B40EE600D80622 /* CategoryTableViewController.swift in Sources */,
 				8EBA43EC25C7BABC00883BAA /* StringExtension.swift in Sources */,
 				8EA2CC7025C0223000D80622 /* ScannerViewController.swift in Sources */,
+				8E3E4AEB25D82FA30056B65C /* CHCSVParser.m in Sources */,
 				8E4B99D325AD4AF500F2B0BF /* SceneDelegate.swift in Sources */,
 				8EA2CC2C25B55A2500D80622 /* GroceryImge.swift in Sources */,
 				8EA2CC7A25C06CA700D80622 /* FridgeTabBarController.swift in Sources */,
@@ -455,6 +468,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4U2X9NNZ52;
@@ -468,6 +482,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = FridgeManager.FreshFridge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FreshFridge/FreshFridge-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -478,6 +494,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4U2X9NNZ52;
@@ -490,6 +507,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = FridgeManager.FreshFridge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FreshFridge/FreshFridge-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

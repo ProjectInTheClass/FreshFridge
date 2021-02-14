@@ -107,6 +107,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             cartGrocery.info = GroceryHistory.getGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: false)
         }
         
+        // read barcode data
+        let filename = "BarcodeData"
+        if let fileURL = Bundle.main.url(forResource: filename, withExtension: "csv")
+        {
+            //print(fileURL)
+            
+            let rows = NSArray(contentsOfCSVURL: fileURL, options: CHCSVParserOptions.sanitizesFields)!
+
+            for row in rows
+            {
+                   
+               let rowArray = row as! NSArray
+               var barcode1 = rowArray[0] as! String
+               var barcode2 = rowArray[1] as! String
+               var name = rowArray[2] as! String
+               var image1 = rowArray[3] as! String
+               var image2 = rowArray[4] as! String
+               var image3 = rowArray[5] as! String
+               var image4 = rowArray[6] as! String
+               
+               
+               barcode1 = String(barcode1.utf8)
+               //print(barcode1)
+               barcode2 = String(barcode2.utf8)
+               //print(barcode2)
+               name = String(name.utf8)
+               //print(name)
+               image1 = String(image1.utf8)
+               //print(image1)
+               image2 = String(image2.utf8)
+               //print(image2)
+               image3 = String(image3.utf8)
+               //print(image3)
+               image4 = String(image4.utf8)
+               //print(image4)
+               
+               let newBarcodeData = BarcodeData(barcode1, barcode2, name, image1, image2, image3, image4)
+               barcodeData.insert(newBarcodeData, at: barcodeData.count)
+            }
+        }
+        
+        
+        
         
         // Override point for customization after application launch.
         let center = UNUserNotificationCenter.current()
