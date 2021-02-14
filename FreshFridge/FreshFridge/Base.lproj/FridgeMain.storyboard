@@ -95,10 +95,10 @@
                                                             <rect key="frame" x="0.0" y="24" width="228" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="D-100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZxX-Yj-UWM">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="65" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="20"/>
                                                                     <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="65" id="Myn-25-PHD"/>
+                                                                        <constraint firstAttribute="width" constant="55" id="Myn-25-PHD"/>
                                                                         <constraint firstAttribute="height" constant="20" id="Y4F-20-MjW"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -106,7 +106,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWv-bE-754">
-                                                                    <rect key="frame" x="65" y="0.0" width="163" height="20"/>
+                                                                    <rect key="frame" x="55" y="0.0" width="173" height="20"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -190,10 +190,10 @@
                                                             <rect key="frame" x="0.0" y="24" width="160" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="D-100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHQ-go-Nce">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="65" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="20"/>
                                                                     <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="65" id="2DG-vk-yEU"/>
+                                                                        <constraint firstAttribute="width" constant="55" id="2DG-vk-yEU"/>
                                                                         <constraint firstAttribute="height" constant="20" id="Lcd-Jd-g6I"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -201,7 +201,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTM-QS-B5P">
-                                                                    <rect key="frame" x="65" y="0.0" width="95" height="20"/>
+                                                                    <rect key="frame" x="55" y="0.0" width="105" height="20"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -310,7 +310,7 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="3vZ-Ba-jIG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
