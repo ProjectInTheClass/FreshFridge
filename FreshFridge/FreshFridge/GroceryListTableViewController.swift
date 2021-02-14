@@ -396,6 +396,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     
                     if let selectedIndex = findGroceryIndex(grocery: selectedGrocery)
                     {
+                        (UIApplication.shared.delegate as! AppDelegate).removeAlarm(grocery: selectedGrocery)
+                        
                         groceries.remove(at: selectedIndex.offset)
                         updateTableView()
                         tableView.reloadData()
@@ -626,7 +628,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 
                 let count = sourceViewController.count
                 let isPercentageCount = sourceViewController.percentageSwitch.isOn
-                
+
                 let dueDate = sourceViewController.dueDate
                 
                 let storage = sourceViewController.storage
@@ -644,7 +646,12 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     }
                     
                     // editing
-                    grocery.info.title = title
+                    var bResetAlarm = false
+                    if(grocery.info.title != title)
+                    {
+                        grocery.info.title = title
+                        bResetAlarm = true
+                    }
                     grocery.info.category = category
                     if(image != nil)
                     {
@@ -652,7 +659,11 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     }
                     grocery.count = count
                     grocery.isPercentageCount = isPercentageCount
-                    grocery.dueDate = dueDate
+                    if(grocery.dueDate.date != dueDate.date)
+                    {
+                        grocery.dueDate = dueDate
+                        bResetAlarm = true
+                    }
                     grocery.storage = storage
                     grocery.fridgeName = fridgeName
                     grocery.notes = notes
@@ -687,6 +698,11 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     if(bUpdateTableView)
                     {
                         updateTableView()
+                    }
+                    
+                    if(bResetAlarm)
+                    {
+                        (UIApplication.shared.delegate as! AppDelegate).resetAlarm(grocery: grocery)
                     }
                 }
                 else

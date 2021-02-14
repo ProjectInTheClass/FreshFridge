@@ -576,64 +576,93 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     {
         guard barcode.isEmpty == false else { return }
         
-        let webAddress = String(format: "http://www.koreannet.or.kr/home/hpisSrchGtin.gs1?gtin=%@", barcode)
-        let searchTerm = [("<div class=\"productTit\">","</div>"),
-                          ("<div class=\"imgArea\">","</div>")]
+        nameTextField.text = ""
+        pictureButton.setImage(nil, for: .normal)
         
-        WebScrapper.shared.scrapingInfo(webAddress: webAddress, searchStartEnd: searchTerm)
-        { [self] (resultString, isSuccess) in
-            if(isSuccess)
+        let data = barcodeData.filter({$0.barcodeGTIN == barcode})
+        if data.count > 0
+        {
+            self.nameTextField.text = data[0].name
+            
+            let link = data[0].imageLink1
+            if let url = URL(string: link)
             {
-                // getting title
-                if(resultString.count > 0)
+                WebScrapper.shared.downloadImage(from: url, ui: pictureButton,
+                                                 completion: {
+                                                    if let image = self.pictureButton.image(for: .normal)
+                                                    {
+                                                        self.groceryImage = GroceryImage(image: image)
+                                                    }
+                                                 })
+            }
+            self.enableCompletButton()
+        }
+        else
+        {
+            // 바코드 정보를 가져오지 못했습니다.
+            print("getting barcode information failed")
+        
+            
+            let webAddress = String(format: "http://www.koreannet.or.kr/home/hpisSrchGtin.gs1?gtin=%@", barcode)
+            let searchTerm = [("<div class=\"productTit\">","</div>"),
+                              ("<div class=\"imgArea\">","</div>")]
+            
+            WebScrapper.shared.scrapingInfo(webAddress: webAddress, searchStartEnd: searchTerm)
+            { [self] (resultString, isSuccess) in
+                if(isSuccess)
                 {
-                    var trimmedString = resultString[0]
-                    trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: "&nbsp;")
-                    print(trimmedString)
-                    
-                    trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: barcode)
-                    print(trimmedString)
-                    
-                    trimmedString = trimmedString.trimmingCharacters(in: .whitespacesAndNewlines)
-                    print(trimmedString)
-                    
-                    self.nameTextField.text = trimmedString
-                }
-                
-                // getting image
-                if(resultString.count > 1)
-                {
-                    var trimmedString = resultString[1]
-                    trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: "<img src=\"")
-                    print(trimmedString)
-                    
-                    trimmedString = WebScrapper.shared.trimmingAfterString(in: trimmedString, trim: " width=\"392\" height=\"260\" id=\"detailImage\" />")
-                    print(trimmedString)
-                    
-                    trimmedString = trimmedString.trimmingCharacters(in: .whitespacesAndNewlines)
-                    print(trimmedString)
-                    
-                    let link = trimmedString
-                    if let url = URL(string: link)
+                    // getting title
+                    if(resultString.count > 0)
                     {
-                        WebScrapper.shared.downloadImage(from: url, ui: pictureButton,
-                                                         completion: {
-                                                            if let image = pictureButton.image(for: .normal)
-                                                            {
-                                                                self.groceryImage = GroceryImage(image: image)
-                                                            }
-                                                         })
+                        var trimmedString = resultString[0]
+                        trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: "&nbsp;")
+                        print(trimmedString)
+                        
+                        trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: barcode)
+                        print(trimmedString)
+                        
+                        trimmedString = trimmedString.trimmingCharacters(in: .whitespacesAndNewlines)
+                        print(trimmedString)
+                        
+                        self.nameTextField.text = trimmedString
                     }
+                    
+                    // getting image
+                    if(resultString.count > 1)
+                    {
+                        var trimmedString = resultString[1]
+                        trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: "<img src=\"")
+                        print(trimmedString)
+                        
+                        trimmedString = WebScrapper.shared.trimmingAfterString(in: trimmedString, trim: " width=\"392\" height=\"260\" id=\"detailImage\" />")
+                        print(trimmedString)
+                        
+                        trimmedString = trimmedString.trimmingCharacters(in: .whitespacesAndNewlines)
+                        print(trimmedString)
+                        
+                        let link = trimmedString
+                        if let url = URL(string: link)
+                        {
+                            WebScrapper.shared.downloadImage(from: url, ui: pictureButton,
+                                                             completion: {
+                                                                if let image = pictureButton.image(for: .normal)
+                                                                {
+                                                                    self.groceryImage = GroceryImage(image: image)
+                                                                }
+                                                             })
+                        }
+                    }
+                    
+                    self.enableCompletButton()
                 }
-                
-                self.enableCompletButton()
-            }
-            else
-            {
-                // 바코드 정보를 가져오지 못했습니다.
-                print("getting barcode information failed")
-            }
-        } // end of closer
+                else
+                {
+                    // 바코드 정보를 가져오지 못했습니다.
+                    print("getting barcode information failed")
+                }
+            } // end of closer
+             
+        }
     }
     
     @IBAction func unwindToAddGrocery(_ unwindSegue: UIStoryboardSegue)

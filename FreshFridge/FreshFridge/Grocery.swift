@@ -10,6 +10,7 @@ import UIKit
 
 class GroceryHistory : Codable
 {
+    var id: UUID
     var title: String
     var category: Category
     var favorite: Bool
@@ -18,6 +19,7 @@ class GroceryHistory : Codable
     
     private init(title: String, category: Category, favorite: Bool , lastestPurchaseDate: Date)
     {
+        self.id = UUID()
         self.title = title
         self.category = category
         self.favorite = favorite
@@ -26,6 +28,7 @@ class GroceryHistory : Codable
     
     private init(title: String, category: Category, favorite: Bool, lastestPurchaseDate: Date, image: GroceryImage)
     {
+        self.id = UUID()
         self.title = title
         self.category = category
         self.favorite = favorite
@@ -175,6 +178,8 @@ class GroceryHistory : Codable
 
 class Grocery : Codable
 {
+    var id: UUID
+    
     var info: GroceryHistory
     
     var count: Int
@@ -189,6 +194,7 @@ class Grocery : Codable
     
     init(info: GroceryHistory, count: Int, isPercentageCount: Bool, dueDate: DueDate, storage: Storage, fridgeName: String, notes: String?)
     {
+        self.id = UUID()
         self.info = info
         self.count = count
         self.isPercentageCount = isPercentageCount
@@ -264,12 +270,17 @@ class Grocery : Codable
 
 class CartGrocery: Codable
 {
+    var id: UUID
+    
     var info: GroceryHistory
+    
     var isPurchased: Bool = false
     var count: Int = 1
     var isPercentageCount: Bool = false
     
-    init(info: GroceryHistory) {
+    init(info: GroceryHistory)
+    {
+        self.id = UUID()
         self.info = info
     }
     
@@ -473,9 +484,32 @@ enum FridgeViewSort: Int, CaseIterable
     }
 }
 
+class BarcodeData
+{
+    let barcodeGTIN: String
+    let barcodeGLN: String
+    let name: String
+    let imageLink1: String
+    let imageLink2: String
+    let imageLink3: String
+    let imageLink4: String
+    
+    init(_ barcode1: String, _ barcode2: String, _ name: String, _ image1: String, _ image2: String, _ image3: String, _ image4: String)
+    {
+        barcodeGTIN = barcode1
+        barcodeGLN = barcode2
+        self.name = name
+        imageLink1 = image1
+        imageLink2 = image2
+        imageLink3 = image3
+        imageLink4 = image4
+    }
+}
+
 var groceryHistories = [GroceryHistory]()
 var groceries = [Grocery]()
 var cartGroceries = [CartGrocery]()
+var barcodeData = [BarcodeData]()
 
 // 저장을 쉽게 하기위해 전역 변수로 옮김
 var isFridgeCategoryButtonOn = false
