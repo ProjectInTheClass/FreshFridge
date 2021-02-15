@@ -10,6 +10,7 @@ import UIKit
 
 class GroceryHistory : Codable
 {
+    var id: UUID
     var title: String
     var category: Category
     var favorite: Bool
@@ -18,6 +19,7 @@ class GroceryHistory : Codable
     
     private init(title: String, category: Category, favorite: Bool , lastestPurchaseDate: Date)
     {
+        self.id = UUID()
         self.title = title
         self.category = category
         self.favorite = favorite
@@ -26,6 +28,7 @@ class GroceryHistory : Codable
     
     private init(title: String, category: Category, favorite: Bool, lastestPurchaseDate: Date, image: GroceryImage)
     {
+        self.id = UUID()
         self.title = title
         self.category = category
         self.favorite = favorite
@@ -33,16 +36,45 @@ class GroceryHistory : Codable
         self.lastestPurchaseDate = lastestPurchaseDate
     }
     
-    enum Category: String, CaseIterable, Codable
+    enum Category: Int, CaseIterable, Codable
     {
-        case MeatsAndEggs = "정육.계란"
-        case MarineProducts = "수산.해산물.건어물"
-        case CookingAndSidedishes = "국.반찬.메인요리"
-        case Vegetable = "채소"
-        case Fruits = "과일"
-        case DrinksAndSnacks = "음료.간식"
-        case SeasonedAndOilAndSauce = "면.양념.오일"
-        case ETC = "기타"
+        case MeatsAndEggs = 0
+        case MarineProducts = 1
+        case CookingAndSidedishes = 2
+        case Vegetable = 3
+        case Fruits = 4
+        case Milk = 5
+        case DrinksAndSnacks = 6
+        case SeasonedAndOilAndSauce = 7
+        case GrainAndNuts = 8
+        case ETC = 9
+        
+        var description: String
+        {
+            switch self
+            {
+            case .MeatsAndEggs:
+                return "정육.계란".localized()
+            case .Milk:
+                return "우유.유제품".localized()
+            case .MarineProducts:
+                return "수산.해산물.건어물".localized()
+            case .CookingAndSidedishes:
+                return "국.반찬.메인요리".localized()
+            case .Vegetable:
+                return "채소".localized()
+            case .Fruits:
+                return "과일".localized()
+            case .DrinksAndSnacks:
+                return "음료.간식".localized()
+            case .SeasonedAndOilAndSauce:
+                return "면.양념.오일".localized()
+            case .GrainAndNuts:
+                return "쌀.잡곡.견과류".localized()
+            case .ETC:
+                return "기타".localized()
+            }
+        }
     }
     
     static func getGroceryHistory(title: String, category: GroceryHistory.Category, updateDate: Bool) -> GroceryHistory
@@ -146,6 +178,8 @@ class GroceryHistory : Codable
 
 class Grocery : Codable
 {
+    var id: UUID
+    
     var info: GroceryHistory
     
     var count: Int
@@ -160,6 +194,7 @@ class Grocery : Codable
     
     init(info: GroceryHistory, count: Int, isPercentageCount: Bool, dueDate: DueDate, storage: Storage, fridgeName: String, notes: String?)
     {
+        self.id = UUID()
         self.info = info
         self.count = count
         self.isPercentageCount = isPercentageCount
@@ -180,11 +215,11 @@ class Grocery : Codable
             switch self
             {
             case .Refrigeration:
-                return "냉장"
+                return "냉장".localized()
             case .Freezing:
-                return "냉동"
+                return "냉동".localized()
             case .Outdoor:
-                return "실외"
+                return "실외".localized()
             }
         }
     }
@@ -235,12 +270,17 @@ class Grocery : Codable
 
 class CartGrocery: Codable
 {
+    var id: UUID
+    
     var info: GroceryHistory
+    
     var isPurchased: Bool = false
     var count: Int = 1
     var isPercentageCount: Bool = false
     
-    init(info: GroceryHistory) {
+    init(info: GroceryHistory)
+    {
+        self.id = UUID()
         self.info = info
     }
     
@@ -292,7 +332,9 @@ struct DueDate: Codable
         
     init(_ addingDay: Int)
     {
-        date = Date().addingTimeInterval(DueDate.secondOfDay*Double(addingDay))
+        date = Calendar.current.startOfDay(for: Date())
+        //date.addingTimeInterval(DueDate.secondOfDay*Double(addingDay))
+        self.addDays(addingDay)
     }
     
     mutating func addDays(_ addingDay: Int)
@@ -365,26 +407,64 @@ func getDocumentsDirectory() -> URL
     return paths[0]
 }
 
-let systemFont15 = UIFont.systemFont(ofSize: 15)
+let systemFont18 = UIFont.systemFont(ofSize: 18)
+let systemFont10 = UIFont.systemFont(ofSize: 10)
 
 
 // 메인뷰 냉장고 이름 선택
-var fridgeNames = ["신선한냉장고", "김치냉장고", "추가냉장고1", "추가냉장고2"]
-var selectedFridgeIndex: [Int] = [0] // 다중 선택가능, fridgeNames index를 배열로 저장한다.
+var fridgeNames = ["신선한냉장고".localized(), "김치냉장고".localized(), "추가냉장고1".localized(), "추가냉장고2".localized()]
+var selectedFridgeIndex: [Int] = [0, 1, 2, 3] // 다중 선택가능, fridgeNames index를 배열로 저장한다.
 var selectedfrideName = fridgeNames[selectedFridgeIndex[0]] // 다중선택된 selectedFridgeIndex중 첫번째 것으로 할당
 
-let defaultNames : [String:GroceryHistory.Category] = [
-    "소고기":.MeatsAndEggs, "돼지고기":.MeatsAndEggs, "닭고기":.MeatsAndEggs, "생선":.MeatsAndEggs,
-    "양파":.Vegetable, "김치":.CookingAndSidedishes, "대파":.Vegetable, "고추":.Vegetable,
-    "마늘":.Vegetable, "무":.Vegetable, "당근":.Vegetable, "애호박":.Vegetable,
-    "가지":.Vegetable, "브로콜리":.Vegetable, "상추":.Vegetable, "양배추":.Vegetable,
-    "파프리카":.Vegetable, "시금치":.Vegetable, "감자":.Vegetable, "고구마":.Vegetable,
-    "두부":.ETC, "라면소면":.SeasonedAndOilAndSauce, "햄":.MeatsAndEggs,
-    "계란":.MeatsAndEggs, "참치":.MarineProducts, "김":.MarineProducts, "밀가루":.ETC,
-    "우유":.DrinksAndSnacks, "소금":.SeasonedAndOilAndSauce, "참기름":.SeasonedAndOilAndSauce, "마요네즈":.SeasonedAndOilAndSauce,
-    "진간장":.SeasonedAndOilAndSauce, "국간장":.SeasonedAndOilAndSauce, "후추":.SeasonedAndOilAndSauce, "올리브유":.SeasonedAndOilAndSauce,
-    "포도씨유":.SeasonedAndOilAndSauce, "카놀라유":.SeasonedAndOilAndSauce, "식용유":.SeasonedAndOilAndSauce, "물엿":.SeasonedAndOilAndSauce
-]
+var defaultNames : [String:GroceryHistory.Category] = [:]
+func getDefaultNames() -> [String:GroceryHistory.Category]
+{
+    let langStr = Locale.current.languageCode
+    switch(langStr)
+    {
+    case "en": // reference : https://www.loveandlemons.com/what-is-fennel/
+        return [
+            "Soda":.DrinksAndSnacks, "Milk":.DrinksAndSnacks, "Bread":.DrinksAndSnacks, "Beer":.DrinksAndSnacks,
+            "Olive oil":.SeasonedAndOilAndSauce, "Flour":.GrainAndNuts, "Butter":.Milk, "Chicken":.MeatsAndEggs,
+            "Sugar":.SeasonedAndOilAndSauce, "Salt":.SeasonedAndOilAndSauce, "Egg":.MeatsAndEggs, "Rice":.GrainAndNuts,
+            "Pork":.MeatsAndEggs, "Beef":.MeatsAndEggs, "Cheese":.Milk, "Garlic":.Vegetable,
+            "Orange":.Fruits, "Turkey":.MeatsAndEggs, "Onion":.Vegetable, "Corn":.Vegetable,
+            "Whole milk":.Milk, "Mayonnaise":.SeasonedAndOilAndSauce, "Chiles":.SeasonedAndOilAndSauce,
+            "Almonds":.GrainAndNuts, "Bacon":.MeatsAndEggs, "Mushrooms":.Vegetable, "Coconut":.Vegetable,
+            "Beets":.Vegetable, "Strawberries":.Fruits, "Fennel":.Vegetable, "Lamb":.MeatsAndEggs,
+            "Apple":.Fruits, "Shrimp":.MarineProducts, "Vegetable oil":.SeasonedAndOilAndSauce, "Fish":.MarineProducts
+        ]
+    case "ko":
+        return [
+        "쇠고기":.MeatsAndEggs, "돼지고기":.MeatsAndEggs, "닭고기":.MeatsAndEggs, "생선":.MeatsAndEggs,
+        "양파":.Vegetable, "김치":.CookingAndSidedishes, "대파":.Vegetable, "고추":.Vegetable,
+        "마늘":.Vegetable, "무":.Vegetable, "당근":.Vegetable, "애호박":.Vegetable,
+        "가지":.Vegetable, "브로콜리":.Vegetable, "상추":.Vegetable, "양배추":.Vegetable,
+        "파프리카":.Vegetable, "시금치":.Vegetable, "감자":.Vegetable, "고구마":.Vegetable,
+        "두부":.ETC, "라면소면":.SeasonedAndOilAndSauce, "햄":.MeatsAndEggs,
+        "계란":.MeatsAndEggs, "참치":.MarineProducts, "김":.MarineProducts, "밀가루":.ETC,
+        "우유":.DrinksAndSnacks, "소금":.SeasonedAndOilAndSauce, "참기름":.SeasonedAndOilAndSauce, "마요네즈":.SeasonedAndOilAndSauce,
+        "진간장":.SeasonedAndOilAndSauce, "국간장":.SeasonedAndOilAndSauce, "후추":.SeasonedAndOilAndSauce, "올리브유":.SeasonedAndOilAndSauce,
+        "포도씨유":.SeasonedAndOilAndSauce, "카놀라유":.SeasonedAndOilAndSauce, "식용유":.SeasonedAndOilAndSauce, "물엿":.SeasonedAndOilAndSauce,
+        "사과":.Fruits,"수박":.Fruits,"포도":.Fruits,"귤":.Fruits,"복숭아":.Fruits,"배":.Fruits,"바나나":.Fruits
+        ]
+    default:
+        return [
+            "Soda":.DrinksAndSnacks, "Milk":.DrinksAndSnacks, "Bread":.DrinksAndSnacks, "Beer":.DrinksAndSnacks,
+            "Olive oil":.SeasonedAndOilAndSauce, "Flour":.GrainAndNuts, "Butter":.Milk, "Chicken":.MeatsAndEggs,
+            "Sugar":.SeasonedAndOilAndSauce, "Salt":.SeasonedAndOilAndSauce, "Egg":.MeatsAndEggs, "Rice":.GrainAndNuts,
+            "Pork":.MeatsAndEggs, "Beef":.MeatsAndEggs, "Cheese":.Milk, "Garlic":.Vegetable,
+            "Orange":.Fruits, "Turkey":.MeatsAndEggs, "Onion":.Vegetable, "Corn":.Vegetable,
+            "Whole milk":.Milk, "Mayonnaise":.SeasonedAndOilAndSauce, "Chiles":.SeasonedAndOilAndSauce,
+            "Almonds":.GrainAndNuts, "Bacon":.MeatsAndEggs, "Mushrooms":.Vegetable, "Coconut":.Vegetable,
+            "Beets":.Vegetable, "Strawberries":.Fruits, "Fennel":.Vegetable, "Lamb":.MeatsAndEggs,
+            "Apple":.Fruits, "Shrimp":.MarineProducts, "Vegetable oil":.SeasonedAndOilAndSauce, "Fish":.MarineProducts
+        ]
+    }
+        
+}
+
+
 
 // 메인뷰의 필터링
 typealias FridgeViewFilter = Grocery.Storage
@@ -399,14 +479,37 @@ enum FridgeViewSort: Int, CaseIterable
         switch self
         {
         case .CategoryFilter:
-            return "분류별"
+            return "분류별".localized()
         }
+    }
+}
+
+class BarcodeData
+{
+    let barcodeGTIN: String
+    let barcodeGLN: String
+    let name: String
+    let imageLink1: String
+    let imageLink2: String
+    let imageLink3: String
+    let imageLink4: String
+    
+    init(_ barcode1: String, _ barcode2: String, _ name: String, _ image1: String, _ image2: String, _ image3: String, _ image4: String)
+    {
+        barcodeGTIN = barcode1
+        barcodeGLN = barcode2
+        self.name = name
+        imageLink1 = image1
+        imageLink2 = image2
+        imageLink3 = image3
+        imageLink4 = image4
     }
 }
 
 var groceryHistories = [GroceryHistory]()
 var groceries = [Grocery]()
 var cartGroceries = [CartGrocery]()
+var barcodeData = [BarcodeData]()
 
 // 저장을 쉽게 하기위해 전역 변수로 옮김
 var isFridgeCategoryButtonOn = false

@@ -12,6 +12,7 @@ import UIKit
 protocol ShopingCartCellDelegate: class {
     func checkCartTapped(sender: ShopingCartTableViewCell)
     func countButtonTapped(sender: ShopingCartTableViewCell)
+    func selectedCell()
 }
 
 class ShopingCartTableViewCell : UITableViewCell
@@ -31,6 +32,11 @@ class ShopingCartTableViewCell : UITableViewCell
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
+        if(selected)
+        {
+            delegate?.selectedCell()
+        }
     }
     //setSelected : 버튼 눌림 효과 
 
@@ -39,7 +45,7 @@ class ShopingCartTableViewCell : UITableViewCell
         if(inCell.isPurchased)
         {
             //CheckCartButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-            CheckCartButton.setImage(UIImage(named: "check_fill"), for: .normal)
+            CheckCartButton.setImage(UIImage(named: "check_fill")?.withTintColor(.systemBlue), for: .normal)
         }
         else
         {
@@ -67,7 +73,9 @@ class ShopingCartTableViewPictureCell : ShopingCartTableViewCell
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleImage.contentMode = .scaleAspectFit
+        //titleImage.contentMode = .scaleAspectFit
+        titleImage.layer.cornerRadius = 3
+        titleImage.clipsToBounds = true
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

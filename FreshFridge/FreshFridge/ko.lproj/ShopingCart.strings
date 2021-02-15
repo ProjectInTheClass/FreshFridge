@@ -1,0 +1,21 @@
+
+/* Class = "UIButton"; normalTitle = "최신순"; ObjectID = "XSf-JB-LAc"; */
+"XSf-JB-LAc.normalTitle" = "최신순";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "cqg-is-4gC"; */
+"cqg-is-4gC.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "장바구니"; ObjectID = "e8d-fU-I8c"; */
+"e8d-fU-I8c.title" = "장바구니";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ewp-u0-1xQ"; */
+"ewp-u0-1xQ.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "장바구니"; ObjectID = "hBn-rY-psi"; */
+"hBn-rY-psi.title" = "장바구니";
+
+/* Class = "UIBarButtonItem"; title = "추가"; ObjectID = "qrZ-7Q-MUh"; */
+"qrZ-7Q-MUh.title" = "추가";
+
+/* Class = "UIButton"; normalTitle = "분류별"; ObjectID = "y3m-mM-dz1"; */
+"y3m-mM-dz1.normalTitle" = "분류별";

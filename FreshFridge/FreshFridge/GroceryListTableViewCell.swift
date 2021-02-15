@@ -23,7 +23,7 @@ class GroceryListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        expirationLabel.layer.cornerRadius = 5
+        expirationLabel.layer.cornerRadius = 7
         expirationLabel.clipsToBounds = true
     }
 
@@ -60,7 +60,9 @@ class GroceryListTableViewPictureCell : GroceryListTableViewCell
         titleImage.clipsToBounds = true
         */
         // cornerRadius와 scaleAspectFit이 동시에 안됨
-        titleImage.contentMode = .scaleAspectFit
+        //titleImage.contentMode = .scaleAspectFill
+        titleImage.layer.cornerRadius = 7
+        titleImage.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -25,6 +25,7 @@ class SelectFridgeNameTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.title = "냉장고 선택".localized()
     }
 
     // MARK: - Table view data source
@@ -45,7 +46,7 @@ class SelectFridgeNameTableViewController: UITableViewController {
         // Configure the cell...
         cell.textLabel?.text = fridgeNames[indexPath.row]
         cell.textLabel?.textColor = .label
-        cell.textLabel?.font = systemFont15
+        cell.textLabel?.font = systemFont18
         if(isFromAddGrocery)
         {
             let groceryFridgeName = fridgeName//grocery != nil ? grocery!.fridgeName : selectedfrideName
@@ -115,6 +116,8 @@ class SelectFridgeNameTableViewController: UITableViewController {
                 selectedFridgeIndex.sort(by:{$0<$1})
                 cell?.accessoryType = .checkmark
             }
+            
+            UserDefaults.standard.set(selectedFridgeIndex, forKey: "selectedFridgeIndex")
         }
 
         if(selectedFridgeIndex.count == 0)

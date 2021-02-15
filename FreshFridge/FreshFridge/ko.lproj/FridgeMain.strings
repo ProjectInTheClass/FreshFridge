@@ -1,0 +1,33 @@
+
+/* Class = "UINavigationItem"; title = "냉장고 선택"; ObjectID = "AYj-rL-Ab6"; */
+"AYj-rL-Ab6.title" = "냉장고 선택";
+
+/* Class = "UIButton"; normalTitle = "분류별"; ObjectID = "V5K-YJ-Xmq"; */
+"V5K-YJ-Xmq.normalTitle" = "분류별";
+
+/* Class = "UIBarButtonItem"; title = "추가"; ObjectID = "WeC-6a-ETG"; */
+"WeC-6a-ETG.title" = "추가";
+
+/* Class = "UILabel"; text = "D-100"; ObjectID = "ZxX-Yj-UWM"; */
+"ZxX-Yj-UWM.text" = "D-100";
+
+/* Class = "UIButton"; normalTitle = "냉장"; ObjectID = "ccY-1T-3mc"; */
+"ccY-1T-3mc.normalTitle" = "냉장";
+
+/* Class = "UIButton"; normalTitle = "실외"; ObjectID = "ePx-zD-F6d"; */
+"ePx-zD-F6d.normalTitle" = "실외";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "h9q-jb-fia"; */
+"h9q-jb-fia.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "nyN-Se-9pY"; */
+"nyN-Se-9pY.text" = "Label";
+
+/* Class = "UILabel"; text = "D-100"; ObjectID = "pHQ-go-Nce"; */
+"pHQ-go-Nce.text" = "D-100";
+
+/* Class = "UINavigationItem"; title = "신선한 냉장고"; ObjectID = "wlj-jN-nJj"; */
+"wlj-jN-nJj.title" = "신선한 냉장고";
+
+/* Class = "UIButton"; normalTitle = "냉동"; ObjectID = "zTS-JF-eWw"; */
+"zTS-JF-eWw.normalTitle" = "냉동";

@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        defaultNames = getDefaultNames()
+        
         if(UserDefaults.isFirstLaunch())
         {
             UserDefaults.standard.set(isFridgeCategoryButtonOn, forKey: "isFridgeCategoryButtonOn")
@@ -28,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             
             UserDefaults.standard.set(isShopingCartCategoryButtonOn, forKey: "isShopingCartCategoryButtonOn")
             UserDefaults.standard.set(isShopingCartLatestButtonOn, forKey: "isShopingCartLatestButtonOn")
+            
+            UserDefaults.standard.set(selectedFridgeIndex, forKey: "selectedFridgeIndex")
         }
         else
         {
@@ -43,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             
             isShopingCartCategoryButtonOn = UserDefaults.standard.bool(forKey: "isShopingCartCategoryButtonOn")
             isShopingCartLatestButtonOn = UserDefaults.standard.bool(forKey: "isShopingCartLatestButtonOn")
+            selectedFridgeIndex = UserDefaults.standard.array(forKey: "selectedFridgeIndex") as? [Int] ?? [0,1,2,3]
         }
         
         // 테스트용 sample date loading
@@ -52,13 +57,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         cartGroceries = CartGrocery.loadSampleCartGrocery()
         */
         
+        let langStr = Locale.current.languageCode
         if let savedGroceryHistories = GroceryHistory.loadGroceryHistory()
         {
             groceryHistories = savedGroceryHistories
         }
         else
         {
-            groceryHistories = GroceryHistory.loadSampleGroceryHistory()
+            if(langStr == "ko")
+            {
+                groceryHistories = GroceryHistory.loadSampleGroceryHistory()
+            }
         }
         
         if let savedGroceries = Grocery.loadGrocery()
@@ -67,7 +76,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         else
         {
-            groceries = Grocery.loadSampleGrocery()
+            if(langStr == "ko")
+            {
+                groceries = Grocery.loadSampleGrocery()
+            }
         }
          
          if let savedCartGroceries = CartGrocery.loadCartGrocery()
@@ -76,7 +88,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
          }
          else
          {
-             cartGroceries = CartGrocery.loadSampleCartGrocery()
+            if(langStr == "ko")
+            {
+                cartGroceries = CartGrocery.loadSampleCartGrocery()
+            }
          }
          
         
@@ -91,6 +106,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         {
             cartGrocery.info = GroceryHistory.getGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: false)
         }
+        
+        // read barcode data
+        let filename = "BarcodeData"
+        if let fileURL = Bundle.main.url(forResource: filename, withExtension: "csv")
+        {
+            //print(fileURL)
+            
+            let rows = NSArray(contentsOfCSVURL: fileURL, options: CHCSVParserOptions.sanitizesFields)!
+
+            for row in rows
+            {
+                   
+               let rowArray = row as! NSArray
+               var barcode1 = rowArray[0] as! String
+               var barcode2 = rowArray[1] as! String
+               var name = rowArray[2] as! String
+               var image1 = rowArray[3] as! String
+               var image2 = rowArray[4] as! String
+               var image3 = rowArray[5] as! String
+               var image4 = rowArray[6] as! String
+               
+               
+               barcode1 = String(barcode1.utf8)
+               //print(barcode1)
+               barcode2 = String(barcode2.utf8)
+               //print(barcode2)
+               name = String(name.utf8)
+               //print(name)
+               image1 = String(image1.utf8)
+               //print(image1)
+               image2 = String(image2.utf8)
+               //print(image2)
+               image3 = String(image3.utf8)
+               //print(image3)
+               image4 = String(image4.utf8)
+               //print(image4)
+               
+               let newBarcodeData = BarcodeData(barcode1, barcode2, name, image1, image2, image3, image4)
+               barcodeData.insert(newBarcodeData, at: barcodeData.count)
+            }
+        }
+        
+        
         
         
         // Override point for customization after application launch.
@@ -117,6 +175,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
     
+    func removeAlarm(grocery: Grocery)
+    {
+        for n in -2...2
+        {
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [grocery.id.uuidString + "_\(n)"])
+        }
+    }
+    
     func setAlarm(grocery : Grocery)
     {
         let expiration = grocery.dueDate.getExpiration()
@@ -125,16 +191,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         {
             let n = -2
             let content = UNMutableNotificationContent()
-            content.title = "기간 만료 알림"
-            content.body = "\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            content.title = "기간 만료 알림".localized()
+            content.body = "%@의 보관 기간이 %d일 남았습니다.".localized(with: [grocery.info.title, -n])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            //print(content.body+grocery.id.uuidString+"_\(n)")
             content.categoryIdentifier = "alarm"
+            content.userInfo = ["customData": "fizzbuzz"]
             content.sound = .default
             
             let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-            let comps = Calendar.current.dateComponents([.year, .month, .day], from: nextTriggerDate)
+            //print(nextTriggerDate)
+            let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
             let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
             
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: grocery.id.uuidString + "_\(n)", content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request)
         }
         
@@ -142,35 +211,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         {
             let n = -1
             let content = UNMutableNotificationContent()
-            content.title = "기간 만료 알림"
-            content.body = "\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            content.title = "기간 만료 알림".localized()
+            content.body = "%@의 보관 기간이 %d일 남았습니다.".localized(with: [grocery.info.title, -n])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            //print(content.body+grocery.id.uuidString + "_\(n)")
             content.categoryIdentifier = "alarm"
+            content.userInfo = ["customData": "fizzbuzz"]
             content.sound = .default
             
             let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-            let comps = Calendar.current.dateComponents([.year, .month, .day], from: nextTriggerDate)
+            //print(nextTriggerDate)
+            let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
             let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
             
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: grocery.id.uuidString + "_\(n)", content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request)
         }
         
         if(expiration < 3)
         {
-            //let n = -1
             let content = UNMutableNotificationContent()
-            content.title = "기간 만료 알림"
-            content.body = "\(grocery.info.title)의 보관 기간이 만료되었습니다.."
+            content.title = "기간 만료 알림".localized()
+            //content.body = "\(grocery.info.title)의 보관 기간이 만료되었습니다.."
+            content.body = "%@의 보관 기간이 만료되었습니다.".localized(with: [grocery.info.title])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            
             content.categoryIdentifier = "alarm"
+            content.userInfo = ["customData": "fizzbuzz"]
             content.sound = .default
             
             for n in 0...2
             {
+                //print(content.body+grocery.id.uuidString + "_\(n)")
+                
                 let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-                let comps = Calendar.current.dateComponents([.year, .month, .day], from: nextTriggerDate)
+                //sprint(nextTriggerDate)
+                let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
                 
-                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                let request = UNNotificationRequest(identifier: grocery.id.uuidString + "_\(n)", content: content, trigger: trigger)
                 UNUserNotificationCenter.current().add(request)
             }
         }
@@ -186,6 +263,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         {
             setAlarm(grocery: grocery)
         }
+    }
+    
+    func resetAlarm(grocery: Grocery)
+    {
+        removeAlarm(grocery: grocery)
+        setAlarm(grocery: grocery)
     }
 
     // MARK: UISceneSession Lifecycle

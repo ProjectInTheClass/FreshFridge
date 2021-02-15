@@ -44,6 +44,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        
         tableView.dragInteractionEnabled = true
         tableView.dragDelegate = self
         tableView.dropDelegate = self
@@ -78,11 +80,11 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         
         if(isFridgeAlarmButtonOn)
         {
-            alarmButton.image = UIImage(systemName: "alarm.fill")
+            alarmButton.image = UIImage(systemName: "bell.fill")
         }
         else
         {
-            alarmButton.image = UIImage(systemName: "alarm")
+            alarmButton.image = UIImage(systemName: "bell")
         }
     }
     
@@ -141,7 +143,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     numbersOfRowInSection.append(sectionGroceries.count)
                     numberOfSections += 1
                     filteredGroceries.append(sectionGroceries)
-                    sectionNames.append(category.rawValue)
+                    sectionNames.append(category.description)
                 }
             }
         }
@@ -394,6 +396,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     
                     if let selectedIndex = findGroceryIndex(grocery: selectedGrocery)
                     {
+                        (UIApplication.shared.delegate as! AppDelegate).removeAlarm(grocery: selectedGrocery)
+                        
                         groceries.remove(at: selectedIndex.offset)
                         updateTableView()
                         tableView.reloadData()
@@ -414,7 +418,12 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     // Rearranging
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem]
     {
-        return [UIDragItem(itemProvider: NSItemProvider())]
+        if(numberOfSections == 1)
+        {
+            return [UIDragItem(itemProvider: NSItemProvider())]
+        }
+        
+        return []
     }
 
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal
@@ -429,6 +438,18 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
 
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator)
     {
+    }
+    
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool
+    {
+        if(numberOfSections == 1)
+        {
+            return true
+        }
+        
+        return false
+        
     }
     
     // Override to support rearranging the table view.
@@ -453,11 +474,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     }
  
 
-    // Override to support conditional rearranging of the table view.
-    /*
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-    }
-    */
+    
+    
     
     func selectedCell()
     {
@@ -493,17 +511,32 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     @IBAction func refrigerationButtonTapped(_ sender: Any)
     {
-        isFridgeFrigerationButtonOn.toggle()
+//        isFridgeFrigerationButtonOn.toggle()
+        if isFridgeFrigerationButtonOn == true {
+            isFridgeFreezingButtonOn.toggle()
+            isFridgeOutdoorButtonOn.toggle()
+        } else {
+            isFridgeFrigerationButtonOn = true
+            isFridgeFreezingButtonOn = false
+            isFridgeOutdoorButtonOn = false
+        }
         UserDefaults.standard.set(isFridgeFrigerationButtonOn, forKey: "isFridgeFrigerationButtonOn")
         updateFilteringButtons()
         updateTableView()
         tableView.reloadData()
-
     }
     
     @IBAction func freezingButtonTapped(_ sender: Any)
     {
-        isFridgeFreezingButtonOn.toggle()
+//        isFridgeFreezingButtonOn.toggle()
+        if isFridgeFreezingButtonOn == true {
+            isFridgeFrigerationButtonOn.toggle()
+            isFridgeOutdoorButtonOn.toggle()
+        } else {
+            isFridgeFrigerationButtonOn = false
+            isFridgeFreezingButtonOn = true
+            isFridgeOutdoorButtonOn = false
+        }
         UserDefaults.standard.set(isFridgeFreezingButtonOn, forKey: "isFridgeFreezingButtonOn")
         updateFilteringButtons()
         updateTableView()
@@ -513,7 +546,15 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     @IBAction func outdoorButtonTapped(_ sender: Any)
     {
-        isFridgeOutdoorButtonOn.toggle()
+//        isFridgeOutdoorButtonOn.toggle()
+        if isFridgeOutdoorButtonOn == true {
+            isFridgeFrigerationButtonOn.toggle()
+            isFridgeFreezingButtonOn.toggle()
+        } else {
+            isFridgeFrigerationButtonOn = false
+            isFridgeFreezingButtonOn = false
+            isFridgeOutdoorButtonOn = true
+        }
         UserDefaults.standard.set(isFridgeOutdoorButtonOn, forKey: "isFridgeOutdoorButtonOn")
         updateFilteringButtons()
         updateTableView()
@@ -570,24 +611,47 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         {
             if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
             {
+                guard sourceViewController.groceryImage != nil
+                        || sourceViewController.nameTextField.text?.isEmpty == false else { return }
+                
                 let title = sourceViewController.nameTextField.text ?? ""
-                let category = GroceryHistory.Category(rawValue: sourceViewController.categoryButton.title(for: .normal) ?? "")!
-                //grocery.info.image =
+                
+                var category: GroceryHistory.Category
+                if(sourceViewController.category == nil)
+                {
+                    category = GroceryHistory.Category.ETC
+                }
+                else
+                {
+                    category = sourceViewController.category!
+                }
                 
                 let count = sourceViewController.count
                 let isPercentageCount = sourceViewController.percentageSwitch.isOn
-                
+
                 let dueDate = sourceViewController.dueDate
                 
-                let storage = Grocery.Storage(rawValue: sourceViewController.storageSegment.selectedSegmentIndex)!
+                let storage = sourceViewController.storage
                 let fridgeName = sourceViewController.fridgeSelectButton.title(for: .normal) ?? ""
                 let notes = sourceViewController.noteTextField.text
                 let image = sourceViewController.groceryImage
                 
-                if let grocery = sourceViewController.grocery
+                if let grocery = sourceViewController.grocery,
+                   let selectedRow = tableView.indexPathForSelectedRow
                 {
+                    var bUpdateTableView : Bool = false
+                    if(grocery.info.category != category)
+                    {
+                        bUpdateTableView = true
+                    }
+                    
                     // editing
-                    grocery.info.title = title
+                    var bResetAlarm = false
+                    if(grocery.info.title != title)
+                    {
+                        grocery.info.title = title
+                        bResetAlarm = true
+                    }
                     grocery.info.category = category
                     if(image != nil)
                     {
@@ -595,14 +659,18 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     }
                     grocery.count = count
                     grocery.isPercentageCount = isPercentageCount
-                    grocery.dueDate = dueDate
+                    if(grocery.dueDate.date != dueDate.date)
+                    {
+                        grocery.dueDate = dueDate
+                        bResetAlarm = true
+                    }
                     grocery.storage = storage
                     grocery.fridgeName = fridgeName
                     grocery.notes = notes
                     
                     if(grocery.info.image == nil)
                     {
-                        if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewCell
+                        if let cell = tableView.cellForRow(at: selectedRow) as? GroceryListTableViewCell
                         {
                             cell.titleLabel.text = title
                             cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
@@ -615,7 +683,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     }
                     else
                     {
-                        if let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as? GroceryListTableViewPictureCell
+                        if let cell = tableView.cellForRow(at: selectedRow) as? GroceryListTableViewPictureCell
                         {
                             cell.titleLabel.text = title
                             cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
@@ -625,6 +693,16 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                         {
                             tableView.reloadData()
                         }
+                    }
+                    
+                    if(bUpdateTableView)
+                    {
+                        updateTableView()
+                    }
+                    
+                    if(bResetAlarm)
+                    {
+                        (UIApplication.shared.delegate as! AppDelegate).resetAlarm(grocery: grocery)
                     }
                 }
                 else
@@ -671,6 +749,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 addGroceryTableViewController.grocery = grocery
             }
         }
+        
     }
     
 

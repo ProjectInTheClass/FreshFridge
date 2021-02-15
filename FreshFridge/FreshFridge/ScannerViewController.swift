@@ -27,6 +27,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var opaqueView: UIView! = nil
     var labelView: UILabel! = nil
     var resultLabel: UILabel! = nil
+    var backButton: UIButton! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,8 +102,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         labelView = UILabel()
         labelView.frame = CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5) + 44, y: Int(centerY) + Int(Double(boxHeight) * 0.5), width: boxWidth, height: 44)
-        labelView.text = "프레임 안에 바코드를 위치시키세요"
+        labelView.text = "프레임 안에 바코드를 위치시키세요".localized()
         labelView.textColor = UIColor.white
+        labelView.shadowColor = .black
         labelView.textAlignment = .left
         view.addSubview(labelView)
         
@@ -110,20 +112,30 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         resultLabel.frame = CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5), y: Int(centerY) - Int(Double(boxHeight) * 0.5) - 44, width: boxWidth, height: 44)
         resultLabel.text = ""
         resultLabel.textColor = UIColor.white
+        resultLabel.shadowColor = .black
         resultLabel.textAlignment = .center
         view.addSubview(resultLabel)
+        
+        backButton = UIButton()
+        backButton.addTarget(self, action: #selector(backButtonTapped(_:)), for: .touchUpInside)
+        backButton.frame = CGRect(x: 20, y: 10, width: 60, height: 60)
+        backButton.setTitle("취소".localized(), for: .normal)
+        backButton.setTitleShadowColor(.black, for: .normal)
+        backButton.tintColor = .white
+        view.addSubview(backButton)
         
         captureSession.startRunning()
 
         NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
-
+    
     deinit {
        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
 
     @objc func rotated()
     {
+        updateView()
 //        if UIDevice.current.orientation.isLandscape
 //        {
 //            print("Landscape")
@@ -132,7 +144,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 //        {
 //            print("Portrait")
 //        }
-        
+    }
+    
+    func updateView() {
         previewLayer.frame = view.layer.bounds
     
         // adding box
@@ -180,6 +194,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if (captureSession?.isRunning == false) {
             captureSession.startRunning()
         }
+        
+        updateView()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -202,7 +218,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             
             if(stringValue.isEmpty == true)
             {
-                resultLabel.text = "바코드를 인식하지 못했습니다."
+                resultLabel.text = "The barcode was not recognized."
                 return
             }
             else
@@ -227,5 +243,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
+    }
+    
+    @IBAction func backButtonTapped(_ sender: Any)
+    {
+        captureSession.stopRunning()
+        dismiss(animated: true)
     }
 }

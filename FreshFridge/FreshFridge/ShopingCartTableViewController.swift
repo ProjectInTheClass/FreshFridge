@@ -38,6 +38,8 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        
         fridgeTabBarController = tabBarController as? FridgeTabBarController
         
         sortedArray = cartGroceries
@@ -88,7 +90,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 numbersOfRowInSection.append(sectionGroceries.count) // 몇개 담겨있는지 세서 Row 갯수를 정한다.
                 numberOfSections += 1 // 섹션은 0에서 하나씩 추가된다.
                 filteredCartGroceries.append(sectionGroceries) //
-                sectionNames.append(category.rawValue) // rawValue 는 enum Category의 case 뒤에 붙은 "스트링" 값을 가져다준다.
+                sectionNames.append(category.description) 
             }
         }
     }
@@ -297,6 +299,11 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
          return UISwipeActionsConfiguration(actions: [modifyAction])
      }
     
+    func selectedCell()
+    {
+        performSegue(withIdentifier: "EditShoppingCart", sender: self)
+    }
+    
     @IBAction func unwindToShopingCart(_ unwindSegue: UIStoryboardSegue)
     {
         
@@ -305,38 +312,80 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         {
             if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
             {
+                
+                // 장바구니에 추가하는 경우
                 let title = sourceViewController.nameTextField.text ?? ""
-                let category = GroceryHistory.Category(rawValue: sourceViewController.categoryButton.title(for: .normal) ?? "")!
+                var category : GroceryHistory.Category
+                if(sourceViewController.category == nil)
+                {
+                    category = GroceryHistory.Category.ETC
+                }
+                else
+                {
+                    category = sourceViewController.category!
+                }
+                
                 let count = sourceViewController.count
                 let isPercentageCount = sourceViewController.percentageSwitch.isOn
                 let image = sourceViewController.groceryImage
                 
-                // adding
-                if(title.isEmpty == false)
+                var bUpdateTableView = false
+                if(sourceViewController.cartGrocery == nil)
                 {
-                    let newCartGrocery = CartGrocery(info: GroceryHistory.getGroceryHistory(title: title, category: category, updateDate: true))
-                    newCartGrocery.info.image = image
-                    newCartGrocery.count = count
-                    newCartGrocery.isPercentageCount = isPercentageCount
-                    cartGroceries.insert(newCartGrocery, at: 0)
-                    
-                    updateTableView()
-                    tableView.reloadData()
-                    
-                    GroceryHistory.saveGroceryHistory(groceryHistories)
-                    CartGrocery.saveCartGrocery(cartGroceries)
+                    // adding
+                    if(title.isEmpty == false)
+                    {
+                        let newCartGrocery = CartGrocery(info: GroceryHistory.getGroceryHistory(title: title, category: category, updateDate: true))
+                        newCartGrocery.info.image = image
+                        newCartGrocery.count = count
+                        newCartGrocery.isPercentageCount = isPercentageCount
+                        cartGroceries.insert(newCartGrocery, at: 0)
+                        
+                        bUpdateTableView = true
+                    }
                 }
+                else
+                {
+                    // 장바구니 상세 페이지에서 수정한 경우
+                    if let cartGrocery = sourceViewController.cartGrocery
+                    {
+                        cartGrocery.info.title = title
+                        if(cartGrocery.info.category != category)
+                        {
+                            cartGrocery.info.category = category
+                            bUpdateTableView = true
+                        }
+                        cartGrocery.count = count
+                        cartGrocery.isPercentageCount = isPercentageCount
+                        cartGrocery.info.image = image
+                    }
+                }
+                
+                if(bUpdateTableView)
+                {
+                    updateTableView()
+                }
+                tableView.reloadData()
+                
+                GroceryHistory.saveGroceryHistory(groceryHistories)
+                CartGrocery.saveCartGrocery(cartGroceries)
             }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if segue.identifier == "AddShoppingCart"
+        if segue.identifier == "AddShoppingCart" || segue.identifier == "EditShoppingCart"
         {
             let navigationController = segue.destination as! UINavigationController
             let addGroceryTableViewController = navigationController.topViewController as! AddGroceryTableViewController
             addGroceryTableViewController.isFromShoppingCart = true
+            
+            if let indexPath = tableView.indexPathForSelectedRow
+            {
+                let cartGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
+                addGroceryTableViewController.cartGrocery = cartGrocery
+            }
         }
     }
 }

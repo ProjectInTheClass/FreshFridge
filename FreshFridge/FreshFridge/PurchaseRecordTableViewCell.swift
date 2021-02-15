@@ -41,7 +41,7 @@ class PurchaseRecordTableViewCell: UITableViewCell {
         if inCell.favorite == true {
             FavoriteMarkButton.setImage(UIImage(named: "favorite.fill")?.withTintColor(.lightGray) , for: .normal)
         } else {
-            FavoriteMarkButton.setImage(UIImage(named: "favorite-Icon")?.withTintColor(.lightGray), for: .normal)
+            FavoriteMarkButton.setImage(UIImage(named: "favoriteIcon")?.withTintColor(.lightGray), for: .normal)
         }
     }
     
@@ -65,7 +65,9 @@ class PurchaseRecordWithPictureTableViewCell: PurchaseRecordTableViewCell
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        titleImage.contentMode = .scaleAspectFit
+        //titleImage.contentMode = .scaleAspectFit
+        titleImage.layer.cornerRadius = 3
+        titleImage.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

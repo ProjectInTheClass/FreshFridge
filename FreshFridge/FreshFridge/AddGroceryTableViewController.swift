@@ -32,12 +32,17 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     var isDueDatePickerShown = false
     
     var grocery: Grocery?
-    
+    var cartGrocery: CartGrocery? = nil
     var count: Int = 0  // 추가 버튼으로 들어온 경우 사용됨
     var dueDate: DueDate = DueDate(0)   // 추가 버튼으로 들어온 경우 사용됨
     var groceryImage: GroceryImage?
+    var category: GroceryHistory.Category? = nil// = GroceryHistory.Category.ETC
+    var storage: Grocery.Storage = Grocery.Storage.Refrigeration
     
     var isFromShoppingCart: Bool = false
+    
+    var isSupportBarcode: Bool = false
+    var contentOffset: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,10 +58,19 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         //    dueDatePicker.backgroundColor = .white
         //}
         
+        let langStr = Locale.current.languageCode
+        if(langStr == "ko")
+        {
+            isSupportBarcode = true
+        }
+        
         nameTextField.delegate = self
         
         countTextField.layer.cornerRadius = 8
         countTextField.clipsToBounds = true
+        
+        countDecreaseButton.tintColor = .systemGray5
+        countIncreaseButton.tintColor = .systemGray5
         
         dueDateTitleLabel.layer.cornerRadius = 10
         dueDateTitleLabel.clipsToBounds = true
@@ -70,13 +84,16 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         
         pictureButton.imageView?.contentMode = .scaleAspectFit
         
-        barcodeScanButton = UIButton(frame: CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50))
-        barcodeScanButton.backgroundColor = .orange
-        barcodeScanButton.setTitle("Barcode Scan", for: .normal)
-        barcodeScanButton.addTarget(self, action: #selector(barcodeScanButtonTapped(_:)), for: .touchUpInside)
-        barcodeScanButton.layer.cornerRadius = 20
-        barcodeScanButton.clipsToBounds = true
-        self.view.addSubview(barcodeScanButton)
+        if(isSupportBarcode)
+        {
+            barcodeScanButton = UIButton()//frame: CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50))
+            barcodeScanButton.backgroundColor = .orange
+            barcodeScanButton.setTitle("Barcode Scan", for: .normal)
+            barcodeScanButton.addTarget(self, action: #selector(barcodeScanButtonTapped(_:)), for: .touchUpInside)
+            barcodeScanButton.layer.cornerRadius = 20
+            barcodeScanButton.clipsToBounds = true
+            self.view.addSubview(barcodeScanButton)
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -88,37 +105,45 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             count = grocery.count
             dueDate.date = grocery.dueDate.date
             
-            storageSegment.selectedSegmentIndex = grocery.storage.rawValue
+            storage = grocery.storage
             nameTextField.text = grocery.info.title
-            categoryButton.setTitle(grocery.info.category.rawValue, for: .normal)
+            category = grocery.info.category
             countTextField.text = "\(Int(grocery.count))"
             percentageSwitch.isOn = grocery.isPercentageCount
             fridgeSelectButton.setTitle(grocery.fridgeName, for: .normal)
             noteTextField.text = grocery.notes
             groceryImage = grocery.info.image
-            if(groceryImage != nil)
-            {
-                pictureButton.setImage(groceryImage?.image(), for: .normal)
-                
-            }
+            
             updateTableView()
             
             self.title = ""
             
+        }
+        else if let cartGrocery = cartGrocery
+        {
+            nameTextField.text = cartGrocery.info.title
+            category = cartGrocery.info.category
+            count = cartGrocery.count
+            countTextField.text = "\(Int(cartGrocery.count))"
+            percentageSwitch.isOn = cartGrocery.isPercentageCount
+            groceryImage = cartGrocery.info.image
+            
+            updateTableView()
         }
         else
         {
             count = 1
             dueDate.date = Calendar.current.startOfDay(for: Date())
             
-            storageSegment.selectedSegmentIndex = 0
-            categoryButton.setTitle(GroceryHistory.Category.ETC.rawValue, for: .normal)
+            storage = Grocery.Storage.Refrigeration
+            //category = GroceryHistory.Category.ETC
             countTextField.text = "\(Int(count))"
             percentageSwitch.isOn = false
             fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
+            
             updateTableView()
             
-            self.title = "상품 추가"
+            self.title = "상품 추가".localized()
         }
         
         if(isFromShoppingCart)
@@ -131,7 +156,10 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             dueDatePicker.isHidden = true
             fridgeSelectButton.isHidden = true
             noteTextField.isHidden = true
-            barcodeScanButton.isHidden = true
+            if(isSupportBarcode)
+            {
+                barcodeScanButton.isHidden = true
+            }
         }
         else
         {
@@ -143,43 +171,38 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             dueDatePicker.isHidden = false
             fridgeSelectButton.isHidden = false
             noteTextField.isHidden = false
-            barcodeScanButton.isHidden = false
+            if(isSupportBarcode)
+            {
+                barcodeScanButton.isHidden = false
+            }
         }
         
         enableCompletButton()
         
         NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
-        }
+    }
 
-        deinit {
-           NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
-        }
-
-        @objc func rotated()
-        {
-//            if UIDevice.current.orientation.isLandscape
-//            {
-//                print("Landscape")
-//            }
-//            else
-//            {
-//                print("Portrait")
-//            }
-        
-            barcodeScanButton.frame = CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset, width: self.view.frame.width - 10, height: 50)
-        }
+    deinit {
+       NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
     
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//
-//        if UIDevice.current.orientation.isLandscape {
-//            print("Landscape")
-//        } else {
-//            print("Portrait")
-//        }
-//
-//        barcodeScanButton.frame = CGRect(x: 5, y: size.height - barcodeScanButtonOffset, width: size.width - 10, height: 50)
-//    }
+    override func viewWillAppear(_ animated: Bool)
+    {
+        updateBarcodeButton()
+    }
+
+    @objc func rotated()
+    {
+        updateBarcodeButton()
+    }
+    
+    func updateBarcodeButton()
+    {
+        if(isSupportBarcode)
+        {
+            barcodeScanButton.frame = CGRect(x: 5, y: self.view.frame.height - barcodeScanButtonOffset + contentOffset, width: self.view.frame.width - 10, height: 50)
+        }
+    }
     
     @objc func dismissKeyboard()
     {
@@ -189,7 +212,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
-        barcodeScanButton.frame.origin.y = scrollView.frame.height - barcodeScanButtonOffset + scrollView.contentOffset.y
+        contentOffset = scrollView.contentOffset.y
+        updateBarcodeButton()        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.
@@ -276,6 +300,18 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         {
             fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
         }
+        
+        if(groceryImage != nil)
+        {
+            pictureButton.setImage(groceryImage?.image(), for: .normal)
+        }
+        
+        storageSegment.selectedSegmentIndex = storage.rawValue
+        
+        if let category = category
+        {
+            categoryButton.setTitle(category.description, for: .normal)
+        }
     }
     
     func enableCompletButton()
@@ -308,6 +344,17 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     @IBAction func storageSegmentedControlTapped(_ sender: Any)
     {
+        switch storageSegment.selectedSegmentIndex {
+        case 0:
+            storage = Grocery.Storage.Refrigeration
+        case 1:
+            storage = Grocery.Storage.Freezing
+        case 2:
+            storage = Grocery.Storage.Outdoor
+        default:
+            storage = Grocery.Storage.Refrigeration
+        }
+        
         dismissKeyboard()
     }
     
@@ -529,56 +576,93 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     {
         guard barcode.isEmpty == false else { return }
         
-        let webAddress = String(format: "http://www.koreannet.or.kr/home/hpisSrchGtin.gs1?gtin=%@", barcode)
-        let searchTerm = [("<div class=\"productTit\">","</div>"),
-                          ("<div class=\"imgArea\">","</div>")]
+        nameTextField.text = ""
+        pictureButton.setImage(nil, for: .normal)
         
-        WebScrapper.shared.scrapingInfo(webAddress: webAddress, searchStartEnd: searchTerm)
-        { [self] (resultString, isSuccess) in
-            if(isSuccess)
+        let data = barcodeData.filter({$0.barcodeGTIN == barcode})
+        if data.count > 0
+        {
+            self.nameTextField.text = data[0].name
+            
+            let link = data[0].imageLink1
+            if let url = URL(string: link)
             {
-                // getting title
-                if(resultString.count > 0)
+                WebScrapper.shared.downloadImage(from: url, ui: pictureButton,
+                                                 completion: {
+                                                    if let image = self.pictureButton.image(for: .normal)
+                                                    {
+                                                        self.groceryImage = GroceryImage(image: image)
+                                                    }
+                                                 })
+            }
+            self.enableCompletButton()
+        }
+        else
+        {
+            // 바코드 정보를 가져오지 못했습니다.
+            print("getting barcode information failed")
+        
+            
+            let webAddress = String(format: "http://www.koreannet.or.kr/home/hpisSrchGtin.gs1?gtin=%@", barcode)
+            let searchTerm = [("<div class=\"productTit\">","</div>"),
+                              ("<div class=\"imgArea\">","</div>")]
+            
+            WebScrapper.shared.scrapingInfo(webAddress: webAddress, searchStartEnd: searchTerm)
+            { [self] (resultString, isSuccess) in
+                if(isSuccess)
                 {
-                    var trimmedString = resultString[0]
-                    trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: "&nbsp;")
-                    print(trimmedString)
-                    
-                    trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: barcode)
-                    print(trimmedString)
-                    
-                    trimmedString = trimmedString.trimmingCharacters(in: .whitespacesAndNewlines)
-                    print(trimmedString)
-                    
-                    self.nameTextField.text = trimmedString
-                }
-                
-                // getting image
-                if(resultString.count > 1)
-                {
-                    var trimmedString = resultString[1]
-                    trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: "<img src=\"")
-                    print(trimmedString)
-                    
-                    trimmedString = WebScrapper.shared.trimmingAfterString(in: trimmedString, trim: " width=\"392\" height=\"260\" id=\"detailImage\" />")
-                    print(trimmedString)
-                    
-                    trimmedString = trimmedString.trimmingCharacters(in: .whitespacesAndNewlines)
-                    print(trimmedString)
-                    
-                    let link = trimmedString
-                    if let url = URL(string: link)
+                    // getting title
+                    if(resultString.count > 0)
                     {
-                        WebScrapper.shared.downloadImage(from: url, ui: pictureButton)
+                        var trimmedString = resultString[0]
+                        trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: "&nbsp;")
+                        print(trimmedString)
+                        
+                        trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: barcode)
+                        print(trimmedString)
+                        
+                        trimmedString = trimmedString.trimmingCharacters(in: .whitespacesAndNewlines)
+                        print(trimmedString)
+                        
+                        self.nameTextField.text = trimmedString
                     }
+                    
+                    // getting image
+                    if(resultString.count > 1)
+                    {
+                        var trimmedString = resultString[1]
+                        trimmedString = WebScrapper.shared.trimmingString(in: trimmedString, trim: "<img src=\"")
+                        print(trimmedString)
+                        
+                        trimmedString = WebScrapper.shared.trimmingAfterString(in: trimmedString, trim: " width=\"392\" height=\"260\" id=\"detailImage\" />")
+                        print(trimmedString)
+                        
+                        trimmedString = trimmedString.trimmingCharacters(in: .whitespacesAndNewlines)
+                        print(trimmedString)
+                        
+                        let link = trimmedString
+                        if let url = URL(string: link)
+                        {
+                            WebScrapper.shared.downloadImage(from: url, ui: pictureButton,
+                                                             completion: {
+                                                                if let image = pictureButton.image(for: .normal)
+                                                                {
+                                                                    self.groceryImage = GroceryImage(image: image)
+                                                                }
+                                                             })
+                        }
+                    }
+                    
+                    self.enableCompletButton()
                 }
-            }
-            else
-            {
-                // 바코드 정보를 가져오지 못했습니다.
-                print("바코드 정보를 가져오지 못했습니다.")
-            }
-        } // end of closer
+                else
+                {
+                    // 바코드 정보를 가져오지 못했습니다.
+                    print("getting barcode information failed")
+                }
+            } // end of closer
+             
+        }
     }
     
     @IBAction func unwindToAddGrocery(_ unwindSegue: UIStoryboardSegue)
@@ -590,20 +674,30 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             {
                 // Use data from the view controller which initiated the unwind segue
                 nameTextField.text = sourceViewController.selectedName
-                if let category = defaultNames[sourceViewController.selectedName]
+                if let selectedCategory = defaultNames[sourceViewController.selectedName]
                 {
-                    categoryButton.setTitle(category.rawValue, for: .normal)
+                    //categoryButton.setTitle(category.description, for: .normal)
+                    category = selectedCategory
                 }
+                if let image = UIImage(named: sourceViewController.selectedName)
+                {
+                    groceryImage = GroceryImage(image: image)
+                    pictureButton.setImage(groceryImage?.image(), for: .normal)
+                }
+                
+                updateTableView()
                 enableCompletButton()
             }
         }
         else if(unwindSegue.identifier == "CategorySegue")
         {
             let sourceViewController = unwindSegue.source as! CategoryTableViewController
-            if(sourceViewController.categoryName != "")
-            {
-                categoryButton.setTitle(sourceViewController.categoryName, for: .normal)
-            }
+            //if(sourceViewController.categoryName != "")
+            //{
+                //categoryButton.setTitle(sourceViewController.categoryName, for: .normal)
+                category = sourceViewController.category
+                updateTableView()
+            //}
         }
         else if(unwindSegue.identifier == "ToAddGrocery")
         {
@@ -621,6 +715,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     @IBAction func completeButtonTapped(_ sender: Any)
     {
+        dismissKeyboard()
         if(isFromShoppingCart)
         {
             performSegue(withIdentifier: "UnwindShopingCartFromAddGrocery", sender: self)
@@ -630,6 +725,19 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             performSegue(withIdentifier: "UnwindGroceryListFromAddGrocery", sender: self)
         }
     }
+    
+    @IBAction func backButtonTapped(_ sender: Any)
+    {
+        if(isFromShoppingCart)
+        {
+            performSegue(withIdentifier: "UnwindShopingCartFromAddGrocery", sender: self)
+        }
+        else
+        {
+            performSegue(withIdentifier: "UnwindGroceryListFromAddGrocery", sender: self)
+        }
+    }
+    
     // MARK: - Table view data source
 /*
     override func numberOfSections(in tableView: UITableView) -> Int {
