@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        ShareManager.shared.beginShareManager()
+        
         defaultNames = getDefaultNames()
         
         if(UserDefaults.isFirstLaunch())
