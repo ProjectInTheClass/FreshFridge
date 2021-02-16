@@ -246,7 +246,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
             if(cartGrocery.isPurchased)
             {
                 isMoved = true
-                let groceryHistory = GroceryHistory.getGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: true)
+                let groceryHistory = DataManager.shared.addGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: true)
                 let fridgeGrocery = Grocery(info: groceryHistory, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
                 
                 groceries.insert(fridgeGrocery, at: 0)
@@ -335,7 +335,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                     // adding
                     if(title.isEmpty == false)
                     {
-                        let newCartGrocery = CartGrocery(info: GroceryHistory.getGroceryHistory(title: title, category: category, updateDate: true))
+                        let newCartGrocery = CartGrocery(info: DataManager.shared.addGroceryHistory(title: title, category: category, updateDate: true))
                         newCartGrocery.info.image = image
                         newCartGrocery.count = count
                         newCartGrocery.isPercentageCount = isPercentageCount
@@ -367,7 +367,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 }
                 tableView.reloadData()
                 
-                GroceryHistory.saveGroceryHistory(groceryHistories)
                 CartGrocery.saveCartGrocery(cartGroceries)
             }
         }

@@ -361,7 +361,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             
             // goto the cart
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-            let cartGrocery = CartGrocery(info: GroceryHistory.getGroceryHistory(title: selectedGrocery.info.title, category: selectedGrocery.info.category, updateDate: true))
+            let cartGrocery = CartGrocery(info: DataManager.shared.addGroceryHistory(title: selectedGrocery.info.title, category: selectedGrocery.info.category, updateDate: true))
             cartGroceries.insert(cartGrocery, at: 0)
             
             CartGrocery.saveCartGrocery(cartGroceries)
@@ -708,7 +708,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 else
                 {
                     // adding
-                    let newGrocery = Grocery(info: GroceryHistory.getGroceryHistory(title: title, category: category, updateDate: true), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
+                    let newGrocery = Grocery(info: DataManager.shared.addGroceryHistory(title: title, category: category, updateDate: true), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
                     if(image != nil)
                     {
                         newGrocery.info.image = image
@@ -722,7 +722,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 tableView.reloadData()
                 
                 Grocery.saveGrocery(groceries)
-                GroceryHistory.saveGroceryHistory(groceryHistories)
+                
                 
             }
         }

@@ -26,6 +26,7 @@
 		8E97D5E225DBC13200684485 /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E97D5E125DBC13200684485 /* ShareManager.swift */; };
 		8E97D5E625DBCE6800684485 /* URLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E97D5E525DBCE6800684485 /* URLExtension.swift */; };
 		8E97D5EA25DBDA4500684485 /* FamilyShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E97D5E925DBDA4500684485 /* FamilyShareViewController.swift */; };
+		8E97D5F325DBF46200684485 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E97D5F225DBF46200684485 /* DataManager.swift */; };
 		8EA2CC2125B40EC900D80622 /* DefaultNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2025B40EC900D80622 /* DefaultNameViewController.swift */; };
 		8EA2CC2425B40EE600D80622 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */; };
 		8EA2CC2825B4201600D80622 /* SelectFridgeNameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */; };
@@ -68,6 +69,7 @@
 		8E97D5E125DBC13200684485 /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
 		8E97D5E525DBCE6800684485 /* URLExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtension.swift; sourceTree = "<group>"; };
 		8E97D5E925DBDA4500684485 /* FamilyShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyShareViewController.swift; sourceTree = "<group>"; };
+		8E97D5F225DBF46200684485 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		8EA2CC2025B40EC900D80622 /* DefaultNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNameViewController.swift; sourceTree = "<group>"; };
 		8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFridgeNameTableViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				8E97D5E125DBC13200684485 /* ShareManager.swift */,
 				8E4B99FA25AD4EFE00F2B0BF /* Grocery.swift */,
 				8EA2CC2B25B55A2500D80622 /* GroceryImge.swift */,
+				8E97D5F225DBF46200684485 /* DataManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				8EA2CC2C25B55A2500D80622 /* GroceryImge.swift in Sources */,
 				8EA2CC7A25C06CA700D80622 /* FridgeTabBarController.swift in Sources */,
 				8EA2CC2825B4201600D80622 /* SelectFridgeNameTableViewController.swift in Sources */,
+				8E97D5F325DBF46200684485 /* DataManager.swift in Sources */,
 				8EA2CC7325C0267C00D80622 /* WebScrapper.swift in Sources */,
 				8E97D5EA25DBDA4500684485 /* FamilyShareViewController.swift in Sources */,
 				8E4B99FF25AD4EFE00F2B0BF /* Grocery.swift in Sources */,
@@ -526,7 +530,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = FridgeManager.FreshFridge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "FreshFridge/FreshFridge-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "FreshFridge/Helpers/FreshFridge-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -551,7 +555,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = FridgeManager.FreshFridge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "FreshFridge/FreshFridge-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "FreshFridge/Helpers/FreshFridge-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

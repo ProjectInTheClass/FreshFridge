@@ -11,7 +11,7 @@ class ShareManager
 {
     var sharedID: Int = -1
     var publicCode: String = ""
-   
+    var lastUpdateTime: Date = Date()
     
     static let shared = ShareManager()
     private init() {}
@@ -134,5 +134,10 @@ class ShareManager
         }
         
         task.resume()
+    }
+    
+    func updated()
+    {
+        
     }
 }
