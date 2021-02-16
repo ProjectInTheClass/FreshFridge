@@ -45,7 +45,7 @@
 		8E3E4AE825D82FA20056B65C /* FreshFridge-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreshFridge-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E3E4AE925D82FA30056B65C /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHCSVParser.m; path = CSV/CHCSVParser.m; sourceTree = "<group>"; };
 		8E3E4AEA25D82FA30056B65C /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHCSVParser.h; path = CSV/CHCSVParser.h; sourceTree = "<group>"; };
-		8E3E4AED25D830CD0056B65C /* BarcodeData.csv */ = {isa = PBXFileReference; lastKnownFileType = file; path = BarcodeData.csv; sourceTree = SOURCE_ROOT; };
+		8E3E4AED25D830CD0056B65C /* BarcodeData.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = BarcodeData.csv; sourceTree = SOURCE_ROOT; };
 		8E4B99CD25AD4AF500F2B0BF /* FreshFridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreshFridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E4B99D025AD4AF500F2B0BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E4B99D225AD4AF500F2B0BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -471,7 +471,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4U2X9NNZ52;
+				DEVELOPMENT_TEAM = 84U9466FR2;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = FreshFridge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
