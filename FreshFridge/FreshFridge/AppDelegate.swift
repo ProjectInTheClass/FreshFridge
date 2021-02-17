@@ -11,8 +11,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var grantedAuthorization: Bool = false
+    var timer = Timer()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        ShareManager.shared.beginShareManager()
         
         defaultNames = getDefaultNames()
         
@@ -58,17 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         */
         
         let langStr = Locale.current.languageCode
-        if let savedGroceryHistories = GroceryHistory.loadGroceryHistory()
-        {
-            groceryHistories = savedGroceryHistories
-        }
-        else
-        {
-            if(langStr == "ko")
-            {
-                groceryHistories = GroceryHistory.loadSampleGroceryHistory()
-            }
-        }
+        DataManager.shared.loadGroceryHistory()
         
         if let savedGroceries = Grocery.loadGrocery()
         {
@@ -98,13 +91,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // link groceries and groceryHistories
         for grocery in groceries.reversed()
         {
-            grocery.info = GroceryHistory.getGroceryHistory(title: grocery.info.title, category: grocery.info.category, updateDate: false)
+            grocery.info = DataManager.shared.addGroceryHistory(title: grocery.info.title, category: grocery.info.category, updateDate: false)
         }
         
         // link cartGroceries and groceryHistories
         for cartGrocery in cartGroceries.reversed()
         {
-            cartGrocery.info = GroceryHistory.getGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: false)
+            cartGrocery.info = DataManager.shared.addGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: false)
         }
         
         // read barcode data
@@ -293,6 +286,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         completionHandler()
+    }
+    
+    func scheduledTimerWithTimeInterval(){
+        // Scheduling timer to Call the function "updateCounting" with the interval of 1 seconds
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
+    }
+
+    @objc func updateCounting(){
+        NSLog("counting..")
     }
 
 }

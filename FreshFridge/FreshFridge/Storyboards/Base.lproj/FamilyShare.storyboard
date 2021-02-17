@@ -32,7 +32,7 @@
         <!--가족 공유-->
         <scene sceneID="mup-mv-j33">
             <objects>
-                <viewController id="Ga2-xJ-rlK" sceneMemberID="viewController">
+                <viewController id="Ga2-xJ-rlK" customClass="FamilyShareViewController" customModule="FreshFridge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lgk-3l-UjM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,21 +47,27 @@
                                             <constraint firstAttribute="height" constant="150" id="zp9-a0-OcN"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBb-7M-akn">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBb-7M-akn">
                                         <rect key="frame" x="0.0" y="210" width="374" height="50"/>
                                         <color key="backgroundColor" systemColor="systemFillColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="4LW-gr-6dm"/>
                                         </constraints>
                                         <state key="normal" title="공유 코드 생성"/>
+                                        <connections>
+                                            <action selector="createPublicCode:" destination="Ga2-xJ-rlK" eventType="touchUpInside" id="3Ct-f6-eaO"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cn5-nq-0E6">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cn5-nq-0E6">
                                         <rect key="frame" x="0.0" y="320" width="374" height="50"/>
                                         <color key="backgroundColor" systemColor="systemFillColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="mrv-eQ-WMR"/>
                                         </constraints>
                                         <state key="normal" title="코드 입력"/>
+                                        <connections>
+                                            <action selector="enterPublicCode:" destination="Ga2-xJ-rlK" eventType="touchUpInside" id="hSP-4m-2Zw"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eki-Kk-gf9">
                                         <rect key="frame" x="0.0" y="430" width="374" height="50"/>
@@ -69,7 +75,6 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Ejv-tR-iV7"/>
                                         </constraints>
-                                        <state key="normal" title="가족 공유 기능 활성 (준비중)"/>
                                     </button>
                                 </subviews>
                                 <constraints>
