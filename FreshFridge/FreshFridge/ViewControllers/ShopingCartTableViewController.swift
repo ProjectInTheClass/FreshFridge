@@ -164,8 +164,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
             let grocery = filteredCartGroceries[indexPath.section][indexPath.row]
             if var count = Int(sender.countTextField.text ?? "")
             {
-                
-                
                 if(grocery.isPercentageCount)
                 {
                     if(count < 0)
@@ -185,8 +183,8 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                     }
                 }
                 
-                grocery.count = count
-                
+                //grocery.count = count
+                DataManager.shared.updateCartGrocery(id: grocery.id, count: count)
             }
          
             sender.countTextField.updatePieChart(count: grocery.count, isPercentage: grocery.isPercentageCount)
@@ -338,15 +336,28 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                     // 장바구니 상세 페이지에서 수정한 경우
                     if let cartGrocery = sourceViewController.cartGrocery
                     {
-                        cartGrocery.info.title = title
+                        if(cartGrocery.info.title != title)
+                        {
+                            DataManager.shared.updateCartGrocery(id: cartGrocery.id, title: title)
+                        }
                         if(cartGrocery.info.category != category)
                         {
-                            cartGrocery.info.category = category
+                            //cartGrocery.info.category = category
+                            DataManager.shared.updateCartGrocery(id: cartGrocery.id, category: category)
                             bUpdateTableView = true
                         }
-                        cartGrocery.count = count
-                        cartGrocery.isPercentageCount = isPercentageCount
-                        cartGrocery.info.image = image
+                        if(cartGrocery.count != count)
+                        {
+                            DataManager.shared.updateCartGrocery(id: cartGrocery.id, count: count)
+                        }
+                        if(cartGrocery.isPercentageCount != isPercentageCount)
+                        {
+                            DataManager.shared.updateCartGrocery(id: cartGrocery.id, isPercentage: isPercentageCount)
+                        }
+                        if((cartGrocery.info.image === image) == false && image != nil)
+                        {
+                            DataManager.shared.updateCartGrocery(id: cartGrocery.id, image: image!)
+                        }
                     }
                 }
                 

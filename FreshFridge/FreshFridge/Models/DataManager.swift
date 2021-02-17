@@ -221,4 +221,52 @@ class DataManager
             saveCartGrocery()
         }
     }
+    
+    func updateCartGrocery(id: UUID, count: Int)
+    {
+        if let foundCartGrocery = findCartGrocery(id: id)
+        {
+            foundCartGrocery.count = count
+            saveCartGrocery()
+        }
+    }
+    
+    func updateCartGrocery(id: UUID, isPercentage: Bool)
+    {
+        if let foundCartGrocery = findCartGrocery(id: id)
+        {
+            foundCartGrocery.isPercentageCount = isPercentage
+            saveCartGrocery()
+        }
+    }
+    
+    func updateCartGrocery(id: UUID, title: String)
+    {
+        if let foundCartGrocery = findCartGrocery(id: id)
+        {
+            foundCartGrocery.info.title = title
+            saveCartGrocery()
+            saveGroceryHistory()
+        }
+    }
+    
+    func updateCartGrocery(id: UUID, category: GroceryHistory.Category)
+    {
+        if let foundCartGrocery = findCartGrocery(id: id)
+        {
+            foundCartGrocery.info.category = category
+            saveCartGrocery()
+            saveGroceryHistory()
+        }
+    }
+    
+    func updateCartGrocery(id: UUID, image: GroceryImage)
+    {
+        if let foundCartGrocery = findCartGrocery(id: id)
+        {
+            foundCartGrocery.info.image = image
+            saveCartGrocery()
+            saveGroceryHistory()
+        }
+    }
 }
