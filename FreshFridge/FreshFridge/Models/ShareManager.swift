@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ShareManager
 {
@@ -27,16 +28,20 @@ class ShareManager
         {
             return rootURL
         }
-        else
-        {
-            fatalError("root url not found")
-        }
+        
+        return ""
     }
     
-    func beginShareManager()
+    func initShareManager()
     {
         sharedID = UserDefaults.standard.integer(forKey: "sharedID")
         publicCode = UserDefaults.standard.string(forKey: "publicCode") ?? ""
+        
+        if( publicCode.isEmpty == false && getServerURL().isEmpty == false )
+        {
+            startShareWithPublicCode(publicCode: publicCode)
+            updateAllProduct()
+        }
     }
     
     struct RequestCode: Codable
@@ -66,8 +71,6 @@ class ShareManager
         
     func startShareAndCreateCode()
     {
-        guard isShared() == false else { return }
-        
         let subURL = "/requestCode"
         let baseURL = URL(string: getServerURL() + subURL)!
         let task = URLSession.shared.dataTask(with: baseURL)
@@ -83,6 +86,8 @@ class ShareManager
                 
                 UserDefaults.standard.set(self.sharedID, forKey: "sharedID")
                 UserDefaults.standard.set(self.publicCode, forKey: "publicCode")
+                
+                // 로컬의 데이터를 서버로 보내고, 로컬 데이터를 전부 지운다.
             }
         }
         
@@ -91,7 +96,7 @@ class ShareManager
     
     func startShareWithPublicCode(publicCode: String)
     {
-         let subURL = "/requestCode"
+        let subURL = "/requestCode"
         let baseURL = URL(string: getServerURL() + subURL)!
         let query: [String: String] = [
                 "code": "\(publicCode)",
@@ -111,6 +116,8 @@ class ShareManager
                 
                 UserDefaults.standard.set(self.sharedID, forKey: "sharedID")
                 UserDefaults.standard.set(self.publicCode, forKey: "publicCode")
+                
+                // 로컬의 데이터를 서버로 보내고, 로컬 데이터를 전부 지운다.
             }
         }
         
@@ -136,8 +143,83 @@ class ShareManager
         task.resume()
     }
     
-    func updated()
+    struct Product: Codable
     {
+        var createdAt: Int
+        var updatedAt: Int
+        var id: Int
+        var title: String
+        var category: Int
+        var favorite: Bool
+        var imageCode: String
         
+        enum CodingKeys: String, CodingKey
+        {
+            case createdAt
+            case updatedAt
+            case id
+            case title
+            case category
+            case favorite
+            case imageCode
+        }
+        
+        init(from decoder: Decoder) throws
+        {
+            let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
+            self.createdAt = try valueContainer.decode(Int.self, forKey: CodingKeys.createdAt)
+            self.updatedAt = try valueContainer.decode(Int.self, forKey: CodingKeys.updatedAt)
+            self.id = try valueContainer.decode(Int.self, forKey: CodingKeys.id)
+            self.title = try! valueContainer.decode(String.self, forKey: CodingKeys.title)
+            self.category = try valueContainer.decode(Int.self, forKey: CodingKeys.category)
+            self.favorite = try valueContainer.decode(Bool.self, forKey: CodingKeys.favorite)
+            self.imageCode = try! valueContainer.decode(String.self, forKey: CodingKeys.imageCode)
+        }
+    }
+    
+    // Product
+    func updateAllProduct()
+    {
+        guard isShared() else { return }
+        let subURL = "/Product"
+        let baseURL = URL(string: getServerURL() + subURL)!
+        let query: [String: String] = [
+                "id": "\(sharedID)",
+            ]
+        
+        let url = baseURL.withQueries(query)!
+        let task = URLSession.shared.dataTask(with: url)
+        { (data, response, error) in
+            let jsonDecoder = JSONDecoder()
+            if let data = data
+            {
+                DataManager.shared.removeAll()
+                if let products = try? jsonDecoder.decode([Product].self, from: data)
+                {
+                    print(products)
+                    
+                    for product in products
+                    {
+                        DataManager.shared.addProduct(product: product)
+                    }
+                }
+                
+                
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func updatePurchaseRecordViewController()
+    {
+        guard (UIApplication.shared.delegate as! AppDelegate).purchaseRecordViewController != nil else { return }
+        
+        
+        DispatchQueue.main.async()
+        {
+            (UIApplication.shared.delegate as! AppDelegate).purchaseRecordViewController.updateTableView()
+            (UIApplication.shared.delegate as! AppDelegate).purchaseRecordViewController.tableView.reloadData()
+        }
     }
 }

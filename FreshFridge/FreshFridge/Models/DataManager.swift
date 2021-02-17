@@ -12,6 +12,7 @@ class DataManager
     var langStr: String// = Locale.current.languageCode
     
     var groceryHistories = [GroceryHistory]()
+    var cartGroceries = [CartGrocery]()
     
     static let shared = DataManager()
     private init()
@@ -25,6 +26,7 @@ class DataManager
     
     func removeAll()
     {
+        groceryHistories.removeAll()
     }
     
     ///
@@ -39,7 +41,7 @@ class DataManager
         return groceryHistories.enumerated().first(where: {$0.element === groceryHistory})
     }
     
-    func findGroceryHistoryIndex(id: UUID) -> GroceryHistory?
+    func findGroceryHistory(id: UUID) -> GroceryHistory?
     {
         return groceryHistories.first(where: {$0.id == id})
     }
@@ -95,6 +97,16 @@ class DataManager
         
     }
     
+    func addProduct(product: ShareManager.Product)
+    {
+        let groceryHistory = GroceryHistory(title: product.title, category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC, favorite: product.favorite, lastestPurchaseDate: Date(timeIntervalSince1970: TimeInterval(product.updatedAt)))
+        //groceryHistory.id = product.id
+        //groceryHistory.image
+        groceryHistories.insert(groceryHistory, at: 0)
+        
+        saveGroceryHistory()
+    }
+    
     func removeGroceryHistory(groceryHistory: GroceryHistory)
     {
         if let selectedIndex = findGroceryHistoryIndex(groceryHistory: groceryHistory)
@@ -106,7 +118,7 @@ class DataManager
     
     func updateGroceryHistory(id: UUID, favorite: Bool)
     {
-        if let foundGroceryHistory = findGroceryHistoryIndex(id: id)
+        if let foundGroceryHistory = findGroceryHistory(id: id)
         {
             foundGroceryHistory.favorite = favorite
             saveGroceryHistory()
@@ -130,19 +142,83 @@ class DataManager
     }
     
     // CartGrocery
+    
+    func getCartGroceries() -> [CartGrocery]
+    {
+        return cartGroceries
+    }
+    
+    func isExistCartGrocery(title: String, category: GroceryHistory.Category) -> Bool
+    {
+        if cartGroceries.first(where: {$0.info.title == title && $0.info.category == category}) != nil
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+
+    func findCartGroceryIndex(cartGrocery: CartGrocery) -> EnumeratedSequence<[CartGrocery]>.Element?
+    {
+        return cartGroceries.enumerated().first(where: {$0.element === cartGrocery})
+    }
+    
+    func findCartGrocery(id: UUID) -> CartGrocery?
+    {
+        return cartGroceries.first(where: {$0.id == id})
+    }
+    
     func saveCartGrocery()
     {
+        CartGrocery.saveCartGrocery(cartGroceries)
     }
     
     func loadCartGrocery()
     {
+        if let savedCartGroceries = CartGrocery.loadCartGrocery()
+        {
+            cartGroceries = savedCartGroceries
+        }
+        else
+        {
+           if(langStr == "ko")
+           {
+               cartGroceries = CartGrocery.loadSampleCartGrocery()
+           }
+        }
     }
     
-    func addCartGrocery()
+    func addCartGrocery(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, count: Int = 1, isPercentageCount: Bool = false)
     {
+        let newCartGrocery = CartGrocery(info: DataManager.shared.addGroceryHistory(title: title, category: category, updateDate: true))
+        if let image = image
+        {
+            newCartGrocery.info.image = image
+        }
+        newCartGrocery.count = count
+        newCartGrocery.isPercentageCount = isPercentageCount
+        cartGroceries.insert(newCartGrocery, at: 0)
+        
+        saveCartGrocery()
     }
     
-    func removeCartGrocery()
+    func removeCartGrocery(cartGrocery: CartGrocery)
     {
+        if let selectedIndex = findCartGroceryIndex(cartGrocery: cartGrocery)
+        {
+            cartGroceries.remove(at: selectedIndex.offset)
+            saveCartGrocery()
+        }
+    }
+    
+    func updateCartGrocery(id: UUID, isPurchased: Bool)
+    {
+        if let foundCartGrocery = findCartGrocery(id: id)
+        {
+            foundCartGrocery.isPurchased = isPurchased
+            saveCartGrocery()
+        }
     }
 }

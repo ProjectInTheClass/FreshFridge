@@ -361,10 +361,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             
             // goto the cart
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-            let cartGrocery = CartGrocery(info: DataManager.shared.addGroceryHistory(title: selectedGrocery.info.title, category: selectedGrocery.info.category, updateDate: true))
-            cartGroceries.insert(cartGrocery, at: 0)
+            DataManager.shared.addCartGrocery(title: selectedGrocery.info.title, category: selectedGrocery.info.category)
             
-            CartGrocery.saveCartGrocery(cartGroceries)
             fridgeTabBarController.animateBadge(tabBarIndex: .shopingCartTabBar)
             
             success(true)

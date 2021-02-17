@@ -12,10 +12,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     var grantedAuthorization: Bool = false
     var timer = Timer()
+    
+    var purchaseRecordViewController: PurchaseRecordTableViewController!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        ShareManager.shared.beginShareManager()
+        scheduledTimerWithTimeInterval()
+        
+        ShareManager.shared.initShareManager()
         
         defaultNames = getDefaultNames()
         
@@ -53,14 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             selectedFridgeIndex = UserDefaults.standard.array(forKey: "selectedFridgeIndex") as? [Int] ?? [0,1,2,3]
         }
         
-        // 테스트용 sample date loading
-        /*
-        groceryHistories = GroceryHistory.loadSampleGroceryHistory()
-        groceries = Grocery.loadSampleGrocery()
-        cartGroceries = CartGrocery.loadSampleCartGrocery()
-        */
-        
-        let langStr = Locale.current.languageCode
         DataManager.shared.loadGroceryHistory()
         
         if let savedGroceries = Grocery.loadGrocery()
@@ -69,23 +65,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         else
         {
-            if(langStr == "ko")
+            if(Locale.current.languageCode == "ko")
             {
                 groceries = Grocery.loadSampleGrocery()
             }
         }
          
-         if let savedCartGroceries = CartGrocery.loadCartGrocery()
-         {
-             cartGroceries = savedCartGroceries
-         }
-         else
-         {
-            if(langStr == "ko")
-            {
-                cartGroceries = CartGrocery.loadSampleCartGrocery()
-            }
-         }
+        DataManager.shared.loadCartGrocery()
          
         
         // link groceries and groceryHistories
@@ -95,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         // link cartGroceries and groceryHistories
-        for cartGrocery in cartGroceries.reversed()
+        for cartGrocery in DataManager.shared.getCartGroceries().reversed()
         {
             cartGrocery.info = DataManager.shared.addGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: false)
         }
@@ -290,11 +276,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func scheduledTimerWithTimeInterval(){
         // Scheduling timer to Call the function "updateCounting" with the interval of 1 seconds
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
     }
 
-    @objc func updateCounting(){
+    @objc func updateCounting()
+    {
         NSLog("counting..")
+        
+        // test code
+        // 60초마다.. 로컬 데이터를 전부 지우고, 서버로부터 전부 받아서 추가함.
+        ShareManager.shared.updateAllProduct()
+        ShareManager.shared.updatePurchaseRecordViewController()
     }
 
 }

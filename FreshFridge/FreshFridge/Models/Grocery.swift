@@ -271,7 +271,7 @@ class CartGrocery: Codable
         return try? propertyListDecoder.decode(Array<CartGrocery>.self, from: codedCartGrocery)
     }
     
-    static func saveCartGrocery(_ groceries: [CartGrocery])
+    static func saveCartGrocery(_ cartGroceries: [CartGrocery])
     {
         let propertyListEncoder = PropertyListEncoder()
         let codedCartGrocery = try? propertyListEncoder.encode(cartGroceries)
@@ -353,17 +353,7 @@ func isExistGrocery(title: String, category: GroceryHistory.Category) -> Bool
     }
 }
 
-func isExistCartGrocery(title: String, category: GroceryHistory.Category) -> Bool
-{
-    if cartGroceries.first(where: {$0.info.title == title && $0.info.category == category}) != nil
-    {
-        return true
-    }
-    else
-    {
-        return false
-    }
-}
+
 
 func findGroceryIndex(grocery: Grocery) -> EnumeratedSequence<[Grocery]>.Element?
 {
@@ -372,10 +362,6 @@ func findGroceryIndex(grocery: Grocery) -> EnumeratedSequence<[Grocery]>.Element
 
 
 
-func findCartGroceryIndex(cartGrocery: CartGrocery) -> EnumeratedSequence<[CartGrocery]>.Element?
-{
-    return cartGroceries.enumerated().first(where: {$0.element === cartGrocery})
-}
 
 func getDocumentsDirectory() -> URL
 {
@@ -484,7 +470,6 @@ class BarcodeData
 
 
 var groceries = [Grocery]()
-var cartGroceries = [CartGrocery]()
 var barcodeData = [BarcodeData]()
 
 // 저장을 쉽게 하기위해 전역 변수로 옮김

@@ -4,7 +4,7 @@
 //
 //  Created by Park Youngeun on 2021/01/20.
 //
-// var cartGroceries = [CartGrocery]()
+
 
 
 import UIKit
@@ -42,7 +42,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         
         fridgeTabBarController = tabBarController as? FridgeTabBarController
         
-        sortedArray = cartGroceries
+        sortedArray = DataManager.shared.getCartGroceries()
         updateButtons() 
         updateTableView()
         
@@ -70,11 +70,11 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         
         // 최신순 버튼이 켜져 있으면 CartGrocery 어레이를 그대로 담는다. 기본 어레이는 사용자가 추가한 순서대로 어팬드 되니까 어짜피 최신순 일 것이다.
         if isShopingCartLatestButtonOn == true {
-            sortedArray = cartGroceries
+            sortedArray = DataManager.shared.getCartGroceries()
         }
         // 최신순 버튼이 꺼져 있으면 타이틀의 가나다 순으로 정렬해서 다음 어레이에 담는다.
        else {
-        sortedArray = cartGroceries.sorted { $0.info.title < $1.info.title }
+        sortedArray = DataManager.shared.getCartGroceries().sorted { $0.info.title < $1.info.title }
             
         }
         // 분류별 버튼이 켜져 있으면 테이블 뷰를 섹션으로 나누어서 카테고리별로 정렬한다.
@@ -143,11 +143,12 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     func checkCartTapped(sender: ShopingCartTableViewCell) {
         if let indexPath = tableView.indexPath(for: sender) {
             let checkGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
-            checkGrocery.isPurchased = !checkGrocery.isPurchased
+            
+            DataManager.shared.updateCartGrocery(id: checkGrocery.id, isPurchased: !checkGrocery.isPurchased)
         }
         //updateTableView()
         tableView.reloadData()
-        CartGrocery.saveCartGrocery(cartGroceries)
+        
         
         //
         if(isAllCheckMarkButtonOn)
@@ -211,12 +212,11 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         isAllCheckMarkButtonOn.toggle()
         updateAllCheckMarkButton()
         
-        for cartGrocery in cartGroceries
+        for cartGrocery in DataManager.shared.getCartGroceries()
         {
-            cartGrocery.isPurchased = isAllCheckMarkButtonOn
+            DataManager.shared.updateCartGrocery(id: cartGrocery.id, isPurchased: isAllCheckMarkButtonOn)
         }
         
-        CartGrocery.saveCartGrocery(cartGroceries)
         tableView.reloadData()
     }
     
@@ -241,19 +241,17 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     @IBAction func ToFridgeButtonTapped(_ sender: UIButton) {
         
         var isMoved = false
-        for cartGrocery in cartGroceries.reversed()
+        for cartGrocery in DataManager.shared.getCartGroceries().reversed()
         {
             if(cartGrocery.isPurchased)
             {
                 isMoved = true
                 let groceryHistory = DataManager.shared.addGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: true)
                 let fridgeGrocery = Grocery(info: groceryHistory, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
-                
                 groceries.insert(fridgeGrocery, at: 0)
-                if let selectedIndex = findCartGroceryIndex(cartGrocery: cartGrocery)
-                {
-                    cartGroceries.remove(at: selectedIndex.offset)
-                }
+                
+                DataManager.shared.removeCartGrocery(cartGrocery: cartGrocery)
+                
                 (UIApplication.shared.delegate as! AppDelegate).setAlarm(grocery: fridgeGrocery)
             }
         }
@@ -263,7 +261,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
             updateTableView()
             tableView.reloadData()
             Grocery.saveGrocery(groceries)
-            CartGrocery.saveCartGrocery(cartGroceries)
+            
             fridgeTabBarController.animateBadge(tabBarIndex: .fridgeTabBar)
         }
     }
@@ -279,16 +277,11 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
              
                 print("Trash action ...")
                 
-                let selectedGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
+                let cartGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
+                DataManager.shared.removeCartGrocery(cartGrocery: cartGrocery)
                 
-                if let selectedIndex = findCartGroceryIndex(cartGrocery: selectedGrocery)
-                {
-                    cartGroceries.remove(at: selectedIndex.offset)
-                    updateTableView()
-                    tableView.reloadData()
-                    
-                    CartGrocery.saveCartGrocery(cartGroceries)
-                }
+                updateTableView()
+                tableView.reloadData()
             
                 success(true)
          })
@@ -335,11 +328,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                     // adding
                     if(title.isEmpty == false)
                     {
-                        let newCartGrocery = CartGrocery(info: DataManager.shared.addGroceryHistory(title: title, category: category, updateDate: true))
-                        newCartGrocery.info.image = image
-                        newCartGrocery.count = count
-                        newCartGrocery.isPercentageCount = isPercentageCount
-                        cartGroceries.insert(newCartGrocery, at: 0)
+                        DataManager.shared.addCartGrocery(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount)
                         
                         bUpdateTableView = true
                     }
@@ -366,8 +355,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                     updateTableView()
                 }
                 tableView.reloadData()
-                
-                CartGrocery.saveCartGrocery(cartGroceries)
             }
         }
     }

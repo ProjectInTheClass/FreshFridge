@@ -75,6 +75,10 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Ejv-tR-iV7"/>
                                         </constraints>
+                                        <state key="normal" title="공유 취소"/>
+                                        <connections>
+                                            <action selector="resignShare:" destination="Ga2-xJ-rlK" eventType="touchUpInside" id="5I0-GZ-TLb"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

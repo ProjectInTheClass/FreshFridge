@@ -3,8 +3,7 @@
 
 //  Created by Park Youngeun on 2021/01/20.
 //
-// var cartGroceries = [CartGrocery]()
-// class CartGrocery
+
 
 
 import UIKit

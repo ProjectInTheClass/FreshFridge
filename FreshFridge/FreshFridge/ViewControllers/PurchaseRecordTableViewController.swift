@@ -43,6 +43,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        (UIApplication.shared.delegate as! AppDelegate).purchaseRecordViewController = self
+        
         searchbarGroceries = DataManager.shared.getGroceryHistories()
         
         tableView.cellLayoutMarginsFollowReadableWidth = true
@@ -216,11 +218,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         let toCartAction = UIContextualAction(style: .destructive, title:  "Cart", handler:
         { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
-            let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-            let cartGrocery = CartGrocery(info: DataManager.shared.addGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, updateDate: true))
-            
-            cartGroceries.insert(cartGrocery, at: 0)
-            CartGrocery.saveCartGrocery(cartGroceries)
+            let selectedHistory = filteredGroceries[indexPath.section][indexPath.row]
+            DataManager.shared.addCartGrocery(title: selectedHistory.title, category: selectedHistory.category)
             fridgeTabBarController.animateBadge(tabBarIndex: .shopingCartTabBar)
             
             success(true)
@@ -282,7 +281,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         toFridgeAction.backgroundColor = .systemBlue
      
         if(isExistGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false
-            && isExistCartGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false)
+            && DataManager.shared.isExistCartGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false)
         {
             return UISwipeActionsConfiguration(actions: [modifyAction, toFridgeAction])
         }

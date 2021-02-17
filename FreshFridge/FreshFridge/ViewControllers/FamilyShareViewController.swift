@@ -18,11 +18,21 @@ class FamilyShareViewController: UIViewController {
     
     @IBAction func createPublicCode(_ sender: Any)
     {
+        if ShareManager.shared.isShared()
+        {
+            return
+        }
+        
         ShareManager.shared.startShareAndCreateCode()
     }
     
     @IBAction func enterPublicCode(_ sender: Any)
     {
+        if ShareManager.shared.isShared()
+        {
+            return
+        }
+        
         var publicCode: String = ""
         let alert = UIAlertController(title: "공유 코드", message: "공유 코드를 입력해주세요.", preferredStyle: .alert)
         alert.addTextField()
@@ -41,6 +51,17 @@ class FamilyShareViewController: UIViewController {
         alert.addAction(ok)
         self.present(alert, animated: true, completion: nil)
         
+    }
+    
+    
+    @IBAction func resignShare(_ sender: Any)
+    {
+        if ShareManager.shared.isShared() == false
+        {
+            return
+        }
+        
+        ShareManager.shared.endShare()
     }
     
     /*
