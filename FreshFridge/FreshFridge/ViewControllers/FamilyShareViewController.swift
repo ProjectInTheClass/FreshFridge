@@ -42,6 +42,11 @@ class FamilyShareViewController: UIViewController {
             publicCode = alert.textFields?[0].text ?? ""
             
             ShareManager.shared.startShareWithPublicCode(publicCode: publicCode)
+            {
+                ShareManager.shared.updateAllProduct()
+                ShareManager.shared.updateAllCartItem()
+                ShareManager.shared.updateAllRefrigeratorItem()
+            }
         }
         let cancel = UIAlertAction(title: "cancel", style: .cancel)
         { (cancel) in
@@ -62,6 +67,7 @@ class FamilyShareViewController: UIViewController {
         }
         
         ShareManager.shared.endShare()
+        
     }
     
     /*

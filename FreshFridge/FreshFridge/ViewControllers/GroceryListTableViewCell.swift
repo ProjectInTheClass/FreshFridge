@@ -43,7 +43,7 @@ class GroceryListTableViewCell: UITableViewCell {
         
         delegate?.countButtonTapped(sender: self)
         
-        Grocery.saveGrocery(groceries)
+        
     }
 }
 

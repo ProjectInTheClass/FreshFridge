@@ -9,7 +9,7 @@
 "cn5-nq-0E6.normalTitle" = "코드 입력";
 
 /* Class = "UIButton"; normalTitle = "가족 공유 기능 활성 (준비중)"; ObjectID = "eki-Kk-gf9"; */
-"eki-Kk-gf9.normalTitle" = "가족 공유 기능 활성 (준비중)";
+"eki-Kk-gf9.normalTitle" = "공유 취소";
 
 /* Class = "UIButton"; normalTitle = "공유 코드 생성"; ObjectID = "gBb-7M-akn"; */
 "gBb-7M-akn.normalTitle" = "공유 코드 생성";

@@ -116,7 +116,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         sectionNames.removeAll()
         
         // 냉장, 냉동, 실외 선택으로 보여지는 groceries를 필터링해서 showGroceries에 추가한다.
-        let showGroceries = groceries.filter
+        let showGroceries = DataManager.shared.getGroceries().filter
         {
             (((isFridgeFrigerationButtonOn == true && $0.storage == .Refrigeration)
             || (isFridgeFreezingButtonOn == true && $0.storage == .Freezing)
@@ -157,30 +157,32 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         }
     }
     
-    func countButtonTapped(sender: GroceryListTableViewCell) {
+    func countButtonTapped(sender: GroceryListTableViewCell)
+    {
         if let indexPath = tableView.indexPath(for: sender)
         {
-            let groceries = filteredGroceries[indexPath.section]
-            let grocery = groceries[indexPath.row]
-            
+            let grocery = filteredGroceries[indexPath.section][indexPath.row]
+            var count: Int = grocery.count
             if(grocery.isPercentageCount == false)
             {
-                grocery.count -= 1
-                if( grocery.count < 0 )
+                count -= 1
+                if( count < 0 )
                 {
-                    grocery.count = 0
+                    count = 0
                 }
             }
             else
             {
-                grocery.count -= 10
-                if( grocery.count < 0 )
+                count -= 10
+                if( count < 0 )
                 {
-                    grocery.count = 0
+                    count = 0
                 }
             }
             
-            sender.countButton.updatePieChart(count:grocery.count, isPercentage: grocery.isPercentageCount)
+            sender.countButton.updatePieChart(count:count, isPercentage: grocery.isPercentageCount)
+            
+            DataManager.shared.updateGrocery(id: grocery.id, count: count)
         }
     }
 
@@ -217,8 +219,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         // Configure the cell...
         if(filteredGroceries.count > indexPath.section)
         {
-            let groceries = filteredGroceries[indexPath.section]
-            let grocery = groceries[indexPath.row]
+            let grocery = filteredGroceries[indexPath.section][indexPath.row]
             
             if(grocery.info.image == nil)
             {
@@ -381,30 +382,14 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
              
                 print("Trash action ...")
-//                if let cell = tableView.cellForRow(at: indexPath) as? GroceryListTableViewCell
-//                {
-//                    let translate = CATransform3DTranslate(CATransform3DIdentity, -1000, 0, 0)
-//
-//                    UIView.animate(withDuration: 0.5, animations: {cell.layer.transform = translate})
-//                    {_ in
-//                        cell.layer.transform = CATransform3DIdentity
-//                    }
                     
-                    let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-                    
-                    if let selectedIndex = findGroceryIndex(grocery: selectedGrocery)
-                    {
-                        (UIApplication.shared.delegate as! AppDelegate).removeAlarm(grocery: selectedGrocery)
-                        
-                        groceries.remove(at: selectedIndex.offset)
-                        updateTableView()
-                        tableView.reloadData()
-                        
-                        Grocery.saveGrocery(groceries)
-                    }
-                    
-                    success(true)
-//                }
+                let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
+                (UIApplication.shared.delegate as! AppDelegate).removeAlarm(grocery: selectedGrocery)
+            
+                DataManager.shared.removeGrocery(id: selectedGrocery.id)
+                updateTableView()
+                tableView.reloadData()
+                success(true)
          })
         
          modifyAction.image = UIImage(systemName: "trash")
@@ -458,16 +443,9 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             let fromGrocery = filteredGroceries[fromIndexPath.section][fromIndexPath.row]
             let toGrocery = filteredGroceries[to.section][to.row]
             
-            if let fromIndex = findGroceryIndex(grocery: fromGrocery),
-               let toIndex = findGroceryIndex(grocery: toGrocery)
-            {
-                groceries.remove(at: fromIndex.offset)
-                groceries.insert(fromGrocery, at: toIndex.offset)
-                updateTableView()
-                tableView.reloadData()
-                
-                Grocery.saveGrocery(groceries)
-            }
+            DataManager.shared.moveGrocery(fromGrocery: fromGrocery, toGrocery: toGrocery)
+            updateTableView()
+            tableView.reloadData()
         }
     }
  
@@ -637,34 +615,63 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 if let grocery = sourceViewController.grocery,
                    let selectedRow = tableView.indexPathForSelectedRow
                 {
+                    // editing
+                    var bResetAlarm = false
                     var bUpdateTableView : Bool = false
+                    
+        
+                    if(grocery.count != count)
+                    {
+                        DataManager.shared.updateGrocery(id: grocery.id, count: count)
+                    }
+                    
+                    if(grocery.isPercentageCount != isPercentageCount)
+                    {
+                        DataManager.shared.updateGrocery(id: grocery.id, isPercentageCount: isPercentageCount)
+                    }
+                    
+                    if(grocery.dueDate.date != dueDate.date)
+                    {
+                        DataManager.shared.updateGrocery(id: grocery.id, dueDate: dueDate)
+                        
+                        bResetAlarm = true
+                    }
+                    
+                    if(grocery.storage != storage)
+                    {
+                        DataManager.shared.updateGrocery(id: grocery.id, storage: storage)
+                    }
+                    
+                    if(grocery.fridgeName != fridgeName)
+                    {
+                        DataManager.shared.updateGrocery(id: grocery.id, fridgeName: fridgeName)
+                    }
+                    
+                    if(notes != nil && grocery.notes != notes)
+                    {
+                        DataManager.shared.updateGrocery(id: grocery.id, notes: notes)
+                    }
+                    
+                    if(grocery.info.title != title)
+                    {
+                        DataManager.shared.updateGrocery(id: grocery.id, title: title)
+                        
+                        bResetAlarm = true
+                    }
+                    
                     if(grocery.info.category != category)
                     {
+                        DataManager.shared.updateGrocery(id: grocery.id, category: category)
+                        
                         bUpdateTableView = true
                     }
                     
-                    // editing
-                    var bResetAlarm = false
-                    if(grocery.info.title != title)
+                    if(image != nil && (grocery.info.image === image) == false)
                     {
-                        grocery.info.title = title
-                        bResetAlarm = true
+                        DataManager.shared.updateGrocery(id: grocery.id, image: image)
                     }
-                    grocery.info.category = category
-                    if(image != nil)
-                    {
-                        grocery.info.image = image
-                    }
-                    grocery.count = count
-                    grocery.isPercentageCount = isPercentageCount
-                    if(grocery.dueDate.date != dueDate.date)
-                    {
-                        grocery.dueDate = dueDate
-                        bResetAlarm = true
-                    }
-                    grocery.storage = storage
-                    grocery.fridgeName = fridgeName
-                    grocery.notes = notes
+                    
+                    
                     
                     if(grocery.info.image == nil)
                     {
@@ -702,26 +709,18 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     {
                         (UIApplication.shared.delegate as! AppDelegate).resetAlarm(grocery: grocery)
                     }
+                    
+                    
                 }
                 else
                 {
                     // adding
-                    let newGrocery = Grocery(info: DataManager.shared.addGroceryHistory(title: title, category: category, updateDate: true), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
-                    if(image != nil)
-                    {
-                        newGrocery.info.image = image
-                    }
-                    
-                    groceries.insert(newGrocery, at: 0)
+                    let newGrocery = DataManager.shared.addGrocery(title: title, category: category, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes ?? "", image: image)
                     (UIApplication.shared.delegate as! AppDelegate).setAlarm(grocery: newGrocery)
                     updateTableView()
                 }
             
                 tableView.reloadData()
-                
-                Grocery.saveGrocery(groceries)
-                
-                
             }
         }
         else if(unwindSegue.identifier == "ToGroceryList")
@@ -739,8 +738,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         {
             if let indexPath = tableView.indexPathForSelectedRow
             {
-                let groceries = filteredGroceries[indexPath.section]
-                let grocery = groceries[indexPath.row]
+                let grocery = filteredGroceries[indexPath.section][indexPath.row]
+                
                 let navigationController = segue.destination as! UINavigationController
                 let addGroceryTableViewController = navigationController.topViewController as! AddGroceryTableViewController
                 

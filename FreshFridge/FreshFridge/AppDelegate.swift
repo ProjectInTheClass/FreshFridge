@@ -58,32 +58,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         DataManager.shared.loadGroceryHistory()
-        
-        if let savedGroceries = Grocery.loadGrocery()
-        {
-            groceries = savedGroceries
-        }
-        else
-        {
-            if(Locale.current.languageCode == "ko")
-            {
-                groceries = Grocery.loadSampleGrocery()
-            }
-        }
-         
+        DataManager.shared.loadGrocery()
         DataManager.shared.loadCartGrocery()
          
         
         // link groceries and groceryHistories
-        for grocery in groceries.reversed()
+        for grocery in DataManager.shared.getGroceries().reversed()
         {
-            grocery.info = DataManager.shared.addGroceryHistory(title: grocery.info.title, category: grocery.info.category, updateDate: false)
+            grocery.info = DataManager.shared.getGroceryHistory(title: grocery.info.title, category: grocery.info.category, updateDate: false)
         }
         
         // link cartGroceries and groceryHistories
         for cartGrocery in DataManager.shared.getCartGroceries().reversed()
         {
-            cartGrocery.info = DataManager.shared.addGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: false)
+            cartGrocery.info = DataManager.shared.getGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: false)
         }
         
         // read barcode data
@@ -238,7 +226,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         
-        for grocery in groceries
+        for grocery in DataManager.shared.getGroceries()
         {
             setAlarm(grocery: grocery)
         }
@@ -285,8 +273,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         // test code
         // 60초마다.. 로컬 데이터를 전부 지우고, 서버로부터 전부 받아서 추가함.
-        ShareManager.shared.updateAllProduct()
-        ShareManager.shared.updatePurchaseRecordViewController()
+        //ShareManager.shared.updateAllCartItem()
+        //ShareManager.shared.updateAllProduct()
+        //ShareManager.shared.updateAllRefrigeratorItem()
+        //ShareManager.shared.updatePurchaseRecordViewController()
     }
 
 }

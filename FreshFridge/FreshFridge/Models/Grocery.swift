@@ -17,6 +17,15 @@ class GroceryHistory : Codable
     var lastestPurchaseDate: Date
     var image: GroceryImage?
     
+    init()
+    {
+        self.id = UUID()
+        self.title = ""
+        self.category = Category.ETC
+        self.favorite = false
+        self.lastestPurchaseDate = Date()
+    }
+    
     init(title: String, category: Category, favorite: Bool , lastestPurchaseDate: Date)
     {
         self.id = UUID()
@@ -26,7 +35,7 @@ class GroceryHistory : Codable
         self.lastestPurchaseDate = lastestPurchaseDate
     }
     
-    private init(title: String, category: Category, favorite: Bool, lastestPurchaseDate: Date, image: GroceryImage)
+    init(title: String, category: Category, favorite: Bool, lastestPurchaseDate: Date, image: GroceryImage)
     {
         self.id = UUID()
         self.title = title
@@ -307,6 +316,11 @@ struct DueDate: Codable
     static let secondOfDay: Double = 60*60*24.0
     
     var date: Date
+    
+    init(date: Date)
+    {
+        self.date = Calendar.current.startOfDay(for: date)
+    }
         
     init(_ addingDay: Int)
     {
@@ -341,24 +355,7 @@ struct DueDate: Codable
     }
 }
 
-func isExistGrocery(title: String, category: GroceryHistory.Category) -> Bool
-{
-    if groceries.first(where: {$0.info.title == title && $0.info.category == category}) != nil
-    {
-        return true
-    }
-    else
-    {
-        return false
-    }
-}
 
-
-
-func findGroceryIndex(grocery: Grocery) -> EnumeratedSequence<[Grocery]>.Element?
-{
-    return groceries.enumerated().first(where: {$0.element === grocery})
-}
 
 
 
@@ -469,7 +466,7 @@ class BarcodeData
 }
 
 
-var groceries = [Grocery]()
+
 var barcodeData = [BarcodeData]()
 
 // 저장을 쉽게 하기위해 전역 변수로 옮김

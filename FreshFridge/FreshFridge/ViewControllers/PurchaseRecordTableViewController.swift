@@ -260,17 +260,10 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 
                 print(selectedGrocery)
                 
-                let groceryHistory = DataManager.shared.addGroceryHistory(title: selectedGrocery.title, category: selectedGrocery.category, updateDate: true)
-                let fridgeGrocery = Grocery(info: groceryHistory, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
+                let fridgeGrocery = DataManager.shared.addGrocery(title: selectedGrocery.title, category: selectedGrocery.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: nil)
                 
-                //        GroceryHistory(title: "바나나우유", category: .DrinksAndSnacks, favorite: false, lastestPurchaseDate: Date(), image: GroceryImage(image: UIImage(named: "dumyPicture1")))
-                
-                
-                print(fridgeGrocery)
-                
-                groceries.insert(fridgeGrocery, at: 0)
                 (UIApplication.shared.delegate as! AppDelegate).setAlarm(grocery: fridgeGrocery)
-                Grocery.saveGrocery(groceries)
+                
                 
                 fridgeTabBarController.animateBadge(tabBarIndex: .fridgeTabBar)
                 
@@ -280,7 +273,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         toFridgeAction.image = UIImage(named: "freshFridge_icon")?.withTintColor( .white)
         toFridgeAction.backgroundColor = .systemBlue
      
-        if(isExistGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false
+        if(DataManager.shared.isExistGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false
             && DataManager.shared.isExistCartGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false)
         {
             return UISwipeActionsConfiguration(actions: [modifyAction, toFridgeAction])

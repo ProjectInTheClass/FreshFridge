@@ -244,9 +244,8 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
             if(cartGrocery.isPurchased)
             {
                 isMoved = true
-                let groceryHistory = DataManager.shared.addGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: true)
-                let fridgeGrocery = Grocery(info: groceryHistory, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName:  selectedfrideName, notes: "")
-                groceries.insert(fridgeGrocery, at: 0)
+                
+                let fridgeGrocery = DataManager.shared.addGrocery(title: cartGrocery.info.title, category: cartGrocery.info.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: nil)
                 
                 DataManager.shared.removeCartGrocery(cartGrocery: cartGrocery)
                 
@@ -258,8 +257,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         {
             updateTableView()
             tableView.reloadData()
-            Grocery.saveGrocery(groceries)
-            
             fridgeTabBarController.animateBadge(tabBarIndex: .fridgeTabBar)
         }
     }
