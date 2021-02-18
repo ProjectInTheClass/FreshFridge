@@ -472,6 +472,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         }
         
+        UserDefaults.standard.set(isFridgeAlarmButtonOn, forKey: "isFridgeAlarmButtonOn")
         updateFilteringButtons()
     }
     
