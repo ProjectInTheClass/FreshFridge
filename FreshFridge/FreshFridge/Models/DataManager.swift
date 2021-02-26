@@ -34,6 +34,7 @@ class DataManager
     
     func removeAllCartGroceries()
     {
+        ShareManager.shared.lastestCartUpdatedAt = -1
         cartGroceries.removeAll()
     }
     
@@ -49,12 +50,17 @@ class DataManager
         return groceryHistories
     }
     
-    func findGroceryHistoryIndex(groceryHistory: GroceryHistory) -> EnumeratedSequence<[GroceryHistory]>.Element?
+//    func findGroceryHistoryIndex(groceryHistory: GroceryHistory) -> EnumeratedSequence<[GroceryHistory]>.Element?
+//    {
+//        return groceryHistories.enumerated().first(where: {$0.element === groceryHistory})
+//    }
+    
+    func findGroceryHistoryIndex(id: AutoIncreasedID) -> EnumeratedSequence<[GroceryHistory]>.Element?
     {
-        return groceryHistories.enumerated().first(where: {$0.element === groceryHistory})
+        return groceryHistories.enumerated().first(where: {$0.element.id == id})
     }
     
-    func findGroceryHistory(id: UUID) -> GroceryHistory?
+    func findGroceryHistory(id: AutoIncreasedID) -> GroceryHistory?
     {
         return groceryHistories.first(where: {$0.id == id})
     }
@@ -79,7 +85,7 @@ class DataManager
         }
     }
     
-    func getGroceryHistory(title: String, category: GroceryHistory.Category, updateDate: Bool) -> GroceryHistory
+    func getGroceryHistory(title: String, category: GroceryHistory.Category) -> GroceryHistory?
     {
         if let groceryHistory = groceryHistories.first(where: {$0.title == title && $0.category == category})
         {
@@ -87,13 +93,14 @@ class DataManager
         }
         else
         {
-            return DataManager.nilGroceryHistory
+            return nil
         }
     }
-    
-    func addGroceryHistory(title: String, category: GroceryHistory.Category, updateDate: Bool) -> GroceryHistory
+
+    func insertGroceryHistory(id: Int, title: String, category: GroceryHistory.Category, image: GroceryImage?, updateDate: Bool)
     {
-        if let groceryHistory = groceryHistories.first(where: {$0.title == title && $0.category == category})
+        //if let groceryHistory = groceryHistories.first(where: {$0.title == title && $0.category == category})
+        if let _ = findGroceryHistory(id: AutoIncreasedID(id))
         {
             // 최신순으로 업데이트가 필요한 경우, 배열에서 찾아서 삭제하고 맨앞에 새로 추가함
             if(updateDate)
@@ -101,45 +108,62 @@ class DataManager
                 if let index = groceryHistories.enumerated().first(where: {$0.element.title == title && $0.element.category == category})
                 {
                     groceryHistories.remove(at: index.offset)
-                    groceryHistories.insert(groceryHistory, at: 0)
+                    groceryHistories.insert(index.element, at: 0)
                     
                     saveGroceryHistory()
                 }
             }
-            
-            return groceryHistory
         }
         else
         {
             let groceryHistory = GroceryHistory(title: title, category: category, favorite: false, lastestPurchaseDate: Date())
+            groceryHistory.id = AutoIncreasedID(id)
+            groceryHistory.image = image
+            
             groceryHistories.insert(groceryHistory, at: 0)
             
             saveGroceryHistory()
-            
-            return groceryHistory
         }
     }
     
-    func addProduct(product: ShareManager.Product)
+    func removeGroceryHistory(id: AutoIncreasedID)
     {
-        //let groceryHistory = GroceryHistory(title: product.title, category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC, favorite: product.favorite, lastestPurchaseDate: Date(timeIntervalSince1970: TimeInterval(product.updatedAt)))
-        //groceryHistory.id = product.id
-        //groceryHistory.image
-        //groceryHistories.insert(groceryHistory, at: 0)
-        
-        //saveGroceryHistory()
-    }
-    
-    func removeGroceryHistory(groceryHistory: GroceryHistory)
-    {
-        if let selectedIndex = findGroceryHistoryIndex(groceryHistory: groceryHistory)
+        if let selectedIndex = findGroceryHistoryIndex(id: id)
         {
             groceryHistories.remove(at: selectedIndex.offset)
             saveGroceryHistory() // 로컬에 저장하기
         }
     }
     
-    func updateGroceryHistory(id: UUID, favorite: Bool)
+    func updateGroceryHistory(id: AutoIncreasedID, title: String)
+    {
+        if let foundGroceryHistory = findGroceryHistory(id: id)
+        {
+            foundGroceryHistory.title = title
+            
+            saveGroceryHistory()
+        }
+    }
+    
+    func updateGroceryHistory(id: AutoIncreasedID, category: GroceryHistory.Category)
+    {
+        if let foundGroceryHistory = findGroceryHistory(id: id)
+        {
+            foundGroceryHistory.category = category
+            saveGroceryHistory()
+        }
+    }
+    
+    func updateGroceryHistory(id: AutoIncreasedID, image: GroceryImage?)
+    {
+        if let foundGroceryHistory = findGroceryHistory(id: id)
+        {
+            foundGroceryHistory.image = image
+            saveGroceryHistory()
+        }
+    }
+    
+    func updateGroceryHistory(id: AutoIncreasedID, favorite: Bool)
     {
         if let foundGroceryHistory = findGroceryHistory(id: id)
         {
@@ -165,12 +189,17 @@ class DataManager
         }
     }
 
-    func findGroceryIndex(grocery: Grocery) -> EnumeratedSequence<[Grocery]>.Element?
+//    func findGroceryIndex(grocery: Grocery) -> EnumeratedSequence<[Grocery]>.Element?
+//    {
+//        return groceries.enumerated().first(where: {$0.element === grocery})
+//    }
+    
+    func findGroceryIndex(id: AutoIncreasedID) -> EnumeratedSequence<[Grocery]>.Element?
     {
-        return groceries.enumerated().first(where: {$0.element === grocery})
+        return groceries.enumerated().first(where: {$0.element.id == id})
     }
     
-    func findGrocery(id: UUID) -> Grocery?
+    func findGrocery(id: AutoIncreasedID) -> Grocery?
     {
         return groceries.first(where: {$0.id == id})
     }
@@ -195,34 +224,39 @@ class DataManager
         }
     }
     
-    func addGrocery(title: String, category: GroceryHistory.Category, count: Int, isPercentageCount: Bool, dueDate: DueDate, storage: Grocery.Storage, fridgeName: String, notes: String, image: GroceryImage?) -> Grocery
+    func insertGrocery(id: Int, title: String, category: GroceryHistory.Category, count: Int, isPercentageCount: Bool, dueDate: DueDate, storage: Grocery.Storage, fridgeName: String, notes: String, image: GroceryImage?)
     {
-        let newGrocery = Grocery(info: DataManager.shared.addGroceryHistory(title: title, category: category, updateDate: true), count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
-        if(image != nil)
+        if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
         {
-            newGrocery.info.image = image
+            let newGrocery = Grocery(info: groceryHistory, id: id, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
+            if(image != nil)
+            {
+                newGrocery.info.image = image
+            }
+            
+            groceries.insert(newGrocery, at: 0)
+            
+            saveGrocery()
+            getRequestManager().setAlarm(grocery: newGrocery)
         }
-        groceries.insert(newGrocery, at: 0)
         
-        saveGrocery()
-        
-        return newGrocery
     }
     
-    func removeGrocery(id: UUID)
+    func removeGrocery(id: AutoIncreasedID)
     {
-        if let grocery = findGrocery(id: id),
-        let selectedIndex = findGroceryIndex(grocery: grocery)
+        if let selectedIndex = findGroceryIndex(id: id)
         {
             groceries.remove(at: selectedIndex.offset)
+            
             Grocery.saveGrocery(groceries)
+            getRequestManager().removeAlarm(grocery: selectedIndex.element)
         }
     }
     
     func moveGrocery(fromGrocery: Grocery, toGrocery: Grocery)
     {
-        if let fromIndex = findGroceryIndex(grocery: fromGrocery),
-           let toIndex = findGroceryIndex(grocery: toGrocery)
+        if let fromIndex = findGroceryIndex(id: fromGrocery.id),
+           let toIndex = findGroceryIndex(id: toGrocery.id)
         {
             groceries.remove(at: fromIndex.offset)
             groceries.insert(fromGrocery, at: toIndex.offset)
@@ -231,83 +265,94 @@ class DataManager
         }
     }
     
-    func updateGrocery(id: UUID, count: Int)
+    func updateGrocery(id: AutoIncreasedID, count: Int)
     {
         if let foundGrocery = findGrocery(id: id)
         {
             foundGrocery.count = count
+            
             saveGrocery()
         }
     }
     
-    func updateGrocery(id: UUID, isPercentageCount: Bool)
+    func updateGrocery(id: AutoIncreasedID, isPercentageCount: Bool)
     {
         if let foundGrocery = findGrocery(id: id)
         {
             foundGrocery.isPercentageCount = isPercentageCount
+            
             Grocery.saveGrocery(groceries)
         }
     }
     
-    func updateGrocery(id: UUID, dueDate: DueDate)
+    func updateGrocery(id: AutoIncreasedID, dueDate: DueDate)
     {
         if let foundGrocery = findGrocery(id: id)
         {
             foundGrocery.dueDate = dueDate
+            
             Grocery.saveGrocery(groceries)
+            getRequestManager().resetAlarm(grocery: foundGrocery)
         }
     }
     
-    func updateGrocery(id: UUID, storage: Grocery.Storage)
+    func updateGrocery(id: AutoIncreasedID, storage: Grocery.Storage)
     {
         if let foundGrocery = findGrocery(id: id)
         {
             foundGrocery.storage = storage
+            
             Grocery.saveGrocery(groceries)
         }
     }
     
-    func updateGrocery(id: UUID, fridgeName: String)
+    func updateGrocery(id: AutoIncreasedID, fridgeName: String)
     {
         if let foundGrocery = findGrocery(id: id)
         {
             foundGrocery.fridgeName = fridgeName
+            
             Grocery.saveGrocery(groceries)
         }
     }
     
-    func updateGrocery(id: UUID, notes:String?)
+    func updateGrocery(id: AutoIncreasedID, notes:String?)
     {
         if let foundGrocery = findGrocery(id: id)
         {
             foundGrocery.notes = notes
+            
             Grocery.saveGrocery(groceries)
         }
     }
     
-    func updateGrocery(id: UUID, title: String)
+    func updateGrocery(id: AutoIncreasedID, title: String)
     {
         if let foundGrocery = findGrocery(id: id)
         {
             foundGrocery.info.title = title
             Grocery.saveGrocery(groceries)
+            
+            getRequestManager().resetAlarm(grocery: foundGrocery)
         }
     }
     
-    func updateGrocery(id: UUID, category: GroceryHistory.Category)
+    func updateGrocery(id: AutoIncreasedID, category: GroceryHistory.Category)
     {
         if let foundGrocery = findGrocery(id: id)
         {
             foundGrocery.info.category = category
+            
             Grocery.saveGrocery(groceries)
         }
     }
     
-    func updateGrocery(id: UUID, image: GroceryImage?)
+    func updateGrocery(id: AutoIncreasedID, image: GroceryImage?)
     {
         if let foundGrocery = findGrocery(id: id)
         {
             foundGrocery.info.image = image
+            
             Grocery.saveGrocery(groceries)
         }
     }
@@ -332,12 +377,17 @@ class DataManager
         }
     }
 
-    func findCartGroceryIndex(cartGrocery: CartGrocery) -> EnumeratedSequence<[CartGrocery]>.Element?
+//    func findCartGroceryIndex(cartGrocery: CartGrocery) -> EnumeratedSequence<[CartGrocery]>.Element?
+//    {
+//        return cartGroceries.enumerated().first(where: {$0.element === cartGrocery})
+//    }
+    
+    func findCartGroceryIndex(id: AutoIncreasedID) -> EnumeratedSequence<[CartGrocery]>.Element?
     {
-        return cartGroceries.enumerated().first(where: {$0.element === cartGrocery})
+        return cartGroceries.enumerated().first(where: {$0.element.id == id})
     }
     
-    func findCartGrocery(id: UUID) -> CartGrocery?
+    func findCartGrocery(id: AutoIncreasedID) -> CartGrocery?
     {
         return cartGroceries.first(where: {$0.id == id})
     }
@@ -362,30 +412,56 @@ class DataManager
         }
     }
     
-    func addCartGrocery(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, count: Int = 1, isPercentageCount: Bool = false, isPurchased: Bool = false)
+//    func addCartGrocery(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, count: Int = 1, isPercentageCount: Bool = false, isPurchased: Bool = false)
+//    {
+//        if(ShareManager.shared.isShared())
+//        {
+//            // post (create cartitem)
+//            ShareManager.shared.addCartGroceryRequestToServer(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased)
+//        }
+//        else
+//        {
+//            ShareManager.shared.addCartGroceryRequestToLocal(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased)
+//        }
+//    }
+    
+    
+    
+    // grocery history를 추가하지 않음
+    func insertCartGrocery(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, id: Int, count: Int = 1, isPercentageCount: Bool = false, isPurchased: Bool = false)
     {
-        let newCartGrocery = CartGrocery(info: DataManager.shared.addGroceryHistory(title: title, category: category, updateDate: true))
-        if let image = image
-        {
-            newCartGrocery.info.image = image
-        }
-        newCartGrocery.count = count
-        newCartGrocery.isPercentageCount = isPercentageCount
-        cartGroceries.insert(newCartGrocery, at: 0)
+        if let _ = findCartGrocery(id: AutoIncreasedID(id)) { return }
         
-        saveCartGrocery()
+        if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
+        {
+            let newCartGrocery: CartGrocery
+            if(id == -1)
+            {
+                newCartGrocery = CartGrocery(info: groceryHistory)
+            }
+            else
+            {
+                newCartGrocery = CartGrocery(info: groceryHistory, id: id)
+            }
+            newCartGrocery.count = count
+            newCartGrocery.isPercentageCount = isPercentageCount
+            newCartGrocery.isPurchased = isPurchased
+            cartGroceries.insert(newCartGrocery, at: 0)
+            
+            saveCartGrocery()
+        }
     }
     
-    func removeCartGrocery(cartGrocery: CartGrocery)
+    func removeCartGrocery(id: AutoIncreasedID)
     {
-        if let selectedIndex = findCartGroceryIndex(cartGrocery: cartGrocery)
+        if let selectedIndex = findCartGroceryIndex(id: id)
         {
             cartGroceries.remove(at: selectedIndex.offset)
             saveCartGrocery()
         }
     }
     
-    func updateCartGrocery(id: UUID, isPurchased: Bool)
+    func updateCartGrocery(id: AutoIncreasedID, isPurchased: Bool)
     {
         if let foundCartGrocery = findCartGrocery(id: id)
         {
@@ -394,7 +470,7 @@ class DataManager
         }
     }
     
-    func updateCartGrocery(id: UUID, count: Int)
+    func updateCartGrocery(id: AutoIncreasedID, count: Int)
     {
         if let foundCartGrocery = findCartGrocery(id: id)
         {
@@ -403,7 +479,7 @@ class DataManager
         }
     }
     
-    func updateCartGrocery(id: UUID, isPercentage: Bool)
+    func updateCartGrocery(id: AutoIncreasedID, isPercentage: Bool)
     {
         if let foundCartGrocery = findCartGrocery(id: id)
         {
@@ -411,8 +487,8 @@ class DataManager
             saveCartGrocery()
         }
     }
-    
-    func updateCartGrocery(id: UUID, title: String)
+    /*
+    func updateCartGrocery(id: AutoIncreasedID, title: String)
     {
         if let foundCartGrocery = findCartGrocery(id: id)
         {
@@ -422,7 +498,7 @@ class DataManager
         }
     }
     
-    func updateCartGrocery(id: UUID, category: GroceryHistory.Category)
+    func updateCartGrocery(id: AutoIncreasedID, category: GroceryHistory.Category)
     {
         if let foundCartGrocery = findCartGrocery(id: id)
         {
@@ -432,7 +508,7 @@ class DataManager
         }
     }
     
-    func updateCartGrocery(id: UUID, image: GroceryImage)
+    func updateCartGrocery(id: AutoIncreasedID, image: GroceryImage)
     {
         if let foundCartGrocery = findCartGrocery(id: id)
         {
@@ -441,4 +517,5 @@ class DataManager
             saveGroceryHistory()
         }
     }
+ */
 }

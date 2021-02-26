@@ -16,9 +16,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     @IBOutlet weak var CategorySortButton: UIButton!
     @IBOutlet weak var FavoriteSortButton: UIButton!
     @IBOutlet weak var RecentSortButton: UIButton!
-    
-    var fridgeTabBarController: FridgeTabBarController!
-    
+  
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
     var numbersOfRowInSection: [Int] = []
@@ -43,7 +41,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        (UIApplication.shared.delegate as! AppDelegate).purchaseRecordViewController = self
+        getRequestManager().purchaseRecordViewController = self
         
         searchbarGroceries = DataManager.shared.getGroceryHistories()
         
@@ -52,8 +50,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         SearchBar.delegate = self
         
         self.SearchBar.backgroundImage = UIImage()
-        
-        fridgeTabBarController = tabBarController as? FridgeTabBarController
         
         searchbarGroceries = DataManager.shared.getGroceryHistories()
 
@@ -219,8 +215,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
             let selectedHistory = filteredGroceries[indexPath.section][indexPath.row]
-            DataManager.shared.addCartGrocery(title: selectedHistory.title, category: selectedHistory.category)
-            fridgeTabBarController.animateBadge(tabBarIndex: .shopingCartTabBar)
+            RequestManager.shared.getRequestInterface().addCartGrocery(title: selectedHistory.title, category: selectedHistory.category)
+            //getRequestManager().animateBadge(tabBarIndex: .shopingCartTabBar)
             
             success(true)
         })
@@ -237,11 +233,12 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         
         let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
         let modifyAction = UIContextualAction(style: .destructive, title:  "Trash", handler:
-            { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            {  (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
-                DataManager.shared.removeGroceryHistory(groceryHistory: selectedGrocery)
-                updateTableView()
-                tableView.reloadData() // cellForRowAt 을 호출
+                //DataManager.shared.removeGroceryHistory(id: selectedGrocery.id)
+                RequestManager.shared.getRequestInterface().removeGroceryHistory(id: selectedGrocery.id)
+                //updateTableView()
+                //tableView.reloadData() // cellForRowAt 을 호출
             
             
                 success(true)
@@ -260,12 +257,13 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 
                 print(selectedGrocery)
                 
-                let fridgeGrocery = DataManager.shared.addGrocery(title: selectedGrocery.title, category: selectedGrocery.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: nil)
+                //DataManager.shared.insertGrocery(title: selectedGrocery.title, category: selectedGrocery.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: nil)
+                RequestManager.shared.getRequestInterface().addGrocery(title: selectedGrocery.title, category: selectedGrocery.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: nil)
                 
-                (UIApplication.shared.delegate as! AppDelegate).setAlarm(grocery: fridgeGrocery)
+                //getRequestManager().setAlarm(grocery: fridgeGrocery)
                 
                 
-                fridgeTabBarController.animateBadge(tabBarIndex: .fridgeTabBar)
+                getRequestManager().animateBadge(tabBarIndex: .fridgeTabBar)
                 
                 success(true)
          })
@@ -289,11 +287,11 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         if let indexPath = tableView.indexPath(for: sender) {
             let thisGroceryHistory = filteredGroceries[indexPath.section][indexPath.row]
             
-            DataManager.shared.updateGroceryHistory(id: thisGroceryHistory.id, favorite: !thisGroceryHistory.favorite)
+            RequestManager.shared.getRequestInterface().updateGroceryHistory(id: thisGroceryHistory.id, favorite: !thisGroceryHistory.favorite)
             
         }
-        updateTableView()
-        tableView.reloadData()
+//        updateTableView()
+//        tableView.reloadData()
     }
         
     /*

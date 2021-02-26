@@ -8,9 +8,48 @@
 import Foundation
 import UIKit
 
+class AutoIncreasedID: Codable, Equatable
+{
+    let id: Int
+    var string: String
+    {
+        return "\(id)"
+    }
+    
+    init(_ id: Int)
+    {
+        if id == -1
+        {
+            self.id = AutoIncreasedID.generateID()
+        }
+        else
+        {
+            self.id = id
+        }
+    }
+    
+    init()
+    {
+        self.id = AutoIncreasedID.generateID()
+    }
+    
+    static func == (lhs: AutoIncreasedID, rhs: AutoIncreasedID) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    static func generateID() -> Int
+    {
+        var generated = UserDefaults.standard.integer(forKey: "generatedAutoIncreasedID")
+        generated += 1
+        UserDefaults.standard.set(generated, forKey: "generatedAutoIncreasedID")
+        UserDefaults.standard.synchronize()
+        return generated
+    }
+}
+
 class GroceryHistory : Codable
 {
-    var id: UUID
+    var id: AutoIncreasedID
     var title: String
     var category: Category
     var favorite: Bool
@@ -19,7 +58,7 @@ class GroceryHistory : Codable
     
     init()
     {
-        self.id = UUID()
+        self.id = AutoIncreasedID()
         self.title = ""
         self.category = Category.ETC
         self.favorite = false
@@ -28,7 +67,7 @@ class GroceryHistory : Codable
     
     init(title: String, category: Category, favorite: Bool , lastestPurchaseDate: Date)
     {
-        self.id = UUID()
+        self.id = AutoIncreasedID()
         self.title = title
         self.category = category
         self.favorite = favorite
@@ -37,7 +76,7 @@ class GroceryHistory : Codable
     
     init(title: String, category: Category, favorite: Bool, lastestPurchaseDate: Date, image: GroceryImage)
     {
-        self.id = UUID()
+        self.id = AutoIncreasedID()
         self.title = title
         self.category = category
         self.favorite = favorite
@@ -165,7 +204,7 @@ class GroceryHistory : Codable
 
 class Grocery : Codable
 {
-    var id: UUID
+    var id: AutoIncreasedID
     
     var info: GroceryHistory
     
@@ -179,9 +218,21 @@ class Grocery : Codable
     
     var notes: String?
     
+    init(info: GroceryHistory, id: Int, count: Int, isPercentageCount: Bool, dueDate: DueDate, storage: Storage, fridgeName: String, notes: String?)
+    {
+        self.id = AutoIncreasedID(id)
+        self.info = info
+        self.count = count
+        self.isPercentageCount = isPercentageCount
+        self.dueDate = dueDate
+        self.storage = storage
+        self.fridgeName = fridgeName
+        self.notes = notes
+    }
+    
     init(info: GroceryHistory, count: Int, isPercentageCount: Bool, dueDate: DueDate, storage: Storage, fridgeName: String, notes: String?)
     {
-        self.id = UUID()
+        self.id = AutoIncreasedID()
         self.info = info
         self.count = count
         self.isPercentageCount = isPercentageCount
@@ -229,35 +280,18 @@ class Grocery : Codable
     
     static func loadSampleGrocery() -> [Grocery]
     {
-        return [Grocery(info: DataManager.shared.addGroceryHistory(title: "양파", category: .Vegetable, updateDate: true), count: 5, isPercentageCount: false, dueDate: DueDate(2), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "양배추", category: .Vegetable, updateDate: true), count: 1, isPercentageCount: false, dueDate: DueDate(14), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "달걀", category: .MeatsAndEggs, updateDate: true), count: 30, isPercentageCount: false, dueDate: DueDate(-1), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "치즈", category: .DrinksAndSnacks, updateDate: true), count: 14, isPercentageCount: false, dueDate: DueDate(14), storage: .Refrigeration, fridgeName: selectedfrideName, notes: "아기 먹일 유기농 치즈"),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "이유식용 소고기", category: .MeatsAndEggs, updateDate: true), count: 100, isPercentageCount: true, dueDate: DueDate(30), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "사과", category: .Fruits, updateDate: true), count: 5, isPercentageCount: false, dueDate: DueDate(8), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "고등어", category: .MarineProducts, updateDate: true), count: 3, isPercentageCount: false, dueDate: DueDate(3), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "김치", category: .CookingAndSidedishes, updateDate: true), count: 30, isPercentageCount: true, dueDate: DueDate(60), storage: .Refrigeration, fridgeName: selectedfrideName, notes: "19년도 김장 김치"),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "바나나우유", category: .DrinksAndSnacks, updateDate: true), count: 10, isPercentageCount: false, dueDate: DueDate(90), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "딸기", category: .Fruits, updateDate: true), count: 100, isPercentageCount: true, dueDate: DueDate(10), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "사과", category: .Fruits, updateDate: true), count: 8, isPercentageCount: false, dueDate: DueDate(5), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "바나나", category: .Fruits, updateDate: true), count: 6, isPercentageCount: false, dueDate: DueDate(2), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "요거트", category: .DrinksAndSnacks, updateDate: true), count: 6, isPercentageCount: false, dueDate: DueDate(7), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "당근", category: .Vegetable, updateDate: true), count: 3, isPercentageCount: false, dueDate: DueDate(10), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "바닐라 아이스크림", category: .DrinksAndSnacks, updateDate: true), count: 80, isPercentageCount: true, dueDate: DueDate(21), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "진간장", category: .SeasonedAndOilAndSauce, updateDate: true), count: 40, isPercentageCount: true, dueDate: DueDate(180), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "멸치액젓", category: .SeasonedAndOilAndSauce, updateDate: true), count: 90, isPercentageCount: true, dueDate: DueDate(180), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "토마토케찹", category: .SeasonedAndOilAndSauce, updateDate: true), count: 10, isPercentageCount: true, dueDate: DueDate(210), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "냉동 돈까스", category: .MeatsAndEggs, updateDate: true), count: 8, isPercentageCount: false, dueDate: DueDate(60), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "냉동 돈까스", category: .MeatsAndEggs, updateDate: true), count: 2, isPercentageCount: false, dueDate: DueDate(30), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "참치캔", category: .MeatsAndEggs, updateDate: true), count: 15, isPercentageCount: false, dueDate: DueDate(210), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.addGroceryHistory(title: "쌀", category: .ETC, updateDate: true), count: 70, isPercentageCount: true, dueDate: DueDate(60), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil)
+        let id = -1
+        DataManager.shared.insertGroceryHistory(id: id, title: "양파", category: .Vegetable, image: nil, updateDate: true)
+        DataManager.shared.insertGroceryHistory(id: id, title: "양배추", category: .Vegetable, image: nil, updateDate: true)
+        return [Grocery(info: DataManager.shared.getGroceryHistory(title: "양파", category: .Vegetable)!, count: 5, isPercentageCount: false, dueDate: DueDate(2), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil),
+                Grocery(info: DataManager.shared.getGroceryHistory(title: "양배추", category: .Vegetable)!, count: 1, isPercentageCount: false, dueDate: DueDate(14), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil)
         ]
     }
 }
 
 class CartGrocery: Codable
 {
-    var id: UUID
+    var id: AutoIncreasedID
     
     var info: GroceryHistory
     
@@ -267,7 +301,13 @@ class CartGrocery: Codable
     
     init(info: GroceryHistory)
     {
-        self.id = UUID()
+        self.id = AutoIncreasedID()
+        self.info = info
+    }
+    
+    init(info: GroceryHistory, id: Int)
+    {
+        self.id = AutoIncreasedID(id)
         self.info = info
     }
     
@@ -289,24 +329,11 @@ class CartGrocery: Codable
     
     static func loadSampleCartGrocery() -> [CartGrocery]
     {
-        return [ CartGrocery(info: DataManager.shared.addGroceryHistory(title: "양배추", category: .Vegetable, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "달걀", category: .MeatsAndEggs, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "양파", category: .Vegetable, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "고등어", category: .MarineProducts, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "김치", category: .CookingAndSidedishes, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "양파", category: .Vegetable, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "사과", category: .Fruits, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "바나나", category: .Fruits, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "요거트", category: .DrinksAndSnacks, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "당근", category: .Vegetable, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "바닐라 아이스크림", category: .DrinksAndSnacks, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "진간장", category: .SeasonedAndOilAndSauce, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "멸치액젓", category: .SeasonedAndOilAndSauce, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "토마토케찹", category: .SeasonedAndOilAndSauce, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "냉동 돈까스", category: .MeatsAndEggs, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "냉동 돈까스", category: .MeatsAndEggs, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "참치캔", category: .MeatsAndEggs, updateDate: true)),
-                 CartGrocery(info: DataManager.shared.addGroceryHistory(title: "쌀", category: .ETC, updateDate: true))
+        let id = -1
+        DataManager.shared.insertGroceryHistory(id: id, title: "양배추", category: .Vegetable, image: nil, updateDate: true)
+        DataManager.shared.insertGroceryHistory(id: id, title: "달걀", category: .MeatsAndEggs, image: nil, updateDate: true)
+        return [ CartGrocery(info: DataManager.shared.getGroceryHistory(title: "양배추", category: .Vegetable)!),
+                 CartGrocery(info: DataManager.shared.getGroceryHistory(title: "달걀", category: .MeatsAndEggs)!)
         ]
     }
 }
@@ -374,6 +401,8 @@ let systemFont10 = UIFont.systemFont(ofSize: 10)
 var fridgeNames = ["신선한냉장고".localized(), "김치냉장고".localized(), "추가냉장고1".localized(), "추가냉장고2".localized()]
 var selectedFridgeIndex: [Int] = [0, 1, 2, 3] // 다중 선택가능, fridgeNames index를 배열로 저장한다.
 var selectedfrideName = fridgeNames[selectedFridgeIndex[0]] // 다중선택된 selectedFridgeIndex중 첫번째 것으로 할당
+
+
 
 var defaultNames : [String:GroceryHistory.Category] = [:]
 func getDefaultNames() -> [String:GroceryHistory.Category]

@@ -21,8 +21,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     @IBOutlet weak var toFridgeButton: UIButton!
     @IBOutlet weak var allCheckMarkButton: UIButton!
     
-    var fridgeTabBarController: FridgeTabBarController!
-    
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
     var numbersOfRowInSection: [Int] = []
@@ -38,9 +36,9 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.cellLayoutMarginsFollowReadableWidth = true
+        getRequestManager().shopingCartViewController = self
         
-        fridgeTabBarController = tabBarController as? FridgeTabBarController
+        tableView.cellLayoutMarginsFollowReadableWidth = true
         
         sortedArray = DataManager.shared.getCartGroceries()
         updateButtons() 
@@ -144,10 +142,10 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         if let indexPath = tableView.indexPath(for: sender) {
             let checkGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
             
-            DataManager.shared.updateCartGrocery(id: checkGrocery.id, isPurchased: !checkGrocery.isPurchased)
+            RequestManager.shared.getRequestInterface().updateCartGrocery(id: checkGrocery.id, isPurchased: !checkGrocery.isPurchased)
         }
-        //updateTableView()
-        tableView.reloadData()
+       
+        //tableView.reloadData()
         
         
         //
@@ -184,7 +182,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 }
                 
                 //grocery.count = count
-                DataManager.shared.updateCartGrocery(id: grocery.id, count: count)
+                RequestManager.shared.getRequestInterface().updateCartGrocery(id: grocery.id, count: count)
             }
          
             sender.countTextField.updatePieChart(count: grocery.count, isPercentage: grocery.isPercentageCount)
@@ -212,10 +210,10 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         
         for cartGrocery in DataManager.shared.getCartGroceries()
         {
-            DataManager.shared.updateCartGrocery(id: cartGrocery.id, isPurchased: isAllCheckMarkButtonOn)
+            RequestManager.shared.getRequestInterface().updateCartGrocery(id: cartGrocery.id, isPurchased: isAllCheckMarkButtonOn)
         }
         
-        tableView.reloadData()
+        //tableView.reloadData()
     }
     
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
@@ -238,27 +236,28 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
   
     @IBAction func ToFridgeButtonTapped(_ sender: UIButton) {
         
-        var isMoved = false
+        //var isMoved = false
         for cartGrocery in DataManager.shared.getCartGroceries().reversed()
         {
             if(cartGrocery.isPurchased)
             {
-                isMoved = true
+                //isMoved = true
                 
-                let fridgeGrocery = DataManager.shared.addGrocery(title: cartGrocery.info.title, category: cartGrocery.info.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: nil)
+                //DataManager.shared.insertGrocery(title: cartGrocery.info.title, category: cartGrocery.info.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: nil)
+                RequestManager.shared.getRequestInterface().addGrocery(title: cartGrocery.info.title, category: cartGrocery.info.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: nil)
                 
-                DataManager.shared.removeCartGrocery(cartGrocery: cartGrocery)
+                RequestManager.shared.getRequestInterface().removeCartGrocery(id: cartGrocery.id)
                 
-                (UIApplication.shared.delegate as! AppDelegate).setAlarm(grocery: fridgeGrocery)
+                
             }
         }
         
-        if(isMoved)
-        {
-            updateTableView()
-            tableView.reloadData()
-            fridgeTabBarController.animateBadge(tabBarIndex: .fridgeTabBar)
-        }
+//        if(isMoved)
+//        {
+//            updateTableView()
+//            tableView.reloadData()
+//            getRequestManager().animateBadge(tabBarIndex: .fridgeTabBar)
+//        }
     }
     
     
@@ -273,10 +272,10 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 print("Trash action ...")
                 
                 let cartGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
-                DataManager.shared.removeCartGrocery(cartGrocery: cartGrocery)
+                RequestManager.shared.getRequestInterface().removeCartGrocery(id: cartGrocery.id)
                 
-                updateTableView()
-                tableView.reloadData()
+//                updateTableView()
+//                tableView.reloadData()
             
                 success(true)
          })
@@ -317,15 +316,15 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 let isPercentageCount = sourceViewController.percentageSwitch.isOn
                 let image = sourceViewController.groceryImage
                 
-                var bUpdateTableView = false
+                //var bUpdateTableView = false
                 if(sourceViewController.cartGrocery == nil)
                 {
                     // adding
                     if(title.isEmpty == false)
                     {
-                        DataManager.shared.addCartGrocery(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount)
+                        RequestManager.shared.getRequestInterface().addCartGrocery(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount)
                         
-                        bUpdateTableView = true
+                        //bUpdateTableView = true
                     }
                 }
                 else
@@ -335,34 +334,34 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                     {
                         if(cartGrocery.info.title != title)
                         {
-                            DataManager.shared.updateCartGrocery(id: cartGrocery.id, title: title)
+                            RequestManager.shared.getRequestInterface().updateGroceryHistory(id: cartGrocery.info.id, title: title)
                         }
                         if(cartGrocery.info.category != category)
                         {
                             //cartGrocery.info.category = category
-                            DataManager.shared.updateCartGrocery(id: cartGrocery.id, category: category)
-                            bUpdateTableView = true
+                            RequestManager.shared.getRequestInterface().updateGroceryHistory(id: cartGrocery.info.id, category: category)
+                            //bUpdateTableView = true
                         }
                         if(cartGrocery.count != count)
                         {
-                            DataManager.shared.updateCartGrocery(id: cartGrocery.id, count: count)
+                            RequestManager.shared.getRequestInterface().updateCartGrocery(id: cartGrocery.id, count: count)
                         }
                         if(cartGrocery.isPercentageCount != isPercentageCount)
                         {
-                            DataManager.shared.updateCartGrocery(id: cartGrocery.id, isPercentage: isPercentageCount)
+                            RequestManager.shared.getRequestInterface().updateCartGrocery(id: cartGrocery.id, isPercentage: isPercentageCount)
                         }
                         if((cartGrocery.info.image === image) == false && image != nil)
                         {
-                            DataManager.shared.updateCartGrocery(id: cartGrocery.id, image: image!)
+                            RequestManager.shared.getRequestInterface().updateGroceryHistory(id: cartGrocery.info.id, image: image!)
                         }
                     }
                 }
                 
-                if(bUpdateTableView)
-                {
-                    updateTableView()
-                }
-                tableView.reloadData()
+//                if(bUpdateTableView)
+//                {
+//                    updateTableView()
+//                }
+//                tableView.reloadData()
             }
         }
     }

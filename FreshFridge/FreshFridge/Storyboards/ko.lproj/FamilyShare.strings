@@ -6,7 +6,7 @@
 "MHn-rC-Dyd.title" = "가족 공유";
 
 /* Class = "UIButton"; normalTitle = "코드 입력"; ObjectID = "cn5-nq-0E6"; */
-"cn5-nq-0E6.normalTitle" = "코드 입력";
+"cn5-nq-0E6.normalTitle" = "코드 입력 / 보기";
 
 /* Class = "UIButton"; normalTitle = "가족 공유 기능 활성 (준비중)"; ObjectID = "eki-Kk-gf9"; */
 "eki-Kk-gf9.normalTitle" = "공유 취소";
