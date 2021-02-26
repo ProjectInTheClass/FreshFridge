@@ -55,12 +55,12 @@ class ShareManager
         sharedID = UserDefaults.standard.integer(forKey: "sharedID")
         publicCode = UserDefaults.standard.string(forKey: "publicCode") ?? ""
         createdPublicCode = UserDefaults.standard.string(forKey: "createdPublicCode") ?? ""
-        createdPublicCode = ""// test code
+        //createdPublicCode = ""// test code
         if let fridgeIDs = UserDefaults.standard.array(forKey: "fridgeIDs")
         {
             self.fridgeIDs = fridgeIDs as! [Int]
         }
-        fridgeIDs = [-1,-1,-1,-1] // test code
+        //fridgeIDs = [-1,-1,-1,-1] // test code
     }
     
     func isShared() -> Bool
@@ -150,19 +150,24 @@ class ShareManager
     
     func sendAllLocalData()
     {
-        var referenceMapForGrocery: [String:[Grocery]] = [:]
-        var referenceMapForCart: [String:[CartGrocery]] = [:]
+        struct GroceryHistoryReferences
+        {
+            var groceries: [Grocery] = []
+            var cartGroceries: [CartGrocery] = []
+        }
+        
+        var referenceMap: [String:GroceryHistoryReferences] = [:]
         
         for grocery in DataManager.shared.getGroceries()
         {
             let key: String = "\(grocery.info.title)\(grocery.info.category.rawValue)"
             //referenceMapForGrocery[key]?.insert(grocery, at: 0)
-            if nil == referenceMapForGrocery[key]
+            if nil == referenceMap[key]
             {
-                referenceMapForGrocery[key] = []
+                referenceMap[key] = GroceryHistoryReferences()
             }
             
-            referenceMapForGrocery[key]!.insert(grocery, at: 0)
+            referenceMap[key]!.groceries.insert(grocery, at: 0)
             
         }
         
@@ -170,67 +175,54 @@ class ShareManager
         {
             let key: String = "\(cartGrocery.info.title)\(cartGrocery.info.category.rawValue)"
             //referenceMapForCart[key]?.insert(cartGrocery, at: 0)
-            if nil == referenceMapForCart[key]
+            if nil == referenceMap[key]
             {
-                referenceMapForCart[key] = []
+                referenceMap[key] = GroceryHistoryReferences()
             }
             
-            referenceMapForCart[key]!.insert(cartGrocery, at: 0)
+            referenceMap[key]!.cartGroceries.insert(cartGrocery, at: 0)
         }
         
-        
-            
-        for (_, groceries) in referenceMapForGrocery
+        for (_, groceryHistoryReferences) in referenceMap
         {
-            if(groceries.count > 0)
+            var id: Int = -1
+            if(groceryHistoryReferences.groceries.count > 0)
             {
-                if let groceryHistory = DataManager.shared.findGroceryHistory(id: groceries[0].info.id)
+                id = groceryHistoryReferences.groceries[0].info.id.id
+            }
+            else if(groceryHistoryReferences.cartGroceries.count > 0)
+            {
+                id = groceryHistoryReferences.cartGroceries[0].info.id.id
+            }
+            
+            if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(id))
+            {
+                
+                createGroceryHistory(title: groceryHistory.title, category: groceryHistory.category)
                 {
-                    createGroceryHistory(title: groceryHistory.title, category: groceryHistory.category)
+                    (id: Int) in
+                    
+                    DispatchQueue.main.async()
                     {
-                        (id: Int) in
+                        print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
+                        groceryHistory.id = AutoIncreasedID(id)
+                        self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
                         
-                        DispatchQueue.main.async()
+                        for grocery in groceryHistoryReferences.groceries
                         {
-                            print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
-                            groceryHistory.id = AutoIncreasedID(id)
-                            self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
-                            
-                            for grocery in groceries
-                            {
-                                self.createGrocery(productID: id, count: grocery.count, isPercentageCount: grocery.isPercentageCount, dueDate: grocery.dueDate, storage: grocery.storage, fridgeName: grocery.fridgeName, notes: grocery.notes ?? "", image: grocery.info.image)
-                            }
+                            self.createGrocery(productID: id, count: grocery.count, isPercentageCount: grocery.isPercentageCount, dueDate: grocery.dueDate, storage: grocery.storage, fridgeName: grocery.fridgeName, notes: grocery.notes ?? "", image: grocery.info.image)
+                        }
+                        
+                        for cartGrocery in groceryHistoryReferences.cartGroceries
+                        {
+                            self.createCartGrocery(productID: id, count: cartGrocery.count, isPercentageCount: cartGrocery.isPercentageCount, isPurchased: cartGrocery.isPurchased)
                         }
                     }
                 }
             }
+            
         }
         
-        for (_, cartGroceries) in referenceMapForCart
-        {
-            if(cartGroceries.count > 0)
-            {
-                if let groceryHistory = DataManager.shared.findGroceryHistory(id: cartGroceries[0].info.id)
-                {
-                    createGroceryHistory(title: groceryHistory.title, category: groceryHistory.category)
-                    {
-                        (id: Int) in
-                        
-                        DispatchQueue.main.async()
-                        {
-                            print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
-                            groceryHistory.id = AutoIncreasedID(id)
-                            self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
-                            
-                            for cartGrocery in cartGroceries
-                            {
-                                self.createCartGrocery(productID: id, count: cartGrocery.count, isPercentageCount: cartGrocery.isPercentageCount, isPurchased: cartGrocery.isPurchased)
-                            }
-                        }
-                    }
-                }
-            }
-        }
         
         var removedGroceryHistories: [GroceryHistory] = []
         for grocery in DataManager.shared.getGroceries()
@@ -364,7 +356,7 @@ class ShareManager
                 ShareManager.shared.lastestCartUpdatedAt = -1
                 ShareManager.shared.lastestRefriUpdateAt = -1
                 
-                self.createdPublicCode = "" // test code
+                //self.createdPublicCode = "" // test code
             }
         }
         
@@ -1308,9 +1300,9 @@ class ShareManager
 
         // insert json data to the request
         let json: [String: Any] = ["product" : productID,
-                                   "count" : count//,
-                                   //"isPurchased" : isPurchased ? "true" : "false",
-                                   //"isPercentageCount" : isPercentageCount ? "true" : "false"
+                                   "count" : count,
+                                   "isPurchased" : isPurchased ? "true" : "false",
+                                   "isPercentageCount" : isPercentageCount ? "true" : "false"
                                     ]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         request.httpBody = jsonData

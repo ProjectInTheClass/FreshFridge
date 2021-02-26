@@ -30,17 +30,19 @@ class DataManager
     func removeAllGroceryHistories()
     {
         groceryHistories.removeAll()
+        saveGroceryHistory()
     }
     
     func removeAllCartGroceries()
     {
-        ShareManager.shared.lastestCartUpdatedAt = -1
         cartGroceries.removeAll()
+        saveCartGrocery()
     }
     
     func removeAllFridgeGroceries()
     {
         groceries.removeAll()
+        saveGrocery()
     }
     
     ///
