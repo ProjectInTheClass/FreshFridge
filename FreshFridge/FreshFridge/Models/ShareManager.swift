@@ -47,18 +47,20 @@ class ShareManager
     var lastestProductUpdateAt: Int = -1
     var lastestRefriUpdateAt: Int = -1
     
+    var startUpdateCounting = false
+    
     static let shared = ShareManager()
     private init()
     {
         sharedID = UserDefaults.standard.integer(forKey: "sharedID")
         publicCode = UserDefaults.standard.string(forKey: "publicCode") ?? ""
         createdPublicCode = UserDefaults.standard.string(forKey: "createdPublicCode") ?? ""
-        //createdPublicCode = ""// test code
+        createdPublicCode = ""// test code
         if let fridgeIDs = UserDefaults.standard.array(forKey: "fridgeIDs")
         {
             self.fridgeIDs = fridgeIDs as! [Int]
         }
-        //fridgeIDs = [-1,-1,-1,-1] // test code
+        fridgeIDs = [-1,-1,-1,-1] // test code
     }
     
     func isShared() -> Bool
@@ -116,7 +118,7 @@ class ShareManager
                     getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
                 }
                                         
-                
+                ShareManager.shared.startUpdateCounting = true
             }
         }
     }
@@ -148,6 +150,107 @@ class ShareManager
     
     func sendAllLocalData()
     {
+        var referenceMapForGrocery: [String:[Grocery]] = [:]
+        var referenceMapForCart: [String:[CartGrocery]] = [:]
+        
+        for grocery in DataManager.shared.getGroceries()
+        {
+            let key: String = "\(grocery.info.title)\(grocery.info.category.rawValue)"
+            //referenceMapForGrocery[key]?.insert(grocery, at: 0)
+            if nil == referenceMapForGrocery[key]
+            {
+                referenceMapForGrocery[key] = []
+            }
+            
+            referenceMapForGrocery[key]!.insert(grocery, at: 0)
+            
+        }
+        
+        for cartGrocery in DataManager.shared.getCartGroceries()
+        {
+            let key: String = "\(cartGrocery.info.title)\(cartGrocery.info.category.rawValue)"
+            //referenceMapForCart[key]?.insert(cartGrocery, at: 0)
+            if nil == referenceMapForCart[key]
+            {
+                referenceMapForCart[key] = []
+            }
+            
+            referenceMapForCart[key]!.insert(cartGrocery, at: 0)
+        }
+        
+        
+            
+        for (_, groceries) in referenceMapForGrocery
+        {
+            if(groceries.count > 0)
+            {
+                if let groceryHistory = DataManager.shared.findGroceryHistory(id: groceries[0].info.id)
+                {
+                    createGroceryHistory(title: groceryHistory.title, category: groceryHistory.category)
+                    {
+                        (id: Int) in
+                        
+                        DispatchQueue.main.async()
+                        {
+                            print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
+                            groceryHistory.id = AutoIncreasedID(id)
+                            self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
+                            
+                            for grocery in groceries
+                            {
+                                self.createGrocery(productID: id, count: grocery.count, isPercentageCount: grocery.isPercentageCount, dueDate: grocery.dueDate, storage: grocery.storage, fridgeName: grocery.fridgeName, notes: grocery.notes ?? "", image: grocery.info.image)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        for (_, cartGroceries) in referenceMapForCart
+        {
+            if(cartGroceries.count > 0)
+            {
+                if let groceryHistory = DataManager.shared.findGroceryHistory(id: cartGroceries[0].info.id)
+                {
+                    createGroceryHistory(title: groceryHistory.title, category: groceryHistory.category)
+                    {
+                        (id: Int) in
+                        
+                        DispatchQueue.main.async()
+                        {
+                            print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
+                            groceryHistory.id = AutoIncreasedID(id)
+                            self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
+                            
+                            for cartGrocery in cartGroceries
+                            {
+                                self.createCartGrocery(productID: id, count: cartGrocery.count, isPercentageCount: cartGrocery.isPercentageCount, isPurchased: cartGrocery.isPurchased)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        var removedGroceryHistories: [GroceryHistory] = []
+        for grocery in DataManager.shared.getGroceries()
+        {
+            if nil == removedGroceryHistories.first(where: {$0.title == grocery.info.title && $0.category == grocery.info.category})
+            {
+                removedGroceryHistories.insert(grocery.info, at: 0)
+                DataManager.shared.removeGroceryHistory(id: grocery.info.id)
+            }
+        }
+        
+        for cartGrocery in DataManager.shared.getCartGroceries()
+        {
+            if nil == removedGroceryHistories.first(where: {$0.title == cartGrocery.info.title && $0.category == cartGrocery.info.category})
+            {
+                removedGroceryHistories.insert(cartGrocery.info, at: 0)
+                DataManager.shared.removeGroceryHistory(id: cartGrocery.info.id)
+            }
+        }
+        
         for groceryHistory in DataManager.shared.getGroceryHistories()
         {
             createGroceryHistory(title: groceryHistory.title, category: groceryHistory.category)
@@ -155,22 +258,6 @@ class ShareManager
                 (id: Int) in
                 groceryHistory.id = AutoIncreasedID(id)
                 self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
-            }
-        }
-        
-        for grocery in DataManager.shared.getGroceries()
-        {
-            createGrocery(productID: grocery.info.id.id, count: grocery.count, isPercentageCount: grocery.isPercentageCount, dueDate: grocery.dueDate, storage: grocery.storage, fridgeName: grocery.fridgeName, notes: grocery.notes ?? "", image: grocery.info.image)
-            {
-                (refriItem: ShareManager.RefrigeratorItem) in
-            }
-        }
-        
-        for cartGrocery in DataManager.shared.getCartGroceries()
-        {
-            createCartGrocery(productID: cartGrocery.info.id.id)
-            {
-                (cartItem: ShareManager.CartItem) in
             }
         }
     }
@@ -202,11 +289,7 @@ class ShareManager
                             {
                                 ShareManager.shared.createRefrigerator(fridgeIndex: 3)
                                 {
-                                    self.requestRefrigeratorIDs()
-                                    {
-                                        completion()
-                                    }
-                                    
+                                    completion()
                                 }
                             }
                         }
@@ -257,6 +340,8 @@ class ShareManager
     {
         guard isShared() else { return }
         
+        ShareManager.shared.startUpdateCounting = false
+        
         let subURL = "/resignCode"
         let baseURL = URL(string: getServerURL() + subURL)!
         let task = URLSession.shared.dataTask(with: baseURL)
@@ -278,6 +363,8 @@ class ShareManager
                 ShareManager.shared.lastestProductUpdateAt = -1
                 ShareManager.shared.lastestCartUpdatedAt = -1
                 ShareManager.shared.lastestRefriUpdateAt = -1
+                
+                self.createdPublicCode = "" // test code
             }
         }
         
@@ -807,7 +894,7 @@ class ShareManager
         }
         
     } // end of func
-    //http://z.ebadaq.com:45082/RefriItem?idForRefri=38&storage=0&count=1&product=283&dueDate=1614265200000&fridgeName=%EC%8B%A0%EC%84%A0%ED%95%9C%EB%83%89%EC%9E%A5%EA%B3%A0&notes=%22%22&isPercentageCount=false
+    
     func createGrocery(productID: Int, count: Int, isPercentageCount: Bool, dueDate: DueDate, storage: Grocery.Storage, fridgeName: String, notes: String, image: GroceryImage?, completion: (((RefrigeratorItem)->Void)?) = nil)
     {
         guard isShared() else { return }

@@ -49,6 +49,10 @@ class AutoIncreasedID: Codable, Equatable
 
 class GroceryHistory : Codable
 {
+    static func == (lhs: GroceryHistory, rhs: GroceryHistory) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     var id: AutoIncreasedID
     var title: String
     var category: Category

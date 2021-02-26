@@ -40,8 +40,11 @@ class FamilyShareViewController: UIViewController {
             (yes) in
             ShareManager.shared.startShareAndCreateCode()
             {
-                
-                    // 로컬의 데이터를 서버로 보내고, 로컬 데이터를 전부 지운다.
+                // 로컬의 데이터를 서버로 보내고, 로컬 데이터를 전부 지운다.
+                DispatchQueue.main.async()
+                {
+                    print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
+                    
                     ShareManager.shared.sendAllLocalData()
                     
                     DataManager.shared.removeAllGroceryHistories()
@@ -64,16 +67,43 @@ class FamilyShareViewController: UIViewController {
                     {
                         getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
                     }
+                    
+                    ShareManager.shared.startUpdateCounting = true
                 }
+            }
             
         }
         
         let no = UIAlertAction(title: "No", style: .default)
         { (no) in
-            //code
-            DataManager.shared.removeAllGroceryHistories()
-            DataManager.shared.removeAllCartGroceries()
-            DataManager.shared.removeAllFridgeGroceries()
+            ShareManager.shared.startShareAndCreateCode()
+            {
+                DispatchQueue.main.async()
+                {
+                    DataManager.shared.removeAllGroceryHistories()
+                    DataManager.shared.removeAllCartGroceries()
+                    DataManager.shared.removeAllFridgeGroceries()
+                    
+                    ShareManager.shared.updateAllProduct()
+                    {
+                        getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
+                        getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
+                        getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+                    }
+                    
+                    ShareManager.shared.updateAllCartItem()
+                    {
+                        getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
+                    }
+                    
+                    ShareManager.shared.updateAllRefrigeratorItem()
+                    {
+                        getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+                    }
+                    
+                    ShareManager.shared.startUpdateCounting = true
+                }
+            }
         }
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
@@ -112,54 +142,68 @@ class FamilyShareViewController: UIViewController {
                 (yes) in
                 ShareManager.shared.startShareWithPublicCode(publicCode: publicCode)
                 {
-                    // 로컬의 데이터를 서버로 보내고, 로컬 데이터를 전부 지운다.
-                    ShareManager.shared.sendAllLocalData()
-                    
-                    DataManager.shared.removeAllGroceryHistories()
-                    DataManager.shared.removeAllCartGroceries()
-                    DataManager.shared.removeAllFridgeGroceries()
-                    
-                    ShareManager.shared.updateAllProduct()
+                    DispatchQueue.main.async()
                     {
-                        getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
-                        getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-                        getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
-                    }
-                    
-                    ShareManager.shared.updateAllCartItem()
-                    {
-                        getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-                    }
-                    
-                    ShareManager.shared.updateAllRefrigeratorItem()
-                    {
-                        getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+                        print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
+                        
+                        // 로컬의 데이터를 서버로 보내고, 로컬 데이터를 전부 지운다.
+                        ShareManager.shared.sendAllLocalData()
+                        
+                        DataManager.shared.removeAllGroceryHistories()
+                        DataManager.shared.removeAllCartGroceries()
+                        DataManager.shared.removeAllFridgeGroceries()
+                        
+                        ShareManager.shared.updateAllProduct()
+                        {
+                            getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
+                            getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
+                            getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+                        }
+                        
+                        ShareManager.shared.updateAllCartItem()
+                        {
+                            getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
+                        }
+                        
+                        ShareManager.shared.updateAllRefrigeratorItem()
+                        {
+                            getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+                        }
+                        
+                        ShareManager.shared.startUpdateCounting = true
                     }
                 }
             }
             
             let no = UIAlertAction(title: "No", style: .default)
             { (no) in
-                //code
-                DataManager.shared.removeAllGroceryHistories()
-                DataManager.shared.removeAllCartGroceries()
-                DataManager.shared.removeAllFridgeGroceries()
-                
-                ShareManager.shared.updateAllProduct()
+                ShareManager.shared.startShareWithPublicCode(publicCode: publicCode)
                 {
-                    getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
-                    getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-                    getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
-                }
-                
-                ShareManager.shared.updateAllCartItem()
-                {
-                    getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-                }
-                
-                ShareManager.shared.updateAllRefrigeratorItem()
-                {
-                    getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+                    DispatchQueue.main.async()
+                    {
+                        DataManager.shared.removeAllGroceryHistories()
+                        DataManager.shared.removeAllCartGroceries()
+                        DataManager.shared.removeAllFridgeGroceries()
+                        
+                        ShareManager.shared.updateAllProduct()
+                        {
+                            getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
+                            getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
+                            getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+                        }
+                        
+                        ShareManager.shared.updateAllCartItem()
+                        {
+                            getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
+                        }
+                        
+                        ShareManager.shared.updateAllRefrigeratorItem()
+                        {
+                            getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+                        }
+                        
+                        ShareManager.shared.startUpdateCounting = true
+                    }
                 }
             }
             

@@ -200,6 +200,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     @objc func updateCounting()
     {
+        guard ShareManager.shared.startUpdateCounting == true else { return }
         NSLog("counting..")
         
         // 일정초마다.. 서버로부터 전부 받아서 update
