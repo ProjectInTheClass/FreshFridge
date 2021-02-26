@@ -53,12 +53,12 @@ class ShareManager
         sharedID = UserDefaults.standard.integer(forKey: "sharedID")
         publicCode = UserDefaults.standard.string(forKey: "publicCode") ?? ""
         createdPublicCode = UserDefaults.standard.string(forKey: "createdPublicCode") ?? ""
-        createdPublicCode = ""// test code
+        //createdPublicCode = ""// test code
         if let fridgeIDs = UserDefaults.standard.array(forKey: "fridgeIDs")
         {
             self.fridgeIDs = fridgeIDs as! [Int]
         }
-        fridgeIDs = [-1,-1,-1,-1] // test code
+        //fridgeIDs = [-1,-1,-1,-1] // test code
     }
     
     func isShared() -> Bool
