@@ -136,6 +136,32 @@ class ShareManager
     
     func sendAllLocalData()
     {
+        // 서버의 구입기록을 가져와서 중복이면 생성요청을 생략한다.
+        
+        // 서버에서 구입기록을 groceryHistoriesInServer에 가져온다.
+        var temp: [GroceryHistory] = []
+        for groceryHistory in DataManager.shared.groceryHistories
+        {
+            temp.insert(groceryHistory, at: temp.count)
+        }
+        DataManager.shared.groceryHistories.removeAll()
+        
+        var isRepeat: Bool = true
+        while isRepeat {
+            ShareManager.shared.updateAllProduct()
+            { (isCompleted: Bool) in
+                isRepeat = !isCompleted
+            }
+        }
+        
+        var groceryHistoriesInServer: [GroceryHistory] = []
+        for groceryHistory in DataManager.shared.groceryHistories
+        {
+            groceryHistoriesInServer.insert(groceryHistory, at: groceryHistoriesInServer.count)
+        }
+        DataManager.shared.groceryHistories = temp
+        
+        // 냉장고나 카트 아이템이 참조하는 구입기록을 referenceMap에 골라낸다.
         struct GroceryHistoryReferences
         {
             var groceries: [Grocery] = []
@@ -169,6 +195,7 @@ class ShareManager
             referenceMap[key]!.cartGroceries.insert(cartGrocery, at: 0)
         }
         
+        // 참조맵에 있는 groceryHistory, grocery, cartGrocery를 서버에 생성 요청한다.
         for (_, groceryHistoryReferences) in referenceMap
         {
             var id: Int = -1
@@ -183,51 +210,91 @@ class ShareManager
             
             if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(id))
             {
-                
-                createGroceryHistory(title: groceryHistory.title, category: groceryHistory.category)
+                if let sameHistory = groceryHistoriesInServer.first(where: { $0.title == groceryHistory.title && $0.category == groceryHistory.category })
                 {
-                    (id: Int) in
+                    // 서버에 같은 이름, 카테고리 구입기록이 있는 경우
+                    print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
+                    groceryHistory.id = sameHistory.id
                     
-                    DispatchQueue.main.async()
+                    if(sameHistory.favorite != groceryHistory.favorite)
                     {
-                        print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
-                        groceryHistory.id = AutoIncreasedID(id)
                         self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
-                        
-                        // processing image
-                        if let image = groceryHistory.image,
-                           let uiImage = image.image()
+                    }
+                    
+                    // processing image
+                    if let image = groceryHistory.image,
+                       let uiImage = image.image()
+                    {
+                        self.uploadImage(image: uiImage, filename: image.filename)
                         {
-                            self.uploadImage(image: uiImage, filename: image.filename)
+                            (imageName: String) in
+                            
+                            DispatchQueue.main.async
                             {
-                                (imageName: String) in
-                                
-                                DispatchQueue.main.async
+                                image.resetFilename(name: imageName)
+                                self.updateGroceryHistory(id: AutoIncreasedID(id), image: image)
                                 {
-                                    image.resetFilename(name: imageName)
-                                    self.updateGroceryHistory(id: AutoIncreasedID(id), image: image)
-                                    {
-                                    }
                                 }
                             }
                         }
+                    }
+                    
+                    for grocery in groceryHistoryReferences.groceries
+                    {
+                        self.createGrocery(productID: id, count: grocery.count, isPercentageCount: grocery.isPercentageCount, dueDate: grocery.dueDate, storage: grocery.storage, fridgeName: grocery.fridgeName, notes: grocery.notes ?? "", image: grocery.info.image)
+                    }
+                    
+                    for cartGrocery in groceryHistoryReferences.cartGroceries
+                    {
+                        self.createCartGrocery(productID: id, count: cartGrocery.count, isPercentageCount: cartGrocery.isPercentageCount, isPurchased: cartGrocery.isPurchased)
+                    }
+                }
+                else
+                {
+                    createGroceryHistory(title: groceryHistory.title, category: groceryHistory.category)
+                    {
+                        (id: Int) in
                         
-                        //self.updateGroceryHistory(id: groceryHistory.id, image: groceryHistory.image, completion: nil)
-                        
-                        for grocery in groceryHistoryReferences.groceries
+                        DispatchQueue.main.async()
                         {
-                            self.createGrocery(productID: id, count: grocery.count, isPercentageCount: grocery.isPercentageCount, dueDate: grocery.dueDate, storage: grocery.storage, fridgeName: grocery.fridgeName, notes: grocery.notes ?? "", image: grocery.info.image)
-                        }
-                        
-                        for cartGrocery in groceryHistoryReferences.cartGroceries
-                        {
-                            self.createCartGrocery(productID: id, count: cartGrocery.count, isPercentageCount: cartGrocery.isPercentageCount, isPurchased: cartGrocery.isPurchased)
+                            print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
+                            groceryHistory.id = AutoIncreasedID(id)
+                            self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
+                            
+                            // processing image
+                            if let image = groceryHistory.image,
+                               let uiImage = image.image()
+                            {
+                                self.uploadImage(image: uiImage, filename: image.filename)
+                                {
+                                    (imageName: String) in
+                                    
+                                    DispatchQueue.main.async
+                                    {
+                                        image.resetFilename(name: imageName)
+                                        self.updateGroceryHistory(id: AutoIncreasedID(id), image: image)
+                                        {
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            for grocery in groceryHistoryReferences.groceries
+                            {
+                                self.createGrocery(productID: id, count: grocery.count, isPercentageCount: grocery.isPercentageCount, dueDate: grocery.dueDate, storage: grocery.storage, fridgeName: grocery.fridgeName, notes: grocery.notes ?? "", image: grocery.info.image)
+                            }
+                            
+                            for cartGrocery in groceryHistoryReferences.cartGroceries
+                            {
+                                self.createCartGrocery(productID: id, count: cartGrocery.count, isPercentageCount: cartGrocery.isPercentageCount, isPurchased: cartGrocery.isPurchased)
+                            }
                         }
                     }
                 }
             }
         }
         
+        // 냉장고나 카트에 참조되지 않는 구입기록을 골라낸다.
         var notReferencedGroceryHistory: [GroceryHistory] = []
         for groceryHistory in DataManager.shared.getGroceryHistories()
         {
@@ -254,14 +321,19 @@ class ShareManager
             }
         }
         
-        
+        // 참조되지 않는 구입기록을 서버에 생성 요청한다.
         for groceryHistory in notReferencedGroceryHistory
         {
-            createGroceryHistory(title: groceryHistory.title, category: groceryHistory.category)
+            if let sameHistory = groceryHistoriesInServer.first(where: { $0.title == groceryHistory.title && $0.category == groceryHistory.category })
             {
-                (id: Int) in
-                groceryHistory.id = AutoIncreasedID(id)
-                self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
+                // 서버에 같은 이름, 카테고리 구입기록이 있는 경우
+                print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
+                groceryHistory.id = sameHistory.id
+                
+                if(sameHistory.favorite != groceryHistory.favorite)
+                {
+                    self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
+                }
                 
                 // processing image
                 if let image = groceryHistory.image,
@@ -270,11 +342,38 @@ class ShareManager
                     self.uploadImage(image: uiImage, filename: image.filename)
                     {
                         (imageName: String) in
+                        
                         DispatchQueue.main.async
                         {
                             image.resetFilename(name: imageName)
-                            self.updateGroceryHistory(id: AutoIncreasedID(id), image: image)
+                            self.updateGroceryHistory(id: groceryHistory.id, image: image)
                             {
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                createGroceryHistory(title: groceryHistory.title, category: groceryHistory.category)
+                {
+                    (id: Int) in
+                    groceryHistory.id = AutoIncreasedID(id)
+                    self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
+                    
+                    // processing image
+                    if let image = groceryHistory.image,
+                       let uiImage = image.image()
+                    {
+                        self.uploadImage(image: uiImage, filename: image.filename)
+                        {
+                            (imageName: String) in
+                            DispatchQueue.main.async
+                            {
+                                image.resetFilename(name: imageName)
+                                self.updateGroceryHistory(id: groceryHistory.id, image: image)
+                                {
+                                }
                             }
                         }
                     }
@@ -400,28 +499,47 @@ class ShareManager
         getRequestManager().isUpdateShopingCart = false
         getRequestManager().isUpdateGroceryList = false
         
+        let maxRepeatCount = 100
+        
         var isRepeat: Bool = true
-        while isRepeat {
+        var repeatCount = 0
+        while isRepeat
+        {
+            guard repeatCount < maxRepeatCount else { break }
             ShareManager.shared.updateAllProduct()
             { (isCompleted: Bool) in
                 isRepeat = !isCompleted
             }
+            
+            repeatCount += 1
         }
         
         isRepeat = true
-        while isRepeat {
+        repeatCount = 0
+        while isRepeat
+        {
+            guard repeatCount < maxRepeatCount else { break }
+            
             ShareManager.shared.updateAllCartItem()
             { (isCompleted: Bool) in
                 isRepeat = !isCompleted
             }
+            
+            repeatCount += 1
         }
         
         isRepeat = true
-        while isRepeat {
+        repeatCount = 0
+        while isRepeat
+        {
+            guard repeatCount < maxRepeatCount else { break }
+            
             ShareManager.shared.updateAllRefrigeratorItem()
             { (isCompleted: Bool) in
                 isRepeat = !isCompleted
             }
+            
+            repeatCount += 1
         }
         
         getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
@@ -579,6 +697,7 @@ class ShareManager
                         self.lastestProductUpdateAt = product.updatedAt
                         print(self.lastestProductUpdateAt)
                     }
+                    
                 }
                 
                 var isCompleted = false
@@ -1055,14 +1174,12 @@ class ShareManager
                                         
                                         getRequestManager().isUpdateGroceryList = true
                                     }
-                                    
-                                    
-                                    if(self.lastestRefriUpdateAt < refriItem.updatedAt)
-                                    {
-                                        self.lastestRefriUpdateAt = refriItem.updatedAt
-                                        print(self.lastestRefriUpdateAt)
-                                    }
-                                    
+                                }
+                                
+                                if(self.lastestRefriUpdateAt < refriItem.updatedAt)
+                                {
+                                    self.lastestRefriUpdateAt = refriItem.updatedAt
+                                    print(self.lastestRefriUpdateAt)
                                 }
                                 
                                 
@@ -1446,12 +1563,15 @@ class ShareManager
                                 getRequestManager().isUpdateShopingCart = true
                             }
                             
-                            if(self.lastestCartUpdatedAt < cartItem.updatedAt)
-                            {
-                                self.lastestCartUpdatedAt = cartItem.updatedAt
-                                print(self.lastestCartUpdatedAt)
-                            }
+                            
                         }
+                        
+                        if(self.lastestCartUpdatedAt < cartItem.updatedAt)
+                        {
+                            self.lastestCartUpdatedAt = cartItem.updatedAt
+                            print(self.lastestCartUpdatedAt)
+                        }
+                        
                     } // end of for
                     
                     var isCompleted = false
