@@ -380,6 +380,11 @@ class ShareManager
                 }
             }
         }
+        
+        ShareManager.shared.lastestProductUpdateAt = -1
+        ShareManager.shared.lastestCartUpdatedAt = -1
+        ShareManager.shared.lastestRefriUpdateAt = -1
+        
     }
         
     func startShareAndCreateCode(completion: @escaping (()->Void))
@@ -601,6 +606,7 @@ class ShareManager
         let baseURL = URL(string: getServerURL() + subURL)!
         let query: [String: String] = [
                 "idForShare": "\(sharedID)",
+                "sort":"updatedAt ASC",
                 "where": "{\"updatedAt\":{\">\":\(lastestProductUpdateAt)},\"idForShare\":\(sharedID),\"isDeleted\":false}"
             ]
         let url = baseURL.withQueries(query)!
@@ -1075,6 +1081,7 @@ class ShareManager
             
             let query: [String: String] = [
                     "idForRefri": "\(frigdeID)",
+                    "sort":"updatedAt ASC",
                     "where": "{\"updatedAt\":{\">\":\(lastestRefriUpdateAt)},\"idForRefri\":\(frigdeID),\"isDeleted\":false}"
                 ]
             
@@ -1484,6 +1491,7 @@ class ShareManager
         let baseURL = URL(string: getServerURL() + subURL)!
         let query: [String: String] = [
                 "idForShare": "\(sharedID)",
+                "sort":"updatedAt ASC",
                 "where": "{\"updatedAt\":{\">\":\(lastestCartUpdatedAt)},\"idForShare\":\(sharedID),\"isDeleted\":false}"
             ]
         
