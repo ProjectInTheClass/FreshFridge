@@ -274,7 +274,7 @@ class RequestToServer : RequestInterface
         else
         {
             // 없으면 서버에 product를 추가한다.
-            ShareManager.shared.createGroceryHistoryForRefri(title: title, category: category, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
+            ShareManager.shared.createGroceryHistoryForRefri(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
             { (refriItem: ShareManager.RefrigeratorItem) in
                 DataManager.shared.insertGrocery(id: refriItem.id, title: refriItem.product!.title,
                                                  category: GroceryHistory.Category(rawValue: refriItem.product!.category) ?? GroceryHistory.Category.ETC,
