@@ -815,12 +815,6 @@ class ShareManager
     
     func downloadImage(id: String, completion: @escaping ((UIImage?)->Void))
     {
-//        if let image = cachedImages[id]
-//        {
-//            completion(image)
-//            return
-//        }
-        
         let subURL = "/image/show/\(id)"
         let url = URL(string: self.getServerURL() + subURL)!
         
@@ -840,9 +834,7 @@ class ShareManager
             print(response.suggestedFilename ?? url.lastPathComponent)
             print("Download Finished")
             
-            //DispatchQueue.main.async() { [weak self] in
-                completion(UIImage(data: data))
-            //}
+            completion(UIImage(data: data))
         }
         task.resume()
     }

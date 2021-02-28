@@ -485,12 +485,9 @@ class RequestToServer : RequestInterface
                 image.resetFilename(name: imageName)
                 ShareManager.shared.updateGroceryHistory(id: id, image: image)
                 {
-                    DispatchQueue.main.async
-                    {
-                        getRequestManager().updatePurchaseRecordViewController(updateTableView: true)
-                        getRequestManager().updateShopingCartViewController(updateTableView: true)
-                        getRequestManager().updateGroceryListViewController(updateTableView: true)
-                    }
+                    getRequestManager().updatePurchaseRecordViewController(updateTableView: true)
+                    getRequestManager().updateShopingCartViewController(updateTableView: true)
+                    getRequestManager().updateGroceryListViewController(updateTableView: true)
                 }
             }
         }

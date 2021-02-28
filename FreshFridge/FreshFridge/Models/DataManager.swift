@@ -41,6 +41,10 @@ class DataManager
     
     func removeAllFridgeGroceries()
     {
+        for grocery in groceries
+        {
+            getRequestManager().removeAlarm(grocery: grocery)
+        }
         groceries.removeAll()
         saveGrocery()
     }
@@ -196,11 +200,6 @@ class DataManager
         }
     }
 
-//    func findGroceryIndex(grocery: Grocery) -> EnumeratedSequence<[Grocery]>.Element?
-//    {
-//        return groceries.enumerated().first(where: {$0.element === grocery})
-//    }
-    
     func findGroceryIndex(id: AutoIncreasedID) -> EnumeratedSequence<[Grocery]>.Element?
     {
         return groceries.enumerated().first(where: {$0.element.id == id})
