@@ -238,6 +238,20 @@ class RequestToServer : RequestInterface
         if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
         {
             productID = groceryHistory.id.id
+            
+            if let image = image,
+               let uiImage = image.image()
+            {
+                ShareManager.shared.uploadImage(image: uiImage, filename: image.filename)
+                {
+                    (imageName: String) in
+                    image.resetFilename(name: imageName)
+                    ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, image: image)
+                    {
+                    }
+                }
+            }
+            
             ShareManager.shared.createGrocery(productID: productID, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes, image: image)
             {
                 (refriItem: ShareManager.RefrigeratorItem) in
@@ -368,6 +382,20 @@ class RequestToServer : RequestInterface
         if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
         {
             productID = groceryHistory.id.id
+            // processing image
+            if let image = image,
+               let uiImage = image.image()
+            {
+                ShareManager.shared.uploadImage(image: uiImage, filename: image.filename)
+                {
+                    (imageName: String) in
+                    image.resetFilename(name: imageName)
+                    ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, image: image)
+                    {
+                    }
+                }
+            }
+            
             ShareManager.shared.createCartGrocery(productID: productID, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased)
             { (cartItem: ShareManager.CartItem) in
                 
