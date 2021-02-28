@@ -183,8 +183,6 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             }
             
             sender.countButton.updatePieChart(count:count, isPercentage: grocery.isPercentageCount)
-            
-            //DataManager.shared.updateGrocery(id: grocery.id, count: count)
             RequestManager.shared.getRequestInterface().updateGrocery(id: grocery.id, count: count)
         }
     }
@@ -232,7 +230,13 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             {
                 cell = tableView.dequeueReusableCell(withIdentifier: "groceryPictureCell", for: indexPath) as? GroceryListTableViewCell
                 let pictureCell = cell as? GroceryListTableViewPictureCell
-                pictureCell?.titleImage.image = grocery.info.image?.image()
+                //
+                
+                if let groceryImage =  grocery.info.image,
+                   let image = groceryImage.image()
+                {
+                    pictureCell?.titleImage.image = image
+                }
             }
             
             cell.delegate = self
@@ -367,8 +371,6 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
             RequestManager.shared.getRequestInterface().addCartGrocery(title: selectedGrocery.info.title, category: selectedGrocery.info.category)
             
-            //getRequestManager().animateBadge(tabBarIndex: .shopingCartTabBar)
-            
             success(true)
         })
         
@@ -387,12 +389,9 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 print("Trash action ...")
                     
                 let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-                //getRequestManager().removeAlarm(grocery: selectedGrocery)
-            
-                //DataManager.shared.removeGrocery(id: selectedGrocery.id)
+                
                 RequestManager.shared.getRequestInterface().removeGrocery(id: selectedGrocery.id)
-                //updateTableView()
-                //tableView.reloadData()
+                
                 success(true)
          })
         
@@ -626,64 +625,50 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         
                     if(grocery.count != count)
                     {
-                        //DataManager.shared.updateGrocery(id: grocery.id, count: count)
                         RequestManager.shared.getRequestInterface().updateGrocery(id: grocery.id, count: count)
                         
                     }
                     
                     if(grocery.isPercentageCount != isPercentageCount)
                     {
-                        //DataManager.shared.updateGrocery(id: grocery.id, isPercentageCount: isPercentageCount)
                         RequestManager.shared.getRequestInterface().updateGrocery(id: grocery.id, isPercentageCount: isPercentageCount)
                     }
                     
                     if(grocery.dueDate.date != dueDate.date)
                     {
-                        //DataManager.shared.updateGrocery(id: grocery.id, dueDate: dueDate)
                         RequestManager.shared.getRequestInterface().updateGrocery(id: grocery.id, dueDate: dueDate)
-                        //bResetAlarm = true
                     }
                     
                     if(grocery.storage != storage)
                     {
-                        //DataManager.shared.updateGrocery(id: grocery.id, storage: storage)
                         RequestManager.shared.getRequestInterface().updateGrocery(id: grocery.id, storage: storage)
                         
                     }
                     
                     if(grocery.fridgeName != fridgeName)
                     {
-                        //DataManager.shared.updateGrocery(id: grocery.id, fridgeName: fridgeName)
                         RequestManager.shared.getRequestInterface().updateGrocery(id: grocery.id, fridgeName: fridgeName)
                         
                     }
                     
                     if(notes != nil && grocery.notes != notes)
                     {
-                        //DataManager.shared.updateGrocery(id: grocery.id, notes: notes)
                         RequestManager.shared.getRequestInterface().updateGrocery(id: grocery.id, notes: notes)
                         
                     }
                     
                     if(grocery.info.title != title)
                     {
-                        //DataManager.shared.updateGrocery(id: grocery.id, title: title)
                         RequestManager.shared.getRequestInterface().updateGrocery(id: grocery.id, title: title)
-                        
-                        //bResetAlarm = true
                     }
                     
                     if(grocery.info.category != category)
                     {
-                        //DataManager.shared.updateGrocery(id: grocery.id, category: category)
                         RequestManager.shared.getRequestInterface().updateGroceryHistory(id: grocery.info.id, category: category)
-                        
-                        //bUpdateTableView = true
                     }
                     
                     if(image != nil && (grocery.info.image === image) == false)
                     {
-                        //DataManager.shared.updateGrocery(id: grocery.id, image: image)
                         RequestManager.shared.getRequestInterface().updateGroceryHistory(id: grocery.info.id, image: image)
                     }
                     
@@ -695,10 +680,6 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                             cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
                             cell.countButton.setTitle("\(grocery.count)", for: .normal)
                         }
-//                        else
-//                        {
-//                            tableView.reloadData()
-//                        }
                     }
                     else
                     {
@@ -708,36 +689,15 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                             cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
                             cell.countButton.setTitle("\(grocery.count)", for: .normal)
                         }
-//                        else
-//                        {
-//                            tableView.reloadData()
-//                        }
                     }
-                    
-//                    if(bUpdateTableView)
-//                    {
-//                        updateTableView()
-//                    }
-                    
-//                    if(bResetAlarm)
-//                    {
-//                        getRequestManager().resetAlarm(grocery: grocery)
-//                    }
-                    
-                    
                 }
                 else
                 {
                     // adding
                     RequestManager.shared.getRequestInterface().addGrocery(title: title, category: category, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes ?? "", image: image)
-                    //DataManager.shared.insertGrocery(title: title, category: category, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes ?? "", image: image)
-                    
-                    //updateTableView()
                 }
                 
                 editingSelectedRow = nil
-            
-                //tableView.reloadData()
             }
         }
         else if(unwindSegue.identifier == "ToGroceryList")

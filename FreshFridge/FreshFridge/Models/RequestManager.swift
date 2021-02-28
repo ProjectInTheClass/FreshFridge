@@ -382,11 +382,11 @@ class RequestToServer : RequestInterface
         else
         {
             // 없으면 서버에 product를 추가한다.
-            ShareManager.shared.createGroceryHistoryForCart(title: title, category: category, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased )
+            ShareManager.shared.createGroceryHistoryForCart(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased )
             {
                 (cartItem: ShareManager.CartItem) in
                 
-                DataManager.shared.insertCartGrocery(title: cartItem.product!.title, category: GroceryHistory.Category(rawValue: cartItem.product!.category) ?? GroceryHistory.Category.ETC, image: nil,
+                DataManager.shared.insertCartGrocery(title: cartItem.product!.title, category: GroceryHistory.Category(rawValue: cartItem.product!.category) ?? GroceryHistory.Category.ETC, image: image,
                                                                id: cartItem.id, count: cartItem.count, isPercentageCount: cartItem.isPercentageCount, isPurchased: cartItem.isPurchased)
                 
                 getRequestManager().updatePurchaseRecordViewController(updateTableView: true)
@@ -475,12 +475,27 @@ class RequestToServer : RequestInterface
     {
         guard ShareManager.shared.isShared() else { return }
         
-        ShareManager.shared.updateGroceryHistory(id: id, image: image)
+        if let image = image,
+            let uiImage = image.image()
         {
-            getRequestManager().updatePurchaseRecordViewController(updateTableView: false)
-            getRequestManager().updateShopingCartViewController(updateTableView: false)
-            getRequestManager().updateGroceryListViewController(updateTableView: false)
+            ShareManager.shared.uploadImage(image: uiImage, filename: image.filename)
+            {
+                (imageName: String) in
+                
+                image.resetFilename(name: imageName)
+                ShareManager.shared.updateGroceryHistory(id: id, image: image)
+                {
+                    DispatchQueue.main.async
+                    {
+                        getRequestManager().updatePurchaseRecordViewController(updateTableView: true)
+                        getRequestManager().updateShopingCartViewController(updateTableView: true)
+                        getRequestManager().updateGroceryListViewController(updateTableView: true)
+                    }
+                }
+            }
         }
+        
+        
     }
     
     override func updateGroceryHistory(id: AutoIncreasedID, favorite: Bool)
@@ -503,6 +518,11 @@ class RequestToLocal : RequestInterface
         if nil == DataManager.shared.getGroceryHistory(title: title, category: category)
         {
             DataManager.shared.insertGroceryHistory(id: -1, title: title, category: category, image: image, updateDate: true)
+            
+            if let image = image
+            {
+                GroceryImage.saveImage(image: image.image(), filename: image.filename)
+            }
         }
         
         DataManager.shared.insertGrocery(id: -1, title: title, category: category, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes, image: image)
@@ -571,6 +591,10 @@ class RequestToLocal : RequestInterface
         if nil == DataManager.shared.getGroceryHistory(title: title, category: category)
         {
             DataManager.shared.insertGroceryHistory(id: -1, title: title, category: category, image: image, updateDate: true)
+            if let image = image
+            {
+                GroceryImage.saveImage(image: image.image(), filename: image.filename)
+            }
         }
         
         DataManager.shared.insertCartGrocery(title: title, category: category, image: image,
@@ -629,6 +653,10 @@ class RequestToLocal : RequestInterface
     override func updateGroceryHistory(id: AutoIncreasedID, image: GroceryImage?)
     {
         DataManager.shared.updateGroceryHistory(id: id, image: image)
+        if let image = image
+        {
+            GroceryImage.saveImage(image: image.image(), filename: image.filename)
+        }
         getRequestManager().updatePurchaseRecordViewController(updateTableView: false)
         getRequestManager().updateShopingCartViewController(updateTableView: false)
         getRequestManager().updateGroceryListViewController(updateTableView: false)

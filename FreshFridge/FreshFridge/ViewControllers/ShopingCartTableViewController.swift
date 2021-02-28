@@ -144,9 +144,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
             
             RequestManager.shared.getRequestInterface().updateCartGrocery(id: checkGrocery.id, isPurchased: !checkGrocery.isPurchased)
         }
-       
-        //tableView.reloadData()
-        
         
         //
         if(isAllCheckMarkButtonOn)
@@ -181,7 +178,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                     }
                 }
                 
-                //grocery.count = count
                 RequestManager.shared.getRequestInterface().updateCartGrocery(id: grocery.id, count: count)
             }
          
@@ -212,8 +208,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         {
             RequestManager.shared.getRequestInterface().updateCartGrocery(id: cartGrocery.id, isPurchased: isAllCheckMarkButtonOn)
         }
-        
-        //tableView.reloadData()
     }
     
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
@@ -236,14 +230,10 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
   
     @IBAction func ToFridgeButtonTapped(_ sender: UIButton) {
         
-        //var isMoved = false
         for cartGrocery in DataManager.shared.getCartGroceries().reversed()
         {
             if(cartGrocery.isPurchased)
             {
-                //isMoved = true
-                
-                //DataManager.shared.insertGrocery(title: cartGrocery.info.title, category: cartGrocery.info.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: nil)
                 RequestManager.shared.getRequestInterface().addGrocery(title: cartGrocery.info.title, category: cartGrocery.info.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: nil)
                 
                 RequestManager.shared.getRequestInterface().removeCartGrocery(id: cartGrocery.id)
@@ -252,12 +242,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
             }
         }
         
-//        if(isMoved)
-//        {
-//            updateTableView()
-//            tableView.reloadData()
-//            getRequestManager().animateBadge(tabBarIndex: .fridgeTabBar)
-//        }
     }
     
     
@@ -274,8 +258,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 let cartGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
                 RequestManager.shared.getRequestInterface().removeCartGrocery(id: cartGrocery.id)
                 
-//                updateTableView()
-//                tableView.reloadData()
             
                 success(true)
          })
@@ -323,8 +305,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                     if(title.isEmpty == false)
                     {
                         RequestManager.shared.getRequestInterface().addCartGrocery(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount)
-                        
-                        //bUpdateTableView = true
                     }
                 }
                 else
@@ -338,9 +318,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                         }
                         if(cartGrocery.info.category != category)
                         {
-                            //cartGrocery.info.category = category
                             RequestManager.shared.getRequestInterface().updateGroceryHistory(id: cartGrocery.info.id, category: category)
-                            //bUpdateTableView = true
                         }
                         if(cartGrocery.count != count)
                         {
@@ -357,11 +335,6 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                     }
                 }
                 
-//                if(bUpdateTableView)
-//                {
-//                    updateTableView()
-//                }
-//                tableView.reloadData()
             }
         }
     }

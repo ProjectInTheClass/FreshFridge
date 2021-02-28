@@ -84,9 +84,10 @@ class ShopingCartTableViewPictureCell : ShopingCartTableViewCell
     {
         super.updateCell(with: inCell)
         
-        if((inCell.info.image) != nil)
+        if let groceryImage = inCell.info.image,
+           let image = groceryImage.image()
         {
-            titleImage.image = inCell.info.image?.image()
+            titleImage.image = image
         }
     }
 }

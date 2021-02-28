@@ -200,28 +200,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     @objc func updateCounting()
     {
-        guard ShareManager.shared.startUpdateCounting == true else { return }
         NSLog("counting..")
         
-        // 일정초마다.. 서버로부터 전부 받아서 update
-        ShareManager.shared.updateAllProduct()
-        {
-            getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
-            getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-            getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
-        }
-        ShareManager.shared.updateAllCartItem()
-        {
-            getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-        }
-        ShareManager.shared.updateAllRefrigeratorItem()
-        {
-            getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
-        }
+        ShareManager.shared.update()
     }
-    
-    
-
 }
 
 extension UserDefaults {

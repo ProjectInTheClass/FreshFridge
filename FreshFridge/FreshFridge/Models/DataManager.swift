@@ -52,10 +52,6 @@ class DataManager
         return groceryHistories
     }
     
-//    func findGroceryHistoryIndex(groceryHistory: GroceryHistory) -> EnumeratedSequence<[GroceryHistory]>.Element?
-//    {
-//        return groceryHistories.enumerated().first(where: {$0.element === groceryHistory})
-//    }
     
     func findGroceryHistoryIndex(id: AutoIncreasedID) -> EnumeratedSequence<[GroceryHistory]>.Element?
     {
@@ -83,6 +79,15 @@ class DataManager
             if(langStr == "ko")
             {
                 groceryHistories = GroceryHistory.loadSampleGroceryHistory()
+            }
+        }
+        
+        for groceryHistory in groceryHistories
+        {
+            if let image = groceryHistory.image
+            {
+                let uiImage = GroceryImage.loadImage(filename: image.filename)
+                groceryHistory.image = GroceryImage(image: uiImage, filename: image.filename)
             }
         }
     }
@@ -414,21 +419,6 @@ class DataManager
         }
     }
     
-//    func addCartGrocery(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, count: Int = 1, isPercentageCount: Bool = false, isPurchased: Bool = false)
-//    {
-//        if(ShareManager.shared.isShared())
-//        {
-//            // post (create cartitem)
-//            ShareManager.shared.addCartGroceryRequestToServer(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased)
-//        }
-//        else
-//        {
-//            ShareManager.shared.addCartGroceryRequestToLocal(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased)
-//        }
-//    }
-    
-    
-    
     // grocery history를 추가하지 않음
     func insertCartGrocery(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, id: Int, count: Int = 1, isPercentageCount: Bool = false, isPurchased: Bool = false)
     {
@@ -489,35 +479,4 @@ class DataManager
             saveCartGrocery()
         }
     }
-    /*
-    func updateCartGrocery(id: AutoIncreasedID, title: String)
-    {
-        if let foundCartGrocery = findCartGrocery(id: id)
-        {
-            foundCartGrocery.info.title = title
-            saveCartGrocery()
-            saveGroceryHistory()
-        }
-    }
-    
-    func updateCartGrocery(id: AutoIncreasedID, category: GroceryHistory.Category)
-    {
-        if let foundCartGrocery = findCartGrocery(id: id)
-        {
-            foundCartGrocery.info.category = category
-            saveCartGrocery()
-            saveGroceryHistory()
-        }
-    }
-    
-    func updateCartGrocery(id: AutoIncreasedID, image: GroceryImage)
-    {
-        if let foundCartGrocery = findCartGrocery(id: id)
-        {
-            foundCartGrocery.info.image = image
-            saveCartGrocery()
-            saveGroceryHistory()
-        }
-    }
- */
 }

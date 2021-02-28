@@ -51,24 +51,7 @@ class FamilyShareViewController: UIViewController {
                     DataManager.shared.removeAllCartGroceries()
                     DataManager.shared.removeAllFridgeGroceries()
                     
-                    ShareManager.shared.updateAllProduct()
-                    {
-                        getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
-                        getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-                        getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
-                    }
-                    
-                    ShareManager.shared.updateAllCartItem()
-                    {
-                        getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-                    }
-                    
-                    ShareManager.shared.updateAllRefrigeratorItem()
-                    {
-                        getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
-                    }
-                    
-                    ShareManager.shared.startUpdateCounting = true
+                    ShareManager.shared.update()
                 }
             }
             
@@ -84,24 +67,7 @@ class FamilyShareViewController: UIViewController {
                     DataManager.shared.removeAllCartGroceries()
                     DataManager.shared.removeAllFridgeGroceries()
                     
-                    ShareManager.shared.updateAllProduct()
-                    {
-                        getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
-                        getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-                        getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
-                    }
-                    
-                    ShareManager.shared.updateAllCartItem()
-                    {
-                        getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-                    }
-                    
-                    ShareManager.shared.updateAllRefrigeratorItem()
-                    {
-                        getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
-                    }
-                    
-                    ShareManager.shared.startUpdateCounting = true
+                    ShareManager.shared.update()
                 }
             }
         }
@@ -153,24 +119,7 @@ class FamilyShareViewController: UIViewController {
                         DataManager.shared.removeAllCartGroceries()
                         DataManager.shared.removeAllFridgeGroceries()
                         
-                        ShareManager.shared.updateAllProduct()
-                        {
-                            getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
-                            getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-                            getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
-                        }
-                        
-                        ShareManager.shared.updateAllCartItem()
-                        {
-                            getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-                        }
-                        
-                        ShareManager.shared.updateAllRefrigeratorItem()
-                        {
-                            getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
-                        }
-                        
-                        ShareManager.shared.startUpdateCounting = true
+                        ShareManager.shared.update()
                     }
                 }
             }
@@ -185,24 +134,7 @@ class FamilyShareViewController: UIViewController {
                         DataManager.shared.removeAllCartGroceries()
                         DataManager.shared.removeAllFridgeGroceries()
                         
-                        ShareManager.shared.updateAllProduct()
-                        {
-                            getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
-                            getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-                            getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
-                        }
-                        
-                        ShareManager.shared.updateAllCartItem()
-                        {
-                            getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-                        }
-                        
-                        ShareManager.shared.updateAllRefrigeratorItem()
-                        {
-                            getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
-                        }
-                        
-                        ShareManager.shared.startUpdateCounting = true
+                        ShareManager.shared.update()
                     }
                 }
             }

@@ -195,8 +195,11 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         {
             cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordWithPictureCell", for: indexPath) as? PurchaseRecordWithPictureTableViewCell
             let pictureCell = cell as? PurchaseRecordWithPictureTableViewCell
-            pictureCell?.titleImage.image = cellContents.image?.image()
-            
+            if let groceryImage = cellContents.image,
+               let image = groceryImage.image()
+            {
+                pictureCell?.titleImage.image = image
+            }
         }
 
         
@@ -216,7 +219,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             
             let selectedHistory = filteredGroceries[indexPath.section][indexPath.row]
             RequestManager.shared.getRequestInterface().addCartGrocery(title: selectedHistory.title, category: selectedHistory.category)
-            //getRequestManager().animateBadge(tabBarIndex: .shopingCartTabBar)
             
             success(true)
         })
@@ -235,12 +237,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         let modifyAction = UIContextualAction(style: .destructive, title:  "Trash", handler:
             {  (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
-                //DataManager.shared.removeGroceryHistory(id: selectedGrocery.id)
                 RequestManager.shared.getRequestInterface().removeGroceryHistory(id: selectedGrocery.id)
-                //updateTableView()
-                //tableView.reloadData() // cellForRowAt 을 호출
-            
-            
+                
                 success(true)
             })
         
@@ -257,11 +255,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 
                 print(selectedGrocery)
                 
-                //DataManager.shared.insertGrocery(title: selectedGrocery.title, category: selectedGrocery.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: nil)
                 RequestManager.shared.getRequestInterface().addGrocery(title: selectedGrocery.title, category: selectedGrocery.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: nil)
-                
-                //getRequestManager().setAlarm(grocery: fridgeGrocery)
-                
                 
                 getRequestManager().animateBadge(tabBarIndex: .fridgeTabBar)
                 
@@ -290,8 +284,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             RequestManager.shared.getRequestInterface().updateGroceryHistory(id: thisGroceryHistory.id, favorite: !thisGroceryHistory.favorite)
             
         }
-//        updateTableView()
-//        tableView.reloadData()
     }
         
     /*
