@@ -53,7 +53,7 @@ class FamilyShareViewController: UIViewController {
                             DataManager.shared.removeAllCartGroceries()
                             DataManager.shared.removeAllFridgeGroceries()
                             
-                            ShareManager.shared.update()
+                            ShareManager.shared.update(true)
                         }
                     }
                 }
@@ -71,7 +71,7 @@ class FamilyShareViewController: UIViewController {
                     DataManager.shared.removeAllCartGroceries()
                     DataManager.shared.removeAllFridgeGroceries()
                     
-                    ShareManager.shared.update()
+                    ShareManager.shared.update(true)
                 }
             }
         }
@@ -125,7 +125,7 @@ class FamilyShareViewController: UIViewController {
                                 DataManager.shared.removeAllCartGroceries()
                                 DataManager.shared.removeAllFridgeGroceries()
                                 
-                                ShareManager.shared.update()
+                                ShareManager.shared.update(true)
                             }
                         }
                     }
@@ -142,7 +142,7 @@ class FamilyShareViewController: UIViewController {
                         DataManager.shared.removeAllCartGroceries()
                         DataManager.shared.removeAllFridgeGroceries()
                         
-                        ShareManager.shared.update()
+                        ShareManager.shared.update(true)
                     }
                 }
             }

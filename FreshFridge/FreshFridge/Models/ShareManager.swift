@@ -81,8 +81,8 @@ class ShareManager
             return rootURL
         }
         */
-        //return "http://z.ebadaq.com:45082"
-        return "http://freshfridge.cafe24app.com"
+        return "http://z.ebadaq.com:45082"
+        //return "http://freshfridge.cafe24app.com"
     }
     
     func getFridgeID(fridgeName: String) -> Int
@@ -104,7 +104,7 @@ class ShareManager
             startShareWithPublicCode(publicCode: publicCode)
             {
                 DispatchQueue.main.async {
-                    ShareManager.shared.update()
+                    ShareManager.shared.update(true)
                 }
             }
         }
@@ -498,61 +498,78 @@ class ShareManager
         task.resume()
     }
     
-    func update()
+    func update(_ showLoading: Bool = false)
     {
         guard ShareManager.shared.isShared() else { return }
         
-        // 일정초마다.. 서버로부터 전부 받아서 update
-        getRequestManager().isUpdatePurchaseRecord = false
-        getRequestManager().isUpdateShopingCart = false
-        getRequestManager().isUpdateGroceryList = false
-        
-        let maxRepeatCount = 100
-        
-        var isRepeat: Bool = true
-        var repeatCount = 0
-        while isRepeat
+        if(showLoading)
         {
-            guard repeatCount < maxRepeatCount else { break }
-            ShareManager.shared.updateAllProduct()
-            { (isCompleted: Bool) in
-                isRepeat = !isCompleted
+            LoadingHUD.showProgressCircle()
+            //LoadingHUD.showProgressAnimation()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01)
+        {
+            // 일정초마다.. 서버로부터 전부 받아서 update
+            getRequestManager().isUpdatePurchaseRecord = false
+            getRequestManager().isUpdateShopingCart = false
+            getRequestManager().isUpdateGroceryList = false
+            
+            let maxRepeatCount = 100
+            
+            var isRepeat: Bool = true
+            var repeatCount = 0
+            while isRepeat
+            {
+                guard repeatCount < maxRepeatCount else { break }
+                ShareManager.shared.updateAllProduct()
+                { (isCompleted: Bool) in
+                    isRepeat = !isCompleted
+                }
+                
+                repeatCount += 1
             }
             
-            repeatCount += 1
-        }
-        
-        isRepeat = true
-        repeatCount = 0
-        while isRepeat
-        {
-            guard repeatCount < maxRepeatCount else { break }
-            
-            ShareManager.shared.updateAllCartItem()
-            { (isCompleted: Bool) in
-                isRepeat = !isCompleted
+            isRepeat = true
+            repeatCount = 0
+            while isRepeat
+            {
+                guard repeatCount < maxRepeatCount else { break }
+                
+                ShareManager.shared.updateAllCartItem()
+                { (isCompleted: Bool) in
+                    isRepeat = !isCompleted
+                }
+                
+                repeatCount += 1
             }
             
-            repeatCount += 1
-        }
-        
-        isRepeat = true
-        repeatCount = 0
-        while isRepeat
-        {
-            guard repeatCount < maxRepeatCount else { break }
-            
-            ShareManager.shared.updateAllRefrigeratorItem()
-            { (isCompleted: Bool) in
-                isRepeat = !isCompleted
+            isRepeat = true
+            repeatCount = 0
+            while isRepeat
+            {
+                guard repeatCount < maxRepeatCount else { break }
+                
+                ShareManager.shared.updateAllRefrigeratorItem()
+                { (isCompleted: Bool) in
+                    isRepeat = !isCompleted
+                }
+                
+                repeatCount += 1
             }
             
-            repeatCount += 1
+            getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
+            getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
+            getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+            
+            if(showLoading)
+            {
+                LoadingHUD.hideProgressCircle()
+                //LoadingHUD.hideProgressAnimation()
+            }
+            
         }
         
-        getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
-        getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-        getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+        
     }
     
     
@@ -621,39 +638,78 @@ class ShareManager
         if let data = data
         {
             print(String(data: data, encoding: .utf8)!)
-            if let products = try? jsonDecoder.decode([Product].self, from: data)
+            
+            do
             {
-                //print(products)
-                for product in products
+                let products: [ShareManager.Product]? = try jsonDecoder.decode([ShareManager.Product].self, from: data)
+                if let products = products
                 {
-                    if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
+                    for product in products
                     {
-                        // 기존 groceryHistory update
-                        if(groceryHistory.title != product.title)
+                        if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
                         {
-                            DataManager.shared.updateGroceryHistory(id: groceryHistory.id, title: product.title)
-                        }
-                        
-                        if(groceryHistory.category.rawValue != product.category)
-                        {
-                            DataManager.shared.updateGroceryHistory(id: groceryHistory.id, category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC)
-                                                        
-                            getRequestManager().isUpdatePurchaseRecord = true
-                            getRequestManager().isUpdateShopingCart = true
-                            getRequestManager().isUpdateGroceryList = true
-                            
-                        }
-                        
-                        if(groceryHistory.favorite != product.favorite)
-                        {
-                            DataManager.shared.updateGroceryHistory(id: groceryHistory.id, favorite: product.favorite)
-                        }
-                        
-                        if(product.imageCode.isEmpty == false)
-                        {
-                            if let image = groceryHistory.image
+                            // 기존 groceryHistory update
+                            if(groceryHistory.title != product.title)
                             {
-                                if(image.filename != product.imageCode)
+                                DataManager.shared.updateGroceryHistory(id: groceryHistory.id, title: product.title)
+                            }
+                            
+                            if(groceryHistory.category.rawValue != product.category)
+                            {
+                                DataManager.shared.updateGroceryHistory(id: groceryHistory.id, category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC)
+                                                            
+                                getRequestManager().isUpdatePurchaseRecord = true
+                                getRequestManager().isUpdateShopingCart = true
+                                getRequestManager().isUpdateGroceryList = true
+                                
+                            }
+                            
+                            if(groceryHistory.favorite != product.favorite)
+                            {
+                                DataManager.shared.updateGroceryHistory(id: groceryHistory.id, favorite: product.favorite)
+                            }
+                            
+                            if(product.imageCode.isEmpty == false)
+                            {
+                                if let image = groceryHistory.image
+                                {
+                                    if(image.filename != product.imageCode)
+                                    {
+                                        self.downloadImage(id: product.imageCode)
+                                        { (image: UIImage?) in
+                                            groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    self.downloadImage(id: product.imageCode)
+                                    { (image: UIImage?) in
+                                        groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
+                                    }
+                                }
+                                
+                            }
+                            
+                            if(product.isDeleted)
+                            {
+                                DataManager.shared.removeGroceryHistory(id: groceryHistory.id)
+                                getRequestManager().isUpdatePurchaseRecord = true
+                            }
+                        }
+                        else
+                        {
+                            guard product.isDeleted == false else
+                            {
+                                continue
+                            }
+                            
+                            DataManager.shared.insertGroceryHistory(id: product.id, title: product.title, category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC, image: nil, updateDate: false)
+                            DataManager.shared.updateGroceryHistory(id: AutoIncreasedID(product.id), favorite: product.favorite)
+                            
+                            if(product.imageCode.isEmpty == false)
+                            {
+                                if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
                                 {
                                     self.downloadImage(id: product.imageCode)
                                     { (image: UIImage?) in
@@ -661,60 +717,34 @@ class ShareManager
                                     }
                                 }
                             }
-                            else
-                            {
-                                self.downloadImage(id: product.imageCode)
-                                { (image: UIImage?) in
-                                    groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
-                                }
-                            }
                             
-                        }
-                        
-                        if(product.isDeleted)
-                        {
-                            DataManager.shared.removeGroceryHistory(id: groceryHistory.id)
                             getRequestManager().isUpdatePurchaseRecord = true
                         }
-                    }
-                    else
-                    {
-                        guard product.isDeleted == false else
+                        
+                        if(self.lastestProductUpdateAt < product.updatedAt)
                         {
-                            continue
+                            self.lastestProductUpdateAt = product.updatedAt
+                            print(self.lastestProductUpdateAt)
                         }
                         
-                        DataManager.shared.insertGroceryHistory(id: product.id, title: product.title, category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC, image: nil, updateDate: false)
-                        DataManager.shared.updateGroceryHistory(id: AutoIncreasedID(product.id), favorite: product.favorite)
-                        
-                        if(product.imageCode.isEmpty == false)
-                        {
-                            if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
-                            {
-                                self.downloadImage(id: product.imageCode)
-                                { (image: UIImage?) in
-                                    groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
-                                }
-                            }
-                        }
-                        
-                        getRequestManager().isUpdatePurchaseRecord = true
                     }
                     
-                    if(self.lastestProductUpdateAt < product.updatedAt)
+                    var isCompleted = false
+                    if(products.count == 0)
                     {
-                        self.lastestProductUpdateAt = product.updatedAt
-                        print(self.lastestProductUpdateAt)
+                        isCompleted = true
                     }
-                    
+                    completion(isCompleted)
                 }
+            }
+            catch
+            {
+                print(error)
                 
-                var isCompleted = false
-                if(products.count == 0)
-                {
-                    isCompleted = true
-                }
-                completion(isCompleted)
+                // 실패하는 경우 다시 RequestCode를 호출한다.
+                startShareWithPublicCode(publicCode: publicCode, completion: {})
+                
+                completion(true)
             }
         }
     }
@@ -992,6 +1022,7 @@ class ShareManager
     
     func uploadImage(image: UIImage, filename: String, completion: @escaping ((String)->Void) )
     {
+        return // test code
         let subURL = "/image/uploader"
         let baseURL = URL(string: self.getServerURL() + subURL)!
         
@@ -1230,6 +1261,11 @@ class ShareManager
                     catch
                     {
                         print(error)
+                        
+                        // 실패하는 경우 다시 RequestCode를 호출한다.
+                        startShareWithPublicCode(publicCode: publicCode, completion: {})
+                        
+                        completion(true)
                     }
                 }
             //}
@@ -1620,6 +1656,11 @@ class ShareManager
             catch
             {
                 print(error)
+                
+                // 실패하는 경우 다시 RequestCode를 호출한다.
+                startShareWithPublicCode(publicCode: publicCode, completion: {})
+                
+                completion(true)
             }
         }
     }

@@ -28,6 +28,12 @@
 		8E97D5EA25DBDA4500684485 /* FamilyShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E97D5E925DBDA4500684485 /* FamilyShareViewController.swift */; };
 		8E97D5F325DBF46200684485 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E97D5F225DBF46200684485 /* DataManager.swift */; };
 		8E97D5F925E4BB4100684485 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E97D5F825E4BB4000684485 /* RequestManager.swift */; };
+		8E9BDCEC25ED3768003E381A /* LoadingHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BDCEB25ED3768003E381A /* LoadingHUD.swift */; };
+		8E9BDCF025ED498E003E381A /* ProgressShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BDCEF25ED498E003E381A /* ProgressShapeLayer.swift */; };
+		8E9BDCF425ED49AA003E381A /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BDCF325ED49AA003E381A /* ProgressView.swift */; };
+		8E9BDCF725ED49C4003E381A /* RotationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BDCF625ED49C4003E381A /* RotationAnimation.swift */; };
+		8E9BDCFA25ED49DE003E381A /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BDCF925ED49DE003E381A /* StrokeAnimation.swift */; };
+		8E9BDCFD25ED49F6003E381A /* StrokeColorAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BDCFC25ED49F6003E381A /* StrokeColorAnimation.swift */; };
 		8EA2CC2125B40EC900D80622 /* DefaultNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2025B40EC900D80622 /* DefaultNameViewController.swift */; };
 		8EA2CC2425B40EE600D80622 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */; };
 		8EA2CC2825B4201600D80622 /* SelectFridgeNameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */; };
@@ -72,6 +78,12 @@
 		8E97D5E925DBDA4500684485 /* FamilyShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyShareViewController.swift; sourceTree = "<group>"; };
 		8E97D5F225DBF46200684485 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		8E97D5F825E4BB4000684485 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		8E9BDCEB25ED3768003E381A /* LoadingHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingHUD.swift; sourceTree = "<group>"; };
+		8E9BDCEF25ED498E003E381A /* ProgressShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressShapeLayer.swift; sourceTree = "<group>"; };
+		8E9BDCF325ED49AA003E381A /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		8E9BDCF625ED49C4003E381A /* RotationAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationAnimation.swift; sourceTree = "<group>"; };
+		8E9BDCF925ED49DE003E381A /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
+		8E9BDCFC25ED49F6003E381A /* StrokeColorAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeColorAnimation.swift; sourceTree = "<group>"; };
 		8EA2CC2025B40EC900D80622 /* DefaultNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNameViewController.swift; sourceTree = "<group>"; };
 		8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFridgeNameTableViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +205,7 @@
 		8E97D5F125DBF24D00684485 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				8E9BDCEE25ED4978003E381A /* ProgressView */,
 				8E3E4AED25D830CD0056B65C /* BarcodeData.csv */,
 				8E3E4AEA25D82FA30056B65C /* CHCSVParser.h */,
 				8E3E4AE925D82FA30056B65C /* CHCSVParser.m */,
@@ -203,8 +216,21 @@
 				8EBA43E825C7B90100883BAA /* Localizable.strings */,
 				8EA2CC7225C0267C00D80622 /* WebScrapper.swift */,
 				8E3E4AE825D82FA20056B65C /* FreshFridge-Bridging-Header.h */,
+				8E9BDCEB25ED3768003E381A /* LoadingHUD.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8E9BDCEE25ED4978003E381A /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				8E9BDCEF25ED498E003E381A /* ProgressShapeLayer.swift */,
+				8E9BDCF325ED49AA003E381A /* ProgressView.swift */,
+				8E9BDCF625ED49C4003E381A /* RotationAnimation.swift */,
+				8E9BDCF925ED49DE003E381A /* StrokeAnimation.swift */,
+				8E9BDCFC25ED49F6003E381A /* StrokeColorAnimation.swift */,
+			);
+			path = ProgressView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,25 +319,31 @@
 				8E97D5E225DBC13200684485 /* ShareManager.swift in Sources */,
 				F701FB6525B88779006906E8 /* PurchaseRecordTableViewController.swift in Sources */,
 				8E4B9A0125AD4EFE00F2B0BF /* GroceryListTableViewCell.swift in Sources */,
+				8E9BDCF425ED49AA003E381A /* ProgressView.swift in Sources */,
 				EE281C6925B7E8D40017AF54 /* ShopingCartTableViewController.swift in Sources */,
 				8E4B9A0025AD4EFE00F2B0BF /* GroceryListTableViewController.swift in Sources */,
 				8EA2CC2125B40EC900D80622 /* DefaultNameViewController.swift in Sources */,
 				8E4B99FE25AD4EFE00F2B0BF /* AddGroceryTableViewController.swift in Sources */,
 				F701FB6425B88779006906E8 /* PurchaseRecordTableViewCell.swift in Sources */,
+				8E9BDCFD25ED49F6003E381A /* StrokeColorAnimation.swift in Sources */,
 				8E4B99D125AD4AF500F2B0BF /* AppDelegate.swift in Sources */,
 				8EA2CC2425B40EE600D80622 /* CategoryTableViewController.swift in Sources */,
 				8EBA43EC25C7BABC00883BAA /* StringExtension.swift in Sources */,
+				8E9BDCF025ED498E003E381A /* ProgressShapeLayer.swift in Sources */,
 				8EA2CC7025C0223000D80622 /* ScannerViewController.swift in Sources */,
 				8E97D5F925E4BB4100684485 /* RequestManager.swift in Sources */,
+				8E9BDCF725ED49C4003E381A /* RotationAnimation.swift in Sources */,
 				8E3E4AEB25D82FA30056B65C /* CHCSVParser.m in Sources */,
 				8E97D5E625DBCE6800684485 /* URLExtension.swift in Sources */,
 				8E4B99D325AD4AF500F2B0BF /* SceneDelegate.swift in Sources */,
 				8EA2CC2C25B55A2500D80622 /* GroceryImge.swift in Sources */,
+				8E9BDCFA25ED49DE003E381A /* StrokeAnimation.swift in Sources */,
 				8EA2CC7A25C06CA700D80622 /* FridgeTabBarController.swift in Sources */,
 				8EA2CC2825B4201600D80622 /* SelectFridgeNameTableViewController.swift in Sources */,
 				8E97D5F325DBF46200684485 /* DataManager.swift in Sources */,
 				8EA2CC7325C0267C00D80622 /* WebScrapper.swift in Sources */,
 				8E97D5EA25DBDA4500684485 /* FamilyShareViewController.swift in Sources */,
+				8E9BDCEC25ED3768003E381A /* LoadingHUD.swift in Sources */,
 				8E4B99FF25AD4EFE00F2B0BF /* Grocery.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
