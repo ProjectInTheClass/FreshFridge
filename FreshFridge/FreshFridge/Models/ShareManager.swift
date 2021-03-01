@@ -1022,7 +1022,7 @@ class ShareManager
     
     func uploadImage(image: UIImage, filename: String, completion: @escaping ((String)->Void) )
     {
-        return // test code
+        guard getServerURL() == "http://z.ebadaq.com:45082" else { return } // test code
         let subURL = "/image/uploader"
         let baseURL = URL(string: self.getServerURL() + subURL)!
         
@@ -2003,10 +2003,18 @@ class ShareManager
                     
                     guard refrigerators.count == 4 else
                     {
-                        print("냉장고가 충분하지 않습니다.")
-                        self.endShare()
+                        print("냉장고가 충분하지 않습니다.") //fatalError("냉장고가 충분하지 않습니다.")
+                        //self.endShare()
+                        
+                        // 냉장고를 생성
+                        for index in refrigerators.count...3
+                        {
+                            self.createRefrigerator(fridgeIndex: index, completion: {})
+                        }
+                        self.requestRefrigeratorIDs(completion: completion)
+                        
                         return
-                    }//fatalError("냉장고가 충분하지 않습니다.") }
+                    }
                     
                     for i in 0...refrigerators.count-1
                     {
