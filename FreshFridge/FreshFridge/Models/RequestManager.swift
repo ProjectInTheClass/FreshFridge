@@ -242,6 +242,7 @@ class RequestToServer : RequestInterface
             if let image = image,
                let uiImage = image.image()
             {
+                groceryHistory.image = image
                 ShareManager.shared.uploadImage(image: uiImage, filename: image.filename)
                 {
                     (imageName: String) in
