@@ -107,22 +107,27 @@ class DataManager
             return nil
         }
     }
+    
+    func moveToTheFrontGroceryHistory(groceryHistory: GroceryHistory)
+    {
+        if let index = groceryHistories.enumerated().first(where: {$0.element.title == groceryHistory.title && $0.element.category == groceryHistory.category})
+        {
+            groceryHistory.lastestPurchaseDate = Date()
+            groceryHistories.remove(at: index.offset)
+            groceryHistories.insert(groceryHistory, at: 0)
+            
+            saveGroceryHistory()
+        }
+    }
 
     func insertGroceryHistory(id: Int, title: String, category: GroceryHistory.Category, image: GroceryImage?, updateDate: Bool)
     {
-        //if let groceryHistory = groceryHistories.first(where: {$0.title == title && $0.category == category})
-        if let _ = findGroceryHistory(id: AutoIncreasedID(id))
+        if let groceryHistory = findGroceryHistory(id: AutoIncreasedID(id))
         {
             // 최신순으로 업데이트가 필요한 경우, 배열에서 찾아서 삭제하고 맨앞에 새로 추가함
             if(updateDate)
             {
-                if let index = groceryHistories.enumerated().first(where: {$0.element.title == title && $0.element.category == category})
-                {
-                    groceryHistories.remove(at: index.offset)
-                    groceryHistories.insert(index.element, at: 0)
-                    
-                    saveGroceryHistory()
-                }
+                moveToTheFrontGroceryHistory(groceryHistory: groceryHistory)
             }
         }
         else

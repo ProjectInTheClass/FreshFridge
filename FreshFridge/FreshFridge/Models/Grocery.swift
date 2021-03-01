@@ -360,6 +360,11 @@ struct DueDate: Codable
         self.addDays(addingDay)
     }
     
+    init(timeIntervalSince1970MS: Int)
+    {
+        date = Date(timeIntervalSince1970: TimeInterval(timeIntervalSince1970MS / 1000))
+    }
+    
     mutating func addDays(_ addingDay: Int)
     {
         date.addTimeInterval(DueDate.secondOfDay*Double(addingDay))
@@ -383,6 +388,16 @@ struct DueDate: Codable
     {
         let diffDay = getExpiration()
         return diffDay<0 ? String("D\(diffDay)") : String("D+\(diffDay)")
+    }
+    
+    func getTimeIntervalSince1970MS() -> Int
+    {
+        return Int(date.timeIntervalSince1970) * 1000
+    }
+    
+    static func getTimeIntervalSince1970MS(date: Date) -> Int
+    {
+        return Int(date.timeIntervalSince1970) * 1000
     }
 }
 
