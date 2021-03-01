@@ -81,8 +81,8 @@ class ShareManager
             return rootURL
         }
         */
-        return "http://z.ebadaq.com:45082"
-        //return "http://freshfridge.cafe24app.com"
+        //return "http://z.ebadaq.com:45082"
+        return "http://freshfridge.cafe24app.com"
     }
     
     func getFridgeID(fridgeName: String) -> Int
