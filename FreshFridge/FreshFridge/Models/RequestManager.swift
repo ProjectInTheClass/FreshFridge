@@ -343,7 +343,7 @@ class RequestToServer : RequestInterface
         
         ShareManager.shared.updateGrocery(id: id, storage: storage)
         {
-            getRequestManager().updateGroceryListViewController(updateTableView: false)
+            getRequestManager().updateGroceryListViewController(updateTableView: true)
         }
     }
     override func updateGrocery(id: AutoIncreasedID, fridgeName: String)
@@ -602,7 +602,7 @@ class RequestToLocal : RequestInterface
     override func updateGrocery(id: AutoIncreasedID, storage: Grocery.Storage)
     {
         DataManager.shared.updateGrocery(id: id, storage: storage)
-        getRequestManager().updateGroceryListViewController(updateTableView: false)
+        getRequestManager().updateGroceryListViewController(updateTableView: true)
     }
     
     override func updateGrocery(id: AutoIncreasedID, fridgeName: String)
