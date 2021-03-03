@@ -148,7 +148,9 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="mjy-X6-PyU" firstAttribute="centerX" secondItem="RmL-Bl-rn3" secondAttribute="centerX" id="0Yb-ol-l90"/>
+                                        <constraint firstAttribute="bottom" secondItem="mjy-X6-PyU" secondAttribute="bottom" constant="5" id="DkT-D0-iBQ"/>
                                         <constraint firstItem="mjy-X6-PyU" firstAttribute="width" secondItem="RmL-Bl-rn3" secondAttribute="width" multiplier="0.8" constant="40" id="Gcj-RD-Qyz"/>
+                                        <constraint firstItem="mjy-X6-PyU" firstAttribute="top" secondItem="RmL-Bl-rn3" secondAttribute="top" constant="5" id="pQf-lL-iHx"/>
                                         <constraint firstItem="mjy-X6-PyU" firstAttribute="centerY" secondItem="RmL-Bl-rn3" secondAttribute="centerY" id="tVr-jm-lQ5"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -240,7 +242,9 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="vzz-Vr-hgG" secondAttribute="bottom" constant="5" id="9yU-WW-4T8"/>
                                         <constraint firstItem="vzz-Vr-hgG" firstAttribute="centerX" secondItem="zN6-Zp-qay" secondAttribute="centerX" id="Bn9-Pb-Rmt"/>
+                                        <constraint firstItem="vzz-Vr-hgG" firstAttribute="top" secondItem="zN6-Zp-qay" secondAttribute="top" constant="5" id="Mhi-oT-PbW"/>
                                         <constraint firstItem="vzz-Vr-hgG" firstAttribute="width" secondItem="zN6-Zp-qay" secondAttribute="width" multiplier="0.8" constant="40" id="RZ9-MM-5GZ"/>
                                         <constraint firstItem="vzz-Vr-hgG" firstAttribute="centerY" secondItem="zN6-Zp-qay" secondAttribute="centerY" id="kYQ-yV-I7f"/>
                                     </constraints>
