@@ -29,6 +29,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var resultLabel: UILabel! = nil
     var backButton: UIButton! = nil
     
+    override var shouldAutorotate: Bool {
+            return false
+        }
+
+        override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+            return .portrait
+        }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -241,9 +249,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         return true
     }
 
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//        return .portrait
+//    }
     
     @IBAction func backButtonTapped(_ sender: Any)
     {
@@ -251,3 +259,5 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         dismiss(animated: true)
     }
 }
+
+

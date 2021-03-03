@@ -429,11 +429,33 @@ struct DueDate: Codable
 }
 
 
-func presentAlert(title: String, parent: UIViewController, okHandler: @escaping ((UIAlertAction) -> Void))
+func presentAlertOkCancel(title: String, message: String = "", parent: UIViewController, okHandler: @escaping ((UIAlertAction) -> Void))
 {
-    let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    
     let ok = UIAlertAction(title: "OK", style: .default, handler: okHandler)
     alert.addAction(ok)
+    
+    let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+    alert.addAction(cancel)
+    
+    parent.present(alert, animated: true, completion: nil)
+}
+
+func presentAlertOk(title: String, message: String = "", parent: UIViewController)
+{
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+    alert.addAction(ok)
+    
+    parent.present(alert, animated: true, completion: nil)
+}
+
+func presentAlertYesNoCancel(title: String, message: String = "", parent: UIViewController, yes: UIAlertAction, no: UIAlertAction)
+{
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    alert.addAction(yes)
+    alert.addAction(no)
     
     let cancel = UIAlertAction(title: "Cancel", style: .cancel)
     alert.addAction(cancel)
