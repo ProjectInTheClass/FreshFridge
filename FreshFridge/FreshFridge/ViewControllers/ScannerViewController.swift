@@ -133,6 +133,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         view.addSubview(backButton)
         
         captureSession.startRunning()
+        (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
 
         NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
@@ -201,6 +202,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
         if (captureSession?.isRunning == false) {
             captureSession.startRunning()
+            
+            (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
         }
         
         updateView()
@@ -211,6 +214,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
         if (captureSession?.isRunning == true) {
             captureSession.stopRunning()
+            
+            (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .all
         }
     }
 
@@ -232,6 +237,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             else
             {
                 captureSession.stopRunning()
+                (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .all
+                
                 dismiss(animated: true)
             }
         }
@@ -256,6 +263,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     @IBAction func backButtonTapped(_ sender: Any)
     {
         captureSession.stopRunning()
+        
+        (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .all
+        
         dismiss(animated: true)
     }
 }
