@@ -190,7 +190,6 @@
 		8E97D5F025DBF22800684485 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8E97D5E925DBDA4500684485 /* FamilyShareViewController.swift */,
 				8E4B99FB25AD4EFE00F2B0BF /* GroceryListTableViewController.swift */,
 				8E4B99FC25AD4EFE00F2B0BF /* GroceryListTableViewCell.swift */,
 				8E4B99F925AD4EFE00F2B0BF /* AddGroceryTableViewController.swift */,
@@ -202,6 +201,7 @@
 				F701FB6225B88779006906E8 /* PurchaseRecordTableViewCell.swift */,
 				EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */,
 				EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */,
+				8E97D5E925DBDA4500684485 /* FamilyShareViewController.swift */,
 				8E9BDCFF25EE45F2003E381A /* SettingTableViewController.swift */,
 				8E9BDD0225EE87F1003E381A /* ImageTableViewCell.swift */,
 			);

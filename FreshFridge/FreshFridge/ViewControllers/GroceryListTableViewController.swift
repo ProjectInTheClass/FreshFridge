@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GroceryListTableViewController: UITableViewController, GroceryListCellDelegate, UITableViewDragDelegate, UITableViewDropDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate
+class GroceryListTableViewController: UITableViewController, GroceryListCellDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate//, UITableViewDragDelegate, UITableViewDropDelegate
 {
     
     @IBOutlet weak var alarmButton: UIBarButtonItem!
@@ -48,9 +48,9 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         
         tableView.cellLayoutMarginsFollowReadableWidth = true
         
-        tableView.dragInteractionEnabled = true
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
+        //tableView.dragInteractionEnabled = true
+       // tableView.dragDelegate = self
+        //tableView.dropDelegate = self
         
         fridgeTabBarController = tabBarController as? FridgeTabBarController
         
@@ -402,6 +402,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
      }
     
     // Rearranging
+    /*
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem]
     {
         if(numberOfSections == 1)
@@ -437,6 +438,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         return false
         
     }
+     
     
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath)
@@ -451,7 +453,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             tableView.reloadData()
         }
     }
- 
+     */
 
     
     
