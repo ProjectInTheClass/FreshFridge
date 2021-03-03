@@ -41,7 +41,7 @@ class SettingTableViewController: UITableViewController {
             removeButtons[2].titleLabel?.textAlignment = .left
         }
         
-        appImage.layer.cornerRadius = 15
+        appImage.layer.cornerRadius = 20
         appImage.clipsToBounds = true
         
         // Uncomment the following line to preserve selection between presentations
@@ -184,6 +184,19 @@ class SettingTableViewController: UITableViewController {
     }
 */
     
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let myLabel = UILabel()
+        myLabel.frame = CGRect(x: 20, y: 20, width: 320, height: 20)
+        myLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        myLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
+
+        let headerView = UIView()
+        headerView.addSubview(myLabel)
+
+        return headerView
+    }
 
     /*
     // Override to support conditional editing of the table view.

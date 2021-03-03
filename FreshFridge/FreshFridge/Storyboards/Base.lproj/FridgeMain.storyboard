@@ -369,7 +369,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VVG-6E-m3r">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
                         <segue destination="n27-7O-L2K" kind="relationship" relationship="rootViewController" id="SYL-S6-QWb"/>
@@ -398,13 +397,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleCheckGreen" translatesAutoresizingMaskIntoConstraints="NO" id="GSI-16-6Zh">
-                                                    <rect key="frame" x="20" y="2" width="40" height="40"/>
+                                                    <rect key="frame" x="20" y="2" width="30" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="hK4-9T-Qdv"/>
+                                                        <constraint firstAttribute="width" constant="30" id="hK4-9T-Qdv"/>
                                                         <constraint firstAttribute="height" constant="40" id="yZz-Ro-2cp"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Kw-qu-9pc">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Kw-qu-9pc">
                                                     <rect key="frame" x="60" y="0.0" width="200" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="200" id="zqa-li-h97"/>
@@ -421,7 +420,7 @@
                                             <constraints>
                                                 <constraint firstItem="GSI-16-6Zh" firstAttribute="leading" secondItem="0KJ-9K-Lif" secondAttribute="leading" constant="20" id="3Kv-OG-hvL"/>
                                                 <constraint firstItem="GSI-16-6Zh" firstAttribute="top" secondItem="0KJ-9K-Lif" secondAttribute="top" constant="2" id="7gQ-br-m4W"/>
-                                                <constraint firstItem="0Kw-qu-9pc" firstAttribute="leading" secondItem="GSI-16-6Zh" secondAttribute="trailing" id="CfH-O5-Tmb"/>
+                                                <constraint firstItem="0Kw-qu-9pc" firstAttribute="leading" secondItem="GSI-16-6Zh" secondAttribute="trailing" constant="10" id="CfH-O5-Tmb"/>
                                                 <constraint firstItem="0Kw-qu-9pc" firstAttribute="top" secondItem="0KJ-9K-Lif" secondAttribute="top" id="Geg-Rv-2fN"/>
                                                 <constraint firstAttribute="bottom" secondItem="GSI-16-6Zh" secondAttribute="bottom" constant="2" id="a2p-VH-eIB"/>
                                                 <constraint firstAttribute="bottom" secondItem="0Kw-qu-9pc" secondAttribute="bottom" id="pHR-z8-Ygr"/>
@@ -436,13 +435,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleCheckOrange" translatesAutoresizingMaskIntoConstraints="NO" id="Umf-t5-vCg">
-                                                    <rect key="frame" x="20" y="2" width="40" height="40"/>
+                                                    <rect key="frame" x="20" y="2" width="30" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="NrN-tm-ez3"/>
-                                                        <constraint firstAttribute="width" constant="40" id="mxc-IC-6zn"/>
+                                                        <constraint firstAttribute="width" constant="30" id="mxc-IC-6zn"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UR6-At-0Hh">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UR6-At-0Hh">
                                                     <rect key="frame" x="60" y="0.0" width="200" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="200" id="XxD-g5-Fzw"/>
@@ -461,7 +460,7 @@
                                                 <constraint firstItem="Umf-t5-vCg" firstAttribute="top" secondItem="bn4-Rm-u3U" secondAttribute="top" constant="2" id="j7h-ur-LTy"/>
                                                 <constraint firstAttribute="bottom" secondItem="Umf-t5-vCg" secondAttribute="bottom" constant="2" id="kBG-gF-NUI"/>
                                                 <constraint firstAttribute="bottom" secondItem="UR6-At-0Hh" secondAttribute="bottom" id="kPD-hf-pA6"/>
-                                                <constraint firstItem="UR6-At-0Hh" firstAttribute="leading" secondItem="Umf-t5-vCg" secondAttribute="trailing" id="mcu-f7-4ED"/>
+                                                <constraint firstItem="UR6-At-0Hh" firstAttribute="leading" secondItem="Umf-t5-vCg" secondAttribute="trailing" constant="10" id="mcu-f7-4ED"/>
                                                 <constraint firstItem="Umf-t5-vCg" firstAttribute="leading" secondItem="bn4-Rm-u3U" secondAttribute="leading" constant="20" id="pAF-tX-T2E"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -474,13 +473,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleCheckPink" translatesAutoresizingMaskIntoConstraints="NO" id="sGX-CR-q0x">
-                                                    <rect key="frame" x="20" y="2" width="40" height="40"/>
+                                                    <rect key="frame" x="20" y="2" width="30" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="aMU-9t-dwT"/>
-                                                        <constraint firstAttribute="width" constant="40" id="ulA-pa-8cg"/>
+                                                        <constraint firstAttribute="width" constant="30" id="ulA-pa-8cg"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEd-kR-0Iw">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEd-kR-0Iw">
                                                     <rect key="frame" x="60" y="0.0" width="200" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="200" id="Qqx-Oj-Kgc"/>
@@ -498,7 +497,7 @@
                                                 <constraint firstItem="sGX-CR-q0x" firstAttribute="top" secondItem="uk2-FW-0JC" secondAttribute="top" constant="2" id="8Rh-Yb-cMr"/>
                                                 <constraint firstItem="QEd-kR-0Iw" firstAttribute="top" secondItem="uk2-FW-0JC" secondAttribute="top" id="DN8-PU-nYH"/>
                                                 <constraint firstItem="sGX-CR-q0x" firstAttribute="leading" secondItem="uk2-FW-0JC" secondAttribute="leading" constant="20" id="Xgo-iz-tEr"/>
-                                                <constraint firstItem="QEd-kR-0Iw" firstAttribute="leading" secondItem="sGX-CR-q0x" secondAttribute="trailing" id="ZFM-Eo-yiT"/>
+                                                <constraint firstItem="QEd-kR-0Iw" firstAttribute="leading" secondItem="sGX-CR-q0x" secondAttribute="trailing" constant="10" id="ZFM-Eo-yiT"/>
                                                 <constraint firstAttribute="bottom" secondItem="QEd-kR-0Iw" secondAttribute="bottom" id="ewy-8c-18j"/>
                                                 <constraint firstAttribute="bottom" secondItem="sGX-CR-q0x" secondAttribute="bottom" constant="2" id="wH1-cZ-Qjj"/>
                                             </constraints>
@@ -512,13 +511,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleCheckBlue" translatesAutoresizingMaskIntoConstraints="NO" id="zMi-S5-jK1">
-                                                    <rect key="frame" x="20" y="2" width="40" height="40"/>
+                                                    <rect key="frame" x="20" y="2" width="30" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="AHm-fN-uFX"/>
-                                                        <constraint firstAttribute="width" constant="40" id="E8d-wX-rsR"/>
+                                                        <constraint firstAttribute="width" constant="30" id="E8d-wX-rsR"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73C-i0-Kfh">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73C-i0-Kfh">
                                                     <rect key="frame" x="60" y="0.0" width="200" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="200" id="EcR-Do-f5n"/>
@@ -538,7 +537,7 @@
                                                 <constraint firstItem="zMi-S5-jK1" firstAttribute="top" secondItem="aad-Pg-MrK" secondAttribute="top" constant="2" id="hX0-Eg-gz9"/>
                                                 <constraint firstItem="zMi-S5-jK1" firstAttribute="leading" secondItem="aad-Pg-MrK" secondAttribute="leading" constant="20" id="hYL-ik-Tud"/>
                                                 <constraint firstAttribute="bottom" secondItem="73C-i0-Kfh" secondAttribute="bottom" id="o2u-9P-uTq"/>
-                                                <constraint firstItem="73C-i0-Kfh" firstAttribute="leading" secondItem="zMi-S5-jK1" secondAttribute="trailing" id="qsP-X3-hji"/>
+                                                <constraint firstItem="73C-i0-Kfh" firstAttribute="leading" secondItem="zMi-S5-jK1" secondAttribute="trailing" constant="10" id="qsP-X3-hji"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -554,13 +553,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CircleFridgerReset" translatesAutoresizingMaskIntoConstraints="NO" id="6HL-th-cs6">
-                                                    <rect key="frame" x="20" y="2" width="40" height="40"/>
+                                                    <rect key="frame" x="20" y="2" width="30" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="lta-Cq-uo2"/>
+                                                        <constraint firstAttribute="width" constant="30" id="lta-Cq-uo2"/>
                                                         <constraint firstAttribute="height" constant="40" id="nud-15-q7M"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6q7-jB-MS2">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6q7-jB-MS2">
                                                     <rect key="frame" x="60" y="0.0" width="228" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="냉장고 품목 전체 지우기">
@@ -573,7 +572,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="6q7-jB-MS2" secondAttribute="bottom" id="CYO-Ax-C5G"/>
-                                                <constraint firstItem="6q7-jB-MS2" firstAttribute="leading" secondItem="6HL-th-cs6" secondAttribute="trailing" id="Etr-6C-Leb"/>
+                                                <constraint firstItem="6q7-jB-MS2" firstAttribute="leading" secondItem="6HL-th-cs6" secondAttribute="trailing" constant="10" id="Etr-6C-Leb"/>
                                                 <constraint firstItem="6HL-th-cs6" firstAttribute="leading" secondItem="EOM-Dk-Lce" secondAttribute="leading" constant="20" id="HGW-wd-YGX"/>
                                                 <constraint firstItem="6q7-jB-MS2" firstAttribute="top" secondItem="EOM-Dk-Lce" secondAttribute="top" id="NvI-VE-r06"/>
                                                 <constraint firstAttribute="trailing" secondItem="6q7-jB-MS2" secondAttribute="trailing" id="SPt-cQ-h2b"/>
@@ -593,13 +592,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleHistoryReset" translatesAutoresizingMaskIntoConstraints="NO" id="EWH-fT-DFr">
-                                                    <rect key="frame" x="20" y="2" width="40" height="40"/>
+                                                    <rect key="frame" x="20" y="2" width="30" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="VTU-MG-yYN"/>
-                                                        <constraint firstAttribute="width" constant="40" id="sqJ-k6-cqm"/>
+                                                        <constraint firstAttribute="width" constant="30" id="sqJ-k6-cqm"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrr-2V-r7k">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrr-2V-r7k">
                                                     <rect key="frame" x="60" y="0.0" width="228" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="구입기록 전체 지우기">
@@ -615,7 +614,7 @@
                                                 <constraint firstItem="EWH-fT-DFr" firstAttribute="leading" secondItem="8UJ-0g-2e9" secondAttribute="leading" constant="20" id="Saj-8m-uoy"/>
                                                 <constraint firstAttribute="bottom" secondItem="Lrr-2V-r7k" secondAttribute="bottom" id="dCy-EH-Jwi"/>
                                                 <constraint firstAttribute="bottom" secondItem="EWH-fT-DFr" secondAttribute="bottom" constant="2" id="eLq-iJ-JJZ"/>
-                                                <constraint firstItem="Lrr-2V-r7k" firstAttribute="leading" secondItem="EWH-fT-DFr" secondAttribute="trailing" id="huu-al-BF8"/>
+                                                <constraint firstItem="Lrr-2V-r7k" firstAttribute="leading" secondItem="EWH-fT-DFr" secondAttribute="trailing" constant="10" id="huu-al-BF8"/>
                                                 <constraint firstItem="Lrr-2V-r7k" firstAttribute="top" secondItem="8UJ-0g-2e9" secondAttribute="top" id="jdz-sR-kyH"/>
                                                 <constraint firstAttribute="trailing" secondItem="Lrr-2V-r7k" secondAttribute="trailing" id="pfr-bl-eS4"/>
                                             </constraints>
@@ -632,13 +631,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleCartReset" translatesAutoresizingMaskIntoConstraints="NO" id="qLL-EV-vcn">
-                                                    <rect key="frame" x="20" y="2" width="40" height="40"/>
+                                                    <rect key="frame" x="20" y="2" width="30" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="QfO-ER-7kd"/>
+                                                        <constraint firstAttribute="width" constant="30" id="QfO-ER-7kd"/>
                                                         <constraint firstAttribute="height" constant="40" id="aYs-Cf-TBc"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDZ-v8-Fl4">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDZ-v8-Fl4">
                                                     <rect key="frame" x="60" y="0.0" width="228" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="장바구니 전체 지우기">
@@ -650,7 +649,7 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="HDZ-v8-Fl4" firstAttribute="leading" secondItem="qLL-EV-vcn" secondAttribute="trailing" id="BEc-eH-U1u"/>
+                                                <constraint firstItem="HDZ-v8-Fl4" firstAttribute="leading" secondItem="qLL-EV-vcn" secondAttribute="trailing" constant="10" id="BEc-eH-U1u"/>
                                                 <constraint firstItem="qLL-EV-vcn" firstAttribute="leading" secondItem="Qit-6q-uDn" secondAttribute="leading" constant="20" id="K9a-KO-ckc"/>
                                                 <constraint firstItem="HDZ-v8-Fl4" firstAttribute="top" secondItem="Qit-6q-uDn" secondAttribute="top" id="Of3-3F-PMn"/>
                                                 <constraint firstAttribute="trailing" secondItem="HDZ-v8-Fl4" secondAttribute="trailing" id="Syh-pD-bIT"/>
