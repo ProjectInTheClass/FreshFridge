@@ -1308,7 +1308,7 @@ class ShareManager
             {
                 let task = URLSession.shared.dataTask(with: url)
                 { (data, response, error) in
-                    self.processRefrigeratorItemData(async: async, data: data)
+                    _ = self.processRefrigeratorItemData(async: async, data: data)
                     completion()
                 }
                 task.resume()
@@ -1732,7 +1732,7 @@ class ShareManager
             let task = URLSession.shared.dataTask(with: url)
             {
                 (data, response, error) in
-                self.processCartItemData(async: async, data: data)
+                _ = self.processCartItemData(async: async, data: data)
                 completion()
             }
             task.resume()

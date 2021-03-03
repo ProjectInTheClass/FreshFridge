@@ -46,7 +46,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         
         getRequestManager().groceryListViewController = self
         
-        tableView.cellLayoutMarginsFollowReadableWidth = true
+        //tableView.cellLayoutMarginsFollowReadableWidth = true
         
         //tableView.dragInteractionEnabled = true
        // tableView.dragDelegate = self
