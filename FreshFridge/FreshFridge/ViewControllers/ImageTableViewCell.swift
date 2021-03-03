@@ -23,7 +23,7 @@ class ImageTableViewCell: UITableViewCell
         super.awakeFromNib()
 
         //titleImage.contentMode = .scaleAspectFit
-        titleImage.layer.cornerRadius = 3
+        titleImage.layer.cornerRadius = 8
         titleImage.clipsToBounds = true
     }
 
