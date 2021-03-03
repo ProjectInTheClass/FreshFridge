@@ -81,8 +81,8 @@ class ShareManager
             return rootURL
         }
         */
-        //return "http://z.ebadaq.com:45082"
-        return "http://freshfridge.cafe24app.com"
+        return "http://z.ebadaq.com:45082"
+        //return "http://freshfridge.cafe24app.com"
     }
     
     func getFridgeID(fridgeName: String) -> Int
@@ -504,8 +504,8 @@ class ShareManager
         
         if(showLoading)
         {
-            LoadingHUD.showProgressCircle()
-            //LoadingHUD.showProgressAnimation()
+            //LoadingHUD.showProgressCircle()
+            LoadingHUD.showProgressAnimation()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01)
         {
@@ -563,8 +563,8 @@ class ShareManager
             
             if(showLoading)
             {
-                LoadingHUD.hideProgressCircle()
-                //LoadingHUD.hideProgressAnimation()
+                //LoadingHUD.hideProgressCircle()
+                LoadingHUD.hideProgressAnimation()
             }
             
         }

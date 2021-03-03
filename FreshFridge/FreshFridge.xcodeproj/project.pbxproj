@@ -34,6 +34,8 @@
 		8E9BDCF725ED49C4003E381A /* RotationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BDCF625ED49C4003E381A /* RotationAnimation.swift */; };
 		8E9BDCFA25ED49DE003E381A /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BDCF925ED49DE003E381A /* StrokeAnimation.swift */; };
 		8E9BDCFD25ED49F6003E381A /* StrokeColorAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BDCFC25ED49F6003E381A /* StrokeColorAnimation.swift */; };
+		8E9BDD0025EE45F2003E381A /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BDCFF25EE45F2003E381A /* SettingTableViewController.swift */; };
+		8E9BDD0325EE87F1003E381A /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9BDD0225EE87F1003E381A /* ImageTableViewCell.swift */; };
 		8EA2CC2125B40EC900D80622 /* DefaultNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2025B40EC900D80622 /* DefaultNameViewController.swift */; };
 		8EA2CC2425B40EE600D80622 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */; };
 		8EA2CC2825B4201600D80622 /* SelectFridgeNameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */; };
@@ -84,6 +86,8 @@
 		8E9BDCF625ED49C4003E381A /* RotationAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationAnimation.swift; sourceTree = "<group>"; };
 		8E9BDCF925ED49DE003E381A /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
 		8E9BDCFC25ED49F6003E381A /* StrokeColorAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeColorAnimation.swift; sourceTree = "<group>"; };
+		8E9BDCFF25EE45F2003E381A /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		8E9BDD0225EE87F1003E381A /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		8EA2CC2025B40EC900D80622 /* DefaultNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNameViewController.swift; sourceTree = "<group>"; };
 		8EA2CC2325B40EE600D80622 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		8EA2CC2725B4201600D80622 /* SelectFridgeNameTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFridgeNameTableViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +202,8 @@
 				F701FB6225B88779006906E8 /* PurchaseRecordTableViewCell.swift */,
 				EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */,
 				EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */,
+				8E9BDCFF25EE45F2003E381A /* SettingTableViewController.swift */,
+				8E9BDD0225EE87F1003E381A /* ImageTableViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -328,9 +334,11 @@
 				8E9BDCFD25ED49F6003E381A /* StrokeColorAnimation.swift in Sources */,
 				8E4B99D125AD4AF500F2B0BF /* AppDelegate.swift in Sources */,
 				8EA2CC2425B40EE600D80622 /* CategoryTableViewController.swift in Sources */,
+				8E9BDD0325EE87F1003E381A /* ImageTableViewCell.swift in Sources */,
 				8EBA43EC25C7BABC00883BAA /* StringExtension.swift in Sources */,
 				8E9BDCF025ED498E003E381A /* ProgressShapeLayer.swift in Sources */,
 				8EA2CC7025C0223000D80622 /* ScannerViewController.swift in Sources */,
+				8E9BDD0025EE45F2003E381A /* SettingTableViewController.swift in Sources */,
 				8E97D5F925E4BB4100684485 /* RequestManager.swift in Sources */,
 				8E9BDCF725ED49C4003E381A /* RotationAnimation.swift in Sources */,
 				8E3E4AEB25D82FA30056B65C /* CHCSVParser.m in Sources */,
