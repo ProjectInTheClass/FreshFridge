@@ -384,17 +384,17 @@
             <objects>
                 <tableViewController id="n27-7O-L2K" customClass="SettingTableViewController" customModule="FreshFridge" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="CKx-Cz-EC1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="946"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection headerTitle="냉장고 선택" footerTitle="냉장고는 다중 선택할 수 있습니다." id="q7d-jG-QRE">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="M2O-PC-XJK">
-                                        <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="16" y="55.5" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M2O-PC-XJK" id="0KJ-9K-Lif">
-                                            <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="248" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleCheckGreen" translatesAutoresizingMaskIntoConstraints="NO" id="GSI-16-6Zh">
@@ -429,10 +429,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="Jo6-Gb-cAg">
-                                        <rect key="frame" x="20" y="99" width="374" height="43.5"/>
+                                        <rect key="frame" x="16" y="99" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jo6-Gb-cAg" id="bn4-Rm-u3U">
-                                            <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="248" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleCheckOrange" translatesAutoresizingMaskIntoConstraints="NO" id="Umf-t5-vCg">
@@ -467,10 +467,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="gEG-cB-fFt">
-                                        <rect key="frame" x="20" y="142.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="16" y="142.5" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gEG-cB-fFt" id="uk2-FW-0JC">
-                                            <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="248" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleCheckPink" translatesAutoresizingMaskIntoConstraints="NO" id="sGX-CR-q0x">
@@ -505,10 +505,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="XWa-jr-b3s">
-                                        <rect key="frame" x="20" y="186" width="374" height="43.5"/>
+                                        <rect key="frame" x="16" y="186" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XWa-jr-b3s" id="aad-Pg-MrK">
-                                            <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="248" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleCheckBlue" translatesAutoresizingMaskIntoConstraints="NO" id="zMi-S5-jK1">
@@ -547,10 +547,10 @@
                             <tableViewSection headerTitle="정보 초기화" id="8t7-Pj-VES">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="PnE-ww-6IA" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="297.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="16" y="297.5" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PnE-ww-6IA" id="EOM-Dk-Lce">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CircleFridgerReset" translatesAutoresizingMaskIntoConstraints="NO" id="6HL-th-cs6">
@@ -561,7 +561,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6q7-jB-MS2">
-                                                    <rect key="frame" x="60" y="0.0" width="314" height="44"/>
+                                                    <rect key="frame" x="60" y="0.0" width="228" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="냉장고 품목 전체 지우기">
                                                         <color key="titleColor" systemColor="labelColor"/>
@@ -586,10 +586,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="XK2-vy-CaE" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="341" width="374" height="43.5"/>
+                                        <rect key="frame" x="16" y="341" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XK2-vy-CaE" id="8UJ-0g-2e9">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleHistoryReset" translatesAutoresizingMaskIntoConstraints="NO" id="EWH-fT-DFr">
@@ -600,7 +600,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrr-2V-r7k">
-                                                    <rect key="frame" x="60" y="0.0" width="314" height="44"/>
+                                                    <rect key="frame" x="60" y="0.0" width="228" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="구입기록 전체 지우기">
                                                         <color key="titleColor" systemColor="labelColor"/>
@@ -625,10 +625,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="qIw-nV-p4b" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="384.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="16" y="384.5" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qIw-nV-p4b" id="Qit-6q-uDn">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleCartReset" translatesAutoresizingMaskIntoConstraints="NO" id="qLL-EV-vcn">
@@ -639,7 +639,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HDZ-v8-Fl4">
-                                                    <rect key="frame" x="60" y="0.0" width="314" height="44"/>
+                                                    <rect key="frame" x="60" y="0.0" width="228" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="장바구니 전체 지우기">
                                                         <color key="titleColor" systemColor="labelColor"/>
@@ -668,10 +668,10 @@
                             <tableViewSection id="JwH-va-vCu">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="descriptionCell" rowHeight="132" id="QFh-Pp-rmQ" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="464" width="374" height="132"/>
+                                        <rect key="frame" x="16" y="464" width="288" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QFh-Pp-rmQ" id="3vS-Qe-qdz">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="132"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="132"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon87" translatesAutoresizingMaskIntoConstraints="NO" id="XPj-tN-9ew">
@@ -682,29 +682,33 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fresh Fridge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Skb-lE-qDe">
-                                                    <rect key="frame" x="16.5" y="100" width="95.5" height="21"/>
+                                                    <rect key="frame" x="16" y="100" width="96" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uDk-tf-Fpd">
-                                                    <rect key="frame" x="120" y="12" width="234" height="108"/>
-                                                    <string key="text">Contact : 
-FreshFridgeCompany@gmail.com</string>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="uDk-tf-Fpd">
+                                                    <rect key="frame" x="112" y="12" width="160" height="109"/>
+                                                    <string key="text">FreshFridgeCompany
+@gmail.com
+
+Changae Choi
+Youngeun Park
+Daniel Shin</string>
                                                     <color key="textColor" systemColor="labelColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="uDk-tf-Fpd" secondAttribute="bottom" id="5mt-dw-ybe"/>
                                                 <constraint firstItem="XPj-tN-9ew" firstAttribute="centerY" secondItem="3vS-Qe-qdz" secondAttribute="centerY" constant="-10" id="5pl-Wa-liM"/>
-                                                <constraint firstItem="uDk-tf-Fpd" firstAttribute="top" secondItem="3vS-Qe-qdz" secondAttribute="top" constant="12" id="6yK-tX-Ggu"/>
-                                                <constraint firstAttribute="bottom" secondItem="uDk-tf-Fpd" secondAttribute="bottom" constant="12" id="E0u-ct-TQ7"/>
                                                 <constraint firstItem="Skb-lE-qDe" firstAttribute="centerX" secondItem="XPj-tN-9ew" secondAttribute="centerX" id="HQT-Vy-eNi"/>
                                                 <constraint firstItem="Skb-lE-qDe" firstAttribute="bottom" secondItem="3vS-Qe-qdz" secondAttribute="bottomMargin" id="K86-li-46c"/>
+                                                <constraint firstItem="uDk-tf-Fpd" firstAttribute="leading" secondItem="Skb-lE-qDe" secondAttribute="trailing" id="M4N-8M-KGy"/>
                                                 <constraint firstItem="XPj-tN-9ew" firstAttribute="leading" secondItem="3vS-Qe-qdz" secondAttribute="leading" constant="20" id="Opm-4I-Loo"/>
-                                                <constraint firstItem="uDk-tf-Fpd" firstAttribute="leading" secondItem="Skb-lE-qDe" secondAttribute="trailing" constant="20" id="Xum-tt-MSQ"/>
-                                                <constraint firstAttribute="trailing" secondItem="uDk-tf-Fpd" secondAttribute="trailing" constant="20" id="Yul-JB-XxU"/>
+                                                <constraint firstItem="uDk-tf-Fpd" firstAttribute="top" secondItem="XPj-tN-9ew" secondAttribute="top" id="XFU-9M-TBx"/>
+                                                <constraint firstItem="uDk-tf-Fpd" firstAttribute="trailing" secondItem="3vS-Qe-qdz" secondAttribute="trailingMargin" id="bYf-az-eId"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -726,7 +730,9 @@ FreshFridgeCompany@gmail.com</string>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <size key="freeformSize" width="320" height="1000"/>
                     <connections>
+                        <outlet property="appImage" destination="XPj-tN-9ew" id="OkY-FR-sxU"/>
                         <outlet property="backButton" destination="ExI-P1-k2K" id="urq-dI-PEm"/>
                         <outletCollection property="selectFridgeCells" destination="M2O-PC-XJK" collectionClass="NSMutableArray" id="8ww-cd-KPe"/>
                         <outletCollection property="selectFridgeCells" destination="Jo6-Gb-cAg" collectionClass="NSMutableArray" id="5Zg-5e-PEP"/>

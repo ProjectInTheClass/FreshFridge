@@ -15,6 +15,7 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet var selectFridgeButtons: [UIButton]!
     @IBOutlet var removeButtons: [UIButton]!
     
+    @IBOutlet weak var appImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,8 @@ class SettingTableViewController: UITableViewController {
             removeButtons[2].titleLabel?.textAlignment = .left
         }
         
+        appImage.layer.cornerRadius = 15
+        appImage.clipsToBounds = true
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
