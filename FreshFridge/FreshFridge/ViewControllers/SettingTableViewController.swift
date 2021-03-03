@@ -12,6 +12,8 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet weak var backButton: UIBarButtonItem!
     
     @IBOutlet var selectFridgeCells: [UITableViewCell]!
+    @IBOutlet var selectFridgeButtons: [UIButton]!
+    @IBOutlet var removeButtons: [UIButton]!
     
     
     override func viewDidLoad() {
@@ -27,6 +29,15 @@ class SettingTableViewController: UITableViewController {
             {
                 selectFridgeCells[index].accessoryType = .none
             }
+            
+            selectFridgeButtons[0].titleLabel?.textAlignment = .left
+            selectFridgeButtons[1].titleLabel?.textAlignment = .left
+            selectFridgeButtons[2].titleLabel?.textAlignment = .left
+            selectFridgeButtons[3].titleLabel?.textAlignment = .left
+            
+            removeButtons[0].titleLabel?.textAlignment = .left
+            removeButtons[1].titleLabel?.textAlignment = .left
+            removeButtons[2].titleLabel?.textAlignment = .left
         }
         
         
@@ -90,48 +101,55 @@ class SettingTableViewController: UITableViewController {
     
     @IBAction func removeAllGroceries(_ sender: Any)
     {
-        //DataManager.shared.removeAllFridgeGroceries()
-        for grocery in DataManager.shared.getGroceries()
-        {
-            RequestManager.shared.getRequestInterface().removeGrocery(id: grocery.id)
+        presentAlert(title: "냉장고 품목 전체를 삭제하시겠습니까?", parent: self)
+        {_ in
+            //DataManager.shared.removeAllFridgeGroceries()
+            for grocery in DataManager.shared.getGroceries()
+            {
+                RequestManager.shared.getRequestInterface().removeGrocery(id: grocery.id)
+            }
         }
+        
     }
     
     @IBAction func removeAllGroceryHistories(_ sender: Any)
     {
         //DataManager.shared.removeAllGroceryHistories()
         // 냉장고나 카트에 참조되지 않는 구입기록을 골라낸다.
-        var notReferencedGroceryHistory: [GroceryHistory] = []
-        for groceryHistory in DataManager.shared.getGroceryHistories()
-        {
-            var found: Bool = false
-            for grocery in DataManager.shared.getGroceries()
+        presentAlert(title: "구입기록 전체를 삭제하시겠습니까?", parent: self)
+        {_ in
+            var notReferencedGroceryHistory: [GroceryHistory] = []
+            for groceryHistory in DataManager.shared.getGroceryHistories()
             {
-                if(groceryHistory === grocery.info)
+                var found: Bool = false
+                for grocery in DataManager.shared.getGroceries()
                 {
-                    found = true
+                    if(groceryHistory === grocery.info)
+                    {
+                        found = true
+                    }
+                }
+                
+                for cartGrocery in DataManager.shared.getCartGroceries()
+                {
+                    if(groceryHistory === cartGrocery.info)
+                    {
+                        found = true
+                    }
+                }
+                
+                if(found == false)
+                {
+                    notReferencedGroceryHistory.insert(groceryHistory, at:0)
                 }
             }
             
-            for cartGrocery in DataManager.shared.getCartGroceries()
+            // 참조되지 않는 구입기록을 서버에 생성 요청한다.
+            for groceryHistory in notReferencedGroceryHistory
             {
-                if(groceryHistory === cartGrocery.info)
-                {
-                    found = true
-                }
+                //DataManager.shared.removeGroceryHistory(id: groceryHistory.id)
+                RequestManager.shared.getRequestInterface().removeGroceryHistory(id: groceryHistory.id)
             }
-            
-            if(found == false)
-            {
-                notReferencedGroceryHistory.insert(groceryHistory, at:0)
-            }
-        }
-        
-        // 참조되지 않는 구입기록을 서버에 생성 요청한다.
-        for groceryHistory in notReferencedGroceryHistory
-        {
-            //DataManager.shared.removeGroceryHistory(id: groceryHistory.id)
-            RequestManager.shared.getRequestInterface().removeGroceryHistory(id: groceryHistory.id)
         }
     }
     
@@ -139,11 +157,16 @@ class SettingTableViewController: UITableViewController {
     @IBAction func removeAllCartGroceries(_ sender: Any)
     {
         //DataManager.shared.removeAllCartGroceries()
-        for cartGrocery in DataManager.shared.getCartGroceries()
-        {
-            RequestManager.shared.getRequestInterface().removeCartGrocery(id: cartGrocery.id)
+        presentAlert(title: "장바구니 전체를 삭제하시겠습니까?", parent: self)
+        {_ in
+            for cartGrocery in DataManager.shared.getCartGroceries()
+            {
+                RequestManager.shared.getRequestInterface().removeCartGrocery(id: cartGrocery.id)
+            }
         }
     }
+    
+    
     
     // MARK: - Table view data source
 /*

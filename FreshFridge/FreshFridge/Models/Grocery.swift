@@ -127,6 +127,33 @@ class GroceryHistory : Codable
                 return "기타".localized()
             }
         }
+        
+        var systemName: String
+        {
+            switch self
+            {
+            case .MeatsAndEggs:
+                return "Meat, Eggs"
+            case .Milk:
+                return "Milk, Dairy products"
+            case .MarineProducts:
+                return "Marine Products"
+            case .CookingAndSidedishes:
+                return "Main Dish, Side Dish"
+            case .Vegetable:
+                return "Vegetable"
+            case .Fruits:
+                return "Fruit"
+            case .DrinksAndSnacks:
+                return "Drinks, Snacks"
+            case .SeasonedAndOilAndSauce:
+                return "Noodles, Seasoning, Oil"
+            case .GrainAndNuts:
+                return "Grains, Nuts"
+            case .ETC:
+                return "Etc"
+            }
+        }
     }
     
     
@@ -402,7 +429,17 @@ struct DueDate: Codable
 }
 
 
-
+func presentAlert(title: String, parent: UIViewController, okHandler: @escaping ((UIAlertAction) -> Void))
+{
+    let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+    let ok = UIAlertAction(title: "OK", style: .default, handler: okHandler)
+    alert.addAction(ok)
+    
+    let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+    alert.addAction(cancel)
+    
+    parent.present(alert, animated: true, completion: nil)
+}
 
 
 

@@ -174,7 +174,10 @@ class FamilyShareViewController: UIViewController {
             return
         }
         
-        ShareManager.shared.endShare()
+        presentAlert(title: "공유를 취소하시겠습니까?", parent: self)
+        {_ in 
+            ShareManager.shared.endShare()
+        }
         
     }
     

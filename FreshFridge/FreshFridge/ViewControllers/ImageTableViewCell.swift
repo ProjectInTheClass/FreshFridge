@@ -16,6 +16,8 @@ class ImageTableViewCell: UITableViewCell
 {
     weak var delegate: ImageTableViewCellDelegate?
     @IBOutlet weak var titleImage: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
