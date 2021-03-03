@@ -382,10 +382,9 @@
         <scene sceneID="ZBf-3i-7ao">
             <objects>
                 <tableViewController id="n27-7O-L2K" customClass="SettingTableViewController" customModule="FreshFridge" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="CKx-Cz-EC1">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" id="CKx-Cz-EC1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="946"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection headerTitle="냉장고 선택" footerTitle="냉장고는 다중 선택할 수 있습니다." id="q7d-jG-QRE">
                                 <cells>
@@ -667,7 +666,7 @@
                             <tableViewSection id="JwH-va-vCu">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="descriptionCell" rowHeight="132" id="QFh-Pp-rmQ" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="464" width="288" height="132"/>
+                                        <rect key="frame" x="16" y="463" width="288" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QFh-Pp-rmQ" id="3vS-Qe-qdz">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="132"/>
