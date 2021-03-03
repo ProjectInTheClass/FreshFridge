@@ -81,7 +81,8 @@ class ShareManager
             return rootURL
         }
         */
-        return "http://z.ebadaq.com:45082"
+        //return "http://z.ebadaq.com:45082"
+        return "http://freshfridge.cafe24app.com"
     }
     
     func getFridgeID(fridgeName: String) -> Int
@@ -103,7 +104,7 @@ class ShareManager
             startShareWithPublicCode(publicCode: publicCode)
             {
                 DispatchQueue.main.async {
-                    ShareManager.shared.update()
+                    ShareManager.shared.update(true)
                 }
             }
         }
@@ -134,7 +135,7 @@ class ShareManager
         }
     }
     
-    func sendAllLocalData()
+    func sendAllLocalData(completion: @escaping (()->Void))
     {
         // 서버의 구입기록을 가져와서 중복이면 생성요청을 생략한다.
         
@@ -241,12 +242,12 @@ class ShareManager
                     
                     for grocery in groceryHistoryReferences.groceries
                     {
-                        self.createGrocery(productID: id, count: grocery.count, isPercentageCount: grocery.isPercentageCount, dueDate: grocery.dueDate, storage: grocery.storage, fridgeName: grocery.fridgeName, notes: grocery.notes ?? "", image: grocery.info.image)
+                        self.createGrocery(productID: groceryHistory.id.id, count: grocery.count, isPercentageCount: grocery.isPercentageCount, dueDate: grocery.dueDate, storage: grocery.storage, fridgeName: grocery.fridgeName, notes: grocery.notes ?? "", image: grocery.info.image)
                     }
                     
                     for cartGrocery in groceryHistoryReferences.cartGroceries
                     {
-                        self.createCartGrocery(productID: id, count: cartGrocery.count, isPercentageCount: cartGrocery.isPercentageCount, isPurchased: cartGrocery.isPurchased)
+                        self.createCartGrocery(productID: groceryHistory.id.id, count: cartGrocery.count, isPercentageCount: cartGrocery.isPercentageCount, isPurchased: cartGrocery.isPurchased)
                     }
                 }
                 else
@@ -281,12 +282,12 @@ class ShareManager
                             
                             for grocery in groceryHistoryReferences.groceries
                             {
-                                self.createGrocery(productID: id, count: grocery.count, isPercentageCount: grocery.isPercentageCount, dueDate: grocery.dueDate, storage: grocery.storage, fridgeName: grocery.fridgeName, notes: grocery.notes ?? "", image: grocery.info.image)
+                                self.createGrocery(productID: groceryHistory.id.id, count: grocery.count, isPercentageCount: grocery.isPercentageCount, dueDate: grocery.dueDate, storage: grocery.storage, fridgeName: grocery.fridgeName, notes: grocery.notes ?? "", image: grocery.info.image)
                             }
                             
                             for cartGrocery in groceryHistoryReferences.cartGroceries
                             {
-                                self.createCartGrocery(productID: id, count: cartGrocery.count, isPercentageCount: cartGrocery.isPercentageCount, isPurchased: cartGrocery.isPurchased)
+                                self.createCartGrocery(productID: groceryHistory.id.id, count: cartGrocery.count, isPercentageCount: cartGrocery.isPercentageCount, isPurchased: cartGrocery.isPurchased)
                             }
                         }
                     }
@@ -380,6 +381,13 @@ class ShareManager
                 }
             }
         }
+        
+        ShareManager.shared.lastestProductUpdateAt = -1
+        ShareManager.shared.lastestCartUpdatedAt = -1
+        ShareManager.shared.lastestRefriUpdateAt = -1
+        
+        NSLog("completed sendAllData")
+        
     }
         
     func startShareAndCreateCode(completion: @escaping (()->Void))
@@ -490,61 +498,78 @@ class ShareManager
         task.resume()
     }
     
-    func update()
+    func update(_ showLoading: Bool = false)
     {
         guard ShareManager.shared.isShared() else { return }
         
-        // 일정초마다.. 서버로부터 전부 받아서 update
-        getRequestManager().isUpdatePurchaseRecord = false
-        getRequestManager().isUpdateShopingCart = false
-        getRequestManager().isUpdateGroceryList = false
-        
-        let maxRepeatCount = 100
-        
-        var isRepeat: Bool = true
-        var repeatCount = 0
-        while isRepeat
+        if(showLoading)
         {
-            guard repeatCount < maxRepeatCount else { break }
-            ShareManager.shared.updateAllProduct()
-            { (isCompleted: Bool) in
-                isRepeat = !isCompleted
+            LoadingHUD.showProgressCircle()
+            //LoadingHUD.showProgressAnimation()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01)
+        {
+            // 일정초마다.. 서버로부터 전부 받아서 update
+            getRequestManager().isUpdatePurchaseRecord = false
+            getRequestManager().isUpdateShopingCart = false
+            getRequestManager().isUpdateGroceryList = false
+            
+            let maxRepeatCount = 100
+            
+            var isRepeat: Bool = true
+            var repeatCount = 0
+            while isRepeat
+            {
+                guard repeatCount < maxRepeatCount else { break }
+                ShareManager.shared.updateAllProduct()
+                { (isCompleted: Bool) in
+                    isRepeat = !isCompleted
+                }
+                
+                repeatCount += 1
             }
             
-            repeatCount += 1
-        }
-        
-        isRepeat = true
-        repeatCount = 0
-        while isRepeat
-        {
-            guard repeatCount < maxRepeatCount else { break }
-            
-            ShareManager.shared.updateAllCartItem()
-            { (isCompleted: Bool) in
-                isRepeat = !isCompleted
+            isRepeat = true
+            repeatCount = 0
+            while isRepeat
+            {
+                guard repeatCount < maxRepeatCount else { break }
+                
+                ShareManager.shared.updateAllCartItem()
+                { (isCompleted: Bool) in
+                    isRepeat = !isCompleted
+                }
+                
+                repeatCount += 1
             }
             
-            repeatCount += 1
-        }
-        
-        isRepeat = true
-        repeatCount = 0
-        while isRepeat
-        {
-            guard repeatCount < maxRepeatCount else { break }
-            
-            ShareManager.shared.updateAllRefrigeratorItem()
-            { (isCompleted: Bool) in
-                isRepeat = !isCompleted
+            isRepeat = true
+            repeatCount = 0
+            while isRepeat
+            {
+                guard repeatCount < maxRepeatCount else { break }
+                
+                ShareManager.shared.updateAllRefrigeratorItem()
+                { (isCompleted: Bool) in
+                    isRepeat = !isCompleted
+                }
+                
+                repeatCount += 1
             }
             
-            repeatCount += 1
+            getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
+            getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
+            getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+            
+            if(showLoading)
+            {
+                LoadingHUD.hideProgressCircle()
+                //LoadingHUD.hideProgressAnimation()
+            }
+            
         }
         
-        getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
-        getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-        getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+        
     }
     
     
@@ -601,6 +626,7 @@ class ShareManager
         let baseURL = URL(string: getServerURL() + subURL)!
         let query: [String: String] = [
                 "idForShare": "\(sharedID)",
+                "sort":"updatedAt ASC",
                 "where": "{\"updatedAt\":{\">\":\(lastestProductUpdateAt)},\"idForShare\":\(sharedID),\"isDeleted\":false}"
             ]
         let url = baseURL.withQueries(query)!
@@ -612,39 +638,78 @@ class ShareManager
         if let data = data
         {
             print(String(data: data, encoding: .utf8)!)
-            if let products = try? jsonDecoder.decode([Product].self, from: data)
+            
+            do
             {
-                //print(products)
-                for product in products
+                let products: [ShareManager.Product]? = try jsonDecoder.decode([ShareManager.Product].self, from: data)
+                if let products = products
                 {
-                    if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
+                    for product in products
                     {
-                        // 기존 groceryHistory update
-                        if(groceryHistory.title != product.title)
+                        if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
                         {
-                            DataManager.shared.updateGroceryHistory(id: groceryHistory.id, title: product.title)
-                        }
-                        
-                        if(groceryHistory.category.rawValue != product.category)
-                        {
-                            DataManager.shared.updateGroceryHistory(id: groceryHistory.id, category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC)
-                                                        
-                            getRequestManager().isUpdatePurchaseRecord = true
-                            getRequestManager().isUpdateShopingCart = true
-                            getRequestManager().isUpdateGroceryList = true
-                            
-                        }
-                        
-                        if(groceryHistory.favorite != product.favorite)
-                        {
-                            DataManager.shared.updateGroceryHistory(id: groceryHistory.id, favorite: product.favorite)
-                        }
-                        
-                        if(product.imageCode.isEmpty == false)
-                        {
-                            if let image = groceryHistory.image
+                            // 기존 groceryHistory update
+                            if(groceryHistory.title != product.title)
                             {
-                                if(image.filename != product.imageCode)
+                                DataManager.shared.updateGroceryHistory(id: groceryHistory.id, title: product.title)
+                            }
+                            
+                            if(groceryHistory.category.rawValue != product.category)
+                            {
+                                DataManager.shared.updateGroceryHistory(id: groceryHistory.id, category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC)
+                                                            
+                                getRequestManager().isUpdatePurchaseRecord = true
+                                getRequestManager().isUpdateShopingCart = true
+                                getRequestManager().isUpdateGroceryList = true
+                                
+                            }
+                            
+                            if(groceryHistory.favorite != product.favorite)
+                            {
+                                DataManager.shared.updateGroceryHistory(id: groceryHistory.id, favorite: product.favorite)
+                            }
+                            
+                            if(product.imageCode.isEmpty == false)
+                            {
+                                if let image = groceryHistory.image
+                                {
+                                    if(image.filename != product.imageCode)
+                                    {
+                                        self.downloadImage(id: product.imageCode)
+                                        { (image: UIImage?) in
+                                            groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    self.downloadImage(id: product.imageCode)
+                                    { (image: UIImage?) in
+                                        groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
+                                    }
+                                }
+                                
+                            }
+                            
+                            if(product.isDeleted)
+                            {
+                                DataManager.shared.removeGroceryHistory(id: groceryHistory.id)
+                                getRequestManager().isUpdatePurchaseRecord = true
+                            }
+                        }
+                        else
+                        {
+                            guard product.isDeleted == false else
+                            {
+                                continue
+                            }
+                            
+                            DataManager.shared.insertGroceryHistory(id: product.id, title: product.title, category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC, image: nil, updateDate: false)
+                            DataManager.shared.updateGroceryHistory(id: AutoIncreasedID(product.id), favorite: product.favorite)
+                            
+                            if(product.imageCode.isEmpty == false)
+                            {
+                                if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
                                 {
                                     self.downloadImage(id: product.imageCode)
                                     { (image: UIImage?) in
@@ -652,60 +717,34 @@ class ShareManager
                                     }
                                 }
                             }
-                            else
-                            {
-                                self.downloadImage(id: product.imageCode)
-                                { (image: UIImage?) in
-                                    groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
-                                }
-                            }
                             
-                        }
-                        
-                        if(product.isDeleted)
-                        {
-                            DataManager.shared.removeGroceryHistory(id: groceryHistory.id)
                             getRequestManager().isUpdatePurchaseRecord = true
                         }
-                    }
-                    else
-                    {
-                        guard product.isDeleted == false else
+                        
+                        if(self.lastestProductUpdateAt < product.updatedAt)
                         {
-                            continue
+                            self.lastestProductUpdateAt = product.updatedAt
+                            print(self.lastestProductUpdateAt)
                         }
                         
-                        DataManager.shared.insertGroceryHistory(id: product.id, title: product.title, category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC, image: nil, updateDate: false)
-                        DataManager.shared.updateGroceryHistory(id: AutoIncreasedID(product.id), favorite: product.favorite)
-                        
-                        if(product.imageCode.isEmpty == false)
-                        {
-                            if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
-                            {
-                                self.downloadImage(id: product.imageCode)
-                                { (image: UIImage?) in
-                                    groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
-                                }
-                            }
-                        }
-                        
-                        getRequestManager().isUpdatePurchaseRecord = true
                     }
                     
-                    if(self.lastestProductUpdateAt < product.updatedAt)
+                    var isCompleted = false
+                    if(products.count == 0)
                     {
-                        self.lastestProductUpdateAt = product.updatedAt
-                        print(self.lastestProductUpdateAt)
+                        isCompleted = true
                     }
-                    
+                    completion(isCompleted)
                 }
+            }
+            catch
+            {
+                print(error)
                 
-                var isCompleted = false
-                if(products.count == 0)
-                {
-                    isCompleted = true
-                }
-                completion(isCompleted)
+                // 실패하는 경우 다시 RequestCode를 호출한다.
+                startShareWithPublicCode(publicCode: publicCode, completion: {})
+                
+                completion(true)
             }
         }
     }
@@ -719,7 +758,8 @@ class ShareManager
         let query: [String: String] = [
             "idForShare": "\(sharedID)",
             "title" : title,
-            "category" : "\(category.rawValue)"
+            "category" : "\(category.rawValue)",
+            "lastPurchaseDate" : "\(DueDate.getTimeIntervalSince1970MS(date: Date()))"
             ]
         
         let url = baseURL.withQueries(query)!
@@ -803,7 +843,7 @@ class ShareManager
                     {
                         image.resetFilename(name: imageName)
                         self.updateGroceryHistory(id: AutoIncreasedID(id), image: image)
-                        {                            
+                        {
                         }
                         
                     }
@@ -831,9 +871,9 @@ class ShareManager
     
     func updateGroceryHistory(id: AutoIncreasedID, json: [String: Any], completion: ((()->Void)?) = nil)
     {
-        if let foundGroceryHistory = DataManager.shared.findGroceryHistory(id: id)
-        {
-            let subURL = "/product/\(foundGroceryHistory.id.id)"
+        //if let foundGroceryHistory = DataManager.shared.findGroceryHistory(id: id)
+        //{
+            let subURL = "/product/\(id.id)"
             let baseURL = URL(string: self.getServerURL() + subURL)!
             let query: [String: String] = [
                 "idForShare": "\(self.sharedID)"
@@ -875,8 +915,29 @@ class ShareManager
             }
             
             task.resume()
-        }
+//        }
+//        else
+//        {
+//            NSLog("findGroceryHistory 실패")
+//        }
         
+    }
+    
+    func updateGroceryHistory(id: AutoIncreasedID, lastPurchaseDate: Date, completion: (()->Void)?)
+    {
+        let json: [String: Any] = ["lastPurchaseDate" : "\(DueDate.getTimeIntervalSince1970MS(date: lastPurchaseDate))"]
+        if let groceryHistory = DataManager.shared.findGroceryHistory(id: id)
+        {
+            updateGroceryHistory(id: id, json: json)
+            {
+                DataManager.shared.moveToTheFrontGroceryHistory(groceryHistory: groceryHistory)
+
+                if let completion = completion
+                {
+                    completion()
+                }
+            }
+        }
     }
     
     func updateGroceryHistory(id: AutoIncreasedID, title: String, completion: (()->Void)?)
@@ -915,6 +976,7 @@ class ShareManager
             if let completion = completion
             {
                 completion()
+                NSLog("completed updateGroceryHistory(imageCode)")
             }
         }
     }
@@ -960,6 +1022,7 @@ class ShareManager
     
     func uploadImage(image: UIImage, filename: String, completion: @escaping ((String)->Void) )
     {
+        guard getServerURL() == "http://z.ebadaq.com:45082" else { return } // test code
         let subURL = "/image/uploader"
         let baseURL = URL(string: self.getServerURL() + subURL)!
         
@@ -1075,6 +1138,7 @@ class ShareManager
             
             let query: [String: String] = [
                     "idForRefri": "\(frigdeID)",
+                    "sort":"updatedAt ASC",
                     "where": "{\"updatedAt\":{\">\":\(lastestRefriUpdateAt)},\"idForRefri\":\(frigdeID),\"isDeleted\":false}"
                 ]
             
@@ -1115,9 +1179,10 @@ class ShareManager
                                             DataManager.shared.updateGrocery(id: grocery.id, isPercentageCount: refriItem.isPercentageCount)
                                         }
                                         
-                                        if(Int(grocery.dueDate.date.timeIntervalSince1970) * 1000 != Int(refriItem.dueDate))
+                                        //if(Int(grocery.dueDate.date.timeIntervalSince1970) * 1000 != Int(refriItem.dueDate))
+                                        if(grocery.dueDate.getTimeIntervalSince1970MS() != Int(refriItem.dueDate))
                                         {
-                                            DataManager.shared.updateGrocery(id: grocery.id, dueDate: DueDate(date: Date(timeIntervalSince1970: TimeInterval((Int(refriItem.dueDate) ?? 0) / 1000))))
+                                            DataManager.shared.updateGrocery(id: grocery.id, dueDate: DueDate(timeIntervalSince1970MS: Int(refriItem.dueDate) ?? 0))
                                         }
                                         
                                         if(grocery.storage.rawValue != refriItem.storage)
@@ -1166,7 +1231,7 @@ class ShareManager
                                                                       category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC,
                                                                       count: refriItem.count,
                                                                       isPercentageCount: refriItem.isPercentageCount,
-                                                                      dueDate: DueDate(date: Date(timeIntervalSince1970: TimeInterval((Int(refriItem.dueDate) ?? 0) / 1000))),
+                                                                      dueDate: DueDate(timeIntervalSince1970MS: Int(refriItem.dueDate) ?? 0),
                                                                       storage: Grocery.Storage(rawValue: refriItem.storage) ?? Grocery.Storage.Refrigeration,
                                                                       fridgeName: refriItem.fridgeName,
                                                                       notes: refriItem.notes,
@@ -1196,6 +1261,11 @@ class ShareManager
                     catch
                     {
                         print(error)
+                        
+                        // 실패하는 경우 다시 RequestCode를 호출한다.
+                        startShareWithPublicCode(publicCode: publicCode, completion: {})
+                        
+                        completion(true)
                     }
                 }
             //}
@@ -1222,7 +1292,7 @@ class ShareManager
                 "product": "\(productID)",
                 "count":"\(count)",
                 "isPercentageCount":"\(isPercentageCount)",
-                "dueDate":"\(Int(dueDate.date.timeIntervalSince1970 * 1000))",
+                "dueDate":"\(dueDate.getTimeIntervalSince1970MS())",
                 "storage":"\(storage.rawValue)",
                 "fridgeName":fridgeName,
                 "notes":notes.isEmpty ? "\"\"" : notes,
@@ -1362,7 +1432,7 @@ class ShareManager
     
     func updateGrocery(id: AutoIncreasedID, dueDate: DueDate, completion: ((()->Void)?))
     {
-        let json: [String: Any] = ["dueDate" : "\(Int(dueDate.date.timeIntervalSince1970 * 1000))"]
+        let json: [String: Any] = ["dueDate" : "\(dueDate.getTimeIntervalSince1970MS())"]
         updateGrocery(id: id, json: json)
         {
             DataManager.shared.updateGrocery(id: id, dueDate: dueDate)
@@ -1484,6 +1554,7 @@ class ShareManager
         let baseURL = URL(string: getServerURL() + subURL)!
         let query: [String: String] = [
                 "idForShare": "\(sharedID)",
+                "sort":"updatedAt ASC",
                 "where": "{\"updatedAt\":{\">\":\(lastestCartUpdatedAt)},\"idForShare\":\(sharedID),\"isDeleted\":false}"
             ]
         
@@ -1585,6 +1656,11 @@ class ShareManager
             catch
             {
                 print(error)
+                
+                // 실패하는 경우 다시 RequestCode를 호출한다.
+                startShareWithPublicCode(publicCode: publicCode, completion: {})
+                
+                completion(true)
             }
         }
     }
@@ -1927,10 +2003,18 @@ class ShareManager
                     
                     guard refrigerators.count == 4 else
                     {
-                        print("냉장고가 충분하지 않습니다.")
-                        self.endShare()
+                        print("냉장고가 충분하지 않습니다.") //fatalError("냉장고가 충분하지 않습니다.")
+                        //self.endShare()
+                        
+                        // 냉장고를 생성
+                        for index in refrigerators.count...3
+                        {
+                            self.createRefrigerator(fridgeIndex: index, completion: {})
+                        }
+                        self.requestRefrigeratorIDs(completion: completion)
+                        
                         return
-                    }//fatalError("냉장고가 충분하지 않습니다.") }
+                    }
                     
                     for i in 0...refrigerators.count-1
                     {

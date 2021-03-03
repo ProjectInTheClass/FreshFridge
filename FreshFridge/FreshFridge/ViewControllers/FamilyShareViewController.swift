@@ -46,12 +46,16 @@ class FamilyShareViewController: UIViewController {
                     print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
                     
                     ShareManager.shared.sendAllLocalData()
-                    
-                    DataManager.shared.removeAllGroceryHistories()
-                    DataManager.shared.removeAllCartGroceries()
-                    DataManager.shared.removeAllFridgeGroceries()
-                    
-                    ShareManager.shared.update()
+                    {
+                        DispatchQueue.main.async()
+                        {
+                            DataManager.shared.removeAllGroceryHistories()
+                            DataManager.shared.removeAllCartGroceries()
+                            DataManager.shared.removeAllFridgeGroceries()
+                            
+                            ShareManager.shared.update(true)
+                        }
+                    }
                 }
             }
             
@@ -67,7 +71,7 @@ class FamilyShareViewController: UIViewController {
                     DataManager.shared.removeAllCartGroceries()
                     DataManager.shared.removeAllFridgeGroceries()
                     
-                    ShareManager.shared.update()
+                    ShareManager.shared.update(true)
                 }
             }
         }
@@ -114,12 +118,16 @@ class FamilyShareViewController: UIViewController {
                         
                         // 로컬의 데이터를 서버로 보내고, 로컬 데이터를 전부 지운다.
                         ShareManager.shared.sendAllLocalData()
-                        
-                        DataManager.shared.removeAllGroceryHistories()
-                        DataManager.shared.removeAllCartGroceries()
-                        DataManager.shared.removeAllFridgeGroceries()
-                        
-                        ShareManager.shared.update()
+                        {
+                            DispatchQueue.main.async()
+                            {
+                                DataManager.shared.removeAllGroceryHistories()
+                                DataManager.shared.removeAllCartGroceries()
+                                DataManager.shared.removeAllFridgeGroceries()
+                                
+                                ShareManager.shared.update(true)
+                            }
+                        }
                     }
                 }
             }
@@ -134,7 +142,7 @@ class FamilyShareViewController: UIViewController {
                         DataManager.shared.removeAllCartGroceries()
                         DataManager.shared.removeAllFridgeGroceries()
                         
-                        ShareManager.shared.update()
+                        ShareManager.shared.update(true)
                     }
                 }
             }

@@ -238,35 +238,55 @@ class RequestToServer : RequestInterface
         if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
         {
             productID = groceryHistory.id.id
-            ShareManager.shared.createGrocery(productID: productID, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes, image: image)
+            
+            if let image = image,
+               let uiImage = image.image()
             {
-                (refriItem: ShareManager.RefrigeratorItem) in
-                DataManager.shared.insertGrocery(id: refriItem.id, title: refriItem.product!.title,
-                                                 category: GroceryHistory.Category(rawValue: refriItem.product!.category) ?? GroceryHistory.Category.ETC,
-                                          count: refriItem.count,
-                                          isPercentageCount: refriItem.isPercentageCount,
-                                          dueDate: DueDate(date: Date(timeIntervalSince1970: TimeInterval((Int(refriItem.dueDate) ?? 0) / 1000))),
-                                          storage: Grocery.Storage(rawValue: refriItem.storage) ?? Grocery.Storage.Refrigeration,
-                                          fridgeName: refriItem.fridgeName,
-                                          notes: refriItem.notes,
-                                          image: nil)
+                groceryHistory.image = image
+                ShareManager.shared.uploadImage(image: uiImage, filename: image.filename)
+                {
+                    (imageName: String) in
+                    image.resetFilename(name: imageName)
+                    ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, image: image)
+                    {
+                    }
+                }
+            }
+            
+            ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, lastPurchaseDate: Date())
+            {
+                DataManager.shared.moveToTheFrontGroceryHistory(groceryHistory: groceryHistory)
                 
-                getRequestManager().updatePurchaseRecordViewController(updateTableView: false)
-                getRequestManager().updateGroceryListViewController(updateTableView: true)
-                
-                getRequestManager().animateBadge(tabBarIndex: .fridgeTabBar)
+                ShareManager.shared.createGrocery(productID: productID, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes, image: image)
+                {
+                    (refriItem: ShareManager.RefrigeratorItem) in
+                    DataManager.shared.insertGrocery(id: refriItem.id, title: refriItem.product!.title,
+                                                     category: GroceryHistory.Category(rawValue: refriItem.product!.category) ?? GroceryHistory.Category.ETC,
+                                              count: refriItem.count,
+                                              isPercentageCount: refriItem.isPercentageCount,
+                                              dueDate: DueDate(timeIntervalSince1970MS: Int(refriItem.dueDate) ?? 0),
+                                              storage: Grocery.Storage(rawValue: refriItem.storage) ?? Grocery.Storage.Refrigeration,
+                                              fridgeName: refriItem.fridgeName,
+                                              notes: refriItem.notes,
+                                              image: nil)
+                    
+                    getRequestManager().updatePurchaseRecordViewController(updateTableView: true)
+                    getRequestManager().updateGroceryListViewController(updateTableView: true)
+                    
+                    getRequestManager().animateBadge(tabBarIndex: .fridgeTabBar)
+                }
             }
         }
         else
         {
             // 없으면 서버에 product를 추가한다.
-            ShareManager.shared.createGroceryHistoryForRefri(title: title, category: category, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
+            ShareManager.shared.createGroceryHistoryForRefri(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes)
             { (refriItem: ShareManager.RefrigeratorItem) in
                 DataManager.shared.insertGrocery(id: refriItem.id, title: refriItem.product!.title,
                                                  category: GroceryHistory.Category(rawValue: refriItem.product!.category) ?? GroceryHistory.Category.ETC,
                                           count: refriItem.count,
                                           isPercentageCount: refriItem.isPercentageCount,
-                                          dueDate: DueDate(date: Date(timeIntervalSince1970: TimeInterval((Int(refriItem.dueDate) ?? 0) / 1000))),
+                                          dueDate: DueDate(timeIntervalSince1970MS: Int(refriItem.dueDate) ?? 0),
                                           storage: Grocery.Storage(rawValue: refriItem.storage) ?? Grocery.Storage.Refrigeration,
                                           fridgeName: refriItem.fridgeName,
                                           notes: refriItem.notes,
@@ -323,7 +343,7 @@ class RequestToServer : RequestInterface
         
         ShareManager.shared.updateGrocery(id: id, storage: storage)
         {
-            getRequestManager().updateGroceryListViewController(updateTableView: false)
+            getRequestManager().updateGroceryListViewController(updateTableView: true)
         }
     }
     override func updateGrocery(id: AutoIncreasedID, fridgeName: String)
@@ -368,15 +388,34 @@ class RequestToServer : RequestInterface
         if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
         {
             productID = groceryHistory.id.id
-            ShareManager.shared.createCartGrocery(productID: productID, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased)
-            { (cartItem: ShareManager.CartItem) in
+            // processing image
+            if let image = image,
+               let uiImage = image.image()
+            {
+                ShareManager.shared.uploadImage(image: uiImage, filename: image.filename)
+                {
+                    (imageName: String) in
+                    image.resetFilename(name: imageName)
+                    ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, image: image)
+                    {
+                    }
+                }
+            }
+            
+            ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, lastPurchaseDate: Date())
+            {
+                DataManager.shared.moveToTheFrontGroceryHistory(groceryHistory: groceryHistory)
                 
-                DataManager.shared.insertCartGrocery(title: cartItem.product!.title, category: GroceryHistory.Category(rawValue: cartItem.product!.category) ?? GroceryHistory.Category.ETC, image: nil,
-                                                               id: cartItem.id, count: cartItem.count, isPercentageCount: cartItem.isPercentageCount, isPurchased: cartItem.isPurchased)
-                getRequestManager().updatePurchaseRecordViewController(updateTableView: false)
-                getRequestManager().updateShopingCartViewController(updateTableView: true)
-                
-                getRequestManager().animateBadge(tabBarIndex: .shopingCartTabBar)
+                ShareManager.shared.createCartGrocery(productID: productID, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased)
+                { (cartItem: ShareManager.CartItem) in
+                    
+                    DataManager.shared.insertCartGrocery(title: cartItem.product!.title, category: GroceryHistory.Category(rawValue: cartItem.product!.category) ?? GroceryHistory.Category.ETC, image: nil,
+                                                                   id: cartItem.id, count: cartItem.count, isPercentageCount: cartItem.isPercentageCount, isPurchased: cartItem.isPurchased)
+                    getRequestManager().updatePurchaseRecordViewController(updateTableView: true)
+                    getRequestManager().updateShopingCartViewController(updateTableView: true)
+                    
+                    getRequestManager().animateBadge(tabBarIndex: .shopingCartTabBar)
+                }
             }
         }
         else
@@ -512,7 +551,11 @@ class RequestToLocal : RequestInterface
 {
     override func addGrocery(title: String, category: GroceryHistory.Category, count: Int, isPercentageCount: Bool, dueDate: DueDate, storage: Grocery.Storage, fridgeName: String, notes: String, image: GroceryImage?)
     {
-        if nil == DataManager.shared.getGroceryHistory(title: title, category: category)
+        if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
+        {
+            DataManager.shared.moveToTheFrontGroceryHistory(groceryHistory: groceryHistory)
+        }
+        else
         {
             DataManager.shared.insertGroceryHistory(id: -1, title: title, category: category, image: image, updateDate: true)
             
@@ -523,6 +566,8 @@ class RequestToLocal : RequestInterface
         }
         
         DataManager.shared.insertGrocery(id: -1, title: title, category: category, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes, image: image)
+        
+        getRequestManager().updatePurchaseRecordViewController(updateTableView: true)
         getRequestManager().updateGroceryListViewController(updateTableView: true)
         getRequestManager().animateBadge(tabBarIndex: .fridgeTabBar)
     }
@@ -557,7 +602,7 @@ class RequestToLocal : RequestInterface
     override func updateGrocery(id: AutoIncreasedID, storage: Grocery.Storage)
     {
         DataManager.shared.updateGrocery(id: id, storage: storage)
-        getRequestManager().updateGroceryListViewController(updateTableView: false)
+        getRequestManager().updateGroceryListViewController(updateTableView: true)
     }
     
     override func updateGrocery(id: AutoIncreasedID, fridgeName: String)
@@ -585,7 +630,11 @@ class RequestToLocal : RequestInterface
     //
     override func addCartGrocery(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, count: Int = 1, isPercentageCount: Bool = false, isPurchased: Bool = false)
     {
-        if nil == DataManager.shared.getGroceryHistory(title: title, category: category)
+        if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
+        {
+            DataManager.shared.moveToTheFrontGroceryHistory(groceryHistory: groceryHistory)
+        }
+        else
         {
             DataManager.shared.insertGroceryHistory(id: -1, title: title, category: category, image: image, updateDate: true)
             if let image = image
@@ -597,6 +646,7 @@ class RequestToLocal : RequestInterface
         DataManager.shared.insertCartGrocery(title: title, category: category, image: image,
                                                        id: -1, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased)
         
+        getRequestManager().updatePurchaseRecordViewController(updateTableView: true)
         getRequestManager().updateShopingCartViewController(updateTableView: true)
         getRequestManager().animateBadge(tabBarIndex: .shopingCartTabBar)
     }
