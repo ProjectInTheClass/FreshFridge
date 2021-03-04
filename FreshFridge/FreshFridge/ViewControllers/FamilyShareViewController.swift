@@ -20,10 +20,7 @@ class FamilyShareViewController: UIViewController {
     {
         if ShareManager.shared.isCreatedShareCode()
         {
-            let alert = UIAlertController(title: "생성 실패", message: "이미 생성한 공유 코드가 존재합니다.(\(ShareManager.shared.createdPublicCode))", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "OK", style: .default)
-            alert.addAction(ok)
-            self.present(alert, animated: true, completion: nil)
+            presentAlertOk(title: "생성 실패".localized(), message: "이미 생성한 공유 코드가 존재합니다.(%@)".localized(with: [ShareManager.shared.createdPublicCode]), parent: self)
             
             return
         }
@@ -34,7 +31,6 @@ class FamilyShareViewController: UIViewController {
         }
         
         
-        let alert = UIAlertController(title: "가족 공유", message: "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다.", preferredStyle: .alert)
         let yes = UIAlertAction(title: "Yes", style: .default)
         {
             (yes) in
@@ -53,7 +49,7 @@ class FamilyShareViewController: UIViewController {
                             DataManager.shared.removeAllCartGroceries()
                             DataManager.shared.removeAllFridgeGroceries()
                             
-                            ShareManager.shared.update(true)
+                            ShareManager.shared.update(async: false)
                         }
                     }
                 }
@@ -71,42 +67,33 @@ class FamilyShareViewController: UIViewController {
                     DataManager.shared.removeAllCartGroceries()
                     DataManager.shared.removeAllFridgeGroceries()
                     
-                    ShareManager.shared.update(true)
+                    ShareManager.shared.update(async: false)
                 }
             }
         }
         
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-        { (cancel) in
-            //code
-        }
-        alert.addAction(yes)
-        alert.addAction(no)
-        alert.addAction(cancel)
-        self.present(alert, animated: true, completion: nil)
+        presentAlertYesNoCancel(title: "가족 공유".localized(), message: "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다".localized(), parent: self, yes: yes, no: no)
+        
     }
     
     @IBAction func enterPublicCode(_ sender: Any)
     {
         if ShareManager.shared.isShared()
         {
-            let alert = UIAlertController(title: "사용 중인 공유 코드", message: "\(ShareManager.shared.publicCode)", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "OK", style: .default)
-            alert.addAction(ok)
-            self.present(alert, animated: true, completion: nil)
+            presentAlertOk(title: "코드 보기".localized(), message: "사용 중인 공유 코드 (%@)".localized(with: [ShareManager.shared.publicCode]), parent: self)
             
             return
         }
         
         var publicCode: String = ""
-        let alert = UIAlertController(title: "공유 코드", message: "공유 코드를 입력해주세요.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "코드 입력".localized(), message: "공유 코드를 입력해주세요".localized(), preferredStyle: .alert)
         alert.addTextField()
         let ok = UIAlertAction(title: "OK", style: .default)
-        { (ok) in
-            //code
+        {_ in
+            
+            // 공유 코드 가져오기
             publicCode = alert.textFields?[0].text ?? ""
-            //
-            let alert = UIAlertController(title: "가족 공유", message: "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다.", preferredStyle: .alert)
+            
             let yes = UIAlertAction(title: "Yes", style: .default)
             {
                 (yes) in
@@ -125,7 +112,7 @@ class FamilyShareViewController: UIViewController {
                                 DataManager.shared.removeAllCartGroceries()
                                 DataManager.shared.removeAllFridgeGroceries()
                                 
-                                ShareManager.shared.update(true)
+                                ShareManager.shared.update(async: false)
                             }
                         }
                     }
@@ -142,27 +129,25 @@ class FamilyShareViewController: UIViewController {
                         DataManager.shared.removeAllCartGroceries()
                         DataManager.shared.removeAllFridgeGroceries()
                         
-                        ShareManager.shared.update(true)
+                        ShareManager.shared.update(async: false)
                     }
                 }
             }
             
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-            { (cancel) in
-                //code
-            }
-            alert.addAction(yes)
-            alert.addAction(no)
-            alert.addAction(cancel)
-            self.present(alert, animated: true, completion: nil)
+            presentAlertYesNoCancel(title: "가족 공유".localized(), message: "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다".localized(), parent: self, yes: yes, no: no)
+            
+            
+            
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-        { (cancel) in
-            //code
-        }
-        alert.addAction(cancel)
         alert.addAction(ok)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cancel)
+        
         self.present(alert, animated: true, completion: nil)
+        
+        
+        
         
     }
     
@@ -174,7 +159,7 @@ class FamilyShareViewController: UIViewController {
             return
         }
         
-        presentAlert(title: "공유를 취소하시겠습니까?", parent: self)
+        presentAlertOkCancel(title: "공유를 취소하시겠습니까?".localized(), parent: self)
         {_ in 
             ShareManager.shared.endShare()
         }

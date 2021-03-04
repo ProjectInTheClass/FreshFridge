@@ -104,7 +104,7 @@ class ShareManager
             startShareWithPublicCode(publicCode: publicCode)
             {
                 DispatchQueue.main.async {
-                    ShareManager.shared.update(true)
+                    ShareManager.shared.update(async: false)
                 }
             }
         }
@@ -149,10 +149,7 @@ class ShareManager
         
         var isRepeat: Bool = true
         while isRepeat {
-            ShareManager.shared.updateAllProduct()
-            { (isCompleted: Bool) in
-                isRepeat = !isCompleted
-            }
+            isRepeat = ShareManager.shared.updateAllProduct(async: false, completion: {})
         }
         
         var groceryHistoriesInServer: [GroceryHistory] = []
@@ -498,10 +495,11 @@ class ShareManager
         task.resume()
     }
     
-    func update(_ showLoading: Bool = false)
+    func update(async: Bool)
     {
         guard ShareManager.shared.isShared() else { return }
         
+        let showLoading = !async
         if(showLoading)
         {
             //LoadingHUD.showProgressCircle()
@@ -521,9 +519,23 @@ class ShareManager
             while isRepeat
             {
                 guard repeatCount < maxRepeatCount else { break }
-                ShareManager.shared.updateAllProduct()
-                { (isCompleted: Bool) in
-                    isRepeat = !isCompleted
+                isRepeat = !ShareManager.shared.updateAllProduct(async: !showLoading)
+                {
+                    getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
+                }
+                                
+                repeatCount += 1
+            }
+            
+            isRepeat = true
+            repeatCount = 0
+            while isRepeat
+            {
+                guard repeatCount < maxRepeatCount else { break }
+                
+                isRepeat = !ShareManager.shared.updateAllCartItem(async: !showLoading)
+                {
+                    getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
                 }
                 
                 repeatCount += 1
@@ -535,23 +547,9 @@ class ShareManager
             {
                 guard repeatCount < maxRepeatCount else { break }
                 
-                ShareManager.shared.updateAllCartItem()
-                { (isCompleted: Bool) in
-                    isRepeat = !isCompleted
-                }
-                
-                repeatCount += 1
-            }
-            
-            isRepeat = true
-            repeatCount = 0
-            while isRepeat
-            {
-                guard repeatCount < maxRepeatCount else { break }
-                
-                ShareManager.shared.updateAllRefrigeratorItem()
-                { (isCompleted: Bool) in
-                    isRepeat = !isCompleted
+                isRepeat = !ShareManager.shared.updateAllRefrigeratorItem(async: !showLoading)
+                {
+                    getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
                 }
                 
                 repeatCount += 1
@@ -618,22 +616,8 @@ class ShareManager
         }
     }
     
-    func updateAllProduct(completion: @escaping ((Bool)->Void))
+    func processProductData(async: Bool, data: Data?) -> Bool
     {
-        guard isShared() else { return }
-        
-        let subURL = "/Product"
-        let baseURL = URL(string: getServerURL() + subURL)!
-        let query: [String: String] = [
-                "idForShare": "\(sharedID)",
-                "sort":"updatedAt ASC",
-                "where": "{\"updatedAt\":{\">\":\(lastestProductUpdateAt)},\"idForShare\":\(sharedID),\"isDeleted\":false}"
-            ]
-        let url = baseURL.withQueries(query)!
-        let task = URLSession.shared.synchronousDataTask(with: url)
-        let data = task.0
-        _ = task.1
-        _ = task.2
         let jsonDecoder = JSONDecoder()
         if let data = data
         {
@@ -734,7 +718,14 @@ class ShareManager
                     {
                         isCompleted = true
                     }
-                    completion(isCompleted)
+                    
+                    if(async)
+                    {
+                        isCompleted = true
+                    }
+                    
+                    //completion(isCompleted)
+                    return isCompleted
                 }
             }
             catch
@@ -744,8 +735,45 @@ class ShareManager
                 // 실패하는 경우 다시 RequestCode를 호출한다.
                 startShareWithPublicCode(publicCode: publicCode, completion: {})
                 
-                completion(true)
+                //completion(true)
+                return true
             }
+        }
+        
+        return true
+    }
+    
+    func updateAllProduct(async: Bool, completion: @escaping (()->Void)) -> Bool
+    {
+        guard isShared() else { return false}
+        
+        let subURL = "/Product"
+        let baseURL = URL(string: getServerURL() + subURL)!
+        let query: [String: String] = [
+                "idForShare": "\(sharedID)",
+                "sort":"updatedAt ASC",
+                "where": "{\"updatedAt\":{\">\":\(lastestProductUpdateAt)},\"idForShare\":\(sharedID),\"isDeleted\":false}"
+            ]
+        let url = baseURL.withQueries(query)!
+        
+        if(async)
+        {
+            let task = URLSession.shared.dataTask(with: url)
+            { (data, response, error) in
+                _ = self.processProductData(async: async, data: data)
+                completion()
+            }
+            task.resume()
+            
+            return true
+        }
+        else
+        {
+            let task = URLSession.shared.synchronousDataTask(with: url)
+            let data = task.0
+            _ = task.1
+            _ = task.2
+            return processProductData(async: async, data: data)
         }
     }
     
@@ -1126,9 +1154,140 @@ class ShareManager
         }
     }
     
-    func updateAllRefrigeratorItem(completion: @escaping ((Bool)->Void))
+    func processRefrigeratorItemData(async: Bool, data: Data?) -> Bool
     {
-        guard isShared() else { return }
+        let jsonDecoder = JSONDecoder()
+        if let data = data
+        {
+            print(String(data: data, encoding: .utf8)!)
+            
+            do
+            {
+                let refriItems: [ShareManager.RefrigeratorItem]? = try jsonDecoder.decode([ShareManager.RefrigeratorItem].self, from: data)
+                if let refriItems = refriItems
+                {
+                    print(refriItems)
+                    
+                    for refriItem in refriItems
+                    {
+                        if let product = refriItem.product
+                        {
+                            if let grocery = DataManager.shared.findGrocery(id: AutoIncreasedID(refriItem.id))
+                            {
+                                // updating
+                                if(grocery.count != refriItem.count)
+                                {
+                                    DataManager.shared.updateGrocery(id: grocery.id, count: refriItem.count)
+                                }
+                                
+                                if(grocery.isPercentageCount != refriItem.isPercentageCount)
+                                {
+                                    DataManager.shared.updateGrocery(id: grocery.id, isPercentageCount: refriItem.isPercentageCount)
+                                }
+                                
+                                //if(Int(grocery.dueDate.date.timeIntervalSince1970) * 1000 != Int(refriItem.dueDate))
+                                if(grocery.dueDate.getTimeIntervalSince1970MS() != Int(refriItem.dueDate))
+                                {
+                                    DataManager.shared.updateGrocery(id: grocery.id, dueDate: DueDate(timeIntervalSince1970MS: Int(refriItem.dueDate) ?? 0))
+                                }
+                                
+                                if(grocery.storage.rawValue != refriItem.storage)
+                                {
+                                    DataManager.shared.updateGrocery(id: grocery.id, storage: Grocery.Storage(rawValue: refriItem.storage) ?? Grocery.Storage.Refrigeration)
+                                }
+                                
+                                if(grocery.fridgeName != refriItem.fridgeName)
+                                {
+                                    DataManager.shared.updateGrocery(id: grocery.id, fridgeName: refriItem.fridgeName)
+                                }
+                                
+                                if(grocery.notes != refriItem.notes)
+                                {
+                                    DataManager.shared.updateGrocery(id: grocery.id, notes: refriItem.notes)
+                                }
+                                
+                                // groceryHistory
+                                if(grocery.info.title != product.title)
+                                {
+                                    DataManager.shared.updateGrocery(id: grocery.id, title: product.title)
+                                }
+                                
+                                if(grocery.info.category.rawValue != product.category)
+                                {
+                                    //cartGrocery.info.category = category
+                                    DataManager.shared.updateGroceryHistory(id: grocery.info.id, category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC)
+                                    
+                                    getRequestManager().isUpdatePurchaseRecord = true
+                                    getRequestManager().isUpdateShopingCart = true
+                                    getRequestManager().isUpdateGroceryList = true
+                                }
+                                
+                                if(refriItem.isDeleted)
+                                {
+                                    DataManager.shared.removeGrocery(id: grocery.id)
+                                    getRequestManager().isUpdateGroceryList = true
+                                }
+                            }
+                            else
+                            {
+                                guard refriItem.isDeleted == false else { continue }
+                                
+                                // adding
+                                DataManager.shared.insertGrocery(id: refriItem.id, title: product.title,
+                                                              category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC,
+                                                              count: refriItem.count,
+                                                              isPercentageCount: refriItem.isPercentageCount,
+                                                              dueDate: DueDate(timeIntervalSince1970MS: Int(refriItem.dueDate) ?? 0),
+                                                              storage: Grocery.Storage(rawValue: refriItem.storage) ?? Grocery.Storage.Refrigeration,
+                                                              fridgeName: refriItem.fridgeName,
+                                                              notes: refriItem.notes,
+                                                              image: nil)
+                                
+                                getRequestManager().isUpdateGroceryList = true
+                            }
+                        }
+                        
+                        if(self.lastestRefriUpdateAt < refriItem.updatedAt)
+                        {
+                            self.lastestRefriUpdateAt = refriItem.updatedAt
+                            print(self.lastestRefriUpdateAt)
+                        }
+                        
+                        
+                    } // end of for
+                    
+                    var isCompleted = false
+                    if(refriItems.count == 0)
+                    {
+                        isCompleted = true
+                    }
+                    
+                    if(async)
+                    {
+                        isCompleted = true
+                    }
+                    //completion(isCompleted)
+                    return isCompleted
+                }
+            }
+            catch
+            {
+                print(error)
+                
+                // 실패하는 경우 다시 RequestCode를 호출한다.
+                startShareWithPublicCode(publicCode: publicCode, completion: {})
+                
+                // completion(true)
+                return true
+            }
+        }
+        
+        return true
+    }
+    
+    func updateAllRefrigeratorItem(async: Bool, completion: @escaping (()->Void)) -> Bool
+    {
+        guard isShared() else { return false}
         
         let subURL = "/RefriItem"
         let baseURL = URL(string: getServerURL() + subURL)!
@@ -1144,135 +1303,29 @@ class ShareManager
             
             let url = baseURL.withQueries(query)!
             print(url)
-            //let task = URLSession.shared.dataTask(with: url)
-            //{ (data, response, error) in
-            let task = URLSession.shared.synchronousDataTask(with: url)
-            let data = task.0
-            _ = task.1
-            _ = task.2
-                let jsonDecoder = JSONDecoder()
-                if let data = data
-                {
-                    print(String(data: data, encoding: .utf8)!)
-                    
-                    do
-                    {
-                        let refriItems: [ShareManager.RefrigeratorItem]? = try jsonDecoder.decode([ShareManager.RefrigeratorItem].self, from: data)
-                        if let refriItems = refriItems
-                        {
-                            print(refriItems)
-                            
-                            for refriItem in refriItems
-                            {
-                                if let product = refriItem.product
-                                {
-                                    if let grocery = DataManager.shared.findGrocery(id: AutoIncreasedID(refriItem.id))
-                                    {
-                                        // updating
-                                        if(grocery.count != refriItem.count)
-                                        {
-                                            DataManager.shared.updateGrocery(id: grocery.id, count: refriItem.count)
-                                        }
-                                        
-                                        if(grocery.isPercentageCount != refriItem.isPercentageCount)
-                                        {
-                                            DataManager.shared.updateGrocery(id: grocery.id, isPercentageCount: refriItem.isPercentageCount)
-                                        }
-                                        
-                                        //if(Int(grocery.dueDate.date.timeIntervalSince1970) * 1000 != Int(refriItem.dueDate))
-                                        if(grocery.dueDate.getTimeIntervalSince1970MS() != Int(refriItem.dueDate))
-                                        {
-                                            DataManager.shared.updateGrocery(id: grocery.id, dueDate: DueDate(timeIntervalSince1970MS: Int(refriItem.dueDate) ?? 0))
-                                        }
-                                        
-                                        if(grocery.storage.rawValue != refriItem.storage)
-                                        {
-                                            DataManager.shared.updateGrocery(id: grocery.id, storage: Grocery.Storage(rawValue: refriItem.storage) ?? Grocery.Storage.Refrigeration)
-                                        }
-                                        
-                                        if(grocery.fridgeName != refriItem.fridgeName)
-                                        {
-                                            DataManager.shared.updateGrocery(id: grocery.id, fridgeName: refriItem.fridgeName)
-                                        }
-                                        
-                                        if(grocery.notes != refriItem.notes)
-                                        {
-                                            DataManager.shared.updateGrocery(id: grocery.id, notes: refriItem.notes)
-                                        }
-                                        
-                                        // groceryHistory
-                                        if(grocery.info.title != product.title)
-                                        {
-                                            DataManager.shared.updateGrocery(id: grocery.id, title: product.title)
-                                        }
-                                        
-                                        if(grocery.info.category.rawValue != product.category)
-                                        {
-                                            //cartGrocery.info.category = category
-                                            DataManager.shared.updateGroceryHistory(id: grocery.info.id, category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC)
-                                            
-                                            getRequestManager().isUpdatePurchaseRecord = true
-                                            getRequestManager().isUpdateShopingCart = true
-                                            getRequestManager().isUpdateGroceryList = true
-                                        }
-                                        
-                                        if(refriItem.isDeleted)
-                                        {
-                                            DataManager.shared.removeGrocery(id: grocery.id)
-                                            getRequestManager().isUpdateGroceryList = true
-                                        }
-                                    }
-                                    else
-                                    {
-                                        guard refriItem.isDeleted == false else { continue }
-                                        
-                                        // adding
-                                        DataManager.shared.insertGrocery(id: refriItem.id, title: product.title,
-                                                                      category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC,
-                                                                      count: refriItem.count,
-                                                                      isPercentageCount: refriItem.isPercentageCount,
-                                                                      dueDate: DueDate(timeIntervalSince1970MS: Int(refriItem.dueDate) ?? 0),
-                                                                      storage: Grocery.Storage(rawValue: refriItem.storage) ?? Grocery.Storage.Refrigeration,
-                                                                      fridgeName: refriItem.fridgeName,
-                                                                      notes: refriItem.notes,
-                                                                      image: nil)
-                                        
-                                        getRequestManager().isUpdateGroceryList = true
-                                    }
-                                }
-                                
-                                if(self.lastestRefriUpdateAt < refriItem.updatedAt)
-                                {
-                                    self.lastestRefriUpdateAt = refriItem.updatedAt
-                                    print(self.lastestRefriUpdateAt)
-                                }
-                                
-                                
-                            } // end of for
-                            
-                            var isCompleted = false
-                            if(refriItems.count == 0)
-                            {
-                                isCompleted = true
-                            }
-                            completion(isCompleted)
-                        }
-                    }
-                    catch
-                    {
-                        print(error)
-                        
-                        // 실패하는 경우 다시 RequestCode를 호출한다.
-                        startShareWithPublicCode(publicCode: publicCode, completion: {})
-                        
-                        completion(true)
-                    }
-                }
-            //}
             
-            //task.resume()
+            if(async)
+            {
+                let task = URLSession.shared.dataTask(with: url)
+                { (data, response, error) in
+                    _ = self.processRefrigeratorItemData(async: async, data: data)
+                    completion()
+                }
+                task.resume()
+                
+                return true
+            }
+            else
+            {
+                let task = URLSession.shared.synchronousDataTask(with: url)
+                let data = task.0
+                _ = task.1
+                _ = task.2
+                return processRefrigeratorItemData(async: async, data: data)
+            }
         }
         
+        return true
     } // end of func
     
     func createGrocery(productID: Int, count: Int, isPercentageCount: Bool, dueDate: DueDate, storage: Grocery.Storage, fridgeName: String, notes: String, image: GroceryImage?, completion: (((RefrigeratorItem)->Void)?) = nil)
@@ -1546,23 +1599,8 @@ class ShareManager
         }
     }
     
-    func updateAllCartItem(completion: @escaping ((Bool)->Void))
+    func processCartItemData(async: Bool, data: Data?) -> Bool
     {
-        guard isShared() else { return }
-        
-        let subURL = "/cartItem"
-        let baseURL = URL(string: getServerURL() + subURL)!
-        let query: [String: String] = [
-                "idForShare": "\(sharedID)",
-                "sort":"updatedAt ASC",
-                "where": "{\"updatedAt\":{\">\":\(lastestCartUpdatedAt)},\"idForShare\":\(sharedID),\"isDeleted\":false}"
-            ]
-        
-        let url = baseURL.withQueries(query)!
-        let task = URLSession.shared.synchronousDataTask(with: url)
-        let data = task.0
-        _ = task.1
-        _ = task.2
         let jsonDecoder = JSONDecoder()
         if let data = data
         {
@@ -1650,7 +1688,14 @@ class ShareManager
                     {
                         isCompleted = true
                     }
-                    completion(isCompleted)
+                    
+                    if(async)
+                    {
+                        isCompleted = true
+                    }
+                    //completion(isCompleted)
+                    
+                    return isCompleted
                 }
             }
             catch
@@ -1660,8 +1705,47 @@ class ShareManager
                 // 실패하는 경우 다시 RequestCode를 호출한다.
                 startShareWithPublicCode(publicCode: publicCode, completion: {})
                 
-                completion(true)
+                //completion(true)
+                return true
             }
+        }
+        
+        return true
+    }
+    
+    func updateAllCartItem(async:Bool, completion: @escaping (()->Void)) -> Bool
+    {
+        guard isShared() else { return false }
+        
+        let subURL = "/cartItem"
+        let baseURL = URL(string: getServerURL() + subURL)!
+        let query: [String: String] = [
+                "idForShare": "\(sharedID)",
+                "sort":"updatedAt ASC",
+                "where": "{\"updatedAt\":{\">\":\(lastestCartUpdatedAt)},\"idForShare\":\(sharedID),\"isDeleted\":false}"
+            ]
+        
+        let url = baseURL.withQueries(query)!
+        
+        if(async)
+        {
+            let task = URLSession.shared.dataTask(with: url)
+            {
+                (data, response, error) in
+                _ = self.processCartItemData(async: async, data: data)
+                completion()
+            }
+            task.resume()
+            
+            return true
+        }
+        else
+        {
+            let task = URLSession.shared.synchronousDataTask(with: url)
+            let data = task.0
+            _ = task.1
+            _ = task.2
+            return processCartItemData(async: async, data: data)
         }
     }
     

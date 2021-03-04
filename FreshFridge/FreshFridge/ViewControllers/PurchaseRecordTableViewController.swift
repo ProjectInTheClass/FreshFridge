@@ -45,7 +45,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         
         searchbarGroceries = DataManager.shared.getGroceryHistories()
         
-        tableView.cellLayoutMarginsFollowReadableWidth = true
+        //tableView.cellLayoutMarginsFollowReadableWidth = true
         
         SearchBar.delegate = self
         

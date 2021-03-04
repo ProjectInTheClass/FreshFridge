@@ -38,7 +38,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         
         getRequestManager().shopingCartViewController = self
         
-        tableView.cellLayoutMarginsFollowReadableWidth = true
+        //tableView.cellLayoutMarginsFollowReadableWidth = true
         
         sortedArray = DataManager.shared.getCartGroceries()
         updateButtons() 

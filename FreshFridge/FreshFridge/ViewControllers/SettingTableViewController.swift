@@ -104,7 +104,7 @@ class SettingTableViewController: UITableViewController {
     
     @IBAction func removeAllGroceries(_ sender: Any)
     {
-        presentAlert(title: "냉장고 품목 전체를 삭제하시겠습니까?", parent: self)
+        presentAlertOkCancel(title: "냉장고 품목 전체를 삭제하시겠습니까?".localized(), parent: self)
         {_ in
             //DataManager.shared.removeAllFridgeGroceries()
             for grocery in DataManager.shared.getGroceries()
@@ -119,7 +119,7 @@ class SettingTableViewController: UITableViewController {
     {
         //DataManager.shared.removeAllGroceryHistories()
         // 냉장고나 카트에 참조되지 않는 구입기록을 골라낸다.
-        presentAlert(title: "구입기록 전체를 삭제하시겠습니까?", parent: self)
+        presentAlertOkCancel(title: "구입기록 전체를 삭제하시겠습니까?".localized(), parent: self)
         {_ in
             var notReferencedGroceryHistory: [GroceryHistory] = []
             for groceryHistory in DataManager.shared.getGroceryHistories()
@@ -160,7 +160,7 @@ class SettingTableViewController: UITableViewController {
     @IBAction func removeAllCartGroceries(_ sender: Any)
     {
         //DataManager.shared.removeAllCartGroceries()
-        presentAlert(title: "장바구니 전체를 삭제하시겠습니까?", parent: self)
+        presentAlertOkCancel(title: "장바구니 전체를 삭제하시겠습니까?".localized(), parent: self)
         {_ in
             for cartGrocery in DataManager.shared.getCartGroceries()
             {

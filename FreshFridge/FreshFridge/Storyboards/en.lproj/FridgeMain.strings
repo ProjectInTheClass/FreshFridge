@@ -1,6 +1,33 @@
 
+/* Class = "UIButton"; normalTitle = "선선한 냉장고"; ObjectID = "0Kw-qu-9pc"; */
+"0Kw-qu-9pc.normalTitle" = "Fresh Fridge";
+
+/* Class = "UIButton"; normalTitle = "냉장고 품목 전체 지우기"; ObjectID = "6q7-jB-MS2"; */
+"6q7-jB-MS2.normalTitle" = "Reset FreshFridge";
+
+/* Class = "UIButton"; normalTitle = "추가 냉장고2"; ObjectID = "73C-i0-Kfh"; */
+"73C-i0-Kfh.normalTitle" = "Third Extra Fridge";
+
+/* Class = "UITableViewSection"; headerTitle = "정보 초기화"; ObjectID = "8t7-Pj-VES"; */
+"8t7-Pj-VES.headerTitle" = "Initalize";
+
 /* Class = "UINavigationItem"; title = "냉장고 선택"; ObjectID = "AYj-rL-Ab6"; */
 "AYj-rL-Ab6.title" = "Select Fridge";
+
+/* Class = "UIButton"; normalTitle = "장바구니 전체 지우기"; ObjectID = "HDZ-v8-Fl4"; */
+"HDZ-v8-Fl4.normalTitle" = "Reset Cart";
+
+/* Class = "UIButton"; normalTitle = "구입기록 전체 지우기"; ObjectID = "Lrr-2V-r7k"; */
+"Lrr-2V-r7k.normalTitle" = "Reset Purchase History";
+
+/* Class = "UIButton"; normalTitle = "추가 냉장고1"; ObjectID = "QEd-kR-0Iw"; */
+"QEd-kR-0Iw.normalTitle" = "Second Extra Fridge";
+
+/* Class = "UILabel"; text = "Fresh Fridge"; ObjectID = "Skb-lE-qDe"; */
+"Skb-lE-qDe.text" = "Fresh Fridge";
+
+/* Class = "UIButton"; normalTitle = "김치 냉장고"; ObjectID = "UR6-At-0Hh"; */
+"UR6-At-0Hh.normalTitle" = "Frist Extra Fridge";
 
 /* Class = "UIButton"; normalTitle = "분류별"; ObjectID = "V5K-YJ-Xmq"; */
 "V5K-YJ-Xmq.normalTitle" = "Category";
@@ -25,6 +52,15 @@
 
 /* Class = "UILabel"; text = "D-100"; ObjectID = "pHQ-go-Nce"; */
 "pHQ-go-Nce.text" = "D-100";
+
+/* Class = "UITableViewSection"; footerTitle = "냉장고는 다중 선택할 수 있습니다."; ObjectID = "q7d-jG-QRE"; */
+"q7d-jG-QRE.footerTitle" = "냉장고는 다중 선택할 수 있습니다.";
+
+/* Class = "UITableViewSection"; headerTitle = "냉장고 선택"; ObjectID = "q7d-jG-QRE"; */
+"q7d-jG-QRE.headerTitle" = "Select Fridge";
+
+/* Class = "UITextView"; text = "FreshFridgeCompany\n@gmail.com\n\nChangae Choi\nYoungeun Park\nDaniel Shin"; ObjectID = "uDk-tf-Fpd"; */
+"uDk-tf-Fpd.text" = "FreshFridgeCompany\n@gmail.com\n\nChangae Choi\nYoungeun Park\nDaniel Shin";
 
 /* Class = "UINavigationItem"; title = "신선한 냉장고"; ObjectID = "wlj-jN-nJj"; */
 "wlj-jN-nJj.title" = "Fresh Fridge";

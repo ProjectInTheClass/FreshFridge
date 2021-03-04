@@ -30,7 +30,9 @@ class LoadingHUD {
         loadingLabel.font = UIFont.boldSystemFont(ofSize: 20)
         loadingLabel.textColor = .black
         
-        if let window = UIApplication.shared.keyWindow {
+        //if let window = UIApplication.shared.keyWindow {
+        if let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first
+        {
             window.addSubview(backgroundView)
             window.addSubview(popupView)
             window.addSubview(loadingLabel)

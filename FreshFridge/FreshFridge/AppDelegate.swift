@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     //var grantedAuthorization: Bool = false
     var timer = Timer()
-    
+    var restrictRotation:UIInterfaceOrientationMask = .all
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -167,7 +167,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
     
-    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask
+    {
+        return self.restrictRotation
+    }
 
     // MARK: UISceneSession Lifecycle
 
@@ -202,7 +205,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     {
         NSLog("counting..")
         
-        ShareManager.shared.update()
+        ShareManager.shared.update(async: true)
     }
 }
 
