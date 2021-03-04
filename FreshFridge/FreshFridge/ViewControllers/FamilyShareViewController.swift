@@ -7,12 +7,27 @@
 
 import UIKit
 
+
+
 class FamilyShareViewController: UIViewController {
 
+    
+    @IBOutlet weak var SharingCondition: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        sharingInfo()
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func sharingInfo() {
+        if ShareManager.shared.isShared() {
+            SharingCondition.image = UIImage(systemName:"person.2")?.withTintColor(.systemBlue)
+        } else {
+            SharingCondition.image = UIImage(systemName:"person.badge.plus")?.withTintColor(.lightGray)
+        }
     }
     
     
@@ -73,7 +88,7 @@ class FamilyShareViewController: UIViewController {
         }
         
         presentAlertYesNoCancel(title: "가족 공유".localized(), message: "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다".localized(), parent: self, yes: yes, no: no)
-        
+        sharingInfo()
     }
     
     @IBAction func enterPublicCode(_ sender: Any)
@@ -146,7 +161,7 @@ class FamilyShareViewController: UIViewController {
         
         self.present(alert, animated: true, completion: nil)
         
-        
+        sharingInfo()
         
         
     }
@@ -163,7 +178,7 @@ class FamilyShareViewController: UIViewController {
         {_ in 
             ShareManager.shared.endShare()
         }
-        
+        sharingInfo()
     }
     
     /*
