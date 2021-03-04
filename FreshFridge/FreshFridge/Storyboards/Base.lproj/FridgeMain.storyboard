@@ -681,7 +681,7 @@ Daniel Shin</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="ezN-4i-6Qh">
-                        <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="ExI-P1-k2K">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ExI-P1-k2K">
                             <connections>
                                 <action selector="backButtonTapped:" destination="n27-7O-L2K" id="lON-AH-PMp"/>
                             </connections>
