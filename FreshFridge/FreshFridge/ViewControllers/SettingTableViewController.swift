@@ -119,7 +119,8 @@ class SettingTableViewController: UITableViewController {
     {
         //DataManager.shared.removeAllGroceryHistories()
         // 냉장고나 카트에 참조되지 않는 구입기록을 골라낸다.
-        presentAlertOkCancel(title: "구입기록 전체를 삭제하시겠습니까?".localized(), parent: self)
+        presentAlertOkCancel(title: "구입기록 전체를 삭제하시겠습니까?".localized(),
+                             message: "냉장고나 장바구니에 있는 품목의 구입기록은 삭제되지 않습니다".localized(), parent: self)
         {_ in
             var notReferencedGroceryHistory: [GroceryHistory] = []
             for groceryHistory in DataManager.shared.getGroceryHistories()

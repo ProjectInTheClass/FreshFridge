@@ -54,6 +54,7 @@
 
 "냉장고 품목 전체를 삭제하시겠습니까?"="Are you sure you want to delete all refrigerator items?";
 "구입기록 전체를 삭제하시겠습니까?"="Are you sure you want to delete the entire purchase history?";
+"냉장고나 장바구니에 있는 품목의 구입기록은 삭제되지 않습니다"="The purchase history of items in the refrigerator or shopping cart is not deleted";
 "장바구니 전체를 삭제하시겠습니까?"="Are you sure you want to delete the entire shopping cart?";
 
 //"공유 취소"="공유 취소";
