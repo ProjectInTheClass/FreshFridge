@@ -133,21 +133,6 @@ class LoadingHUD {
         animationArray.append(UIImage(named: "frame_loading_10")!)
         animationArray.append(UIImage(named: "frame_loading_11")!)
         animationArray.append(UIImage(named: "frame_loading_12")!)
-        animationArray.append(UIImage(named: "frame_loading_13")!)
-        animationArray.append(UIImage(named: "frame_loading_14")!)
-        animationArray.append(UIImage(named: "frame_loading_15")!)
-        animationArray.append(UIImage(named: "frame_loading_16")!)
-        animationArray.append(UIImage(named: "frame_loading_17")!)
-        animationArray.append(UIImage(named: "frame_loading_18")!)
-        animationArray.append(UIImage(named: "frame_loading_19")!)
-        animationArray.append(UIImage(named: "frame_loading_20")!)
-        animationArray.append(UIImage(named: "frame_loading_21")!)
-        animationArray.append(UIImage(named: "frame_loading_22")!)
-        animationArray.append(UIImage(named: "frame_loading_23")!)
-        animationArray.append(UIImage(named: "frame_loading_24")!)
-        animationArray.append(UIImage(named: "frame_loading_25")!)
-        animationArray.append(UIImage(named: "frame_loading_26")!)
-        animationArray.append(UIImage(named: "frame_loading_27")!)
         return animationArray
     }
     

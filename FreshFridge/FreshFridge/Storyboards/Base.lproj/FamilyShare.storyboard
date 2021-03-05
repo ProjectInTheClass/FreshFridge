@@ -92,6 +92,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="가족 공유" id="MHn-rC-Dyd"/>
+                    <connections>
+                        <outlet property="SharingCondition" destination="ZjS-hT-GPY" id="aOd-Qn-i06"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x7k-ba-llS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
