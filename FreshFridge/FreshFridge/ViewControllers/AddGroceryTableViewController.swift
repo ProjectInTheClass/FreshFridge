@@ -13,6 +13,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     @IBOutlet weak var storageSegment: UISegmentedControl!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var categoryButton: UIButton!
+    @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var countTextField: UITextField!
     @IBOutlet weak var countDecreaseButton: UIButton!
     @IBOutlet weak var countIncreaseButton: UIButton!
@@ -312,6 +313,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         if let category = category
         {
             categoryButton.setTitle(category.description, for: .normal)
+            categoryImage.image = UIImage(named: category.systemName)
         }
     }
     

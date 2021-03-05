@@ -528,6 +528,7 @@
                     <size key="freeformSize" width="414" height="1200"/>
                     <connections>
                         <outlet property="categoryButton" destination="m9m-Fe-mnM" id="E8G-JY-yVD"/>
+                        <outlet property="categoryImage" destination="tJq-dr-Z7e" id="TLW-nP-dhO"/>
                         <outlet property="completeButton" destination="C2g-Kk-idQ" id="EZs-yR-9x7"/>
                         <outlet property="countDecreaseButton" destination="4zd-w4-eza" id="P6M-lY-aux"/>
                         <outlet property="countIncreaseButton" destination="hCK-Dz-O95" id="qBi-Ad-AYv"/>
