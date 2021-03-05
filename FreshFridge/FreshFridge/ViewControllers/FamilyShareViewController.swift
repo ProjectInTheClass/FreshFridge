@@ -24,9 +24,9 @@ class FamilyShareViewController: UIViewController {
     
     func sharingInfo() {
         if ShareManager.shared.isShared() {
-            SharingCondition.image = UIImage(systemName:"person.2")?.withTintColor(.systemBlue)
+            SharingCondition.image = UIImage(systemName:"person.2")?.withTintColor(UIColor.systemBlue, renderingMode: .automatic)
         } else {
-            SharingCondition.image = UIImage(systemName:"person.badge.plus")?.withTintColor(.lightGray)
+            SharingCondition.image = UIImage(systemName:"person.badge.plus")?.withTintColor(.systemGray, renderingMode: .automatic)
         }
     }
     

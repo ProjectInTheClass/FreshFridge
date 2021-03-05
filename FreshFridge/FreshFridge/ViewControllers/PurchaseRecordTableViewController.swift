@@ -262,7 +262,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 success(true)
          })
         
-        toFridgeAction.image = UIImage(named: "freshFridge_icon")?.withTintColor( .white)
+        toFridgeAction.image = UIImage(named: "freshFridge_icon")?.withTintColor(.white)
         toFridgeAction.backgroundColor = .systemBlue
      
         if(DataManager.shared.isExistGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false
