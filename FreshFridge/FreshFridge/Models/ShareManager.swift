@@ -81,8 +81,8 @@ class ShareManager
             return rootURL
         }
         */
-        return "http://z.ebadaq.com:45082"
-        //return "http://freshfridge.cafe24app.com"
+        //return "http://z.ebadaq.com:45082"
+        return "http://freshfridge.cafe24app.com"
     }
     
     func getFridgeID(fridgeName: String) -> Int
@@ -135,7 +135,7 @@ class ShareManager
         }
     }
     
-    func sendAllLocalData(completion: @escaping (()->Void))
+    func sendAllLocalData()
     {
         // 서버의 구입기록을 가져와서 중복이면 생성요청을 생략한다.
         
@@ -149,7 +149,7 @@ class ShareManager
         
         var isRepeat: Bool = true
         while isRepeat {
-            isRepeat = ShareManager.shared.updateAllProduct(async: false, completion: {})
+            isRepeat = !ShareManager.shared.updateAllProduct(async: false, completion: {})
         }
         
         var groceryHistoriesInServer: [GroceryHistory] = []
@@ -384,7 +384,6 @@ class ShareManager
         ShareManager.shared.lastestRefriUpdateAt = -1
         
         NSLog("completed sendAllData")
-        
     }
         
     func startShareAndCreateCode(completion: @escaping (()->Void))
@@ -662,6 +661,12 @@ class ShareManager
                                         self.downloadImage(id: product.imageCode)
                                         { (image: UIImage?) in
                                             groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
+                                            
+                                            DispatchQueue.main.async {
+                                                RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
+                                                RequestManager.shared.updateShopingCartViewController(updateTableView: true)
+                                                RequestManager.shared.updateGroceryListViewController(updateTableView: true)
+                                            }
                                         }
                                     }
                                 }
@@ -670,6 +675,12 @@ class ShareManager
                                     self.downloadImage(id: product.imageCode)
                                     { (image: UIImage?) in
                                         groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
+                                        
+                                        DispatchQueue.main.async {
+                                            RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
+                                            RequestManager.shared.updateShopingCartViewController(updateTableView: true)
+                                            RequestManager.shared.updateGroceryListViewController(updateTableView: true)
+                                        }
                                     }
                                 }
                                 
@@ -698,6 +709,12 @@ class ShareManager
                                     self.downloadImage(id: product.imageCode)
                                     { (image: UIImage?) in
                                         groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
+                                        
+                                        DispatchQueue.main.async {
+                                            RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
+                                            RequestManager.shared.updateShopingCartViewController(updateTableView: true)
+                                            RequestManager.shared.updateGroceryListViewController(updateTableView: true)
+                                        }
                                     }
                                 }
                             }
