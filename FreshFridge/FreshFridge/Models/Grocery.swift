@@ -176,60 +176,7 @@ class GroceryHistory : Codable
     
     static func loadSampleGroceryHistory() -> [GroceryHistory]
     {
-        return [
-            GroceryHistory(title: "사과", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "배", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "바나나", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "귤", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "복숭아", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "감", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "파인애플", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "토마토", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "딸기", category: .Fruits, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "고등어", category: .MarineProducts, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "김치", category: .CookingAndSidedishes, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "바나나우유", category: .DrinksAndSnacks, favorite: false, lastestPurchaseDate: Date(), image: GroceryImage(image: UIImage(named: "dumyPicture1"))),
-        GroceryHistory(title: "소고기", category: .MeatsAndEggs, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "돼지고기", category: .MeatsAndEggs, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "닭고기", category: .MeatsAndEggs, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "생선", category: .MarineProducts, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "양파", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "김치", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "대파", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "고추", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "마늘", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "무", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "당근", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "애호박", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "가지", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "브로콜리", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "상추", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "양배추", category: .Vegetable, favorite: true, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "파프리카", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "시금치", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "감자", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "고구마", category: .Vegetable, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "두부", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "라면", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "소면", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "햄", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "계란", category: .MeatsAndEggs, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "참치", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "김", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "밀가루", category: .ETC, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "우유", category: .DrinksAndSnacks, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "치즈", category: .DrinksAndSnacks, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "소금", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "참기름", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "마요네즈", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "진간장", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "국간장", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "후추", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "올리브유", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "포도씨유", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "카놀라유", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "식용유", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date()),
-        GroceryHistory(title: "물엿", category: .SeasonedAndOilAndSauce, favorite: false, lastestPurchaseDate: Date())]
+        return []
     }
 }
 
@@ -312,10 +259,34 @@ class Grocery : Codable
     static func loadSampleGrocery() -> [Grocery]
     {
         let id = -1
-        DataManager.shared.insertGroceryHistory(id: id, title: "양파", category: .Vegetable, image: nil, updateDate: true)
-        DataManager.shared.insertGroceryHistory(id: id, title: "양배추", category: .Vegetable, image: nil, updateDate: true)
-        return [Grocery(info: DataManager.shared.getGroceryHistory(title: "양파", category: .Vegetable)!, count: 5, isPercentageCount: false, dueDate: DueDate(2), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil),
-                Grocery(info: DataManager.shared.getGroceryHistory(title: "양배추", category: .Vegetable)!, count: 1, isPercentageCount: false, dueDate: DueDate(14), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil)
+        //사과 - 냉장보관 - 6개 - D-5
+        //아이스크림 - 냉동보관 - 40% - D-50
+        //양파 - 실외보관 - 2개 - D-2
+        if nil == DataManager.shared.getGroceryHistory(title: "사과".localized(), category: .Fruits)
+        {
+            let image = GroceryImage(image: UIImage(named: "사과"))
+            DataManager.shared.insertGroceryHistory(id: id, title: "사과".localized(), category: .Fruits, image: image, updateDate: false)
+            GroceryImage.saveImage(image: image.image(), filename: image.filename)
+            
+        }
+        
+        if( nil == DataManager.shared.getGroceryHistory(title: "아이스크림".localized(), category: .DrinksAndSnacks))
+        {
+            let image = GroceryImage(image: UIImage(named: "아이스크림"))
+            DataManager.shared.insertGroceryHistory(id: id, title: "아이스크림".localized(), category: .DrinksAndSnacks, image: image, updateDate: false)
+            GroceryImage.saveImage(image: image.image(), filename: image.filename)
+        }
+        
+        if( nil == DataManager.shared.getGroceryHistory(title: "양파".localized(), category: .Vegetable) )
+        {
+            let image = GroceryImage(image: UIImage(named: "양파"))
+            DataManager.shared.insertGroceryHistory(id: id, title: "양파".localized(), category: .Vegetable, image: image, updateDate: false)
+            GroceryImage.saveImage(image: image.image(), filename: image.filename)
+        }
+        
+        return [Grocery(info: DataManager.shared.getGroceryHistory(title: "사과".localized(), category: .Fruits)!, count: 6, isPercentageCount: false, dueDate: DueDate(5), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
+                Grocery(info: DataManager.shared.getGroceryHistory(title: "아이스크림".localized(), category: .DrinksAndSnacks)!, count: 40, isPercentageCount: true, dueDate: DueDate(50), storage: .Freezing, fridgeName: selectedfrideName, notes: nil),
+                Grocery(info: DataManager.shared.getGroceryHistory(title: "양파".localized(), category: .Vegetable)!, count: 2, isPercentageCount: false, dueDate: DueDate(2), storage: .Outdoor, fridgeName: selectedfrideName, notes: nil)
         ]
     }
 }
@@ -360,12 +331,13 @@ class CartGrocery: Codable
     
     static func loadSampleCartGrocery() -> [CartGrocery]
     {
-        let id = -1
-        DataManager.shared.insertGroceryHistory(id: id, title: "양배추", category: .Vegetable, image: nil, updateDate: true)
-        DataManager.shared.insertGroceryHistory(id: id, title: "달걀", category: .MeatsAndEggs, image: nil, updateDate: true)
-        return [ CartGrocery(info: DataManager.shared.getGroceryHistory(title: "양배추", category: .Vegetable)!),
-                 CartGrocery(info: DataManager.shared.getGroceryHistory(title: "달걀", category: .MeatsAndEggs)!)
-        ]
+        //let id = -1
+        //DataManager.shared.insertGroceryHistory(id: id, title: "양배추", category: .Vegetable, image: nil, updateDate: true)
+        //DataManager.shared.insertGroceryHistory(id: id, title: "달걀", category: .MeatsAndEggs, image: nil, updateDate: true)
+        //return [ CartGrocery(info: DataManager.shared.getGroceryHistory(title: "양배추", category: .Vegetable)!),
+        //         CartGrocery(info: DataManager.shared.getGroceryHistory(title: "달걀", category: .MeatsAndEggs)!)
+        //]
+        return []
     }
 }
 

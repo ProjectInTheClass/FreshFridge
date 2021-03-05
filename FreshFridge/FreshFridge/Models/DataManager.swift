@@ -80,10 +80,7 @@ class DataManager
         }
         else
         {
-            if(langStr == "ko")
-            {
-                groceryHistories = GroceryHistory.loadSampleGroceryHistory()
-            }
+            groceryHistories = GroceryHistory.loadSampleGroceryHistory()
         }
         
         for groceryHistory in groceryHistories
@@ -228,10 +225,7 @@ class DataManager
         }
         else
         {
-            if(Locale.current.languageCode == "ko")
-            {
-                groceries = Grocery.loadSampleGrocery()
-            }
+            groceries = Grocery.loadSampleGrocery()
         }
     }
     
@@ -416,10 +410,7 @@ class DataManager
         }
         else
         {
-           if(langStr == "ko")
-           {
-               cartGroceries = CartGrocery.loadSampleCartGrocery()
-           }
+            cartGroceries = CartGrocery.loadSampleCartGrocery()
         }
     }
     
