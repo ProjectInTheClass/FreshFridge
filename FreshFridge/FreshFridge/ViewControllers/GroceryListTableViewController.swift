@@ -615,7 +615,14 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 let storage = sourceViewController.storage
                 let fridgeName = sourceViewController.fridgeSelectButton.title(for: .normal) ?? ""
                 let notes = sourceViewController.noteTextField.text
-                let image = sourceViewController.groceryImage
+                var image = sourceViewController.groceryImage
+                if(image == nil)
+                {
+                    if let uiImage = UIImage(named: title)
+                    {
+                        image = GroceryImage(image: uiImage)
+                    }
+                }
                 
                 if let grocery = sourceViewController.grocery,
                    let selectedRow = editingSelectedRow//tableView.indexPathForSelectedRow

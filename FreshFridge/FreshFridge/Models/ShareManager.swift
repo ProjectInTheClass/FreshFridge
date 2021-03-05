@@ -1067,7 +1067,6 @@ class ShareManager
     
     func uploadImage(image: UIImage, filename: String, completion: @escaping ((String)->Void) )
     {
-        guard getServerURL() == "http://z.ebadaq.com:45082" else { return } // test code
         let subURL = "/image/uploader"
         let baseURL = URL(string: self.getServerURL() + subURL)!
         
