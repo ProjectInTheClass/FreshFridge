@@ -14,9 +14,22 @@ class FamilyShareViewController: UIViewController {
     
     @IBOutlet weak var SharingCondition: UIImageView!
     
+    @IBOutlet weak var createPublicCodeButton: UIButton!
+    @IBOutlet weak var enterPublicCodeButton: UIButton!
+    @IBOutlet weak var resignShareButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        createPublicCodeButton.layer.cornerRadius = 10
+        createPublicCodeButton.clipsToBounds = true
+        enterPublicCodeButton.layer.cornerRadius = 10
+        enterPublicCodeButton.clipsToBounds = true
+        resignShareButton.layer.cornerRadius = 10
+        resignShareButton.clipsToBounds = true
+        
+        
         sharingInfo()
         
         // Do any additional setup after loading the view.
@@ -36,7 +49,7 @@ class FamilyShareViewController: UIViewController {
         if ShareManager.shared.isCreatedShareCode()
         {
             presentAlertOk(title: "생성 실패".localized(), message: "이미 생성한 공유 코드가 존재합니다.(%@)".localized(with: [ShareManager.shared.createdPublicCode]), parent: self)
-            
+            sharingInfo()
             return
         }
         
@@ -116,7 +129,7 @@ class FamilyShareViewController: UIViewController {
         if ShareManager.shared.isShared()
         {
             presentAlertOk(title: "코드 보기".localized(), message: "사용 중인 공유 코드 (%@)".localized(with: [ShareManager.shared.publicCode]), parent: self)
-            
+            sharingInfo()
             return
         }
         
@@ -190,6 +203,7 @@ class FamilyShareViewController: UIViewController {
     {
         if ShareManager.shared.isShared() == false
         {
+            sharingInfo()
             return
         }
         
