@@ -179,9 +179,11 @@
                         <outlet property="FavoriteSortButton" destination="kul-z3-o9U" id="rAe-kq-EEy"/>
                         <outlet property="RecentSortButton" destination="6ix-xb-XdR" id="1Xs-gJ-1S1"/>
                         <outlet property="SearchBar" destination="YgP-pg-bjE" id="v3i-Vb-qFJ"/>
+                        <segue destination="1nd-6U-chT" kind="unwind" identifier="AddGrocerySegue" unwindAction="unwindToAddGrocery:" id="B3Q-63-y0O"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="InZ-t5-hzT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="1nd-6U-chT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1257.4766355140187" y="710.79913606911452"/>
         </scene>

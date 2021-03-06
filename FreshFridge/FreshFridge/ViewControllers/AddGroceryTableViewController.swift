@@ -1,9 +1,9 @@
-//
-//  AddGroceryTableViewController.swift
-//  GroceryListTableView
-//
-//  Created by changae choi on 2021/01/02.
-//
+    /*
+    AddGroceryTableViewController.swift
+    GroceryListTableView
+
+    Created by changae choi on 2021/01/02.
+    */
 
 import UIKit
 
@@ -721,6 +721,27 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 }
             }
         }
+        else if(unwindSegue.identifier == "ToAddGroceryFromPurchase")
+        {
+            let sourceViewController = unwindSegue.source as! PurchaseRecordTableViewController
+            if let selectedGroceryHistory = sourceViewController.selectedGroceryHistory
+            {
+                nameTextField.text = selectedGroceryHistory.title
+                category = selectedGroceryHistory.category
+                
+                if let image = UIImage(named: selectedGroceryHistory.title)
+                {
+                    groceryImage = GroceryImage(image: image)
+                    if let groceryImage = groceryImage,
+                       let image = groceryImage.image()
+                    {
+                        self.pictureButton.setImage(image, for: .normal)
+                    }
+                }
+                
+                enableCompletButton()
+            }
+        }
     }
     
     @IBAction func completeButtonTapped(_ sender: Any)
@@ -833,6 +854,12 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             {
                 controller.fridgeName = grocery!.fridgeName
             }
+        }
+        else if(segue.identifier == "DefaultNameSegue")
+        {
+            let navController = segue.destination as! UINavigationController
+            let controller = navController.topViewController as! PurchaseRecordTableViewController
+            controller.isFromAddGrocery = true
         }
     }
     

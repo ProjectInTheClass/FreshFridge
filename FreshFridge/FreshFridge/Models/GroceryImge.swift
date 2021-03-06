@@ -18,6 +18,15 @@ class GroceryImage: Codable
     
     init(image: UIImage?, filename: String? = nil)
     {
+        if let filename = filename
+        {
+            self.filename = filename
+        }
+        else
+        {
+            self.filename = UUID().uuidString
+        }
+        
         // image rotation & resizing
         if let image = image
         {
@@ -48,14 +57,7 @@ class GroceryImage: Codable
                 normalizedImage = image
             }
             
-            if let filename = filename
-            {
-                self.filename = filename
-            }
-            else
-            {
-                self.filename = UUID().uuidString
-            }
+            
             
             GroceryImage.cachedImages[self.filename] = normalizedImage
         }

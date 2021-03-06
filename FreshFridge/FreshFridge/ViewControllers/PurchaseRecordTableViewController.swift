@@ -16,15 +16,18 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     @IBOutlet weak var CategorySortButton: UIButton!
     @IBOutlet weak var FavoriteSortButton: UIButton!
     @IBOutlet weak var RecentSortButton: UIButton!
+    
+    var savedCategorySortEnable: Bool!
   
     var numberOfSections: Int = 0
     var sectionNames: [String] = []
     var numbersOfRowInSection: [Int] = []
         
-    
+    var isFromAddGrocery = false
+    var selectedGroceryHistory: GroceryHistory? = nil
     
     // 서치바를 위한 어레이
-    var searchbarGroceries: [GroceryHistory] = []//DataManager.shared.getGroceryHistory()
+   // var searchbarGroceries: [GroceryHistory] = []//DataManager.shared.getGroceryHistory()
     
     // 최신순 또는 가나다 순으로 정렬된 어레이
     var sortedArray: [GroceryHistory] = []
@@ -43,7 +46,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         
         getRequestManager().purchaseRecordViewController = self
         
-        searchbarGroceries = DataManager.shared.getGroceryHistories()
         
         //tableView.cellLayoutMarginsFollowReadableWidth = true
         
@@ -51,8 +53,12 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         
         self.SearchBar.backgroundImage = UIImage()
         
-        searchbarGroceries = DataManager.shared.getGroceryHistories()
-
+        if(isFromAddGrocery)
+        {
+            savedCategorySortEnable = isPurchaseRecordCategorySortButtonOn
+            isPurchaseRecordCategorySortButtonOn = true
+        }
+        
         updateButtons()
         updateTableView()
         
@@ -89,9 +95,12 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
   */
     
     func updateButtons() {
-        CategorySortButton.switchOnOff(isOn: isPurchaseRecordCategorySortButtonOn)
-        FavoriteSortButton.switchOnOff(isOn: isPurchaseRecordFavoriteSortButtonOn)
-        RecentSortButton.switchOnOff(isOn: isPurchaseRecordRecentSortButtonOn)
+        if(!isFromAddGrocery)
+        {
+            CategorySortButton.switchOnOff(isOn: isPurchaseRecordCategorySortButtonOn)
+            FavoriteSortButton.switchOnOff(isOn: isPurchaseRecordFavoriteSortButtonOn)
+            RecentSortButton.switchOnOff(isOn: isPurchaseRecordRecentSortButtonOn)
+        }
     }
     
     
@@ -104,12 +113,26 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         sectionNames.removeAll()
         
         var groceryHistoryArray: [GroceryHistory]
-        if searchText == ""
+        
+        if(isFromAddGrocery)
         {
-            groceryHistoryArray = DataManager.shared.getGroceryHistories()
-        } else
+            if searchText == ""
+            {
+                groceryHistoryArray = getDefaultItemNames()
+            } else
+            {
+                groceryHistoryArray = getDefaultItemNames().filter { $0.title.contains(searchText)}
+            }
+        }
+        else
         {
-            groceryHistoryArray = DataManager.shared.getGroceryHistories().filter { $0.title.contains(searchText)}
+            if searchText == ""
+            {
+                groceryHistoryArray = DataManager.shared.getGroceryHistories()
+            } else
+            {
+                groceryHistoryArray = DataManager.shared.getGroceryHistories().filter { $0.title.contains(searchText)}
+            }
         }
         
         // 최신순 버튼이 켜져 있으면 서치바에서 넘어온 어레이를 그대로 담는다. 기본 어레이는 사용자가 추가한 순서대로 인서트 at:0 되니까 어짜피 최신순 일 것이다.
@@ -200,15 +223,31 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             {
                 pictureCell?.titleImage.image = image
             }
+            else
+            {
+                pictureCell?.titleImage.image = nil
+            }
         }
 
         
-        cell.updateCell(with: cellContents)
+        cell.updateCell(with: cellContents, isFromAddGrocery: isFromAddGrocery)
         cell.delegate = self
         
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        if(isFromAddGrocery)
+        {
+            selectedGroceryHistory = filteredGroceries[indexPath.section][indexPath.row]
+            
+            // restore state
+            isPurchaseRecordCategorySortButtonOn = savedCategorySortEnable
+            
+            performSegue(withIdentifier: "ToAddGroceryFromPurchase", sender: self)
+        }
+    }
     
     
     // 셀의 왼쪽에서 오른쪽으로 스와이프 했을 때 카트로 보내는 이밴트
@@ -218,7 +257,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
             let selectedHistory = filteredGroceries[indexPath.section][indexPath.row]
-            RequestManager.shared.getRequestInterface().addCartGrocery(title: selectedHistory.title, category: selectedHistory.category)
+            RequestManager.shared.getRequestInterface().addCartGrocery(title: selectedHistory.title, category: selectedHistory.category, image: selectedHistory.image)
             
             success(true)
         })
@@ -255,7 +294,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 
                 print(selectedGrocery)
                 
-                RequestManager.shared.getRequestInterface().addGrocery(title: selectedGrocery.title, category: selectedGrocery.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: nil)
+                RequestManager.shared.getRequestInterface().addGrocery(title: selectedGrocery.title, category: selectedGrocery.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: selectedGrocery.image )
                 
                 getRequestManager().animateBadge(tabBarIndex: .fridgeTabBar)
                 
@@ -264,16 +303,29 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         
         toFridgeAction.image = UIImage(named: "freshFridge_icon")?.withTintColor(.white)
         toFridgeAction.backgroundColor = .systemBlue
-     
-        if(DataManager.shared.isExistGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false
-            && DataManager.shared.isExistCartGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false)
+        
+        
+        var actions: [UIContextualAction] = []
+        if(isFromAddGrocery)
         {
-            return UISwipeActionsConfiguration(actions: [modifyAction, toFridgeAction])
+            actions = [toFridgeAction]
         }
         else
         {
-            return UISwipeActionsConfiguration(actions: [toFridgeAction])
+            if(DataManager.shared.isExistGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false
+                && DataManager.shared.isExistCartGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false)
+            {
+                //return UISwipeActionsConfiguration(actions: [modifyAction, toFridgeAction])
+                actions = [modifyAction, toFridgeAction]
+            }
+            else
+            {
+                //return UISwipeActionsConfiguration(actions: [toFridgeAction])
+                actions = [toFridgeAction]
+            }
         }
+        
+        return UISwipeActionsConfiguration(actions: actions)
      }
    
     // 즐겨찾기 별표 버튼을 누르면 반응

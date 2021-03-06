@@ -69,6 +69,16 @@ class GroceryHistory : Codable
         self.lastestPurchaseDate = Date()
     }
     
+    init(title: String, category: Category, image: GroceryImage)
+    {
+        self.id = AutoIncreasedID()
+        self.title = title
+        self.category = category
+        self.favorite = false
+        self.lastestPurchaseDate = Date()
+        self.image = image
+    }
+    
     init(title: String, category: Category, favorite: Bool , lastestPurchaseDate: Date)
     {
         self.id = AutoIncreasedID()
@@ -501,6 +511,168 @@ func getDefaultNames() -> [String:GroceryHistory.Category]
         ]
     }
         
+}
+
+func getDefaultItemNames() -> [GroceryHistory]
+{
+    if(Locale.current.languageCode == "ko")
+    {
+        return [
+            GroceryHistory(title: "쇠고기", category:.MeatsAndEggs, image: GroceryImage(image: UIImage(named: "쇠고기"))),
+            GroceryHistory(title: "돼지고기", category:.MeatsAndEggs, image: GroceryImage(image: UIImage(named: "돼지고기"))),
+            GroceryHistory(title: "닭고기", category:.MeatsAndEggs, image: GroceryImage(image: UIImage(named: "닭고기"))),
+            GroceryHistory(title: "햄", category:.MeatsAndEggs, image: GroceryImage(image: UIImage(named: "햄"))),
+            GroceryHistory(title: "계란", category:.MeatsAndEggs, image: GroceryImage(image: UIImage(named: "계란"))),
+            GroceryHistory(title: "김치", category:.CookingAndSidedishes, image: GroceryImage(image: UIImage(named: "김치"))),
+            GroceryHistory(title: "양파", category:.Vegetable, image: GroceryImage(image: UIImage(named: "양파"))),
+            GroceryHistory(title: "대파", category:.Vegetable, image: GroceryImage(image: UIImage(named: "대파"))),
+            GroceryHistory(title: "고추", category:.Vegetable, image: GroceryImage(image: UIImage(named: "고추"))),
+            GroceryHistory(title: "마늘", category:.Vegetable, image: GroceryImage(image: UIImage(named: "마늘"))),
+            GroceryHistory(title: "무", category:.Vegetable, image: GroceryImage(image: UIImage(named: "무"))),
+            GroceryHistory(title: "당근", category:.Vegetable, image: GroceryImage(image: UIImage(named: "당근"))),
+            GroceryHistory(title: "애호박", category:.Vegetable, image: GroceryImage(image: UIImage(named: "애호박"))),
+            GroceryHistory(title: "가지", category:.Vegetable, image: GroceryImage(image: UIImage(named: "가지"))),
+            GroceryHistory(title: "브로콜리", category:.Vegetable, image: GroceryImage(image: UIImage(named: "브로콜리"))),
+            GroceryHistory(title: "상추", category:.Vegetable, image: GroceryImage(image: UIImage(named: "상추"))),
+            GroceryHistory(title: "양배추", category:.Vegetable, image: GroceryImage(image: UIImage(named: "양배추"))),
+            GroceryHistory(title: "파프리카", category:.Vegetable, image: GroceryImage(image: UIImage(named: "파프리카"))),
+            GroceryHistory(title: "시금치", category:.Vegetable, image: GroceryImage(image: UIImage(named: "시금치"))),
+            GroceryHistory(title: "감자", category:.Vegetable, image: GroceryImage(image: UIImage(named: "감자"))),
+            GroceryHistory(title: "고구마", category:.Vegetable, image: GroceryImage(image: UIImage(named: "고구마"))),
+            GroceryHistory(title: "두부", category:.ETC, image: GroceryImage(image: UIImage(named: "두부"))),
+            GroceryHistory(title: "라면소면", category:.ETC, image: GroceryImage(image: UIImage(named: "라면소면"))),
+            GroceryHistory(title: "생선", category:.MarineProducts, image: GroceryImage(image: UIImage(named: "생선"))),
+            GroceryHistory(title: "참치", category:.MarineProducts, image: GroceryImage(image: UIImage(named: "참치"))),
+            GroceryHistory(title: "김", category:.MarineProducts, image: GroceryImage(image: UIImage(named: "김"))),
+            GroceryHistory(title: "밀가루", category:.GrainAndNuts, image: GroceryImage(image: UIImage(named: "밀가루"))),
+            GroceryHistory(title: "우유", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "우유"))),
+            GroceryHistory(title: "소금", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "소금"))),
+            GroceryHistory(title: "참기름", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "참기름"))),
+            GroceryHistory(title: "마요네즈", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "마요네즈"))),
+            GroceryHistory(title: "간장", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "간장"))),
+            GroceryHistory(title: "후추", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "후추"))),
+            GroceryHistory(title: "올리브유", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "올리브유"))),
+            GroceryHistory(title: "식용유", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "식용유"))),
+            GroceryHistory(title: "사과", category:.Fruits, image: GroceryImage(image: UIImage(named: "사과"))),
+            GroceryHistory(title: "수박", category:.Fruits, image: GroceryImage(image: UIImage(named: "수박"))),
+            GroceryHistory(title: "포도", category:.Fruits, image: GroceryImage(image: UIImage(named: "포도"))),
+            GroceryHistory(title: "귤", category:.Fruits, image: GroceryImage(image: UIImage(named: "귤"))),
+            GroceryHistory(title: "복숭아", category:.Fruits, image: GroceryImage(image: UIImage(named: "복숭아"))),
+            GroceryHistory(title: "배", category:.Fruits, image: GroceryImage(image: UIImage(named: "배"))),
+            GroceryHistory(title: "바나나", category:.Fruits, image: GroceryImage(image: UIImage(named: "바나나")))
+        ]
+    }
+    else
+    {
+        return [
+            GroceryHistory(title: "Soda", category: .DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "Soda"))),
+            GroceryHistory(title: "Milk", category: .DrinksAndSnacks, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Bread", category: .DrinksAndSnacks, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Beer", category: .DrinksAndSnacks, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Olive oil", category: .SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Flour", category: .GrainAndNuts, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Butter", category: .Milk, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Chicken", category: .MeatsAndEggs, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Sugar", category: .SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Salt", category: .SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Egg", category: .MeatsAndEggs, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Rice", category: .GrainAndNuts, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Pork", category: .MeatsAndEggs, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Beef", category: .MeatsAndEggs, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Cheese", category: .Milk, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Garlic", category: .Vegetable, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Orange", category: .Fruits, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Turkey", category: .MeatsAndEggs, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Onion", category: .Vegetable, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Corn", category: .Vegetable, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Whole milk", category: .Milk, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Mayonnaise", category: .SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Chiles", category: .SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Almonds", category: .GrainAndNuts, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Bacon", category: .MeatsAndEggs, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Mushrooms", category: .Vegetable, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Coconut", category: .Vegetable, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Beets", category: .Vegetable, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Strawberries", category: .Fruits, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Fennel", category: .Vegetable, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Lamb", category: .MeatsAndEggs, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Apple", category: .Fruits, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Shrimp", category: .MarineProducts, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Vegetable oil", category: .SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: ""))),
+            GroceryHistory(title: "Fish", category: .MarineProducts, image: GroceryImage(image: UIImage(named: "")))
+        ]
+    }
+    /*
+    let langStr = Locale.current.languageCode
+    switch(langStr)
+    {
+    case "en": // reference : https://www.loveandlemons.com/what-is-fennel/
+        return [
+            GroceryHistory(title: "Soda", category: .DrinksAndSnacks),
+            GroceryHistory(title: "Milk", category: .DrinksAndSnacks),
+            GroceryHistory(title: "Bread", category: .DrinksAndSnacks),
+            GroceryHistory(title: "Beer", category: .DrinksAndSnacks),
+            GroceryHistory(title: "Olive oil", category: .SeasonedAndOilAndSauce),
+            GroceryHistory(title: "Flour", category: .GrainAndNuts),
+            GroceryHistory(title: "Butter", category: .Milk),
+            GroceryHistory(title: "Chicken", category: .MeatsAndEggs),
+            GroceryHistory(title: "Sugar", category: .SeasonedAndOilAndSauce),
+            GroceryHistory(title: "Salt", category: .SeasonedAndOilAndSauce),
+            GroceryHistory(title: "Egg", category: .MeatsAndEggs),
+            GroceryHistory(title: "Rice", category: .GrainAndNuts),
+            GroceryHistory(title: "Pork", category: .MeatsAndEggs),
+            GroceryHistory(title: "Beef", category: .MeatsAndEggs),
+            GroceryHistory(title: "Cheese", category: .Milk),
+            GroceryHistory(title: "Garlic", category: .Vegetable),
+            GroceryHistory(title: "Orange", category: .Fruits),
+            GroceryHistory(title: "Turkey", category: .MeatsAndEggs),
+            GroceryHistory(title: "Onion", category: .Vegetable),
+            GroceryHistory(title: "Corn", category: .Vegetable),
+            GroceryHistory(title: "Whole milk", category: .Milk),
+            GroceryHistory(title: "Mayonnaise", category: .SeasonedAndOilAndSauce),
+            GroceryHistory(title: "Chiles", category: .SeasonedAndOilAndSauce),
+            GroceryHistory(title: "Almonds", category: .GrainAndNuts),
+            GroceryHistory(title: "Bacon", category: .MeatsAndEggs),
+            GroceryHistory(title: "Mushrooms", category: .Vegetable),
+            GroceryHistory(title: "Coconut", category: .Vegetable),
+            GroceryHistory(title: "Beets", category: .Vegetable),
+            GroceryHistory(title: "Strawberries", category: .Fruits),
+            GroceryHistory(title: "Fennel", category: .Vegetable),
+            GroceryHistory(title: "Lamb", category: .MeatsAndEggs),
+            GroceryHistory(title: "Apple", category: .Fruits),
+            GroceryHistory(title: "Shrimp", category: .MarineProducts),
+            GroceryHistory(title: "Vegetable oil", category: .SeasonedAndOilAndSauce),
+            GroceryHistory(title: "Fish", category: .MarineProducts)
+        ]
+    case "ko":
+        return [
+        "쇠고기":.MeatsAndEggs, "돼지고기":.MeatsAndEggs, "닭고기":.MeatsAndEggs, "햄":.MeatsAndEggs, "계란":.MeatsAndEggs,
+        "김치":.CookingAndSidedishes,
+        "양파":.Vegetable, "대파":.Vegetable, "고추":.Vegetable,
+        "마늘":.Vegetable, "무":.Vegetable, "당근":.Vegetable, "애호박":.Vegetable,
+        "가지":.Vegetable, "브로콜리":.Vegetable, "상추":.Vegetable, "양배추":.Vegetable,
+        "파프리카":.Vegetable, "시금치":.Vegetable, "감자":.Vegetable, "고구마":.Vegetable,
+        "두부":.ETC, "라면소면":.ETC,
+        "생선":.MarineProducts, "참치":.MarineProducts, "김":.MarineProducts, "밀가루":.GrainAndNuts,
+        "우유":.DrinksAndSnacks,
+        "소금":.SeasonedAndOilAndSauce, "참기름":.SeasonedAndOilAndSauce, "마요네즈":.SeasonedAndOilAndSauce,
+        "간장":.SeasonedAndOilAndSauce, "후추":.SeasonedAndOilAndSauce, "올리브유":.SeasonedAndOilAndSauce, "식용유":.SeasonedAndOilAndSauce,
+        "사과":.Fruits,"수박":.Fruits,"포도":.Fruits,"귤":.Fruits,"복숭아":.Fruits,"배":.Fruits,"바나나":.Fruits
+        ]
+    default:
+        return [
+            "Soda":.DrinksAndSnacks, "Milk":.DrinksAndSnacks, "Bread":.DrinksAndSnacks, "Beer":.DrinksAndSnacks,
+            "Olive oil":.SeasonedAndOilAndSauce, "Flour":.GrainAndNuts, "Butter":.Milk, "Chicken":.MeatsAndEggs,
+            "Sugar":.SeasonedAndOilAndSauce, "Salt":.SeasonedAndOilAndSauce, "Egg":.MeatsAndEggs, "Rice":.GrainAndNuts,
+            "Pork":.MeatsAndEggs, "Beef":.MeatsAndEggs, "Cheese":.Milk, "Garlic":.Vegetable,
+            "Orange":.Fruits, "Turkey":.MeatsAndEggs, "Onion":.Vegetable, "Corn":.Vegetable,
+            "Whole milk":.Milk, "Mayonnaise":.SeasonedAndOilAndSauce, "Chiles":.SeasonedAndOilAndSauce,
+            "Almonds":.GrainAndNuts, "Bacon":.MeatsAndEggs, "Mushrooms":.Vegetable, "Coconut":.Vegetable,
+            "Beets":.Vegetable, "Strawberries":.Fruits, "Fennel":.Vegetable, "Lamb":.MeatsAndEggs,
+            "Apple":.Fruits, "Shrimp":.MarineProducts, "Vegetable oil":.SeasonedAndOilAndSauce, "Fish":.MarineProducts
+        ]
+    }
+        */
 }
 
 
