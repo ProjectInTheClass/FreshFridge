@@ -121,16 +121,17 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         
         
         let cellContents = filteredCartGroceries[indexPath.section][indexPath.row]
-        if(cellContents.info.image == nil)
+        if let groceryImage =  cellContents.info.image,
+           let _ = groceryImage.image()
         {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartCell", for: indexPath) as! ShopingCartTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartPictureCell", for: indexPath) as! ShopingCartTableViewPictureCell
             cell.updateCell(with: cellContents)
             cell.delegate = self
             return cell
         }
         else
         {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartPictureCell", for: indexPath) as! ShopingCartTableViewPictureCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartCell", for: indexPath) as! ShopingCartTableViewCell
             cell.updateCell(with: cellContents)
             cell.delegate = self
             return cell

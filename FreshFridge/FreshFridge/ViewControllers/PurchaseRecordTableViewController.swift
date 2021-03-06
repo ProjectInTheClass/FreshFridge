@@ -209,26 +209,18 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         var cell: PurchaseRecordTableViewCell! = nil
         let cellContents = filteredGroceries[indexPath.section][indexPath.row]
          
-        if cellContents.image == nil
+        if let groceryImage =  cellContents.image,
+           let image = groceryImage.image()
+        {
+            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordWithPictureCell", for: indexPath) as? PurchaseRecordWithPictureTableViewCell
+            let pictureCell = cell as? PurchaseRecordWithPictureTableViewCell
+            pictureCell?.titleImage.image = image
+        }
+        else
         {
             cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as? PurchaseRecordTableViewCell
             
         }
-        else
-        {
-            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordWithPictureCell", for: indexPath) as? PurchaseRecordWithPictureTableViewCell
-            let pictureCell = cell as? PurchaseRecordWithPictureTableViewCell
-            if let groceryImage = cellContents.image,
-               let image = groceryImage.image()
-            {
-                pictureCell?.titleImage.image = image
-            }
-            else
-            {
-                pictureCell?.titleImage.image = nil
-            }
-        }
-
         
         cell.updateCell(with: cellContents, isFromAddGrocery: isFromAddGrocery)
         cell.delegate = self

@@ -222,21 +222,17 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         {
             let grocery = filteredGroceries[indexPath.section][indexPath.row]
             
-            if(grocery.info.image == nil)
-            {
-                cell = tableView.dequeueReusableCell(withIdentifier: "groceryCell", for: indexPath) as? GroceryListTableViewCell
-            }
-            else
+            if let groceryImage =  grocery.info.image,
+               let image = groceryImage.image()
             {
                 cell = tableView.dequeueReusableCell(withIdentifier: "groceryPictureCell", for: indexPath) as? GroceryListTableViewCell
                 let pictureCell = cell as? GroceryListTableViewPictureCell
                 //
-                
-                if let groceryImage =  grocery.info.image,
-                   let image = groceryImage.image()
-                {
-                    pictureCell?.titleImage.image = image
-                }
+                pictureCell?.titleImage.image = image
+            }
+            else
+            {
+                cell = tableView.dequeueReusableCell(withIdentifier: "groceryCell", for: indexPath) as? GroceryListTableViewCell
             }
             
             cell.delegate = self
