@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "AppIcon87.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "AppIcon87.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
