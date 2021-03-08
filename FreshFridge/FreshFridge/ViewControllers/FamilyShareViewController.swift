@@ -48,7 +48,7 @@ class FamilyShareViewController: UIViewController {
     {
         if ShareManager.shared.isCreatedShareCode()
         {
-            presentAlertOk(title: "생성 실패".localized(), message: "이미 생성한 공유 코드가 존재합니다.(%@)".localized(with: [ShareManager.shared.createdPublicCode]), parent: self)
+            presentAlertOk(title: "[\"%@\"]".localized(with: [ShareManager.shared.createdPublicCode]), message: "이미 생성한 공유 코드가 존재합니다.".localized(), parent: self)
             sharingInfo()
             return
         }
@@ -104,7 +104,7 @@ class FamilyShareViewController: UIViewController {
                 }
             }
             
-            presentAlertYesNoCancel(title: "가족 공유".localized(), message: "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다".localized(), parent: self, yes: yes, no: no)
+            presentAlertYesNoCancel(title: "가족 공유".localized(), message: "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다.".localized(), parent: self, yes: yes, no: no)
         }
         else
         {
@@ -134,7 +134,7 @@ class FamilyShareViewController: UIViewController {
         }
         
         var publicCode: String = ""
-        let alert = UIAlertController(title: "코드 입력".localized(), message: "공유 코드를 입력해주세요".localized(), preferredStyle: .alert)
+        let alert = UIAlertController(title: "코드 입력".localized(), message: "공유 코드를 입력해주세요.".localized(), preferredStyle: .alert)
         alert.addTextField()
         let ok = UIAlertAction(title: "OK", style: .default)
         {_ in
@@ -181,7 +181,7 @@ class FamilyShareViewController: UIViewController {
                 }
             }
             
-            presentAlertYesNoCancel(title: "가족 공유".localized(), message: "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다".localized(), parent: self, yes: yes, no: no)
+            presentAlertYesNoCancel(title: "가족 공유".localized(), message: "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다.".localized(), parent: self, yes: yes, no: no)
             
             
             
@@ -207,7 +207,7 @@ class FamilyShareViewController: UIViewController {
             return
         }
         
-        presentAlertOkCancel(title: "공유를 취소하시겠습니까?".localized(), parent: self)
+        presentAlertOkCancel(title: "공유 취소".localized(), message: "공유를 취소하시겠습니까?".localized(), parent: self)
         {_ in 
             ShareManager.shared.endShare()
         }

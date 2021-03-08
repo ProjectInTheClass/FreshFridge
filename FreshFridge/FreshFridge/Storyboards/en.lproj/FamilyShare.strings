@@ -9,7 +9,7 @@
 "cn5-nq-0E6.normalTitle" = "Enter Shared Code";
 
 /* Class = "UIButton"; normalTitle = "가족 공유 기능 활성 (준비중)"; ObjectID = "eki-Kk-gf9"; */
-"eki-Kk-gf9.normalTitle" = "Resign Family Share";
+"eki-Kk-gf9.normalTitle" = "Exit Family Share";
 
 /* Class = "UIButton"; normalTitle = "공유 코드 생성"; ObjectID = "gBb-7M-akn"; */
 "gBb-7M-akn.normalTitle" = "Create Shared Code";

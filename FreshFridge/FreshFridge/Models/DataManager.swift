@@ -242,7 +242,7 @@ class DataManager
             groceries.insert(newGrocery, at: 0)
             
             saveGrocery()
-            getRequestManager().setAlarm(grocery: newGrocery)
+            getRequestManager().resetAlarm(grocery: newGrocery)
         }
         
     }
