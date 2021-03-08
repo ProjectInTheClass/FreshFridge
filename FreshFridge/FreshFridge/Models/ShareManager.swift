@@ -498,13 +498,13 @@ class ShareManager
     {
         guard ShareManager.shared.isShared() else { return }
         
-        let showLoading = !async
+        let showLoading = true//!async
         if(showLoading)
         {
             //LoadingHUD.showProgressCircle()
             LoadingHUD.showProgressAnimation()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1)
         {
             // 일정초마다.. 서버로부터 전부 받아서 update
             getRequestManager().isUpdatePurchaseRecord = false
@@ -554,9 +554,12 @@ class ShareManager
                 repeatCount += 1
             }
             
-            getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
-            getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
-            getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+            if(!async)
+            {
+                getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
+                getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
+                getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
+            }
             
             if(showLoading)
             {

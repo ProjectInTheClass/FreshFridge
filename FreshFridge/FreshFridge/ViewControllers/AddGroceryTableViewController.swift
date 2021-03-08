@@ -739,6 +739,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                     }
                 }
                 
+                updateTableView()
                 enableCompletButton()
             }
         }
