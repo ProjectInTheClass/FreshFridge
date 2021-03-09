@@ -518,7 +518,7 @@ class ShareManager
             while isRepeat
             {
                 guard repeatCount < maxRepeatCount else { break }
-                isRepeat = !ShareManager.shared.updateAllProduct(async: !showLoading)
+                isRepeat = !ShareManager.shared.updateAllProduct(async: async)
                 {
                     getRequestManager().updatePurchaseRecordViewController(updateTableView: getRequestManager().isUpdatePurchaseRecord)
                 }
@@ -532,7 +532,7 @@ class ShareManager
             {
                 guard repeatCount < maxRepeatCount else { break }
                 
-                isRepeat = !ShareManager.shared.updateAllCartItem(async: !showLoading)
+                isRepeat = !ShareManager.shared.updateAllCartItem(async: async)
                 {
                     getRequestManager().updateShopingCartViewController(updateTableView: getRequestManager().isUpdateShopingCart)
                 }
@@ -546,7 +546,7 @@ class ShareManager
             {
                 guard repeatCount < maxRepeatCount else { break }
                 
-                isRepeat = !ShareManager.shared.updateAllRefrigeratorItem(async: !showLoading)
+                isRepeat = !ShareManager.shared.updateAllRefrigeratorItem(async: async)
                 {
                     getRequestManager().updateGroceryListViewController(updateTableView: getRequestManager().isUpdateGroceryList)
                 }
@@ -772,7 +772,7 @@ class ShareManager
         let query: [String: String] = [
                 "idForShare": "\(sharedID)",
                 "sort":"updatedAt ASC",
-                "where": "{\"updatedAt\":{\">\":\(lastestProductUpdateAt)},\"idForShare\":\(sharedID),\"isDeleted\":false}"
+                "where": "{\"updatedAt\":{\">\":\(lastestProductUpdateAt)},\"idForShare\":\(sharedID)}"
             ]
         let url = baseURL.withQueries(query)!
         
@@ -1317,7 +1317,7 @@ class ShareManager
             let query: [String: String] = [
                     "idForRefri": "\(frigdeID)",
                     "sort":"updatedAt ASC",
-                    "where": "{\"updatedAt\":{\">\":\(lastestRefriUpdateAt)},\"idForRefri\":\(frigdeID),\"isDeleted\":false}"
+                    "where": "{\"updatedAt\":{\">\":\(lastestRefriUpdateAt)},\"idForRefri\":\(frigdeID)}"
                 ]
             
             let url = baseURL.withQueries(query)!
@@ -1741,7 +1741,7 @@ class ShareManager
         let query: [String: String] = [
                 "idForShare": "\(sharedID)",
                 "sort":"updatedAt ASC",
-                "where": "{\"updatedAt\":{\">\":\(lastestCartUpdatedAt)},\"idForShare\":\(sharedID),\"isDeleted\":false}"
+                "where": "{\"updatedAt\":{\">\":\(lastestCartUpdatedAt)},\"idForShare\":\(sharedID)}"
             ]
         
         let url = baseURL.withQueries(query)!
