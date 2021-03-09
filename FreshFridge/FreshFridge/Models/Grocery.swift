@@ -573,7 +573,7 @@ func getDefaultItemNames() -> [GroceryHistory]
             GroceryHistory(title: "Flour", category: .GrainAndNuts, image: GroceryImage(image: UIImage(named: "밀가루"))),
             GroceryHistory(title: "Butter", category: .Milk, image: GroceryImage(image: UIImage(named: "Butter"))),
             GroceryHistory(title: "Chicken", category: .MeatsAndEggs, image: GroceryImage(image: UIImage(named: "닭고기"))),
-            GroceryHistory(title: "Sugar", category: .SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "설탕"))),
+            GroceryHistory(title: "Sugar", category: .SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "Sugar"))),
             GroceryHistory(title: "Salt", category: .SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "소금"))),
             GroceryHistory(title: "Egg", category: .MeatsAndEggs, image: GroceryImage(image: UIImage(named: "계란"))),
             GroceryHistory(title: "Rice", category: .GrainAndNuts, image: GroceryImage(image: UIImage(named: "쌀"))),
