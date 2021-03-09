@@ -35,12 +35,27 @@ class FamilyShareViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    func sharingInfo() {
-        if ShareManager.shared.isShared() {
+    func sharingInfo()
+    {
+        if ShareManager.shared.isShared()
+        {
             SharingCondition.image = UIImage(systemName:"person.2")?.withTintColor(UIColor.systemBlue, renderingMode: .automatic)
-        } else {
-            SharingCondition.image = UIImage(systemName:"person.badge.plus")?.withTintColor(.systemGray, renderingMode: .automatic)
+            resignShareButton.isEnabled = true
         }
+        else
+        {
+            SharingCondition.image = UIImage(systemName:"person.badge.plus")?.withTintColor(.systemGray, renderingMode: .automatic)
+            resignShareButton.isEnabled = false
+        }
+        
+//        if(ShareManager.shared.isCreatedShareCode())
+//        {
+//            createPublicCodeButton.isEnabled = false
+//        }
+//        else
+//        {
+//            createPublicCodeButton.isEnabled = true
+//        }
     }
     
     
@@ -84,6 +99,8 @@ class FamilyShareViewController: UIViewController {
                         RequestManager.shared.updateGroceryListViewController(updateTableView: true)
                         RequestManager.shared.updateShopingCartViewController(updateTableView: true)
                         RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
+                        
+                        self.sharingInfo()
                     }
                 }
                 
@@ -100,6 +117,8 @@ class FamilyShareViewController: UIViewController {
                         DataManager.shared.removeAllFridgeGroceries()
                         
                         ShareManager.shared.update(async: false)
+                        
+                        self.sharingInfo()
                     }
                 }
             }
@@ -117,18 +136,20 @@ class FamilyShareViewController: UIViewController {
                     DataManager.shared.removeAllFridgeGroceries()
                     
                     ShareManager.shared.update(async: false)
+                    
+                    self.sharingInfo()
                 }
             }
         }
         
-        sharingInfo()
+        
     }
     
     @IBAction func enterPublicCode(_ sender: Any)
     {
         if ShareManager.shared.isShared()
         {
-            presentAlertOk(title: "코드 보기".localized(), message: "사용 중인 공유 코드 (%@)".localized(with: [ShareManager.shared.publicCode]), parent: self)
+            presentAlertOk(title: "[\"%@\"]".localized(with: [ShareManager.shared.publicCode]), message: "사용 중인 공유 코드".localized(), parent: self)
             sharingInfo()
             return
         }
@@ -138,53 +159,57 @@ class FamilyShareViewController: UIViewController {
         alert.addTextField()
         let ok = UIAlertAction(title: "OK", style: .default)
         {_ in
-            
             // 공유 코드 가져오기
             publicCode = alert.textFields?[0].text ?? ""
-            
-            let yes = UIAlertAction(title: "Yes", style: .default)
+            ShareManager.shared.startShareWithPublicCode(publicCode: publicCode)
             {
-                (yes) in
-                ShareManager.shared.startShareWithPublicCode(publicCode: publicCode)
+                DispatchQueue.main.async()
                 {
-                    DispatchQueue.main.async()
-                    {
-                        print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
+                    let yes = UIAlertAction(title: "Yes", style: .default)
+                    { (yes) in
                         
-                        // 로컬의 데이터를 서버로 보내고, 로컬 데이터를 전부 지운다.
-                        ShareManager.shared.sendAllLocalData()
-                        DataManager.shared.removeAllGroceryHistories()
-                        DataManager.shared.removeAllCartGroceries()
-                        DataManager.shared.removeAllFridgeGroceries()
+                        DispatchQueue.main.async()
+                        {
+                            print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
+                            
+                            // 로컬의 데이터를 서버로 보내고, 로컬 데이터를 전부 지운다.
+                            ShareManager.shared.sendAllLocalData()
+                            DataManager.shared.removeAllGroceryHistories()
+                            DataManager.shared.removeAllCartGroceries()
+                            DataManager.shared.removeAllFridgeGroceries()
+                            
+                            ShareManager.shared.update(async: false)
+                            
+                            RequestManager.shared.updateGroceryListViewController(updateTableView: true)
+                            RequestManager.shared.updateShopingCartViewController(updateTableView: true)
+                            RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
+                            
+                            presentAlertOk(title: "가족 공유 성공".localized(), parent: self)
+                            self.sharingInfo()
+                        }
                         
-                        ShareManager.shared.update(async: false)
-                        
-                        RequestManager.shared.updateGroceryListViewController(updateTableView: true)
-                        RequestManager.shared.updateShopingCartViewController(updateTableView: true)
-                        RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
                     }
+                    
+                    let no = UIAlertAction(title: "No", style: .default)
+                    { (no) in
+                        
+                        DispatchQueue.main.async()
+                        {
+                            DataManager.shared.removeAllGroceryHistories()
+                            DataManager.shared.removeAllCartGroceries()
+                            DataManager.shared.removeAllFridgeGroceries()
+                            
+                            ShareManager.shared.update(async: false)
+                            
+                            presentAlertOk(title: "가족 공유 성공".localized(), parent: self)
+                            self.sharingInfo()
+                        }
+                    }
+                    
+                    presentAlertYesNoCancel(title: "가족 공유".localized(), message: "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다.".localized(), parent: self, yes: yes, no: no)
+                    
                 }
             }
-            
-            let no = UIAlertAction(title: "No", style: .default)
-            { (no) in
-                ShareManager.shared.startShareWithPublicCode(publicCode: publicCode)
-                {
-                    DispatchQueue.main.async()
-                    {
-                        DataManager.shared.removeAllGroceryHistories()
-                        DataManager.shared.removeAllCartGroceries()
-                        DataManager.shared.removeAllFridgeGroceries()
-                        
-                        ShareManager.shared.update(async: false)
-                    }
-                }
-            }
-            
-            presentAlertYesNoCancel(title: "가족 공유".localized(), message: "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다.".localized(), parent: self, yes: yes, no: no)
-            
-            
-            
         }
         alert.addAction(ok)
         
@@ -192,8 +217,6 @@ class FamilyShareViewController: UIViewController {
         alert.addAction(cancel)
         
         self.present(alert, animated: true, completion: nil)
-        
-        sharingInfo()
         
         
     }
@@ -210,8 +233,10 @@ class FamilyShareViewController: UIViewController {
         presentAlertOkCancel(title: "공유 취소".localized(), message: "공유를 취소하시겠습니까?".localized(), parent: self)
         {_ in 
             ShareManager.shared.endShare()
+            presentAlertOk(title: "가족 공유 취소 성공".localized(), parent: self)
+            self.sharingInfo()
         }
-        sharingInfo()
+        
     }
     
     /*

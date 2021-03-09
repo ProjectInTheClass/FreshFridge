@@ -38,20 +38,20 @@
 "상품 추가" = "Add Grocery";
 "취소" = "Cancel";
 
-"[\"%@\"]" = "[\"%@\"]";
+"[\"%@\"]" = "[%@]";
 "이미 생성한 공유 코드가 존재합니다."="A sharing code already exists.";
 
 "가족 공유"="Family Share";
 "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다."="Would you like to share the data you currently have? 'No' will erase your data.";
 
-"코드 보기"="View Shared Code";
-"사용 중인 공유 코드 (%@)"="Sharing code in use (%@)";
+//"코드 보기"="View Shared Code";
+"사용 중인 공유 코드"="Sharing code in use";
 
 "코드 입력"="Enter Shared Code";
 "공유 코드를 입력해주세요."="Please enter the sharing code.";
 
 "공유 취소"="Exit Family Share";
-"공유를 취소하시겠습니까?"="Are you sure you want to cancel sharing?";
+"공유를 취소하시겠습니까?"="Are you sure you want to exit sharing?";
 
 "냉장고 품목 전체를 삭제하시겠습니까?"="Are you sure you want to delete all refrigerator items?";
 "구입기록 전체를 삭제하시겠습니까?"="Are you sure you want to delete the entire purchase history?";
@@ -64,3 +64,6 @@
 "사과"="Apple";
 "아이스크림"="Icecream";
 "양파"="Onion";
+
+"가족 공유 성공"="Family sharing success";
+"가족 공유 취소 성공"="Family sharing exit success";

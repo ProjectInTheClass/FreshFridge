@@ -439,8 +439,8 @@ func presentAlertYesNoCancel(title: String, message: String = "", parent: UIView
     alert.addAction(yes)
     alert.addAction(no)
     
-    let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-    alert.addAction(cancel)
+//    let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+//    alert.addAction(cancel)
     
     parent.present(alert, animated: true, completion: nil)
 }
