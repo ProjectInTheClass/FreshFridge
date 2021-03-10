@@ -293,8 +293,22 @@ class ShareManager
         let task = URLSession.shared.dataTask(with: baseURL)
         { (data, response, error) in
             let jsonDecoder = JSONDecoder()
-            if let data = data,
-            let requestCode = try? jsonDecoder.decode(RequestCode.self, from: data)
+            
+            guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else
+            {
+                return
+            }
+            let error = error
+            guard error == nil else
+            {
+                print("Error occur: \(String(describing: error))")
+                return
+            }
+            
+            NSLog("Complete: \(String(describing: response))")
+            
+            //if let data = data,
+            if let requestCode = try? jsonDecoder.decode(RequestCode.self, from: data)
             {
                 print(requestCode)
                 
@@ -339,8 +353,21 @@ class ShareManager
         let task = URLSession.shared.dataTask(with: url)
         { (data, response, error) in
             let jsonDecoder = JSONDecoder()
-            if let data = data,
-            let requestCode = try? jsonDecoder.decode(RequestCode.self, from: data)
+            //if let data = data,
+            guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else
+            {
+                return
+            }
+            let error = error
+            guard error == nil else
+            {
+                print("Error occur: \(String(describing: error))")
+                return
+            }
+            
+            NSLog("Complete: \(String(describing: response))")
+            
+            if let requestCode = try? jsonDecoder.decode(RequestCode.self, from: data)
             {
                 print(requestCode)
                 
@@ -370,8 +397,21 @@ class ShareManager
         let task = URLSession.shared.dataTask(with: baseURL)
         { (data, response, error) in
             _ = JSONDecoder()
-            if let data = data,
-            let string = String(data: data, encoding: .utf8)
+            //if let data = data,
+            guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else
+            {
+                return
+            }
+            let error = error
+            guard error == nil else
+            {
+                print("Error occur: \(String(describing: error))")
+                return
+            }
+            
+            NSLog("Complete: \(String(describing: response))")
+            
+            if let string = String(data: data, encoding: .utf8)
             {
                 print(string)
                 self.publicCode = ""
@@ -691,6 +731,20 @@ class ShareManager
         {
             let task = URLSession.shared.dataTask(with: url)
             { (data, response, error) in
+                
+                guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else
+                {
+                    return
+                }
+                let error = error
+                guard error == nil else
+                {
+                    print("Error occur: \(String(describing: error))")
+                    return
+                }
+                
+                NSLog("Complete: \(String(describing: response))")
+                
                 _ = self.processProductData(async: async, data: data)
                 completion()
             }
@@ -738,24 +792,38 @@ class ShareManager
         let task = URLSession.shared.dataTask(with: request)
         { (data, response, error) in
             let jsonDecoder = JSONDecoder()
-            if let data = data
+            //if let data = data
+            //{
+            
+            guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else
             {
-                print(String(data: data, encoding: .utf8)!)
-                do
+                return
+            }
+            let error = error
+            guard error == nil else
+            {
+                print("Error occur: \(String(describing: error))")
+                return
+            }
+            
+            NSLog("Complete: \(String(describing: response))")
+            
+            print(String(data: data, encoding: .utf8)!)
+            do
+            {
+                let product: ShareManager.Product? = try jsonDecoder.decode(ShareManager.Product.self, from: data)
+                if let product = product
                 {
-                    let product: ShareManager.Product? = try jsonDecoder.decode(ShareManager.Product.self, from: data)
-                    if let product = product
-                    {
-                        print(product)
-                        
-                        completion(product.id)
-                    }
-                }
-                catch
-                {
-                    print(error)
+                    print(product)
+                    
+                    completion(product.id)
                 }
             }
+            catch
+            {
+                print(error)
+            }
+            //}
         }
         
         task.resume()
@@ -1052,7 +1120,7 @@ class ShareManager
         let boundary = "Boundary-\(NSUUID().uuidString)"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
-        guard let imageData = image.jpegData(compressionQuality: 1) else// (imageData == nil)
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else// (imageData == nil)
         {
             print("UIImageJPEGRepresentation return nil")
             return
@@ -1305,6 +1373,20 @@ class ShareManager
             {
                 let task = URLSession.shared.dataTask(with: url)
                 { (data, response, error) in
+                    
+                    guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else
+                    {
+                        return
+                    }
+                    let error = error
+                    guard error == nil else
+                    {
+                        print("Error occur: \(String(describing: error))")
+                        return
+                    }
+                    
+                    NSLog("Complete: \(String(describing: response))")
+                    
                     _ = self.processRefrigeratorItemData(async: async, data: data)
                     completion()
                 }
@@ -1361,9 +1443,23 @@ class ShareManager
             request.httpMethod = "POST"
             let task = URLSession.shared.dataTask(with: request)
             { (data, response, error) in
-                let jsonDecoder = JSONDecoder()
-                if let data = data
+                
+                guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else
                 {
+                    return
+                }
+                let error = error
+                guard error == nil else
+                {
+                    print("Error occur: \(String(describing: error))")
+                    return
+                }
+                
+                NSLog("Complete: \(String(describing: response))")
+                
+                let jsonDecoder = JSONDecoder()
+                //if let data = data
+                //{
                     print(String(data: data, encoding: .utf8)!)
                     
                     do
@@ -1387,7 +1483,7 @@ class ShareManager
                     {
                         print(error)
                     }
-                }
+                //}
             }
             
             task.resume()
@@ -1735,6 +1831,20 @@ class ShareManager
             let task = URLSession.shared.dataTask(with: url)
             {
                 (data, response, error) in
+                
+                guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else
+                {
+                    return
+                }
+                let error = error
+                guard error == nil else
+                {
+                    print("Error occur: \(String(describing: error))")
+                    return
+                }
+                
+                NSLog("Complete: \(String(describing: response))")
+                
                 _ = self.processCartItemData(async: async, data: data)
                 completion()
             }

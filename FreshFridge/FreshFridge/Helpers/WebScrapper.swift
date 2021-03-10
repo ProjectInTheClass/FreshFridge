@@ -121,6 +121,7 @@ class WebScrapper
             DispatchQueue.main.async()
             {
                 ui?.setImage(UIImage(data: data), for: .normal)
+                ui?.setTitle(nil, for: .normal)
                 
                 completion()
             }
