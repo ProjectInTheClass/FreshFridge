@@ -348,10 +348,13 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
             let addGroceryTableViewController = navigationController.topViewController as! AddGroceryTableViewController
             addGroceryTableViewController.isFromShoppingCart = true
             
-            if let indexPath = tableView.indexPathForSelectedRow
+            if(segue.identifier == "EditShoppingCart")
             {
-                let cartGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
-                addGroceryTableViewController.cartGrocery = cartGrocery
+                if let indexPath = tableView.indexPathForSelectedRow
+                {
+                    let cartGrocery = filteredCartGroceries[indexPath.section][indexPath.row]
+                    addGroceryTableViewController.cartGrocery = cartGrocery
+                }
             }
         }
     }
