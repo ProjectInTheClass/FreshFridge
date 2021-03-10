@@ -119,7 +119,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             if searchText == ""
             {
                 groceryHistoryArray = getDefaultItemNames()
-            } else
+            }
+            else
             {
                 groceryHistoryArray = getDefaultItemNames().filter { $0.title.contains(searchText)}
             }
@@ -129,7 +130,8 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             if searchText == ""
             {
                 groceryHistoryArray = DataManager.shared.getGroceryHistories()
-            } else
+            }
+            else
             {
                 groceryHistoryArray = DataManager.shared.getGroceryHistories().filter { $0.title.contains(searchText)}
             }
@@ -237,6 +239,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
             // restore state
             isPurchaseRecordCategorySortButtonOn = savedCategorySortEnable
             
+            isFromAddGrocery = false
             performSegue(withIdentifier: "ToAddGroceryFromPurchase", sender: self)
         }
     }
@@ -288,7 +291,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 
                 RequestManager.shared.getRequestInterface().addGrocery(title: selectedGrocery.title, category: selectedGrocery.category, count: 1, isPercentageCount: false, dueDate: DueDate(4), storage: Grocery.Storage.Refrigeration, fridgeName: selectedfrideName, notes: "", image: selectedGrocery.image )
                 
-                getRequestManager().animateBadge(tabBarIndex: .fridgeTabBar)
+                //getRequestManager().animateBadge(tabBarIndex: .fridgeTabBar)
                 
                 success(true)
          })

@@ -239,6 +239,7 @@ class RequestToServer : RequestInterface
         {
             productID = groceryHistory.id.id
             
+            /*
             if let image = image,
                let uiImage = image.image()
             {
@@ -252,6 +253,7 @@ class RequestToServer : RequestInterface
                     }
                 }
             }
+             */
             
             ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, lastPurchaseDate: Date())
             {
@@ -388,6 +390,8 @@ class RequestToServer : RequestInterface
         if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
         {
             productID = groceryHistory.id.id
+            
+            /*
             // processing image
             if let image = image,
                let uiImage = image.image()
@@ -401,6 +405,7 @@ class RequestToServer : RequestInterface
                     }
                 }
             }
+             */
             
             ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, lastPurchaseDate: Date())
             {
@@ -559,10 +564,10 @@ class RequestToLocal : RequestInterface
         {
             DataManager.shared.insertGroceryHistory(id: -1, title: title, category: category, image: image, updateDate: true)
             
-            if let image = image
-            {
-                GroceryImage.saveImage(image: image.image(), filename: image.filename)
-            }
+//            if let image = image
+//            {
+//                GroceryImage.saveImage(image: image.image(), filename: image.filename)
+//            }
         }
         
         DataManager.shared.insertGrocery(id: -1, title: title, category: category, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes, image: image)
@@ -637,10 +642,10 @@ class RequestToLocal : RequestInterface
         else
         {
             DataManager.shared.insertGroceryHistory(id: -1, title: title, category: category, image: image, updateDate: true)
-            if let image = image
-            {
-                GroceryImage.saveImage(image: image.image(), filename: image.filename)
-            }
+//            if let image = image
+//            {
+//                GroceryImage.saveImage(image: image.image(), filename: image.filename)
+//            }
         }
         
         DataManager.shared.insertCartGrocery(title: title, category: category, image: image,
@@ -700,10 +705,10 @@ class RequestToLocal : RequestInterface
     override func updateGroceryHistory(id: AutoIncreasedID, image: GroceryImage?)
     {
         DataManager.shared.updateGroceryHistory(id: id, image: image)
-        if let image = image
-        {
-            GroceryImage.saveImage(image: image.image(), filename: image.filename)
-        }
+//        if let image = image
+//        {
+//            GroceryImage.saveImage(image: image.image(), filename: image.filename)
+        //}
         getRequestManager().updatePurchaseRecordViewController(updateTableView: false)
         getRequestManager().updateShopingCartViewController(updateTableView: false)
         getRequestManager().updateGroceryListViewController(updateTableView: false)

@@ -131,7 +131,11 @@ class DataManager
         {
             let groceryHistory = GroceryHistory(title: title, category: category, favorite: false, lastestPurchaseDate: Date())
             groceryHistory.id = AutoIncreasedID(id)
-            groceryHistory.image = image
+            if let image = image
+            {
+                groceryHistory.image = image
+                GroceryImage.saveImage(image: image.image(), filename: image.filename)
+            }
             
             groceryHistories.insert(groceryHistory, at: 0)
             
@@ -169,9 +173,11 @@ class DataManager
     
     func updateGroceryHistory(id: AutoIncreasedID, image: GroceryImage?)
     {
-        if let foundGroceryHistory = findGroceryHistory(id: id)
+        if let foundGroceryHistory = findGroceryHistory(id: id),
+           let image = image
         {
             foundGroceryHistory.image = image
+            GroceryImage.saveImage(image: image.image(), filename: image.filename)
             saveGroceryHistory()
         }
     }

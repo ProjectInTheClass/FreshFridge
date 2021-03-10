@@ -200,27 +200,30 @@ class ShareManager
             if let sameHistory = groceryHistoriesInServer.first(where: { $0.title == groceryHistory.title && $0.category == groceryHistory.category })
             {
                 // 서버에 같은 이름, 카테고리 구입기록이 있는 경우
-                print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
+                //print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
                 groceryHistory.id = sameHistory.id
                 
-                if(sameHistory.favorite != groceryHistory.favorite)
+                DispatchQueue.main.async()
                 {
-                    self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
-                }
-                
-                // processing image
-                if let image = groceryHistory.image,
-                   let uiImage = image.image()
-                {
-                    self.uploadImage(image: uiImage, filename: image.filename)
+                    if(sameHistory.favorite != groceryHistory.favorite)
                     {
-                        (imageName: String) in
-                        
-                        DispatchQueue.main.async
+                        self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
+                    }
+                    
+                    // processing image
+                    if let image = groceryHistory.image,
+                       let uiImage = image.image()
+                    {
+                        self.uploadImage(image: uiImage, filename: image.filename)
                         {
+                            (imageName: String) in
                             image.resetFilename(name: imageName)
-                            self.updateGroceryHistory(id: sameHistory.id, image: image)
+                            
+                            DispatchQueue.main.async
                             {
+                                self.updateGroceryHistory(id: sameHistory.id, image: image)
+                                {
+                                }
                             }
                         }
                     }
@@ -233,11 +236,13 @@ class ShareManager
                 createGroceryHistorySync(title: groceryHistory.title, category: groceryHistory.category)
                 {
                     (id: Int) in
+                    groceryHistory.id = AutoIncreasedID(id)
+                    groceryHistoriesInServer.insert(groceryHistory, at: groceryHistoriesInServer.count)
                     
                     DispatchQueue.main.async()
                     {
                         print("You are on \(Thread.isMainThread ? "MAIN" : "BACKGROUND") thread.")
-                        groceryHistory.id = AutoIncreasedID(id)
+                        
                         self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
                         
                         // processing image
@@ -355,7 +360,7 @@ class ShareManager
         task.resume()
     }
     
-    func endShare()
+    func endShare(completion: @escaping ()->Void)
     {
         guard isShared() else { return }
         
@@ -383,6 +388,7 @@ class ShareManager
                 ShareManager.shared.lastestRefriUpdateAt = -1
                 
                 //self.createdPublicCode = "" // test code
+                completion()
             }
         }
         
@@ -399,7 +405,7 @@ class ShareManager
             //LoadingHUD.showProgressCircle()
             LoadingHUD.showProgressAnimation()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01)
         {
             // 일정초마다.. 서버로부터 전부 받아서 update
             getRequestManager().isUpdatePurchaseRecord = false
@@ -527,6 +533,7 @@ class ShareManager
                 {
                     for product in products
                     {
+                        var isDownloadImage = false
                         if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
                         {
                             // 기존 groceryHistory update
@@ -552,35 +559,15 @@ class ShareManager
                             
                             if(product.imageCode.isEmpty == false)
                             {
+                                isDownloadImage = true
                                 if let image = groceryHistory.image
                                 {
-                                    if(image.filename != product.imageCode)
+                                    if(image.filename == product.imageCode)
                                     {
-                                        self.downloadImage(id: product.imageCode)
-                                        { (image: UIImage?) in
-                                            groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
-                                            
-                                            DispatchQueue.main.async {
-                                                RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
-                                                RequestManager.shared.updateShopingCartViewController(updateTableView: true)
-                                                RequestManager.shared.updateGroceryListViewController(updateTableView: true)
-                                            }
-                                        }
+                                        isDownloadImage = false
                                     }
                                 }
-                                else
-                                {
-                                    self.downloadImage(id: product.imageCode)
-                                    { (image: UIImage?) in
-                                        groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
-                                        
-                                        DispatchQueue.main.async {
-                                            RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
-                                            RequestManager.shared.updateShopingCartViewController(updateTableView: true)
-                                            RequestManager.shared.updateGroceryListViewController(updateTableView: true)
-                                        }
-                                    }
-                                }
+                                
                                 
                             }
                             
@@ -600,22 +587,51 @@ class ShareManager
                                 
                                 if(product.imageCode.isEmpty == false)
                                 {
-                                    if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
-                                    {
-                                        self.downloadImage(id: product.imageCode)
-                                        { (image: UIImage?) in
-                                            groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
-                                            
-                                            DispatchQueue.main.async {
-                                                RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
-                                                RequestManager.shared.updateShopingCartViewController(updateTableView: true)
-                                                RequestManager.shared.updateGroceryListViewController(updateTableView: true)
-                                            }
-                                        }
-                                    }
+                                    isDownloadImage = true
+//                                    if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
+//                                    {
+//                                        self.downloadImage(id: product.imageCode)
+//                                        { (image: UIImage?) in
+//                                            groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
+//
+//                                            DispatchQueue.main.async {
+//                                                RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
+//                                                RequestManager.shared.updateShopingCartViewController(updateTableView: true)
+//                                                RequestManager.shared.updateGroceryListViewController(updateTableView: true)
+//                                            }
+//                                        }
+//                                    }
                                 }
                                 
                                 getRequestManager().isUpdatePurchaseRecord = true
+                            }
+                        }
+                        
+                        if(isDownloadImage)
+                        {
+                            if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
+                            {
+                                if let uiImage = GroceryImage.loadImage(filename: product.imageCode)
+                                {
+                                    groceryHistory.image = GroceryImage(image: uiImage, filename: product.imageCode)
+                                    getRequestManager().isUpdatePurchaseRecord = true
+                                    getRequestManager().isUpdateGroceryList = true
+                                    getRequestManager().isUpdateShopingCart = true
+                                }
+                                else
+                                {
+                                    self.downloadImage(id: product.imageCode)
+                                    { (image: UIImage?) in
+                                        groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
+                                        GroceryImage.saveImage(image: image, filename: product.imageCode)
+                                        
+                                        DispatchQueue.main.async {
+                                            RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
+                                            RequestManager.shared.updateShopingCartViewController(updateTableView: true)
+                                            RequestManager.shared.updateGroceryListViewController(updateTableView: true)
+                                        }
+                                    }
+                                }
                             }
                         }
                         
@@ -657,6 +673,7 @@ class ShareManager
         return true
     }
     
+    // return이 false이면 다시 호출함
     func updateAllProduct(async: Bool, completion: @escaping (()->Void)) -> Bool
     {
         guard isShared() else { return false}
@@ -684,9 +701,16 @@ class ShareManager
         else
         {
             let task = URLSession.shared.synchronousDataTask(with: url)
-            let data = task.0
-            _ = task.1
-            _ = task.2
+            guard let data = task.0, let response = task.1 as? HTTPURLResponse, response.statusCode == 200 else
+            {
+                return true
+            }
+            let error = task.2
+            guard error == nil else
+            {
+                print("Error occur: \(String(describing: error))")
+                return true
+            }
             return processProductData(async: async, data: data)
         }
     }
@@ -758,30 +782,32 @@ class ShareManager
         //let task = URLSession.shared.dataTask(with: request)
         //{ (data, response, error) in
         let task = URLSession.shared.synchronousDataTask(with: request)
-        let data = task.0
-        _ = task.1
-        _ = task.2
-        let jsonDecoder = JSONDecoder()
-        if let data = data
+        guard let data = task.0, let response = task.1 as? HTTPURLResponse, response.statusCode == 200 else
         {
-            print(String(data: data, encoding: .utf8)!)
-            do
+            return
+        }
+        let error = task.2
+        guard error == nil else
+        {
+            print("Error occur: \(String(describing: error))")
+            return
+        }
+        let jsonDecoder = JSONDecoder()
+        print(String(data: data, encoding: .utf8)!)
+        do
+        {
+            let product: ShareManager.Product? = try jsonDecoder.decode(ShareManager.Product.self, from: data)
+            if let product = product
             {
-                let product: ShareManager.Product? = try jsonDecoder.decode(ShareManager.Product.self, from: data)
-                if let product = product
-                {
-                    print(product)
-                    
-                    completion(product.id)
-                }
-            }
-            catch
-            {
-                print(error)
+                print(product)
+                
+                completion(product.id)
             }
         }
-        
-        //task.resume()
+        catch
+        {
+            print(error)
+        }
     }
     
     func createGroceryHistoryForCart(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, count: Int = 1, isPercentageCount: Bool = false, isPurchased: Bool = false, completion2: (((ShareManager.CartItem) -> Void)?) = nil)
@@ -911,6 +937,7 @@ class ShareManager
 //        }
         
     }
+   
     
     func updateGroceryHistory(id: AutoIncreasedID, lastPurchaseDate: Date, completion: (()->Void)?)
     {
@@ -961,7 +988,7 @@ class ShareManager
         let json: [String: Any] = ["imageCode" : image!.filename]
         updateGroceryHistory(id: id, json: json)
         {
-            //DataManager.shared.updateGroceryHistory(id: id, image: image)
+            DataManager.shared.updateGroceryHistory(id: id, image: image)
             if let completion = completion
             {
                 completion()
@@ -986,7 +1013,11 @@ class ShareManager
     func downloadImage(id: String, completion: @escaping ((UIImage?)->Void))
     {
         let subURL = "/image/show/\(id)"
-        let url = URL(string: self.getServerURL() + subURL)!
+        guard let url = URL(string: self.getServerURL() + subURL) else
+        {
+            print("downloadImage url error"+"("+self.getServerURL()+subURL+")")
+            return
+        }
         
         print("Download Started")
         let task = URLSession.shared.dataTask(with: url)
@@ -1043,24 +1074,28 @@ class ShareManager
         //session.uploadTask(with: urlRequest, from: data, completionHandler:
         {
             (data, response, error) -> Void in
-            if let data = data
+            
+            guard let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 else
             {
-                NSLog("Complete: \(String(describing: response))")
+                return
+            }
+            let error = error
+            guard error == nil else
+            {
+                print("Error occur: \(String(describing: error))")
+                return
+            }
+            
+            NSLog("Complete: \(String(describing: response))")
+            
+           // do what you want in success case
+            if let imageName = String(data: data, encoding: .utf8)
+            {
+                print(imageName)
                 
-               // do what you want in success case
-                if let imageName = String(data: data, encoding: .utf8)
-                {
-                    print(imageName)
-                    
-                    //self.cachedImages[imageName] = UIImage(data: data)
-                    //GroceryImage.saveImage(image: UIImage(data: data), filename: imageName)
-                    completion(imageName)
-                }
+                completion(imageName)
             }
-            else if let error = error
-            {
-                print(error.localizedDescription)
-            }
+            
         })
 
         task.resume()
@@ -1280,9 +1315,16 @@ class ShareManager
             else
             {
                 let task = URLSession.shared.synchronousDataTask(with: url)
-                let data = task.0
-                _ = task.1
-                _ = task.2
+                guard let data = task.0, let response = task.1 as? HTTPURLResponse, response.statusCode == 200 else
+                {
+                    return true
+                }
+                let error = task.2
+                guard error == nil else
+                {
+                    print("Error occur: \(String(describing: error))")
+                    return true
+                }
                 return processRefrigeratorItemData(async: async, data: data)
             }
         }
@@ -1703,9 +1745,16 @@ class ShareManager
         else
         {
             let task = URLSession.shared.synchronousDataTask(with: url)
-            let data = task.0
-            _ = task.1
-            _ = task.2
+            guard let data = task.0, let response = task.1 as? HTTPURLResponse, response.statusCode == 200 else
+            {
+                return true
+            }
+            let error = task.2
+            guard error == nil else
+            {
+                print("Error occur: \(String(describing: error))")
+                return true
+            }
             return processCartItemData(async: async, data: data)
         }
     }

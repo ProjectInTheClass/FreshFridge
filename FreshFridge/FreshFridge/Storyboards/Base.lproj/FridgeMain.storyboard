@@ -644,7 +644,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="uDk-tf-Fpd">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="right" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDk-tf-Fpd">
                                                     <rect key="frame" x="112" y="12" width="160" height="109"/>
                                                     <string key="text">FreshFridgeCompany
 @gmail.com
@@ -716,7 +716,7 @@ Daniel Shin</string>
         <segue reference="Q1T-a6-IbF"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="AppIcon87" width="87" height="87"/>
+        <image name="AppIcon87" width="43.5" height="43.5"/>
         <image name="CircleFridgerReset" width="52.333332061767578" height="52.333332061767578"/>
         <image name="bell" catalog="system" width="128" height="124"/>
         <image name="button:Qsm-Vz-TEa:backgroundImage" width="29" height="29">

@@ -41,12 +41,17 @@ class FamilyShareViewController: UIViewController {
         {
             SharingCondition.image = UIImage(systemName:"person.2")?.withTintColor(UIColor.systemBlue, renderingMode: .automatic)
             resignShareButton.isEnabled = true
+            SharingCondition.image = SharingCondition.image?.withRenderingMode(.alwaysTemplate)
+            SharingCondition.tintColor = UIColor.link
         }
         else
         {
             SharingCondition.image = UIImage(systemName:"person.badge.plus")?.withTintColor(.systemGray, renderingMode: .automatic)
             resignShareButton.isEnabled = false
+            SharingCondition.image = SharingCondition.image?.withRenderingMode(.alwaysTemplate)
+            SharingCondition.tintColor = UIColor.systemGray2
         }
+        
         
 //        if(ShareManager.shared.isCreatedShareCode())
 //        {
@@ -68,17 +73,23 @@ class FamilyShareViewController: UIViewController {
             return
         }
         
-        var isSendLocalData: Bool = true
         if ShareManager.shared.isShared()
         {
-            //presentAlertOk(title: "공유 취소".localized(), message: "공유를 취소합니다.(%s)".localized(with: [ShareManager.shared.sharedID]), parent: self)
-            ShareManager.shared.endShare()
-            
-            isSendLocalData = false
+            presentAlertOk(title: "먼저 공유 취소를 해야합니다.", parent: self)
+            return
         }
         
-        if(isSendLocalData)
-        {
+//        var isSendLocalData: Bool = true
+//        if ShareManager.shared.isShared()
+//        {
+//            //presentAlertOk(title: "공유 취소".localized(), message: "공유를 취소합니다.(%s)".localized(with: [ShareManager.shared.sharedID]), parent: self)
+//            ShareManager.shared.endShare()
+//
+//            isSendLocalData = false
+//        }
+        
+//        if(isSendLocalData)
+//        {
             let yes = UIAlertAction(title: "Yes", style: .default)
             {
                 (yes) in
@@ -124,7 +135,8 @@ class FamilyShareViewController: UIViewController {
             }
             
             presentAlertYesNoCancel(title: "가족 공유".localized(), message: "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다.".localized(), parent: self, yes: yes, no: no)
-        }
+        //}
+        /*
         else
         {
             ShareManager.shared.startShareAndCreateCode()
@@ -141,7 +153,7 @@ class FamilyShareViewController: UIViewController {
                 }
             }
         }
-        
+        */
         
     }
     
@@ -184,7 +196,7 @@ class FamilyShareViewController: UIViewController {
                             RequestManager.shared.updateShopingCartViewController(updateTableView: true)
                             RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
                             
-                            presentAlertOk(title: "가족 공유 성공".localized(), parent: self)
+                            //presentAlertOk(title: "가족 공유 성공".localized(), parent: self)
                             self.sharingInfo()
                         }
                         
@@ -201,7 +213,7 @@ class FamilyShareViewController: UIViewController {
                             
                             ShareManager.shared.update(async: false)
                             
-                            presentAlertOk(title: "가족 공유 성공".localized(), parent: self)
+                            //presentAlertOk(title: "가족 공유 성공".localized(), parent: self)
                             self.sharingInfo()
                         }
                     }
@@ -233,8 +245,12 @@ class FamilyShareViewController: UIViewController {
         presentAlertOkCancel(title: "공유 취소".localized(), message: "공유를 취소하시겠습니까?".localized(), parent: self)
         {_ in 
             ShareManager.shared.endShare()
-            presentAlertOk(title: "가족 공유 취소 성공".localized(), parent: self)
-            self.sharingInfo()
+            {
+                DispatchQueue.main.async {
+                    //presentAlertOk(title: "가족 공유 취소 성공".localized(), parent: self)
+                    self.sharingInfo()
+                }
+            }
         }
         
     }

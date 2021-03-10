@@ -276,7 +276,7 @@ class Grocery : Codable
         {
             let image = GroceryImage(image: UIImage(named: "사과"))
             DataManager.shared.insertGroceryHistory(id: id, title: "사과".localized(), category: .Fruits, image: image, updateDate: false)
-            GroceryImage.saveImage(image: image.image(), filename: image.filename)
+            //GroceryImage.saveImage(image: image.image(), filename: image.filename)
             
         }
         
@@ -284,14 +284,14 @@ class Grocery : Codable
         {
             let image = GroceryImage(image: UIImage(named: "아이스크림"))
             DataManager.shared.insertGroceryHistory(id: id, title: "아이스크림".localized(), category: .DrinksAndSnacks, image: image, updateDate: false)
-            GroceryImage.saveImage(image: image.image(), filename: image.filename)
+            //GroceryImage.saveImage(image: image.image(), filename: image.filename)
         }
         
         if( nil == DataManager.shared.getGroceryHistory(title: "양파".localized(), category: .Vegetable) )
         {
             let image = GroceryImage(image: UIImage(named: "양파"))
             DataManager.shared.insertGroceryHistory(id: id, title: "양파".localized(), category: .Vegetable, image: image, updateDate: false)
-            GroceryImage.saveImage(image: image.image(), filename: image.filename)
+            //GroceryImage.saveImage(image: image.image(), filename: image.filename)
         }
         
         return [Grocery(info: DataManager.shared.getGroceryHistory(title: "사과".localized(), category: .Fruits)!, count: 6, isPercentageCount: false, dueDate: DueDate(5), storage: .Refrigeration, fridgeName: selectedfrideName, notes: nil),
