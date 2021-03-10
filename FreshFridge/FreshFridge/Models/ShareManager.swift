@@ -1120,7 +1120,7 @@ class ShareManager
         let boundary = "Boundary-\(NSUUID().uuidString)"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
-        guard let imageData = image.jpegData(compressionQuality: 1) else// (imageData == nil)
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else// (imageData == nil)
         {
             print("UIImageJPEGRepresentation return nil")
             return

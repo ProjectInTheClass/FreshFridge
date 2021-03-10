@@ -239,7 +239,6 @@ class RequestToServer : RequestInterface
         {
             productID = groceryHistory.id.id
             
-            /*
             if let image = image,
                let uiImage = image.image()
             {
@@ -253,7 +252,6 @@ class RequestToServer : RequestInterface
                     }
                 }
             }
-             */
             
             ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, lastPurchaseDate: Date())
             {
@@ -391,7 +389,6 @@ class RequestToServer : RequestInterface
         {
             productID = groceryHistory.id.id
             
-            /*
             // processing image
             if let image = image,
                let uiImage = image.image()
@@ -405,7 +402,6 @@ class RequestToServer : RequestInterface
                     }
                 }
             }
-             */
             
             ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, lastPurchaseDate: Date())
             {

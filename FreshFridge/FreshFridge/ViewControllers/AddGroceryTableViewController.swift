@@ -84,6 +84,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         noteTextField.delegate = self
         
         pictureButton.imageView?.contentMode = .scaleAspectFit
+        pictureButton.setTitle("사진 추가".localized(), for: .normal)
         
         if(isSupportBarcode)
         {
@@ -306,6 +307,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
            let image = groceryImage.image()
         {
             self.pictureButton.setImage(image, for: .normal)
+            self.pictureButton.setTitle(nil, for: .normal)
         }
         
         storageSegment.selectedSegmentIndex = storage.rawValue
@@ -562,6 +564,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
            let image = groceryImage.image()
         {
             self.pictureButton.setImage(image, for: .normal)
+            self.pictureButton.setTitle(nil, for: .normal)
         }
         enableCompletButton()
 
@@ -584,6 +587,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         
         nameTextField.text = ""
         pictureButton.setImage(nil, for: .normal)
+        pictureButton.setTitle("사진 추가".localized(), for: .normal)
         
         let data = barcodeData.filter({$0.barcodeGTIN == barcode})
         if data.count > 0
@@ -692,6 +696,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                        let image = groceryImage.image()
                     {
                         self.pictureButton.setImage(image, for: .normal)
+                        self.pictureButton.setTitle(nil, for: .normal)
                     }
                 }
                 
@@ -736,6 +741,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                        let image = groceryImage.image()
                     {
                         self.pictureButton.setImage(image, for: .normal)
+                        self.pictureButton.setTitle(nil, for: .normal)
                     }
                 }
                 
