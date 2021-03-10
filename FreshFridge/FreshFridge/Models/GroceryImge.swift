@@ -99,7 +99,7 @@ class GroceryImage: Codable
     {
         // file로 저장
         if let image = image,
-            let data = image.jpegData(compressionQuality: 1)//.pngData()
+           let data = image.jpegData(compressionQuality: 0.5)//.pngData()
         {
             let fullFilename = getDocumentsDirectory().appendingPathComponent("\(filename).jpg")
             try? data.write(to: fullFilename)
