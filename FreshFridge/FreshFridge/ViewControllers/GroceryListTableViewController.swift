@@ -494,8 +494,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             isFridgeOutdoorButtonOn.toggle()
         } else {
             isFridgeFrigerationButtonOn = true
-            isFridgeFreezingButtonOn = false
-            isFridgeOutdoorButtonOn = false
+            isFridgeFreezingButtonOn = true
+            isFridgeOutdoorButtonOn = true
         }
         UserDefaults.standard.set(isFridgeFrigerationButtonOn, forKey: "isFridgeFrigerationButtonOn")
         updateFilteringButtons()
@@ -510,9 +510,9 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             isFridgeFrigerationButtonOn.toggle()
             isFridgeOutdoorButtonOn.toggle()
         } else {
-            isFridgeFrigerationButtonOn = false
+            isFridgeFrigerationButtonOn = true
             isFridgeFreezingButtonOn = true
-            isFridgeOutdoorButtonOn = false
+            isFridgeOutdoorButtonOn = true
         }
         UserDefaults.standard.set(isFridgeFreezingButtonOn, forKey: "isFridgeFreezingButtonOn")
         updateFilteringButtons()
@@ -528,8 +528,8 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             isFridgeFrigerationButtonOn.toggle()
             isFridgeFreezingButtonOn.toggle()
         } else {
-            isFridgeFrigerationButtonOn = false
-            isFridgeFreezingButtonOn = false
+            isFridgeFrigerationButtonOn = true
+            isFridgeFreezingButtonOn = true
             isFridgeOutdoorButtonOn = true
         }
         UserDefaults.standard.set(isFridgeOutdoorButtonOn, forKey: "isFridgeOutdoorButtonOn")
