@@ -36,7 +36,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     var cartGrocery: CartGrocery? = nil
     var count: Int = 0  // 추가 버튼으로 들어온 경우 사용됨
     var dueDate: DueDate = DueDate(0)   // 추가 버튼으로 들어온 경우 사용됨
-    var groceryImage: GroceryImage?
+    var groceryImage: GroceryImage? = nil
     var category: GroceryHistory.Category? = nil// = GroceryHistory.Category.ETC
     var storage: Grocery.Storage = Grocery.Storage.Refrigeration
     
@@ -114,7 +114,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             percentageSwitch.isOn = grocery.isPercentageCount
             fridgeSelectButton.setTitle(grocery.fridgeName, for: .normal)
             noteTextField.text = grocery.notes
-            groceryImage = grocery.info.image
+            //groceryImage = grocery.info.image
             
             updateTableView()
             
@@ -128,7 +128,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             count = cartGrocery.count
             countTextField.text = "\(Int(cartGrocery.count))"
             percentageSwitch.isOn = cartGrocery.isPercentageCount
-            groceryImage = cartGrocery.info.image
+            //groceryImage = cartGrocery.info.image
             
             updateTableView()
         }
@@ -303,7 +303,15 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
         }
         
-        if let groceryImage = groceryImage,
+        if let grocery = grocery,
+           let groceryImage = grocery.info.image,
+           let image = groceryImage.image()
+        {
+            self.pictureButton.setImage(image, for: .normal)
+            self.pictureButton.setTitle(nil, for: .normal)
+        }
+        else if let cartGrocery = cartGrocery,
+           let groceryImage = cartGrocery.info.image,
            let image = groceryImage.image()
         {
             self.pictureButton.setImage(image, for: .normal)
@@ -736,13 +744,14 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 
                 if let image = UIImage(named: selectedGroceryHistory.title)
                 {
-                    groceryImage = GroceryImage(image: image)
-                    if let groceryImage = groceryImage,
-                       let image = groceryImage.image()
-                    {
+                    groceryImage = GroceryImage(image: image, filename: selectedGroceryHistory.title)
+                    //groceryImage?.filename = selectedGroceryHistory.title
+//                    if let groceryImage = groceryImage,
+//                       let image = groceryImage.image()
+//                    {
                         self.pictureButton.setImage(image, for: .normal)
                         self.pictureButton.setTitle(nil, for: .normal)
-                    }
+//                    }
                 }
                 
                 updateTableView()
