@@ -1087,6 +1087,12 @@ class ShareManager
     
     func downloadImage(id: String, completion: @escaping ((UIImage?)->Void))
     {
+        if let uiImage = UIImage(named: id)
+        {
+            completion(uiImage)
+            return
+        }
+        
         let subURL = "/image/show/\(id)"
         guard let url = URL(string: self.getServerURL() + subURL) else
         {
@@ -1117,6 +1123,13 @@ class ShareManager
     
     func uploadImage(image: UIImage, filename: String, completion: @escaping ((String)->Void) )
     {
+        if let _ = UIImage(named: filename)
+        {
+            completion(filename)
+            return
+        }
+
+        
         let subURL = "/image/uploader"
         let baseURL = URL(string: self.getServerURL() + subURL)!
         
