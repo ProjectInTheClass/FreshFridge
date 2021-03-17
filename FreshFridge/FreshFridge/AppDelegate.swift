@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     //var grantedAuthorization: Bool = false
     var timer = Timer()
     var restrictRotation:UIInterfaceOrientationMask = .all
-    
+    var updatedCount: Int = 0
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -206,6 +206,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         NSLog("counting..")
         
         ShareManager.shared.update(async: true)
+        updatedCount += 1
+        
+        if(updatedCount > 5)
+        {
+            ShareManager.shared.resetUpdating()
+            updatedCount = 0
+        }
     }
 }
 

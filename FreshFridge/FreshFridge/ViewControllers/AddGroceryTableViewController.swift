@@ -303,11 +303,16 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
         }
         
-        if let groceryImage = groceryImage,
-           let image = groceryImage.image()
+        if let groceryImage = groceryImage
         {
-            self.pictureButton.setImage(image, for: .normal)
+            self.pictureButton.setBackgroundImage(groceryImage.image(), for: .normal)
             self.pictureButton.setTitle(nil, for: .normal)
+            
+            // debugging code
+            #if DEBUG
+            self.pictureButton.setTitle(groceryImage.filename, for: .normal)
+            #endif
+            
         }
         
         storageSegment.selectedSegmentIndex = storage.rawValue
@@ -691,7 +696,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 }
                 if let image = UIImage(named: sourceViewController.selectedName)
                 {
-                    groceryImage = GroceryImage(image: image)
+                    groceryImage = GroceryImage(image: image, filename: sourceViewController.selectedName)
                     if let groceryImage = groceryImage,
                        let image = groceryImage.image()
                     {
@@ -736,7 +741,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 
                 if let image = UIImage(named: selectedGroceryHistory.title)
                 {
-                    groceryImage = GroceryImage(image: image)
+                    groceryImage = GroceryImage(image: image, filename: selectedGroceryHistory.title)
                     if let groceryImage = groceryImage,
                        let image = groceryImage.image()
                     {

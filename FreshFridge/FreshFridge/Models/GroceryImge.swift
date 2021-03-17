@@ -86,6 +86,8 @@ class GroceryImage: Codable
     
     func resetFilename(name: String)
     {
+        guard name != self.filename else { return }
+        
         if let image = GroceryImage.cachedImages[self.filename]
         {
             GroceryImage.cachedImages[name] = image
