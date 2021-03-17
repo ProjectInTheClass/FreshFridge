@@ -83,7 +83,9 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         
         noteTextField.delegate = self
         
-        pictureButton.imageView?.contentMode = .scaleAspectFit
+        //pictureButton.imageView?.contentMode = .scaleAspectFit
+        
+        
         pictureButton.setTitle("사진 추가".localized(), for: .normal)
         
         if(isSupportBarcode)
@@ -305,12 +307,14 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         
         if let groceryImage = groceryImage
         {
-            self.pictureButton.setBackgroundImage(groceryImage.image(), for: .normal)
-            self.pictureButton.setTitle(nil, for: .normal)
+            pictureButton.setBackgroundImage(groceryImage.image(), for: .normal)
+            pictureButton.layoutIfNeeded()
+            pictureButton.subviews.first?.contentMode = .scaleAspectFill
+            pictureButton.setTitle(nil, for: .normal)
             
             // debugging code
             #if DEBUG
-            self.pictureButton.setTitle(groceryImage.filename, for: .normal)
+            pictureButton.setTitle(groceryImage.filename, for: .normal)
             #endif
             
         }
@@ -565,12 +569,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         
         groceryImage = GroceryImage(image: selectedImage)
-        if let groceryImage = groceryImage,
-           let image = groceryImage.image()
-        {
-            self.pictureButton.setImage(image, for: .normal)
-            self.pictureButton.setTitle(nil, for: .normal)
-        }
+        updateTableView()
         enableCompletButton()
 
         dismiss(animated: true, completion: nil)
@@ -602,13 +601,14 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             let link = data[0].imageLink1
             if let url = URL(string: link)
             {
-                WebScrapper.shared.downloadImage(from: url, ui: pictureButton,
-                                                 completion: {
-                                                    if let image = self.pictureButton.image(for: .normal)
-                                                    {
-                                                        self.groceryImage = GroceryImage(image: image)
-                                                    }
-                                                 })
+                WebScrapper.shared.downloadImage(from: url)
+                { (image: UIImage?) in
+                    DispatchQueue.main.async()
+                    {
+                        self.groceryImage = GroceryImage(image: image)
+                        self.updateTableView()
+                    }
+                }
             }
             self.enableCompletButton()
         }
@@ -658,13 +658,14 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                         let link = trimmedString
                         if let url = URL(string: link)
                         {
-                            WebScrapper.shared.downloadImage(from: url, ui: pictureButton,
-                                                             completion: {
-                                                                if let image = pictureButton.image(for: .normal)
-                                                                {
-                                                                    self.groceryImage = GroceryImage(image: image)
-                                                                }
-                                                             })
+                            WebScrapper.shared.downloadImage(from: url)
+                            { (image: UIImage?) in
+                                DispatchQueue.main.async()
+                                {
+                                    self.groceryImage = GroceryImage(image: image)
+                                    self.updateTableView()
+                                }
+                            }
                         }
                     }
                     
@@ -697,12 +698,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 if let image = UIImage(named: sourceViewController.selectedName)
                 {
                     groceryImage = GroceryImage(image: image, filename: sourceViewController.selectedName)
-                    if let groceryImage = groceryImage,
-                       let image = groceryImage.image()
-                    {
-                        self.pictureButton.setImage(image, for: .normal)
-                        self.pictureButton.setTitle(nil, for: .normal)
-                    }
+                    updateTableView()
                 }
                 
                 updateTableView()
@@ -742,12 +738,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 if let image = UIImage(named: selectedGroceryHistory.title)
                 {
                     groceryImage = GroceryImage(image: image, filename: selectedGroceryHistory.title)
-                    if let groceryImage = groceryImage,
-                       let image = groceryImage.image()
-                    {
-                        self.pictureButton.setImage(image, for: .normal)
-                        self.pictureButton.setTitle(nil, for: .normal)
-                    }
+                    updateTableView()
                 }
                 
                 updateTableView()

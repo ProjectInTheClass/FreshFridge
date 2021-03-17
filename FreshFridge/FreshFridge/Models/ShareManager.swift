@@ -635,19 +635,6 @@ class ShareManager
                                 if(product.imageCode.isEmpty == false)
                                 {
                                     isDownloadImage = true
-//                                    if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
-//                                    {
-//                                        self.downloadImage(id: product.imageCode)
-//                                        { (image: UIImage?) in
-//                                            groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
-//
-//                                            DispatchQueue.main.async {
-//                                                RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
-//                                                RequestManager.shared.updateShopingCartViewController(updateTableView: true)
-//                                                RequestManager.shared.updateGroceryListViewController(updateTableView: true)
-//                                            }
-//                                        }
-//                                    }
                                 }
                                 
                                 getRequestManager().isUpdatePurchaseRecord = true

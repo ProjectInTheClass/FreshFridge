@@ -112,19 +112,17 @@ class WebScrapper
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
-    func downloadImage(from url: URL, ui: UIButton?, completion: @escaping (()->Void)) {
+    func downloadImage(from url: URL, completion: @escaping ((UIImage?)->Void))
+    {
         print("Download Started")
-        getData(from: url) { data, response, error in
+        getData(from: url)
+        { data, response, error in
             guard let data = data, error == nil else { return }
+            
             print(response?.suggestedFilename ?? url.lastPathComponent)
             print("Download Finished")
-            DispatchQueue.main.async()
-            {
-                ui?.setImage(UIImage(data: data), for: .normal)
-                ui?.setTitle(nil, for: .normal)
-                
-                completion()
-            }
+            
+            completion(UIImage(data: data))
         }
     }
     
