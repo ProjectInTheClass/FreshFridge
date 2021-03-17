@@ -7,8 +7,7 @@
 
 import UIKit
 
-class CategoryTableViewController: UITableViewController, ImageTableViewCellDelegate {
-        
+class CategoryTableViewController: UITableViewController {
 
     //var categoryName = ""
     var category: GroceryHistory.Category? = nil// = GroceryHistory.Category.ETC
@@ -40,28 +39,22 @@ class CategoryTableViewController: UITableViewController, ImageTableViewCellDele
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath)
 
         // Configure the cell...
-        (cell as! ImageTableViewCell).titleLabel?.text = GroceryHistory.Category.allCases[indexPath.row].description
-        (cell as! ImageTableViewCell).titleLabel?.textColor = .label
-        (cell as! ImageTableViewCell).titleLabel?.font = systemFont18
-        (cell as! ImageTableViewCell).titleImage?.image = UIImage(named: GroceryHistory.Category(rawValue: indexPath.row)!.systemName)
-        (cell as! ImageTableViewCell).tag = indexPath.row
-        (cell as! ImageTableViewCell).delegate = self
+        cell.textLabel?.text = GroceryHistory.Category.allCases[indexPath.row].description
+        cell.textLabel?.textColor = .label
+        cell.textLabel?.font = systemFont18
+        cell.tag = indexPath.row
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        //let cell = tableView.cellForRow(at: indexPath)
+        //categoryName = cell?.textLabel?.text ?? ""
         category = GroceryHistory.Category.allCases[indexPath.row]
+        
         performSegue(withIdentifier: "CategorySegue", sender: self)
     }
-    
-    func selectedCell(cell: ImageTableViewCell)
-    {
-        //category = GroceryHistory.Category(rawValue: cell.tag)
-        //performSegue(withIdentifier: "CategorySegue", sender: self)
-    }
-
 
     /*
     // Override to support conditional editing of the table view.

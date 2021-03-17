@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l6Y-WG-yrH">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--냉장고 선택-->
+        <scene sceneID="KqZ-ee-qXz">
+            <objects>
+                <tableViewController id="Drd-Hi-vPt" customClass="SelectFridgeNameTableViewController" customModule="FreshFridge" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="qID-pg-Ok6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="JlM-l9-SSv">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JlM-l9-SSv" id="kdg-Tq-8OE">
+                                    <rect key="frame" x="0.0" y="0.0" width="370" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Drd-Hi-vPt" id="qm5-3V-Syk"/>
+                            <outlet property="delegate" destination="Drd-Hi-vPt" id="YC3-qi-E8r"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="냉장고 선택" id="w1o-vh-Ep4">
+                        <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="svC-hO-8eW">
+                            <connections>
+                                <action selector="backButtonTapped:" destination="Drd-Hi-vPt" id="CQ4-hF-zE6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="backButton" destination="svC-hO-8eW" id="dkX-x4-Tcm"/>
+                        <segue destination="GP0-4c-zWw" kind="unwind" identifier="ToAddGrocery" unwindAction="unwindToAddGrocery:" id="T5H-4d-XRI"/>
+                        <segue destination="GP0-4c-zWw" kind="unwind" identifier="ToGroceryList" unwindAction="unwindToGroceryListTableView:" id="MC4-O0-800"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nnn-y5-THD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="GP0-4c-zWw" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2972" y="-1158"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lYx-qa-P5K">
+            <objects>
+                <navigationController id="l6Y-WG-yrH" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Roc-aP-UtG">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Drd-Hi-vPt" kind="relationship" relationship="rootViewController" id="n9H-bD-VzS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6u6-IW-wcs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2086" y="-1158"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

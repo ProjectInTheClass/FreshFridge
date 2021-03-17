@@ -3,7 +3,8 @@
 
 //  Created by Park Youngeun on 2021/01/20.
 //
-
+// var cartGroceries = [CartGrocery]()
+// class CartGrocery
 
 
 import UIKit
@@ -73,7 +74,7 @@ class ShopingCartTableViewPictureCell : ShopingCartTableViewCell
     override func awakeFromNib() {
         super.awakeFromNib()
         //titleImage.contentMode = .scaleAspectFit
-        titleImage.layer.cornerRadius = 7
+        titleImage.layer.cornerRadius = 3
         titleImage.clipsToBounds = true
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -84,10 +85,9 @@ class ShopingCartTableViewPictureCell : ShopingCartTableViewCell
     {
         super.updateCell(with: inCell)
         
-        if let groceryImage = inCell.info.image,
-           let image = groceryImage.image()
+        if((inCell.info.image) != nil)
         {
-            titleImage.image = image
+            titleImage.image = inCell.info.image?.image()
         }
     }
 }

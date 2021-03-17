@@ -32,13 +32,13 @@ class FridgeTabBarController: UITabBarController {
             {
             case .fridgeTabBar:
                 tabBarItem.badgeColor = UIColor.systemBlue
-                tabBarItem.badgeValue = "+\(DataManager.shared.getGroceries().count)"
+                tabBarItem.badgeValue = "+\(groceries.count)"
             case .purchaseTabBar:
                 tabBarItem.badgeColor = UIColor.systemGray5
                 tabBarItem.badgeValue = "+\(DataManager.shared.getGroceryHistories().count)"
             case .shopingCartTabBar:
                 tabBarItem.badgeColor = UIColor.systemGreen
-                tabBarItem.badgeValue = "+\(DataManager.shared.getCartGroceries().count)"
+                tabBarItem.badgeValue = "+\(cartGroceries.count)"
             case .familyShareTabBar:
                 tabBarItem.badgeColor = UIColor.systemGray5
             }

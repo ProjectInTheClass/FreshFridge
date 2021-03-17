@@ -34,23 +34,14 @@ class PurchaseRecordTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func updateCell(with inCell: GroceryHistory, isFromAddGrocery: Bool = false) {
+    func updateCell(with inCell: GroceryHistory) {
 //        FavoriteMarkButton.isSelected = inCell.favorite
         PurchaseRecordListLabel.text = inCell.title
         
-        if(isFromAddGrocery)
-        {
-            FavoriteMarkButton.isHidden = true
-        }
-        else
-        {
-            FavoriteMarkButton.isHidden = false
-            
-            if inCell.favorite == true {
-                FavoriteMarkButton.setImage(UIImage(named: "favorite.fill")?.withTintColor(.lightGray) , for: .normal)
-            } else {
-                FavoriteMarkButton.setImage(UIImage(named: "favoriteIcon")?.withTintColor(.lightGray), for: .normal)
-            }
+        if inCell.favorite == true {
+            FavoriteMarkButton.setImage(UIImage(named: "favorite.fill")?.withTintColor(.lightGray) , for: .normal)
+        } else {
+            FavoriteMarkButton.setImage(UIImage(named: "favoriteIcon")?.withTintColor(.lightGray), for: .normal)
         }
     }
     

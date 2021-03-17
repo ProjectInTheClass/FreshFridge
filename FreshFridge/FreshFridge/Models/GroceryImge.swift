@@ -12,25 +12,29 @@ import CryptoKit
 class GroceryImage: Codable
 {
     var filename: String = ""
-    var fileExtension: String = "jpg"
-    static var viewSize: CGSize = CGSize(width: 300, height: 300)
-    static var cachedImages: [String:UIImage] = [:]
+    var fileExtension: String = "png"
+    static var viewSize: CGSize = CGSize(width: 192, height: 108)
     
-    init(image: UIImage?, filename: String? = nil)
+    static func getHashName() -> String
     {
-        if let filename = filename
-        {
-            self.filename = filename
-        }
-        else
-        {
-            self.filename = UUID().uuidString
-        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM_dd_yyyy_HH_mm_ss_SSS"
+        let currentTimeString = dateFormatter.string(from: Date())
+        let currentTimeData = Data(currentTimeString.utf8)
+        let hashed = Insecure.MD5.hash(data: currentTimeData)//let hashed = SHA256.hash(data: currentTimeData)
+        let name = hashed.compactMap { String(format: "%02x", $0) }.joined()
+        return name
+    }
+    
+    init(image: UIImage?)
+    {
+        filename = GroceryImage.getHashName()
+        
+        print(filename)
         
         // image rotation & resizing
         if let image = image
         {
-            // image rotation & resizing
             let size = image.size
 
             let widthRatio  = GroceryImage.viewSize.width  / size.width
@@ -38,66 +42,33 @@ class GroceryImage: Codable
 
             // Figure out what our orientation is, and use that to form the rectangle
             var newSize: CGSize
-            if(widthRatio > heightRatio)
-            {
+            if(widthRatio > heightRatio) {
                 newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-            } else
-            {
+            } else {
                 newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
             }
-            
-            print("image.size : ")
-            print(image.size)
-            print("newSize : ")
-            print(newSize)
             
             UIGraphicsBeginImageContextWithOptions(newSize, false, image.scale);
             let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
             image.draw(in: rect)
 
-            var normalizedImage : UIImage! = UIGraphicsGetImageFromCurrentImageContext()
+            let normalizedImage : UIImage! = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            if(normalizedImage == nil)
+            if(normalizedImage != nil)
             {
-                normalizedImage = image
-            }
-            
-            if let data = normalizedImage.jpegData(compressionQuality: 0.5)//.pngData()
-            {
-                GroceryImage.cachedImages[self.filename] = UIImage(data: data)
+                makeImage(uiImage: normalizedImage)
             }
             else
             {
-                GroceryImage.cachedImages[self.filename] = normalizedImage
+                print("rotation failed.")
+                makeImage(uiImage: image)
             }
-            
         }
     }
-    
-    func image() -> UIImage?//completion: @escaping (UIImage?)->Void )// -> UIImage?
+
+    func image() -> UIImage?
     {
-        if let image = GroceryImage.cachedImages[filename]
-        {
-            return image
-        }
-        
-        return nil
-    }
-    
-    func resetFilename(name: String)
-    {
-        if let image = GroceryImage.cachedImages[self.filename]
-        {
-            GroceryImage.cachedImages[name] = image
-            GroceryImage.cachedImages.removeValue(forKey: self.filename)
-            
-            self.filename = name
-        }
-    }
-    
-    static func loadImage(filename: String) -> UIImage?
-    {
-        let fullFilename = getDocumentsDirectory().appendingPathComponent("\(filename).jpg")
+        let fullFilename = getDocumentsDirectory().appendingPathComponent("\(filename).\(fileExtension)")
         if let data = try? Data(contentsOf: fullFilename)
         {
             return UIImage(data: data)
@@ -106,13 +77,14 @@ class GroceryImage: Codable
         return nil
     }
     
-    static func saveImage(image: UIImage?, filename: String)
+    
+    
+    func makeImage(uiImage: UIImage)
     {
         // file로 저장
-        if let image = image,
-           let data = image.jpegData(compressionQuality: 0.5)//.pngData()
+        if let data = uiImage.pngData()
         {
-            let fullFilename = getDocumentsDirectory().appendingPathComponent("\(filename).jpg")
+            let fullFilename = getDocumentsDirectory().appendingPathComponent("\(filename).\(fileExtension)")
             try? data.write(to: fullFilename)
         }
     }

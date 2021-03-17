@@ -118,10 +118,10 @@ class WebScrapper
             guard let data = data, error == nil else { return }
             print(response?.suggestedFilename ?? url.lastPathComponent)
             print("Download Finished")
-            DispatchQueue.main.async()
-            {
+            DispatchQueue.main.async() {
+                //ui!.image = UIImage(data: data)
+                //let groceryImage = GroceryImage(image: UIImage(data: data))
                 ui?.setImage(UIImage(data: data), for: .normal)
-                ui?.setTitle(nil, for: .normal)
                 
                 completion()
             }

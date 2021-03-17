@@ -29,14 +29,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var resultLabel: UILabel! = nil
     var backButton: UIButton! = nil
     
-    override var shouldAutorotate: Bool {
-            return false
-        }
-
-        override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-            return .portrait
-        }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -110,7 +102,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         labelView = UILabel()
         labelView.frame = CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5) + 44, y: Int(centerY) + Int(Double(boxHeight) * 0.5), width: boxWidth, height: 44)
-        labelView.text = "프레임 안에 바코드를 위치시키세요.".localized()
+        labelView.text = "프레임 안에 바코드를 위치시키세요".localized()
         labelView.textColor = UIColor.white
         labelView.shadowColor = .black
         labelView.textAlignment = .left
@@ -133,7 +125,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         view.addSubview(backButton)
         
         captureSession.startRunning()
-        (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
 
         NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
@@ -202,8 +193,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
         if (captureSession?.isRunning == false) {
             captureSession.startRunning()
-            
-            (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
         }
         
         updateView()
@@ -214,8 +203,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
         if (captureSession?.isRunning == true) {
             captureSession.stopRunning()
-            
-            (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .all
         }
     }
 
@@ -237,8 +224,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             else
             {
                 captureSession.stopRunning()
-                (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .all
-                
                 dismiss(animated: true)
             }
         }
@@ -256,18 +241,13 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         return true
     }
 
-//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-//        return .portrait
-//    }
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
     
     @IBAction func backButtonTapped(_ sender: Any)
     {
         captureSession.stopRunning()
-        
-        (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .all
-        
         dismiss(animated: true)
     }
 }
-
-
