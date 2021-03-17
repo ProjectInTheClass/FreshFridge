@@ -43,7 +43,10 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        getRequestManager().purchaseRecordViewController = self
+        
+        
         //tableView.cellLayoutMarginsFollowReadableWidth = true
         
         SearchBar.delegate = self
@@ -54,10 +57,6 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         {
             savedCategorySortEnable = isPurchaseRecordCategorySortButtonOn
             isPurchaseRecordCategorySortButtonOn = true
-        }
-        else
-        {
-            getRequestManager().purchaseRecordViewController = self
         }
         
         updateButtons()
