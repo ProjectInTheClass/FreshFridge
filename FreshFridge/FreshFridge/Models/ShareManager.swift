@@ -97,6 +97,13 @@ class ShareManager
         }
     }
     
+    func resetUpdating()
+    {
+        lastestProductUpdateAt = -1
+        lastestCartUpdatedAt = -1
+        lastestRefriUpdateAt = -1
+    }
+    
     func initShareManager()
     {
         if( publicCode.isEmpty == false && getServerURL().isEmpty == false )
