@@ -238,6 +238,7 @@ class RequestToServer : RequestInterface
         if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
         {
             productID = groceryHistory.id.id
+            DataManager.shared.updateGroceryHistory(id: groceryHistory.id, image: image)
             
             if let image = image,
                let uiImage = image.image()
@@ -388,6 +389,7 @@ class RequestToServer : RequestInterface
         if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
         {
             productID = groceryHistory.id.id
+            DataManager.shared.updateGroceryHistory(id: groceryHistory.id, image: image)
             
             // processing image
             if let image = image,
@@ -518,6 +520,8 @@ class RequestToServer : RequestInterface
         if let image = image,
             let uiImage = image.image()
         {
+            DataManager.shared.updateGroceryHistory(id: id, image: image)
+            
             ShareManager.shared.uploadImage(image: uiImage, filename: image.filename)
             {
                 (imageName: String) in
