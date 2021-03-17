@@ -558,7 +558,13 @@ class RequestToLocal : RequestInterface
     {
         if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
         {
+            
             DataManager.shared.moveToTheFrontGroceryHistory(groceryHistory: groceryHistory)
+            
+            if(groceryHistory.image?.filename != image?.filename)
+            {
+               DataManager.shared.updateGroceryHistory(id: groceryHistory.id, image: image)
+            }
         }
         else
         {
@@ -638,6 +644,11 @@ class RequestToLocal : RequestInterface
         if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
         {
             DataManager.shared.moveToTheFrontGroceryHistory(groceryHistory: groceryHistory)
+            
+            if(groceryHistory.image?.filename != image?.filename)
+            {
+               DataManager.shared.updateGroceryHistory(id: groceryHistory.id, image: image)
+            }
         }
         else
         {
