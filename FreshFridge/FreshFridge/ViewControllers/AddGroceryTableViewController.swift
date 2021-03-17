@@ -1,9 +1,9 @@
-//
-//  AddGroceryTableViewController.swift
-//  GroceryListTableView
-//
-//  Created by changae choi on 2021/01/02.
-//
+    /*
+    AddGroceryTableViewController.swift
+    GroceryListTableView
+
+    Created by changae choi on 2021/01/02.
+    */
 
 import UIKit
 
@@ -13,6 +13,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     @IBOutlet weak var storageSegment: UISegmentedControl!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var categoryButton: UIButton!
+    @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var countTextField: UITextField!
     @IBOutlet weak var countDecreaseButton: UIButton!
     @IBOutlet weak var countIncreaseButton: UIButton!
@@ -83,6 +84,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         noteTextField.delegate = self
         
         pictureButton.imageView?.contentMode = .scaleAspectFit
+        pictureButton.setTitle("사진 추가".localized(), for: .normal)
         
         if(isSupportBarcode)
         {
@@ -301,9 +303,11 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
         }
         
-        if(groceryImage != nil)
+        if let groceryImage = groceryImage,
+           let image = groceryImage.image()
         {
-            pictureButton.setImage(groceryImage?.image(), for: .normal)
+            self.pictureButton.setImage(image, for: .normal)
+            self.pictureButton.setTitle(nil, for: .normal)
         }
         
         storageSegment.selectedSegmentIndex = storage.rawValue
@@ -311,6 +315,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         if let category = category
         {
             categoryButton.setTitle(category.description, for: .normal)
+            categoryImage.image = UIImage(named: category.systemName)
         }
     }
     
@@ -555,8 +560,12 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         
         groceryImage = GroceryImage(image: selectedImage)
-        pictureButton.setImage(groceryImage?.image(), for: .normal)
-        
+        if let groceryImage = groceryImage,
+           let image = groceryImage.image()
+        {
+            self.pictureButton.setImage(image, for: .normal)
+            self.pictureButton.setTitle(nil, for: .normal)
+        }
         enableCompletButton()
 
         dismiss(animated: true, completion: nil)
@@ -578,6 +587,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         
         nameTextField.text = ""
         pictureButton.setImage(nil, for: .normal)
+        pictureButton.setTitle("사진 추가".localized(), for: .normal)
         
         let data = barcodeData.filter({$0.barcodeGTIN == barcode})
         if data.count > 0
@@ -682,7 +692,12 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 if let image = UIImage(named: sourceViewController.selectedName)
                 {
                     groceryImage = GroceryImage(image: image)
-                    pictureButton.setImage(groceryImage?.image(), for: .normal)
+                    if let groceryImage = groceryImage,
+                       let image = groceryImage.image()
+                    {
+                        self.pictureButton.setImage(image, for: .normal)
+                        self.pictureButton.setTitle(nil, for: .normal)
+                    }
                 }
                 
                 updateTableView()
@@ -709,6 +724,29 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 {
                     grocery.fridgeName = sourceViewController.fridgeName
                 }
+            }
+        }
+        else if(unwindSegue.identifier == "ToAddGroceryFromPurchase")
+        {
+            let sourceViewController = unwindSegue.source as! PurchaseRecordTableViewController
+            if let selectedGroceryHistory = sourceViewController.selectedGroceryHistory
+            {
+                nameTextField.text = selectedGroceryHistory.title
+                category = selectedGroceryHistory.category
+                
+                if let image = UIImage(named: selectedGroceryHistory.title)
+                {
+                    groceryImage = GroceryImage(image: image)
+                    if let groceryImage = groceryImage,
+                       let image = groceryImage.image()
+                    {
+                        self.pictureButton.setImage(image, for: .normal)
+                        self.pictureButton.setTitle(nil, for: .normal)
+                    }
+                }
+                
+                updateTableView()
+                enableCompletButton()
             }
         }
     }
@@ -823,6 +861,12 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             {
                 controller.fridgeName = grocery!.fridgeName
             }
+        }
+        else if(segue.identifier == "DefaultNameSegue")
+        {
+            let navController = segue.destination as! UINavigationController
+            let controller = navController.topViewController as! PurchaseRecordTableViewController
+            controller.isFromAddGrocery = true
         }
     }
     

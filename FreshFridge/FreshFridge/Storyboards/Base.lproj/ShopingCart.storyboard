@@ -20,191 +20,232 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ens-ro-v3F">
-                                    <rect key="frame" x="10" y="5" width="44" height="44"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="44" id="RZK-bK-HvJ"/>
-                                    </constraints>
-                                    <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                    <state key="normal" image="check"/>
-                                    <connections>
-                                        <action selector="allCheckButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="Ug6-zq-cue"/>
-                                    </connections>
-                                </button>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hiG-8y-Ach">
-                                    <rect key="frame" x="59" y="0.0" width="275" height="54"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hiG-8y-Ach">
+                                    <rect key="frame" x="21.5" y="0.0" width="371" height="54"/>
                                     <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ens-ro-v3F">
+                                            <rect key="frame" x="0.0" y="0.0" width="36" height="54"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="36" id="RZK-bK-HvJ"/>
+                                            </constraints>
+                                            <inset key="contentEdgeInsets" minX="6" minY="15" maxX="6" maxY="15"/>
+                                            <state key="normal" image="check"/>
+                                            <connections>
+                                                <action selector="allCheckButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="Ug6-zq-cue"/>
+                                            </connections>
+                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y3m-mM-dz1">
-                                            <rect key="frame" x="0.0" y="0.0" width="137.5" height="54"/>
+                                            <rect key="frame" x="46" y="0.0" width="100" height="54"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="LdF-X4-YQp"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="분류별"/>
                                             <connections>
                                                 <action selector="categoryButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="8lM-7V-4RF"/>
                                             </connections>
                                         </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0K-qu-Pqe">
+                                            <rect key="frame" x="156" y="0.0" width="25" height="54"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSf-JB-LAc">
-                                            <rect key="frame" x="137.5" y="0.0" width="137.5" height="54"/>
+                                            <rect key="frame" x="191" y="0.0" width="100" height="54"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="e7w-eq-spI"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="최신순"/>
                                             <connections>
                                                 <action selector="RecentSortButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="9qX-9C-2E9"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ld-gx-Liw" userLabel="AllCheck">
+                                            <rect key="frame" x="301" y="0.0" width="70" height="54"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="70" id="tre-5z-XWF"/>
+                                            </constraints>
+                                            <color key="tintColor" systemColor="linkColor"/>
+                                            <state key="normal" title="" image="freshFridge_icon.fill"/>
+                                            <connections>
+                                                <action selector="ToFridgeButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="Nxe-FD-x3N"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ld-gx-Liw" userLabel="AllCheck">
-                                    <rect key="frame" x="334" y="0.0" width="70" height="54"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="70" id="tre-5z-XWF"/>
-                                    </constraints>
-                                    <color key="tintColor" systemColor="linkColor"/>
-                                    <state key="normal" title="" image="freshFridge_icon.fill"/>
-                                    <connections>
-                                        <action selector="ToFridgeButtonTapped:" destination="xCs-Wd-AV3" eventType="touchUpInside" id="Nxe-FD-x3N"/>
-                                    </connections>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
+                                <constraint firstItem="hiG-8y-Ach" firstAttribute="centerX" secondItem="eN9-3t-pwY" secondAttribute="centerX" id="4rL-tW-dBq"/>
                                 <constraint firstItem="hiG-8y-Ach" firstAttribute="top" secondItem="eN9-3t-pwY" secondAttribute="top" id="XoE-3y-7vw"/>
-                                <constraint firstItem="hiG-8y-Ach" firstAttribute="leading" secondItem="ens-ro-v3F" secondAttribute="trailing" constant="5" id="dQY-y1-pdD"/>
-                                <constraint firstItem="ens-ro-v3F" firstAttribute="top" secondItem="eN9-3t-pwY" secondAttribute="top" constant="5" id="gcp-wS-She"/>
-                                <constraint firstItem="ens-ro-v3F" firstAttribute="leading" secondItem="eN9-3t-pwY" secondAttribute="leading" constant="10" id="jVM-K8-OHF"/>
-                                <constraint firstAttribute="bottom" secondItem="ens-ro-v3F" secondAttribute="bottom" constant="5" id="kcu-ai-L8U"/>
-                                <constraint firstItem="4ld-gx-Liw" firstAttribute="top" secondItem="eN9-3t-pwY" secondAttribute="top" id="liG-zu-gzK"/>
-                                <constraint firstAttribute="bottom" secondItem="4ld-gx-Liw" secondAttribute="bottom" id="roa-qP-3WF"/>
+                                <constraint firstItem="hiG-8y-Ach" firstAttribute="width" secondItem="eN9-3t-pwY" secondAttribute="width" multiplier="0.8" constant="40" id="kfB-o1-62o"/>
                                 <constraint firstAttribute="bottom" secondItem="hiG-8y-Ach" secondAttribute="bottom" id="tIu-LM-CLc"/>
-                                <constraint firstAttribute="trailing" secondItem="4ld-gx-Liw" secondAttribute="trailing" constant="10" id="v7l-s1-KwA"/>
-                                <constraint firstItem="4ld-gx-Liw" firstAttribute="leading" secondItem="hiG-8y-Ach" secondAttribute="trailing" id="vOR-bZ-GYD"/>
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="shopingCartCell" rowHeight="60" id="gUr-1M-w14" customClass="ShopingCartTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="82" width="414" height="60"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="shopingCartCell" rowHeight="54" id="gUr-1M-w14" customClass="ShopingCartTableViewCell" customModule="FreshFridge" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="82" width="414" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gUr-1M-w14" id="RmL-Bl-rn3">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5m-9V-DOS">
-                                            <rect key="frame" x="10" y="8" width="44" height="44"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="44" id="qtB-jM-3bi"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                            <state key="normal" image="check"/>
-                                            <connections>
-                                                <action selector="CheckCartButtonTapped:" destination="gUr-1M-w14" eventType="touchUpInside" id="CqW-UL-lNC"/>
-                                            </connections>
-                                        </button>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Tyy-nd-gk4">
-                                            <rect key="frame" x="54" y="5" width="340" height="50"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="mjy-X6-PyU">
+                                            <rect key="frame" x="21.5" y="5" width="371" height="44"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqg-is-4gC">
-                                                    <rect key="frame" x="0.0" y="0.0" width="290" height="50"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <color key="highlightedColor" systemColor="labelColor"/>
-                                                </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="47h-4d-RwG">
-                                                    <rect key="frame" x="290" y="0.0" width="50" height="50"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EW0-Ag-y6b">
+                                                    <rect key="frame" x="0.0" y="0.0" width="36" height="44"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcN-fc-fUN">
+                                                            <rect key="frame" x="3" y="3" width="30" height="38"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="30" id="11j-ir-4xH"/>
+                                                                <constraint firstAttribute="height" constant="44" id="LNt-Un-3RV"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <inset key="contentEdgeInsets" minX="3" minY="10" maxX="3" maxY="10"/>
+                                                            <state key="normal" image="check"/>
+                                                            <connections>
+                                                                <action selector="CheckCartButtonTapped:" destination="gUr-1M-w14" eventType="touchUpInside" id="1aB-CU-3WM"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="ut1-FM-3gX"/>
+                                                        <constraint firstItem="EcN-fc-fUN" firstAttribute="top" secondItem="EW0-Ag-y6b" secondAttribute="top" constant="3" id="1Xn-Vu-SXM"/>
+                                                        <constraint firstAttribute="bottom" secondItem="EcN-fc-fUN" secondAttribute="bottom" constant="3" id="HqN-g8-foT"/>
+                                                        <constraint firstAttribute="height" constant="50" id="RR8-qf-Az8"/>
+                                                        <constraint firstAttribute="width" constant="36" id="hdL-pe-2if"/>
+                                                        <constraint firstItem="EcN-fc-fUN" firstAttribute="leading" secondItem="EW0-Ag-y6b" secondAttribute="leading" constant="3" id="npk-3p-yqO"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                    <connections>
-                                                        <action selector="countTextFieldEdited:" destination="gUr-1M-w14" eventType="editingDidEnd" id="b0p-zn-ln4"/>
-                                                    </connections>
-                                                </textField>
+                                                </view>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Tyy-nd-gk4">
+                                                    <rect key="frame" x="43" y="0.0" width="328" height="44"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqg-is-4gC">
+                                                            <rect key="frame" x="0.0" y="0.0" width="268" height="44"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <color key="highlightedColor" systemColor="labelColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="47h-4d-RwG">
+                                                            <rect key="frame" x="278" y="0.0" width="50" height="44"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="WJX-9e-BsY"/>
+                                                                <constraint firstAttribute="width" constant="50" id="ut1-FM-3gX"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                            <connections>
+                                                                <action selector="countTextFieldEdited:" destination="gUr-1M-w14" eventType="editingDidEnd" id="b0p-zn-ln4"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="Fkl-ok-n5x"/>
+                                                    </constraints>
+                                                </stackView>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="200" id="C4p-Wu-JAV"/>
-                                                <constraint firstAttribute="height" constant="50" id="adF-Sa-gbr"/>
-                                            </constraints>
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="Tyy-nd-gk4" secondAttribute="bottom" constant="5" id="BJA-Ob-kgT"/>
-                                        <constraint firstItem="y5m-9V-DOS" firstAttribute="leading" secondItem="RmL-Bl-rn3" secondAttribute="leading" constant="10" id="G2n-pX-cHu"/>
-                                        <constraint firstAttribute="trailing" secondItem="Tyy-nd-gk4" secondAttribute="trailing" constant="20" id="PbN-V1-8VO"/>
-                                        <constraint firstAttribute="bottom" secondItem="y5m-9V-DOS" secondAttribute="bottom" constant="8" id="VNf-4R-Qf9"/>
-                                        <constraint firstItem="Tyy-nd-gk4" firstAttribute="leading" secondItem="y5m-9V-DOS" secondAttribute="trailing" id="dcX-py-k8k"/>
-                                        <constraint firstItem="y5m-9V-DOS" firstAttribute="top" secondItem="RmL-Bl-rn3" secondAttribute="top" constant="8" id="i5Z-5p-8PO"/>
-                                        <constraint firstItem="Tyy-nd-gk4" firstAttribute="top" secondItem="RmL-Bl-rn3" secondAttribute="top" constant="5" id="l24-zZ-srW"/>
+                                        <constraint firstItem="mjy-X6-PyU" firstAttribute="centerX" secondItem="RmL-Bl-rn3" secondAttribute="centerX" id="0Yb-ol-l90"/>
+                                        <constraint firstAttribute="bottom" secondItem="mjy-X6-PyU" secondAttribute="bottom" constant="5" id="DkT-D0-iBQ"/>
+                                        <constraint firstItem="mjy-X6-PyU" firstAttribute="width" secondItem="RmL-Bl-rn3" secondAttribute="width" multiplier="0.8" constant="40" id="Gcj-RD-Qyz"/>
+                                        <constraint firstItem="mjy-X6-PyU" firstAttribute="top" secondItem="RmL-Bl-rn3" secondAttribute="top" constant="5" id="pQf-lL-iHx"/>
+                                        <constraint firstItem="mjy-X6-PyU" firstAttribute="centerY" secondItem="RmL-Bl-rn3" secondAttribute="centerY" id="tVr-jm-lQ5"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <outlet property="CheckCartButton" destination="y5m-9V-DOS" id="S8q-of-hIP"/>
+                                    <outlet property="CheckCartButton" destination="EcN-fc-fUN" id="Qqq-XX-aA0"/>
                                     <outlet property="countTextField" destination="47h-4d-RwG" id="7c3-qN-R0B"/>
                                     <outlet property="titleLabel" destination="cqg-is-4gC" id="GwP-mR-fGw"/>
                                     <segue destination="Ga8-Al-37H" kind="presentation" identifier="EditShoppingCart" trigger="accessoryAction" id="ixG-Gd-AVa"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="shopingCartPictureCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="shopingCartPictureCell" rowHeight="60" id="0B6-hM-wAu" customClass="ShopingCartTableViewPictureCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="142" width="414" height="60"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="shopingCartPictureCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="shopingCartPictureCell" rowHeight="54" id="0B6-hM-wAu" customClass="ShopingCartTableViewPictureCell" customModule="FreshFridge" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="136" width="414" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0B6-hM-wAu" id="zN6-Zp-qay">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSe-q0-ohD">
-                                            <rect key="frame" x="10" y="8" width="44" height="44"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="44" id="L2l-VV-Kyb"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                            <state key="normal" image="check"/>
-                                            <connections>
-                                                <action selector="CheckCartButtonTapped:" destination="0B6-hM-wAu" eventType="touchUpInside" id="D0a-6Y-EFf"/>
-                                            </connections>
-                                        </button>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="li8-e8-frZ">
-                                            <rect key="frame" x="54" y="5" width="340" height="50"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="vzz-Vr-hgG">
+                                            <rect key="frame" x="21.5" y="5" width="371" height="44"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:gh3-Ep-HRa:image" translatesAutoresizingMaskIntoConstraints="NO" id="gh3-Ep-HRa">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qCF-0H-WOU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="36" height="44"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSe-q0-ohD">
+                                                            <rect key="frame" x="3" y="3" width="30" height="38"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="30" id="L2l-VV-Kyb"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <inset key="contentEdgeInsets" minX="3" minY="10" maxX="3" maxY="10"/>
+                                                            <state key="normal" image="check"/>
+                                                            <connections>
+                                                                <action selector="CheckCartButtonTapped:" destination="0B6-hM-wAu" eventType="touchUpInside" id="D0a-6Y-EFf"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="lG3-A0-RLS"/>
-                                                        <constraint firstAttribute="width" constant="50" id="tho-xx-wkY"/>
+                                                        <constraint firstItem="nSe-q0-ohD" firstAttribute="leading" secondItem="qCF-0H-WOU" secondAttribute="leading" constant="3" id="C0M-ZG-kEX"/>
+                                                        <constraint firstAttribute="width" constant="36" id="T75-Y2-GCU"/>
+                                                        <constraint firstAttribute="bottom" secondItem="nSe-q0-ohD" secondAttribute="bottom" constant="3" id="dJO-57-HTU"/>
+                                                        <constraint firstItem="nSe-q0-ohD" firstAttribute="top" secondItem="qCF-0H-WOU" secondAttribute="top" constant="3" id="gj0-JO-etq"/>
+                                                        <constraint firstAttribute="height" constant="50" id="rFQ-63-gxH"/>
                                                     </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewp-u0-1xQ">
-                                                    <rect key="frame" x="60" y="0.0" width="220" height="50"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <color key="highlightedColor" systemColor="labelColor"/>
-                                                </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OWS-Ci-PkK">
-                                                    <rect key="frame" x="290" y="0.0" width="50" height="50"/>
+                                                </view>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="li8-e8-frZ">
+                                                    <rect key="frame" x="43" y="0.0" width="328" height="44"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:gh3-Ep-HRa:image" translatesAutoresizingMaskIntoConstraints="NO" id="gh3-Ep-HRa">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="lG3-A0-RLS"/>
+                                                                <constraint firstAttribute="width" constant="50" id="tho-xx-wkY"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewp-u0-1xQ">
+                                                            <rect key="frame" x="60" y="0.0" width="208" height="44"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <color key="highlightedColor" systemColor="labelColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OWS-Ci-PkK">
+                                                            <rect key="frame" x="278" y="0.0" width="50" height="44"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="50" id="5I8-1a-gBi"/>
+                                                                <constraint firstAttribute="height" constant="50" id="kSo-0l-6TS"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                            <connections>
+                                                                <action selector="countTextFieldEdited:" destination="0B6-hM-wAu" eventType="editingDidEnd" id="DEu-Bf-uvu"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="5I8-1a-gBi"/>
+                                                        <constraint firstItem="gh3-Ep-HRa" firstAttribute="top" secondItem="li8-e8-frZ" secondAttribute="top" id="2MH-0n-88T"/>
+                                                        <constraint firstAttribute="trailing" secondItem="OWS-Ci-PkK" secondAttribute="trailing" id="CMg-nE-RDu"/>
+                                                        <constraint firstItem="ewp-u0-1xQ" firstAttribute="top" secondItem="li8-e8-frZ" secondAttribute="top" id="Gml-5W-fLR"/>
+                                                        <constraint firstAttribute="height" constant="50" id="HnR-H3-5cq"/>
+                                                        <constraint firstItem="OWS-Ci-PkK" firstAttribute="top" secondItem="li8-e8-frZ" secondAttribute="top" id="oOW-Sc-n0E"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                    <connections>
-                                                        <action selector="countTextFieldEdited:" destination="0B6-hM-wAu" eventType="editingDidEnd" id="DEu-Bf-uvu"/>
-                                                    </connections>
-                                                </textField>
+                                                </stackView>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="gh3-Ep-HRa" firstAttribute="top" secondItem="li8-e8-frZ" secondAttribute="top" id="2MH-0n-88T"/>
-                                                <constraint firstAttribute="height" constant="50" id="HnR-H3-5cq"/>
-                                            </constraints>
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="nSe-q0-ohD" firstAttribute="leading" secondItem="zN6-Zp-qay" secondAttribute="leading" constant="10" id="FqM-pf-xD5"/>
-                                        <constraint firstItem="li8-e8-frZ" firstAttribute="top" secondItem="zN6-Zp-qay" secondAttribute="top" constant="5" id="LH9-FE-fYv"/>
-                                        <constraint firstItem="nSe-q0-ohD" firstAttribute="top" secondItem="zN6-Zp-qay" secondAttribute="top" constant="8" id="U0D-md-d6w"/>
-                                        <constraint firstAttribute="trailing" secondItem="li8-e8-frZ" secondAttribute="trailing" constant="20" id="dN3-dE-cgG"/>
-                                        <constraint firstAttribute="bottom" secondItem="li8-e8-frZ" secondAttribute="bottom" constant="5" id="ej3-uf-K4N"/>
-                                        <constraint firstItem="li8-e8-frZ" firstAttribute="leading" secondItem="nSe-q0-ohD" secondAttribute="trailing" id="lUU-bp-g61"/>
-                                        <constraint firstAttribute="bottom" secondItem="nSe-q0-ohD" secondAttribute="bottom" constant="8" id="pvj-Ed-LNN"/>
+                                        <constraint firstAttribute="bottom" secondItem="vzz-Vr-hgG" secondAttribute="bottom" constant="5" id="9yU-WW-4T8"/>
+                                        <constraint firstItem="vzz-Vr-hgG" firstAttribute="centerX" secondItem="zN6-Zp-qay" secondAttribute="centerX" id="Bn9-Pb-Rmt"/>
+                                        <constraint firstItem="vzz-Vr-hgG" firstAttribute="top" secondItem="zN6-Zp-qay" secondAttribute="top" constant="5" id="Mhi-oT-PbW"/>
+                                        <constraint firstItem="vzz-Vr-hgG" firstAttribute="width" secondItem="zN6-Zp-qay" secondAttribute="width" multiplier="0.8" constant="40" id="RZ9-MM-5GZ"/>
+                                        <constraint firstItem="vzz-Vr-hgG" firstAttribute="centerY" secondItem="zN6-Zp-qay" secondAttribute="centerY" id="kYQ-yV-I7f"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>

@@ -7,15 +7,59 @@
 
 import UIKit
 
+//func getAppDelegate() -> AppDelegate
+//{
+//    return (UIApplication.shared.delegate as! AppDelegate)
+//}
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
-    var grantedAuthorization: Bool = false
+    //var grantedAuthorization: Bool = false
     var timer = Timer()
+    var restrictRotation:UIInterfaceOrientationMask = .all
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        ShareManager.shared.beginShareManager()
+        scheduledTimerWithTimeInterval()
+        
+        if( ShareManager.shared.publicCode.isEmpty == false && ShareManager.shared.getServerURL().isEmpty == false )
+        {
+            ShareManager.shared.initShareManager()
+        }
+        else
+        {
+            DataManager.shared.loadGroceryHistory()
+            DataManager.shared.loadGrocery()
+            DataManager.shared.loadCartGrocery()
+             
+            // link groceries and groceryHistories
+            for grocery in DataManager.shared.getGroceries().reversed()
+            {
+                if let info = DataManager.shared.getGroceryHistory(title: grocery.info.title, category: grocery.info.category)
+                {
+                    grocery.info = info
+                }
+                else
+                {
+                    grocery.info = DataManager.nilGroceryHistory
+                }
+            }
+            
+            // link cartGroceries and groceryHistories
+            for cartGrocery in DataManager.shared.getCartGroceries().reversed()
+            {
+                if let info = DataManager.shared.getGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category)
+                {
+                    cartGrocery.info = info
+                }
+                else
+                {
+                    cartGrocery.info = DataManager.nilGroceryHistory
+                }
+            }
+        }
         
         defaultNames = getDefaultNames()
         
@@ -53,52 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             selectedFridgeIndex = UserDefaults.standard.array(forKey: "selectedFridgeIndex") as? [Int] ?? [0,1,2,3]
         }
         
-        // 테스트용 sample date loading
-        /*
-        groceryHistories = GroceryHistory.loadSampleGroceryHistory()
-        groceries = Grocery.loadSampleGrocery()
-        cartGroceries = CartGrocery.loadSampleCartGrocery()
-        */
         
-        let langStr = Locale.current.languageCode
-        DataManager.shared.loadGroceryHistory()
-        
-        if let savedGroceries = Grocery.loadGrocery()
-        {
-            groceries = savedGroceries
-        }
-        else
-        {
-            if(langStr == "ko")
-            {
-                groceries = Grocery.loadSampleGrocery()
-            }
-        }
-         
-         if let savedCartGroceries = CartGrocery.loadCartGrocery()
-         {
-             cartGroceries = savedCartGroceries
-         }
-         else
-         {
-            if(langStr == "ko")
-            {
-                cartGroceries = CartGrocery.loadSampleCartGrocery()
-            }
-         }
-         
-        
-        // link groceries and groceryHistories
-        for grocery in groceries.reversed()
-        {
-            grocery.info = DataManager.shared.addGroceryHistory(title: grocery.info.title, category: grocery.info.category, updateDate: false)
-        }
-        
-        // link cartGroceries and groceryHistories
-        for cartGrocery in cartGroceries.reversed()
-        {
-            cartGrocery.info = DataManager.shared.addGroceryHistory(title: cartGrocery.info.title, category: cartGrocery.info.category, updateDate: false)
-        }
         
         // read barcode data
         let filename = "BarcodeData"
@@ -153,115 +152,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         center.requestAuthorization(options: options)
         {
             (granted, error) in
-            if granted
-            {
-                self.grantedAuthorization = granted
-//
-//                {
-//                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-//
-//
-//                }
-            }
+//            if granted
+//            {
+//                self.grantedAuthorization = granted
+////
+////                {
+////                    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+////
+////
+////                }
+//            }
         }
         
         return true
     }
     
-    func removeAlarm(grocery: Grocery)
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask
     {
-        for n in -2...2
-        {
-            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [grocery.id.uuidString + "_\(n)"])
-        }
-    }
-    
-    func setAlarm(grocery : Grocery)
-    {
-        let expiration = grocery.dueDate.getExpiration()
-       
-        if(expiration <= -2)
-        {
-            let n = -2
-            let content = UNMutableNotificationContent()
-            content.title = "기간 만료 알림".localized()
-            content.body = "%@의 보관 기간이 %d일 남았습니다.".localized(with: [grocery.info.title, -n])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
-            //print(content.body+grocery.id.uuidString+"_\(n)")
-            content.categoryIdentifier = "alarm"
-            content.userInfo = ["customData": "fizzbuzz"]
-            content.sound = .default
-            
-            let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-            //print(nextTriggerDate)
-            let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
-            
-            let request = UNNotificationRequest(identifier: grocery.id.uuidString + "_\(n)", content: content, trigger: trigger)
-            UNUserNotificationCenter.current().add(request)
-        }
-        
-        if(expiration <= -1)
-        {
-            let n = -1
-            let content = UNMutableNotificationContent()
-            content.title = "기간 만료 알림".localized()
-            content.body = "%@의 보관 기간이 %d일 남았습니다.".localized(with: [grocery.info.title, -n])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
-            //print(content.body+grocery.id.uuidString + "_\(n)")
-            content.categoryIdentifier = "alarm"
-            content.userInfo = ["customData": "fizzbuzz"]
-            content.sound = .default
-            
-            let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-            //print(nextTriggerDate)
-            let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
-            
-            let request = UNNotificationRequest(identifier: grocery.id.uuidString + "_\(n)", content: content, trigger: trigger)
-            UNUserNotificationCenter.current().add(request)
-        }
-        
-        if(expiration < 3)
-        {
-            let content = UNMutableNotificationContent()
-            content.title = "기간 만료 알림".localized()
-            //content.body = "\(grocery.info.title)의 보관 기간이 만료되었습니다.."
-            content.body = "%@의 보관 기간이 만료되었습니다.".localized(with: [grocery.info.title])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
-            
-            content.categoryIdentifier = "alarm"
-            content.userInfo = ["customData": "fizzbuzz"]
-            content.sound = .default
-            
-            for n in 0...2
-            {
-                //print(content.body+grocery.id.uuidString + "_\(n)")
-                
-                let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-                //sprint(nextTriggerDate)
-                let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
-                
-                let request = UNNotificationRequest(identifier: grocery.id.uuidString + "_\(n)", content: content, trigger: trigger)
-                UNUserNotificationCenter.current().add(request)
-            }
-        }
-    }
-    
-    func resetAllAlarms()
-    {
-        guard  self.grantedAuthorization == true else { return }
-        
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        
-        for grocery in groceries
-        {
-            setAlarm(grocery: grocery)
-        }
-    }
-    
-    func resetAlarm(grocery: Grocery)
-    {
-        removeAlarm(grocery: grocery)
-        setAlarm(grocery: grocery)
+        return self.restrictRotation
     }
 
     // MARK: UISceneSession Lifecycle
@@ -290,13 +198,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func scheduledTimerWithTimeInterval(){
         // Scheduling timer to Call the function "updateCounting" with the interval of 1 seconds
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
     }
 
-    @objc func updateCounting(){
+    @objc func updateCounting()
+    {
         NSLog("counting..")
+        
+        ShareManager.shared.update(async: true)
     }
-
 }
 
 extension UserDefaults {
