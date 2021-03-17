@@ -495,7 +495,8 @@ func getDefaultNames() -> [String:GroceryHistory.Category]
         "우유":.DrinksAndSnacks,
         "소금":.SeasonedAndOilAndSauce, "참기름":.SeasonedAndOilAndSauce, "마요네즈":.SeasonedAndOilAndSauce,
         "간장":.SeasonedAndOilAndSauce, "후추":.SeasonedAndOilAndSauce, "올리브유":.SeasonedAndOilAndSauce, "식용유":.SeasonedAndOilAndSauce,
-        "사과":.Fruits,"수박":.Fruits,"포도":.Fruits,"귤":.Fruits,"복숭아":.Fruits,"배":.Fruits,"바나나":.Fruits
+        "사과":.Fruits,"수박":.Fruits,"포도":.Fruits,"귤":.Fruits,"복숭아":.Fruits,"배":.Fruits,"바나나":.Fruits,
+            "쌀":.GrainAndNuts, "생수":.DrinksAndSnacks, "콩나물":.Vegetable, "딸기":.Fruits, "방울토마토":.Fruits, "토마토":.Fruits
         ]
     default:
         return [
@@ -539,13 +540,13 @@ func getDefaultItemNames() -> [GroceryHistory]
             GroceryHistory(title: "시금치", category:.Vegetable, image: GroceryImage(image: UIImage(named: "시금치"))),
             GroceryHistory(title: "감자", category:.Vegetable, image: GroceryImage(image: UIImage(named: "감자"))),
             GroceryHistory(title: "고구마", category:.Vegetable, image: GroceryImage(image: UIImage(named: "고구마"))),
-            GroceryHistory(title: "두부", category:.ETC, image: GroceryImage(image: UIImage(named: "두부"))),
-            GroceryHistory(title: "라면소면", category:.ETC, image: GroceryImage(image: UIImage(named: "라면소면"))),
+            GroceryHistory(title: "두부", category:.CookingAndSidedishes, image: GroceryImage(image: UIImage(named: "두부"))),
+            GroceryHistory(title: "라면소면", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "라면소면"))),
             GroceryHistory(title: "생선", category:.MarineProducts, image: GroceryImage(image: UIImage(named: "생선"))),
             GroceryHistory(title: "참치", category:.MarineProducts, image: GroceryImage(image: UIImage(named: "참치"))),
             GroceryHistory(title: "김", category:.MarineProducts, image: GroceryImage(image: UIImage(named: "김"))),
             GroceryHistory(title: "밀가루", category:.GrainAndNuts, image: GroceryImage(image: UIImage(named: "밀가루"))),
-            GroceryHistory(title: "우유", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "우유"))),
+            GroceryHistory(title: "우유", category:.Milk, image: GroceryImage(image: UIImage(named: "우유"))),
             GroceryHistory(title: "소금", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "소금"))),
             GroceryHistory(title: "참기름", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "참기름"))),
             GroceryHistory(title: "마요네즈", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "마요네즈"))),
@@ -559,7 +560,27 @@ func getDefaultItemNames() -> [GroceryHistory]
             GroceryHistory(title: "귤", category:.Fruits, image: GroceryImage(image: UIImage(named: "귤"))),
             GroceryHistory(title: "복숭아", category:.Fruits, image: GroceryImage(image: UIImage(named: "복숭아"))),
             GroceryHistory(title: "배", category:.Fruits, image: GroceryImage(image: UIImage(named: "배"))),
-            GroceryHistory(title: "바나나", category:.Fruits, image: GroceryImage(image: UIImage(named: "바나나")))
+            GroceryHistory(title: "바나나", category:.Fruits, image: GroceryImage(image: UIImage(named: "바나나"))),
+            GroceryHistory(title: "쌀", category:.GrainAndNuts, image: GroceryImage(image: UIImage(named: "쌀"))),
+            GroceryHistory(title: "생수", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "생수"))),
+            GroceryHistory(title: "콩나물", category:.Vegetable, image: GroceryImage(image: UIImage(named: "콩나물"))),
+            GroceryHistory(title: "딸기", category:.Fruits, image: GroceryImage(image: UIImage(named: "딸기"))),
+            GroceryHistory(title: "방울토마토", category:.Vegetable, image: GroceryImage(image: UIImage(named: "방울토마토"))),
+            GroceryHistory(title: "토마토", category:.Vegetable, image: GroceryImage(image: UIImage(named: "토마토"))),
+            GroceryHistory(title: "빵", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "빵"))),
+            GroceryHistory(title: "시리얼", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "시리얼"))),
+            GroceryHistory(title: "치즈", category:.Milk, image: GroceryImage(image: UIImage(named: "치즈"))),
+            GroceryHistory(title: "설탕", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "설탕"))),
+            GroceryHistory(title: "식초", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "식초"))),
+            GroceryHistory(title: "초코릿", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "초코릿"))),
+            GroceryHistory(title: "스낵", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "스낵"))),
+            GroceryHistory(title: "사탕", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "사탕"))),
+            GroceryHistory(title: "두유", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "두유"))),
+            GroceryHistory(title: "요거트", category:.Milk, image: GroceryImage(image: UIImage(named: "요거트"))),
+            GroceryHistory(title: "콜라", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "콜라"))),
+            GroceryHistory(title: "사이다", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "사이다"))),
+            GroceryHistory(title: "오렌지주스", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "오렌지주스"))),
+            GroceryHistory(title: "케찹", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "케찹")))
         ]
     }
     else
