@@ -64,7 +64,8 @@ class ShareManager
     
     func isShared() -> Bool
     {
-        return publicCode.isEmpty == false
+        //return publicCode.isEmpty == false
+        return false // FreshFridge_Lite
     }
     
     func isCreatedShareCode() -> Bool
