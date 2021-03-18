@@ -59,6 +59,7 @@ class GroceryHistory : Codable
     var favorite: Bool
     var lastestPurchaseDate: Date
     var image: GroceryImage?
+    var isDeleted: Bool = false
     
     init()
     {
@@ -514,6 +515,27 @@ func getDefaultNames() -> [String:GroceryHistory.Category]
         
 }
 
+let imageNames: [String:String]
+    = [ "Milk" : "우유",
+        "Olive oil" : "올리브유",
+        "Flour" : "밀가루",
+        "Chicken": "닭고기",
+        "Salt": "소금",
+        "Egg" : "계란",
+        "Rice" : "쌀",
+        "Pork" : "돼지고기",
+        "Beef" : "쇠고기",
+        "Garlic" : "마늘",
+        "Onion" : "양파",
+        "Whole milk" : "우유",
+        "Mayonnaise" : "마요네즈",
+        "Chiles" : "고추",
+        "Strawberries" : "딸기",
+        "Apple" : "사과",
+        "Vegetable oil" : "식용유",
+        "Fish" : "생선",
+        "Icecream" : "아이스크림"]
+
 func getDefaultItemNames() -> [GroceryHistory]
 {
     if(Locale.current.languageCode == "ko")
@@ -580,7 +602,8 @@ func getDefaultItemNames() -> [GroceryHistory]
             GroceryHistory(title: "콜라", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "콜라"))),
             GroceryHistory(title: "사이다", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "사이다"))),
             GroceryHistory(title: "오렌지주스", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "오렌지주스"))),
-            GroceryHistory(title: "케찹", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "케찹")))
+            GroceryHistory(title: "케찹", category:.SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "케찹"))),
+            GroceryHistory(title: "아이스크림", category:.DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "아이스크림")))
         ]
     }
     else
@@ -620,7 +643,8 @@ func getDefaultItemNames() -> [GroceryHistory]
             GroceryHistory(title: "Apple", category: .Fruits, image: GroceryImage(image: UIImage(named: "사과"))),
             GroceryHistory(title: "Shrimp", category: .MarineProducts, image: GroceryImage(image: UIImage(named: "Shrimp"))),
             GroceryHistory(title: "Vegetable oil", category: .SeasonedAndOilAndSauce, image: GroceryImage(image: UIImage(named: "식용유"))),
-            GroceryHistory(title: "Fish", category: .MarineProducts, image: GroceryImage(image: UIImage(named: "생선")))
+            GroceryHistory(title: "Fish", category: .MarineProducts, image: GroceryImage(image: UIImage(named: "생선"))),
+            GroceryHistory(title: "Icecream", category: .DrinksAndSnacks, image: GroceryImage(image: UIImage(named: "아이스크림")))
         ]
     }
     /*

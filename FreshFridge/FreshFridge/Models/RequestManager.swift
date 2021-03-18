@@ -256,7 +256,7 @@ class RequestToServer : RequestInterface
             
             ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, lastPurchaseDate: Date())
             {
-                DataManager.shared.moveToTheFrontGroceryHistory(groceryHistory: groceryHistory)
+                //DataManager.shared.moveToTheFrontGroceryHistory(groceryHistory: groceryHistory)
                 
                 ShareManager.shared.createGrocery(productID: productID, count: count, isPercentageCount: isPercentageCount, dueDate: dueDate, storage: storage, fridgeName: fridgeName, notes: notes, image: image)
                 {
@@ -407,7 +407,7 @@ class RequestToServer : RequestInterface
             
             ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, lastPurchaseDate: Date())
             {
-                DataManager.shared.moveToTheFrontGroceryHistory(groceryHistory: groceryHistory)
+                //DataManager.shared.moveToTheFrontGroceryHistory(groceryHistory: groceryHistory)
                 
                 ShareManager.shared.createCartGrocery(productID: productID, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased)
                 { (cartItem: ShareManager.CartItem) in

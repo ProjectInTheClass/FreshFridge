@@ -217,6 +217,11 @@ class ShareManager
                         self.updateGroceryHistory(id: groceryHistory.id, favorite: groceryHistory.favorite, completion: nil)
                     }
                     
+                    if(sameHistory.isDeleted != groceryHistory.isDeleted)
+                    {
+                        self.deleteGroceryHistory(id: groceryHistory.id){}
+                    }
+                    
                     // processing image
                     if let image = groceryHistory.image,
                        let uiImage = image.image()
@@ -1003,7 +1008,8 @@ class ShareManager
     
     func updateGroceryHistory(id: AutoIncreasedID, lastPurchaseDate: Date, completion: (()->Void)?)
     {
-        let json: [String: Any] = ["lastPurchaseDate" : "\(DueDate.getTimeIntervalSince1970MS(date: lastPurchaseDate))"]
+        let json: [String: Any] = ["lastPurchaseDate" : "\(DueDate.getTimeIntervalSince1970MS(date: lastPurchaseDate))",
+                                    "isDeleted" : false ]
         if let groceryHistory = DataManager.shared.findGroceryHistory(id: id)
         {
             updateGroceryHistory(id: id, json: json)

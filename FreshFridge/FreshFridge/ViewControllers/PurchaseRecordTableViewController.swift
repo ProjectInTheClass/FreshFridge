@@ -133,11 +133,11 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         {
             if searchText == ""
             {
-                groceryHistoryArray = DataManager.shared.getGroceryHistories()
+                groceryHistoryArray = DataManager.shared.getGroceryHistories().filter({$0.isDeleted == false})
             }
             else
             {
-                groceryHistoryArray = DataManager.shared.getGroceryHistories().filter { $0.title.contains(searchText)}
+                groceryHistoryArray = DataManager.shared.getGroceryHistories().filter { $0.isDeleted == false && $0.title.contains(searchText)}
             }
         }
         
@@ -311,6 +311,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         }
         else
         {
+            /*
             if(DataManager.shared.isExistGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false
                 && DataManager.shared.isExistCartGrocery(title: selectedGrocery.title, category: selectedGrocery.category) == false)
             {
@@ -322,6 +323,9 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
                 //return UISwipeActionsConfiguration(actions: [toFridgeAction])
                 actions = [toFridgeAction]
             }
+             */
+            
+            actions = [modifyAction, toFridgeAction]
         }
         
         return UISwipeActionsConfiguration(actions: actions)

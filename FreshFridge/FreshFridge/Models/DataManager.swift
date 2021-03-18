@@ -110,6 +110,7 @@ class DataManager
         if let index = groceryHistories.enumerated().first(where: {$0.element.title == groceryHistory.title && $0.element.category == groceryHistory.category})
         {
             groceryHistory.lastestPurchaseDate = Date()
+            groceryHistory.isDeleted = false
             groceryHistories.remove(at: index.offset)
             groceryHistories.insert(groceryHistory, at: 0)
             
@@ -147,7 +148,8 @@ class DataManager
     {
         if let selectedIndex = findGroceryHistoryIndex(id: id)
         {
-            groceryHistories.remove(at: selectedIndex.offset)
+            //groceryHistories.remove(at: selectedIndex.offset)
+            selectedIndex.element.isDeleted = true
             saveGroceryHistory() // 로컬에 저장하기
         }
     }
