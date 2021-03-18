@@ -690,14 +690,16 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             {
                 // Use data from the view controller which initiated the unwind segue
                 nameTextField.text = sourceViewController.selectedName
+                
+                let imageName = imageNames[sourceViewController.selectedName] ?? sourceViewController.selectedName
                 if let selectedCategory = defaultNames[sourceViewController.selectedName]
                 {
                     //categoryButton.setTitle(category.description, for: .normal)
                     category = selectedCategory
                 }
-                if let image = UIImage(named: sourceViewController.selectedName)
+                if let image = UIImage(named: imageName)
                 {
-                    groceryImage = GroceryImage(image: image, filename: sourceViewController.selectedName)
+                    groceryImage = GroceryImage(image: image, filename: imageName)
                     updateTableView()
                 }
                 
@@ -735,9 +737,10 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 nameTextField.text = selectedGroceryHistory.title
                 category = selectedGroceryHistory.category
                 
-                if let image = UIImage(named: selectedGroceryHistory.title)
+                let imageName = imageNames[selectedGroceryHistory.title] ?? selectedGroceryHistory.title
+                if let image = UIImage(named: imageName)
                 {
-                    groceryImage = GroceryImage(image: image, filename: selectedGroceryHistory.title)
+                    groceryImage = GroceryImage(image: image, filename: imageName)
                     updateTableView()
                 }
                 

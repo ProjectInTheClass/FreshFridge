@@ -111,14 +111,37 @@ class SettingTableViewController: UITableViewController {
             {
                 RequestManager.shared.getRequestInterface().removeGrocery(id: grocery.id)
             }
+            
+            presentAlertOk(title: "모두 삭제되었습니다.".localized(), parent: self)
         }
         
     }
     
     @IBAction func removeAllGroceryHistories(_ sender: Any)
     {
-        //DataManager.shared.removeAllGroceryHistories()
+        presentAlertOkCancel(title: "구입기록 전체를 삭제하시겠습니까?".localized(), parent: self)
+        {_ in
+            
+            for groceryHistory in DataManager.shared.getGroceryHistories()
+            {
+                RequestManager.shared.getRequestInterface().removeGroceryHistory(id: groceryHistory.id)
+            }
+            
+            // 냉장고나 카트에 참조되지 않는 구입기록을 골라낸다.
+            var notReferencedGroceryHistory: [GroceryHistory] = []
+            for groceryHistory in DataManager.shared.getGroceryHistories()
+            {
+                if(DataManager.shared.isExistGrocery(title: groceryHistory.title, category: groceryHistory.category) == false
+                    && DataManager.shared.isExistCartGrocery(title: groceryHistory.title, category: groceryHistory.category) == false)
+                {
+                    notReferencedGroceryHistory.insert(groceryHistory, at:0)
+                }
+            }
+            
+            presentAlertOk(title: "모두 삭제되었습니다.".localized(), parent: self)
+        }
         // 냉장고나 카트에 참조되지 않는 구입기록을 골라낸다.
+        /*
         presentAlertOkCancel(title: "구입기록 전체를 삭제하시겠습니까?".localized(),
                              message: "냉장고나 장바구니에 있는 품목의 구입기록은 삭제되지 않습니다.".localized(), parent: self)
         {_ in
@@ -155,6 +178,7 @@ class SettingTableViewController: UITableViewController {
                 RequestManager.shared.getRequestInterface().removeGroceryHistory(id: groceryHistory.id)
             }
         }
+         */
     }
     
     
@@ -167,6 +191,8 @@ class SettingTableViewController: UITableViewController {
             {
                 RequestManager.shared.getRequestInterface().removeCartGrocery(id: cartGrocery.id)
             }
+            
+            presentAlertOk(title: "모두 삭제되었습니다.".localized(), parent: self)
         }
     }
     

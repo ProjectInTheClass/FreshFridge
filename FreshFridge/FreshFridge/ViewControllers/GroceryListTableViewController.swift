@@ -614,9 +614,10 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 var image = sourceViewController.groceryImage
                 if(image == nil)
                 {
-                    if let uiImage = UIImage(named: title)
+                    let imageName = imageNames[title] ?? title
+                    if let uiImage = UIImage(named: imageName)
                     {
-                        image = GroceryImage(image: uiImage, filename: title)
+                        image = GroceryImage(image: uiImage, filename: imageName)
                     }
                 }
                 
