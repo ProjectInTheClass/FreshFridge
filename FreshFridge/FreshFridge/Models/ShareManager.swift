@@ -624,6 +624,13 @@ class ShareManager
                                 
                             }
                             
+                            let lastestPurchaseDate: Date = Date(timeIntervalSince1970: ((TimeInterval(product.lastPurchaseDate) ?? 0) / 1000))
+                            if(groceryHistory.lastestPurchaseDate != lastestPurchaseDate)
+                            {
+                                DataManager.shared.moveToTheFrontGroceryHistory(groceryHistory: groceryHistory, date: lastestPurchaseDate)
+                                getRequestManager().isUpdatePurchaseRecord = true
+                            }
+                            
                             if(product.isDeleted)
                             {
                                 DataManager.shared.removeGroceryHistory(id: groceryHistory.id)
