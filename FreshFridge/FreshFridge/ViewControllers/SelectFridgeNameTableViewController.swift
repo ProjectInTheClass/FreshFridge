@@ -44,7 +44,7 @@ class SelectFridgeNameTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FridgeNameCell", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = fridgeNames[indexPath.row]
+        cell.textLabel?.text = fridgeNames[indexPath.row].localized()
         cell.textLabel?.textColor = .label
         cell.textLabel?.font = systemFont18
         if(isFromAddGrocery)

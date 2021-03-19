@@ -39,6 +39,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     var groceryImage: GroceryImage?
     var category: GroceryHistory.Category? = nil// = GroceryHistory.Category.ETC
     var storage: Grocery.Storage = Grocery.Storage.Refrigeration
+    var fridgeName: String? = nil
     
     var isFromShoppingCart: Bool = false
     
@@ -114,7 +115,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             category = grocery.info.category
             countTextField.text = "\(Int(grocery.count))"
             percentageSwitch.isOn = grocery.isPercentageCount
-            fridgeSelectButton.setTitle(grocery.fridgeName, for: .normal)
+            fridgeName = grocery.fridgeName
             noteTextField.text = grocery.notes
             groceryImage = grocery.info.image
             
@@ -129,6 +130,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             category = cartGrocery.info.category
             count = cartGrocery.count
             countTextField.text = "\(Int(cartGrocery.count))"
+            fridgeName = nil
             percentageSwitch.isOn = cartGrocery.isPercentageCount
             groceryImage = cartGrocery.info.image
             
@@ -143,7 +145,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             //category = GroceryHistory.Category.ETC
             countTextField.text = "\(Int(count))"
             percentageSwitch.isOn = false
-            fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
+            fridgeName = selectedfrideName
             
             updateTableView()
             
@@ -292,17 +294,15 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         dateFormatter.timeStyle = .none
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dueDateButton.setTitle(dateFormatter.string(from: dueDate.date), for: .normal)
-        print(dueDate.getExpirationDay())
-        
+        //print(dueDate.getExpirationDay())
         countTextField.text = "\(Int(count))"
-        
-        if(grocery != nil)
+        if let fridgeName = fridgeName
         {
-            fridgeSelectButton.setTitle(grocery?.fridgeName, for: .normal)
+            fridgeSelectButton.setTitle(fridgeName.localized(), for: .normal)
         }
         else
         {
-            fridgeSelectButton.setTitle(selectedfrideName, for: .normal)
+            fridgeSelectButton.setTitle("", for: .normal)
         }
         
         if let groceryImage = groceryImage
@@ -722,11 +722,13 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             let sourceViewController = unwindSegue.source as! SelectFridgeNameTableViewController
             if(sourceViewController.fridgeName != "")
             {
-                fridgeSelectButton.setTitle(sourceViewController.fridgeName, for: .normal)
+                fridgeName = sourceViewController.fridgeName
                 if let grocery = grocery
                 {
                     grocery.fridgeName = sourceViewController.fridgeName
                 }
+                
+                updateTableView()
             }
         }
         else if(unwindSegue.identifier == "ToAddGroceryFromPurchase")
@@ -741,7 +743,6 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 if let image = UIImage(named: imageName)
                 {
                     groceryImage = GroceryImage(image: image, filename: imageName)
-                    updateTableView()
                 }
                 
                 updateTableView()
@@ -847,9 +848,9 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             
             if(grocery == nil)
             {
-                if(fridgeSelectButton.title(for: .normal) != nil)
+                if(fridgeName != nil)
                 {
-                    controller.fridgeName = fridgeSelectButton.title(for: .normal)!
+                    controller.fridgeName = fridgeName!
                 }
                 else
                 {
