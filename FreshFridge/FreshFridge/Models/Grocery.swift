@@ -459,7 +459,7 @@ let systemFont10 = UIFont.systemFont(ofSize: 10)
 
 
 // 메인뷰 냉장고 이름 선택
-var fridgeNames = ["신선한냉장고".localized(), "김치냉장고".localized(), "추가냉장고1".localized(), "추가냉장고2".localized()]
+var fridgeNames = ["신선한냉장고", "김치냉장고", "추가냉장고1", "추가냉장고2"]
 var selectedFridgeIndex: [Int] = [0, 1, 2, 3] // 다중 선택가능, fridgeNames index를 배열로 저장한다.
 var selectedfrideName = fridgeNames[selectedFridgeIndex[0]] // 다중선택된 selectedFridgeIndex중 첫번째 것으로 할당
 

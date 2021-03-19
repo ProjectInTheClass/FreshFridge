@@ -110,7 +110,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     func updateTableView()
     {
-        self.title = selectedfrideName
+        self.title = selectedfrideName.localized()
         
         numberOfSections = 0
         numbersOfRowInSection.removeAll()
@@ -609,7 +609,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 let dueDate = sourceViewController.dueDate
                 
                 let storage = sourceViewController.storage
-                let fridgeName = sourceViewController.fridgeSelectButton.title(for: .normal) ?? ""
+                let fridgeName = sourceViewController.fridgeName ?? ""
                 let notes = sourceViewController.noteTextField.text
                 var image = sourceViewController.groceryImage
                 if(image == nil)
