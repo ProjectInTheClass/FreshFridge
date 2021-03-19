@@ -105,11 +105,19 @@ class DataManager
         }
     }
     
-    func moveToTheFrontGroceryHistory(groceryHistory: GroceryHistory)
+    func moveToTheFrontGroceryHistory(groceryHistory: GroceryHistory, date: Date? = nil)
     {
         if let index = groceryHistories.enumerated().first(where: {$0.element.title == groceryHistory.title && $0.element.category == groceryHistory.category})
         {
-            groceryHistory.lastestPurchaseDate = Date()
+            if let date = date
+            {
+                groceryHistory.lastestPurchaseDate = date
+            }
+            else
+            {
+                groceryHistory.lastestPurchaseDate = Date()
+            }
+            
             groceryHistory.isDeleted = false
             groceryHistories.remove(at: index.offset)
             groceryHistories.insert(groceryHistory, at: 0)
