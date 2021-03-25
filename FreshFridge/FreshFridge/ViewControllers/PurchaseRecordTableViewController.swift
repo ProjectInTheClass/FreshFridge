@@ -383,6 +383,10 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     }
     
     
+    @IBAction func backButtonTapped(_ sender: Any)
+    {
+        dismiss(animated: true)
+    }
     
     
 }

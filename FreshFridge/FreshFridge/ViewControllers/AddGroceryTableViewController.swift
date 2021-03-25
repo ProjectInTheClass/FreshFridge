@@ -766,14 +766,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     @IBAction func backButtonTapped(_ sender: Any)
     {
-        if(isFromShoppingCart)
-        {
-            performSegue(withIdentifier: "UnwindShopingCartFromAddGrocery", sender: self)
-        }
-        else
-        {
-            performSegue(withIdentifier: "UnwindGroceryListFromAddGrocery", sender: self)
-        }
+        dismiss(animated: true)
     }
     
     // MARK: - Table view data source
