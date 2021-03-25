@@ -856,7 +856,13 @@
                             <outlet property="delegate" destination="pSp-Tr-fOX" id="VE2-16-WQN"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="이름 선택" id="hMc-hu-4nS"/>
+                    <navigationItem key="navigationItem" title="이름 선택" id="hMc-hu-4nS">
+                        <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="eyD-tR-mv5">
+                            <connections>
+                                <action selector="backButtonTapped:" destination="pSp-Tr-fOX" id="hpc-1T-Mn1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="SearchBar" destination="0dY-tU-a88" id="uUD-7V-mbN"/>
                         <segue destination="DJi-3J-hwi" kind="unwind" identifier="ToAddGroceryFromPurchase" unwindAction="unwindToAddGrocery:" id="qDX-gG-ZCE"/>
