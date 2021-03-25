@@ -31,14 +31,7 @@ class RequestManager
     
     func getRequestInterface() -> RequestInterface
     {
-        if( ShareManager.shared.isShared() )
-        {
-            return requestToServer
-        }
-        else
-        {
-            return requestToLocal
-        }
+        return requestToLocal
     }
     
     func updateGroceryListViewController(updateTableView: Bool)
