@@ -479,7 +479,7 @@ func getDefaultNames() -> [String:GroceryHistory.Category]
             "Pork":.MeatsAndEggs, "Beef":.MeatsAndEggs, "Cheese":.Milk, "Garlic":.Vegetable,
             "Orange":.Fruits, "Turkey":.MeatsAndEggs, "Onion":.Vegetable, "Corn":.Vegetable,
             "Whole milk":.Milk, "Mayonnaise":.SeasonedAndOilAndSauce, "Chiles":.SeasonedAndOilAndSauce,
-            "Almonds":.GrainAndNuts, "Bacon":.MeatsAndEggs, "Mushrooms":.Vegetable, "Coconut":.Vegetable,
+            "Almonds":.GrainAndNuts, "Bacon":.MeatsAndEggs, "Mushrooms":.Vegetable, "Coconut":.Fruits,
             "Beets":.Vegetable, "Strawberries":.Fruits, "Fennel":.Vegetable, "Lamb":.MeatsAndEggs,
             "Apple":.Fruits, "Shrimp":.MarineProducts, "Vegetable oil":.SeasonedAndOilAndSauce, "Fish":.MarineProducts
         ]
@@ -507,7 +507,7 @@ func getDefaultNames() -> [String:GroceryHistory.Category]
             "Pork":.MeatsAndEggs, "Beef":.MeatsAndEggs, "Cheese":.Milk, "Garlic":.Vegetable,
             "Orange":.Fruits, "Turkey":.MeatsAndEggs, "Onion":.Vegetable, "Corn":.Vegetable,
             "Whole milk":.Milk, "Mayonnaise":.SeasonedAndOilAndSauce, "Chiles":.SeasonedAndOilAndSauce,
-            "Almonds":.GrainAndNuts, "Bacon":.MeatsAndEggs, "Mushrooms":.Vegetable, "Coconut":.Vegetable,
+            "Almonds":.GrainAndNuts, "Bacon":.MeatsAndEggs, "Mushrooms":.Vegetable, "Coconut":.Fruits,
             "Beets":.Vegetable, "Strawberries":.Fruits, "Fennel":.Vegetable, "Lamb":.MeatsAndEggs,
             "Apple":.Fruits, "Shrimp":.MarineProducts, "Vegetable oil":.SeasonedAndOilAndSauce, "Fish":.MarineProducts
         ]
