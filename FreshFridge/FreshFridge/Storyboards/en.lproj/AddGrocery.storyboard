@@ -514,7 +514,7 @@
                     <navigationItem key="navigationItem" title="Add Grocery" id="Flv-cH-eWD">
                         <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="PVE-zM-oK8">
                             <connections>
-                                <segue destination="r72-NC-VZF" kind="unwind" unwindAction="unwindToGroceryListTableView:" id="wLh-bD-mgV"/>
+                                <action selector="backButtonTapped:" destination="sDW-H2-BPf" id="InT-ND-S9Z"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Complete" id="C2g-Kk-idQ">
