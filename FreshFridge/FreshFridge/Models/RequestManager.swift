@@ -729,6 +729,6 @@ class RequestToLocal : RequestInterface
     {
         DataManager.shared.updateGroceryHistory(id: id, favorite: favorite)
         
-        getRequestManager().updatePurchaseRecordViewController(updateTableView: false)
+        getRequestManager().updatePurchaseRecordViewController(updateTableView: true)
     }
 }
