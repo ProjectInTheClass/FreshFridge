@@ -54,7 +54,7 @@
 "pHQ-go-Nce.text" = "D-100";
 
 /* Class = "UITableViewSection"; footerTitle = "냉장고는 다중 선택할 수 있습니다."; ObjectID = "q7d-jG-QRE"; */
-"q7d-jG-QRE.footerTitle" = "냉장고는 다중 선택할 수 있습니다.";
+"q7d-jG-QRE.footerTitle" = "You can choose multiple refrigerators.";
 
 /* Class = "UITableViewSection"; headerTitle = "냉장고 선택"; ObjectID = "q7d-jG-QRE"; */
 "q7d-jG-QRE.headerTitle" = "Select Fridge";
