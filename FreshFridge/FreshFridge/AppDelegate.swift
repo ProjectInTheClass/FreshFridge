@@ -14,13 +14,14 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-
-    //var grantedAuthorization: Bool = false
+    
     var timer = Timer()
     var restrictRotation:UIInterfaceOrientationMask = .all
     var updatedCount: Int = 0
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        IAPManager.shared.fetchProducts()
         
         scheduledTimerWithTimeInterval()
         

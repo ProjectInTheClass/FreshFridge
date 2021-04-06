@@ -37,6 +37,19 @@ class FamilyShareViewController: UIViewController {
     
     func sharingInfo()
     {
+        if(IAPManager.shared.isPurchasedSharing())
+        {
+            createPublicCodeButton.isEnabled = true
+            enterPublicCodeButton.isEnabled = true
+            resignShareButton.isEnabled = true
+        }
+        else
+        {
+            createPublicCodeButton.isEnabled = false
+            enterPublicCodeButton.isEnabled = false
+            resignShareButton.isEnabled = false
+        }
+        
         if ShareManager.shared.isShared()
         {
             SharingCondition.image = UIImage(systemName:"person.2")?.withTintColor(UIColor.systemBlue, renderingMode: .automatic)
@@ -253,6 +266,12 @@ class FamilyShareViewController: UIViewController {
             }
         }
         
+    }
+    
+    
+    @IBAction func unlockSharing(_ sender: Any) {
+        
+        IAPManager.shared.purchaseUnlockSharing()
     }
     
     /*

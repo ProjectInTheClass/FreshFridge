@@ -1,0 +1,44 @@
+{
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "423EE4A2",
+      "localizations" : [
+        {
+          "description" : "Unlock Sharing",
+          "displayName" : "Unlock Sharing",
+          "locale" : "ko"
+        }
+      ],
+      "productID" : "com.codershigh.FreshFridge.unlockSharing",
+      "referenceName" : "Unlock Sharing",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "42F2FBA3",
+      "localizations" : [
+        {
+          "description" : "Remove all ads in the app.",
+          "displayName" : "Remove Ads",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.codershigh.FreshFridge.removeAds",
+      "referenceName" : "Remove Ads",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 0
+  }
+}
