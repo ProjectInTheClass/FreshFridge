@@ -37,7 +37,7 @@ struct DetailView1: View {
                         self.isPresented.toggle()
                     }, label: {
                         HStack{
-                            Text("2. 신석기 시대(생활양식의 변화")
+                            Text("2. 신석기 시대(생활양식의 변화)")
                             if myInfo.ckOn2 == false {
                                 Text("완료")
                                     .foregroundColor(.blue)

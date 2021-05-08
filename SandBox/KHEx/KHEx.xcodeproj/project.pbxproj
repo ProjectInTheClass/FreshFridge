@@ -78,15 +78,15 @@
 		EE9497CB264207EF00974C43 /* KHEx */ = {
 			isa = PBXGroup;
 			children = (
+				EE9497CC264207EF00974C43 /* KHExApp.swift */,
+				EE9497CE264207EF00974C43 /* ContentView.swift */,
 				EE9497F626456B3800974C43 /* ViewData */,
 				EE9497F726456B7300974C43 /* DetailView */,
 				EE9497F826456BA100974C43 /* MDetailView */,
-				EE9497CC264207EF00974C43 /* KHExApp.swift */,
-				EE9497CE264207EF00974C43 /* ContentView.swift */,
-				EE9497D0264207F100974C43 /* Assets.xcassets */,
-				EE9497D5264207F100974C43 /* Info.plist */,
 				EE9497DD2642099A00974C43 /* Setting */,
 				EE9497D2264207F100974C43 /* Preview Content */,
+				EE9497D0264207F100974C43 /* Assets.xcassets */,
+				EE9497D5264207F100974C43 /* Info.plist */,
 			);
 			path = KHEx;
 			sourceTree = "<group>";
