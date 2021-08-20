@@ -501,10 +501,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="정보 초기화" id="8t7-Pj-VES">
+                            <tableViewSection headerTitle="정보 초기화" footerTitle="전체 지우기" id="8t7-Pj-VES">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="PnE-ww-6IA" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="297.33333206176758" width="288" height="43.5"/>
+                                        <rect key="frame" x="16" y="304.66666412353516" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PnE-ww-6IA" id="EOM-Dk-Lce">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
@@ -543,7 +543,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="XK2-vy-CaE" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="340.83333206176758" width="288" height="43.5"/>
+                                        <rect key="frame" x="16" y="348.16666412353516" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XK2-vy-CaE" id="8UJ-0g-2e9">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
@@ -582,7 +582,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="qIw-nV-p4b" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="384.33333206176758" width="288" height="43.5"/>
+                                        <rect key="frame" x="16" y="391.66666412353516" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qIw-nV-p4b" id="Qit-6q-uDn">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
@@ -625,7 +625,7 @@
                             <tableViewSection id="JwH-va-vCu">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="descriptionCell" rowHeight="132" id="QFh-Pp-rmQ" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="463.83333206176758" width="288" height="132"/>
+                                        <rect key="frame" x="16" y="483.16666412353516" width="288" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QFh-Pp-rmQ" id="3vS-Qe-qdz">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="132"/>

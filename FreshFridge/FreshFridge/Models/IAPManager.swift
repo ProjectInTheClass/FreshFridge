@@ -19,8 +19,8 @@ class IAPManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObser
     // product
     enum Product : String, CaseIterable
     {
-        case unlockEverything  = "com.codershigh.FreshFridge.unlockSharing"
-        case removeAds = "com.codershigh.FreshFridge.removeAds"
+        case unlockEverything  = "com.codershigh.freshfridge.unlocksharing"
+        case removeAds = "com.codershigh.freshfridge.removeAds"
     }
     
     public func isPurchasedSharing() -> Bool
@@ -35,6 +35,8 @@ class IAPManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObser
         request.start()
         
         purchasedSharing = UserDefaults.standard.bool(forKey: "purchasedSharing")
+        
+        restoreIAP()
     }
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
@@ -73,6 +75,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObser
                 purchasedSharing = true
                 UserDefaults.standard.setValue(purchasedSharing, forKey: "purchasedSharing")
                 UserDefaults.standard.synchronize()
+                getRequestManager().updateFamilyShareViewController()
                 break
             case .failed, .deferred:
                 print("did not purchase")
@@ -87,13 +90,39 @@ class IAPManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObser
         })
     }
     
+    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        for transaction in queue.transactions {
+                let t: SKPaymentTransaction = transaction
+                let prodID = t.payment.productIdentifier as String
+
+                switch prodID {
+                case "ProductID1":
+                    // implement the given in-app purchase as if it were bought
+                    break
+                case "ProductID2":
+                    // implement the given in-app purchase as if it were bought
+                    break
+                default:
+                    print("iap not found")
+                }
+        }
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
+        
+    }
+    
     public func purchaseUnlockSharing()
     {
+        guard let product = products.first else { return }
+        
         purchase(product: products[0])
     }
     
-    @IBAction func restorePressed(_ sender: Any)
+    public func restoreIAP()
     {
+        guard SKPaymentQueue.canMakePayments() else { return }
+        
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
 }

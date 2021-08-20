@@ -24,6 +24,7 @@ class RequestManager
     var groceryListViewController: GroceryListTableViewController!
     var purchaseRecordViewController: PurchaseRecordTableViewController!
     var shopingCartViewController: ShopingCartTableViewController!
+    var familyShareViewController: FamilyShareViewController!
     
     var isUpdateGroceryList: Bool = false
     var isUpdatePurchaseRecord: Bool = false
@@ -87,6 +88,13 @@ class RequestManager
             }
             self.shopingCartViewController.tableView.reloadData()
         }
+    }
+    
+    func updateFamilyShareViewController()
+    {
+        guard familyShareViewController != nil else { return }
+        
+        familyShareViewController.sharingInfo()
     }
     
     func animateBadge(tabBarIndex: TabBarIndex)

@@ -17,10 +17,14 @@ class FamilyShareViewController: UIViewController {
     @IBOutlet weak var createPublicCodeButton: UIButton!
     @IBOutlet weak var enterPublicCodeButton: UIButton!
     @IBOutlet weak var resignShareButton: UIButton!
+    @IBOutlet weak var unlockSharingButton: UIButton!
+    @IBOutlet weak var restorePurchaseButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getRequestManager().familyShareViewController = self
 
         createPublicCodeButton.layer.cornerRadius = 10
         createPublicCodeButton.clipsToBounds = true
@@ -28,7 +32,10 @@ class FamilyShareViewController: UIViewController {
         enterPublicCodeButton.clipsToBounds = true
         resignShareButton.layer.cornerRadius = 10
         resignShareButton.clipsToBounds = true
-        
+        unlockSharingButton.layer.cornerRadius = 10
+        unlockSharingButton.clipsToBounds = true
+        restorePurchaseButton.layer.cornerRadius = 10
+        restorePurchaseButton.clipsToBounds = true
         
         sharingInfo()
         
@@ -41,13 +48,17 @@ class FamilyShareViewController: UIViewController {
         {
             createPublicCodeButton.isEnabled = true
             enterPublicCodeButton.isEnabled = true
-            resignShareButton.isEnabled = true
+            //resignShareButton.isEnabled = true
+            unlockSharingButton.isEnabled = false
+            restorePurchaseButton.isEnabled = false
         }
         else
         {
             createPublicCodeButton.isEnabled = false
             enterPublicCodeButton.isEnabled = false
-            resignShareButton.isEnabled = false
+            //resignShareButton.isEnabled = false
+            unlockSharingButton.isEnabled = true
+            restorePurchaseButton.isEnabled = true
         }
         
         if ShareManager.shared.isShared()
@@ -272,8 +283,14 @@ class FamilyShareViewController: UIViewController {
     @IBAction func unlockSharing(_ sender: Any) {
         
         IAPManager.shared.purchaseUnlockSharing()
+        
+        
+        
     }
     
+    @IBAction func restorePurchase(_ sender: Any) {
+        IAPManager.shared.restoreIAP()
+    }
     /*
     // MARK: - Navigation
 

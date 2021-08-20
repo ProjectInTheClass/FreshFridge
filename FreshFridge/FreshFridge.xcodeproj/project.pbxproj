@@ -58,6 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E0C798C26CFBD9300ACF0FE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FamilyShare.strings; sourceTree = "<group>"; };
 		8E3E4AE825D82FA20056B65C /* FreshFridge-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreshFridge-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E3E4AE925D82FA30056B65C /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		8E3E4AEA25D82FA30056B65C /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
@@ -109,7 +110,6 @@
 		8EBA43D325C6604C00883BAA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/PurchaseRecord.strings; sourceTree = "<group>"; };
 		8EBA43D425C6605300883BAA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ShopingCart.strings; sourceTree = "<group>"; };
 		8EBA43D525C6608400883BAA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/ShopingCart.strings; sourceTree = "<group>"; };
-		8EBA43D625C660A300883BAA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FamilyShare.strings; sourceTree = "<group>"; };
 		8EBA43D725C660D400883BAA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/FamilyShare.strings; sourceTree = "<group>"; };
 		8EBA43D925C666E700883BAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AddGrocery.storyboard; sourceTree = "<group>"; };
 		8EBA43DF25C6671A00883BAA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/AddGrocery.strings; sourceTree = "<group>"; };
@@ -407,8 +407,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				8E4B99E625AD4B8400F2B0BF /* Base */,
-				8EBA43D625C660A300883BAA /* en */,
 				8EBA43D725C660D400883BAA /* ko */,
+				8E0C798C26CFBD9300ACF0FE /* en */,
 			);
 			name = FamilyShare.storyboard;
 			sourceTree = "<group>";

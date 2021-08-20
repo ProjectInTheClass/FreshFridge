@@ -211,9 +211,9 @@ class SettingTableViewController: UITableViewController {
     }
 */
     
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
+    /*
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
         let myLabel = UILabel()
         myLabel.frame = CGRect(x: 20, y: 20, width: 320, height: 20)
         myLabel.font = UIFont.boldSystemFont(ofSize: 20)
@@ -224,7 +224,17 @@ class SettingTableViewController: UITableViewController {
 
         return headerView
     }
-
+*/
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        
+        header.textLabel?.textColor = UIColor.label
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        header.textLabel?.frame = header.frame
+        
+    }
     
     /*
     // Override to support conditional editing of the table view.

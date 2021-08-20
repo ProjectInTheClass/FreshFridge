@@ -1,3 +1,5 @@
+/* Class = "UIButton"; normalTitle = "앱 내 구입 초기화"; ObjectID = "C8w-pw-tkU"; */
+"C8w-pw-tkU.normalTitle" = "앱 내 구입 초기화";
 
 /* Class = "UITabBarItem"; title = "공유"; ObjectID = "Ige-bu-3e7"; */
 "Ige-bu-3e7.title" = "공유";
@@ -5,11 +7,14 @@
 /* Class = "UINavigationItem"; title = "가족 공유"; ObjectID = "MHn-rC-Dyd"; */
 "MHn-rC-Dyd.title" = "가족 공유";
 
-/* Class = "UIButton"; normalTitle = "코드 입력"; ObjectID = "cn5-nq-0E6"; */
-"cn5-nq-0E6.normalTitle" = "공유 코드 입력 / 보기";
+/* Class = "UIButton"; normalTitle = "공유 기능 잠금 해제"; ObjectID = "R5d-2G-GXb"; */
+"R5d-2G-GXb.normalTitle" = "공유 기능 잠금 해제";
 
-/* Class = "UIButton"; normalTitle = "가족 공유 기능 활성 (준비중)"; ObjectID = "eki-Kk-gf9"; */
+/* Class = "UIButton"; normalTitle = "코드 입력"; ObjectID = "cn5-nq-0E6"; */
+"cn5-nq-0E6.normalTitle" = "코드 입력";
+
+/* Class = "UIButton"; normalTitle = "공유 취소"; ObjectID = "eki-Kk-gf9"; */
 "eki-Kk-gf9.normalTitle" = "공유 취소";
 
 /* Class = "UIButton"; normalTitle = "공유 코드 생성"; ObjectID = "gBb-7M-akn"; */
-"gBb-7M-akn.normalTitle" = "공유 코드 생성 / 보기";
+"gBb-7M-akn.normalTitle" = "공유 코드 생성";

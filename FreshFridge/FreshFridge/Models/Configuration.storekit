@@ -1,4 +1,8 @@
 {
+  "identifier" : "9A39871B",
+  "nonRenewingSubscriptions" : [
+
+  ],
   "products" : [
     {
       "displayPrice" : "0.99",
@@ -9,9 +13,14 @@
           "description" : "Unlock Sharing",
           "displayName" : "Unlock Sharing",
           "locale" : "ko"
+        },
+        {
+          "description" : "Unlock Sharing",
+          "displayName" : "Unlock Sharing",
+          "locale" : "en_US"
         }
       ],
-      "productID" : "com.codershigh.FreshFridge.unlockSharing",
+      "productID" : "com.codershigh.freshfridge.unlocksharing",
       "referenceName" : "Unlock Sharing",
       "type" : "NonConsumable"
     },
@@ -24,6 +33,11 @@
           "description" : "Remove all ads in the app.",
           "displayName" : "Remove Ads",
           "locale" : "en_US"
+        },
+        {
+          "description" : "Remove Ads",
+          "displayName" : "Remove Ads",
+          "locale" : "ko"
         }
       ],
       "productID" : "com.codershigh.FreshFridge.removeAds",
@@ -39,6 +53,6 @@
   ],
   "version" : {
     "major" : 1,
-    "minor" : 0
+    "minor" : 1
   }
 }
