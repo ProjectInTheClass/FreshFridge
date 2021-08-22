@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Firebase
 
 
 class FamilyShareViewController: UIViewController {
@@ -102,6 +102,8 @@ class FamilyShareViewController: UIViewController {
             presentAlertOk(title: "먼저 공유 취소를 해야합니다.", parent: self)
             return
         }
+        
+        Analytics.logEvent("create_sharing", parameters: nil)
         
 //        var isSendLocalData: Bool = true
 //        if ShareManager.shared.isShared()

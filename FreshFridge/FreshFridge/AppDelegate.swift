@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 //func getAppDelegate() -> AppDelegate
 //{
@@ -20,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var updatedCount: Int = 0
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        FirebaseApp.configure()
+        Analytics.setAnalyticsCollectionEnabled(true)
         
         IAPManager.shared.fetchProducts()
         

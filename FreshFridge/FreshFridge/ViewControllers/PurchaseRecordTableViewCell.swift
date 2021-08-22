@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol PurchaseRecordCellDelegate: class {
+protocol PurchaseRecordCellDelegate: AnyObject {
     func fovoriteCheckMarkTapped(sender: PurchaseRecordTableViewCell)
 }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol GroceryListCellDelegate: class {
+protocol GroceryListCellDelegate: AnyObject {
     func countButtonTapped(sender: GroceryListTableViewCell)
     func selectedCell()
 }

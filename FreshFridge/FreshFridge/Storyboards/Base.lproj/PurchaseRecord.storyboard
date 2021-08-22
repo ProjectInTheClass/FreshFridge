@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YxD-Xb-Gsp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YxD-Xb-Gsp">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -73,7 +73,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordCell" id="0jO-oe-uXx" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="136" width="428" height="40.333332061767578"/>
+                                <rect key="frame" x="0.0" y="132.33333396911621" width="428" height="40.333332061767578"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0jO-oe-uXx" id="SeZ-YD-VoW">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="40.333332061767578"/>
@@ -117,7 +117,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordWithPictureCell" id="FkW-eM-jEp" userLabel="PurchaseRecordWithPictureCell" customClass="PurchaseRecordWithPictureTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="176.33333206176758" width="428" height="40.333332061767578"/>
+                                <rect key="frame" x="0.0" y="172.66666603088379" width="428" height="40.333332061767578"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FkW-eM-jEp" id="OnM-fb-p62">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="40.333332061767578"/>
@@ -130,7 +130,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="30" height="30.333333333333332"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="1E5-8b-q5d"/>
-                                                        <constraint firstAttribute="width" constant="30" id="CxP-YM-Rf9"/>
+                                                        <constraint firstAttribute="width" constant="30" id="XTF-Bx-9Y4"/>
                                                     </constraints>
                                                     <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                     <state key="normal" title="Button" image="favorite-Icon"/>

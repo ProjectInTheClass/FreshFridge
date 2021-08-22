@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class DataManager
 {
@@ -87,8 +88,17 @@ class DataManager
         {
             if let image = groceryHistory.image
             {
-                let uiImage = GroceryImage.loadImage(filename: image.filename)
-                groceryHistory.image = GroceryImage(image: uiImage, filename: image.filename)
+                if let uiImage = GroceryImage.loadImage(filename: image.filename)
+                {
+                    groceryHistory.image = GroceryImage(image: uiImage, filename: image.filename)
+                }
+                else
+                {
+                    if let uiImage = UIImage(named: groceryHistory.category.systemName)
+                    {
+                        groceryHistory.image = GroceryImage(image: uiImage, filename: groceryHistory.category.systemName)
+                    }
+                }
             }
         }
     }

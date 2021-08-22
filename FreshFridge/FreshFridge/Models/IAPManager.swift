@@ -114,7 +114,7 @@ class IAPManager: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObser
     
     public func purchaseUnlockSharing()
     {
-        guard let product = products.first else { return }
+        guard products.first != nil else { return }
         
         purchase(product: products[0])
     }

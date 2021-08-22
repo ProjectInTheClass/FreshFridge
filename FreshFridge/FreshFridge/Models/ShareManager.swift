@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseStorage
 
 class ShareManager
 {
@@ -519,10 +520,7 @@ class ShareManager
                 //LoadingHUD.hideProgressCircle()
                 LoadingHUD.hideProgressAnimation()
             }
-            
         }
-        
-        
     }
     
     
@@ -677,6 +675,20 @@ class ShareManager
                                             RequestManager.shared.updateGroceryListViewController(updateTableView: true)
                                         }
                                     }
+                                }
+                            }
+                        }
+                        else // 이미지 설정이 없으면 카테고리 이미지로 대체
+                        {
+                            if let category = GroceryHistory.Category(rawValue: product.category)
+                             , let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
+                            {
+                                if let uiImage = UIImage(named: category.systemName)
+                                {
+                                    groceryHistory.image = GroceryImage(image: uiImage, filename: category.systemName)
+                                    getRequestManager().isUpdatePurchaseRecord = true
+                                    getRequestManager().isUpdateGroceryList = true
+                                    getRequestManager().isUpdateShopingCart = true
                                 }
                             }
                         }
@@ -1087,6 +1099,18 @@ class ShareManager
     
     func downloadImage(id: String, completion: @escaping ((UIImage?)->Void))
     {
+        let storageRef = Storage.storage().reference(withPath: "images/\(id)")
+        storageRef.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
+            if let error = error {
+                print("got an error downloadImage \(error.localizedDescription)")
+                return
+            }
+            if let data = data{
+                completion(UIImage(data: data))
+            }
+        })
+        return
+        /*
         if let uiImage = UIImage(named: id)
         {
             completion(uiImage)
@@ -1119,6 +1143,7 @@ class ShareManager
             completion(UIImage(data: data))
         }
         task.resume()
+         */
     }
     
     func uploadImage(image: UIImage, filename: String, completion: @escaping ((String)->Void) )
@@ -1128,8 +1153,37 @@ class ShareManager
             completion(filename)
             return
         }
-
         
+        //let randomID = UUID.init().uuidString
+        let uploadRef = Storage.storage().reference(withPath: "images/\(filename)")
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else// (imageData == nil)
+        {
+            print("UIImageJPEGRepresentation return nil")
+            return
+        }
+        let uploadMetadata = StorageMetadata.init()
+        uploadMetadata.contentType = "image/jpeg"
+        
+        let taskReference = uploadRef.putData(imageData, metadata: uploadMetadata, completion:
+        {
+        (metadata, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            completion(filename)
+        })
+        
+        taskReference.observe(.progress, handler: {/*[weak self]*/
+            (snapshot) in
+                guard let pctThere = snapshot.progress?.fractionCompleted else { return }
+                print("You are \(pctThere) complete")
+                //self?.progressView.progress = Float(pctThere)
+        })
+        
+        return
+        /*
         let subURL = "/image/uploader"
         let baseURL = URL(string: self.getServerURL() + subURL)!
         
@@ -1187,6 +1241,7 @@ class ShareManager
         })
 
         task.resume()
+         */
     }
     
     //------------------------------------------------------------------------------

@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E33062B26D20AB600B617AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E33062A26D20AB600B617AF /* GoogleService-Info.plist */; };
 		8E3E4AEB25D82FA30056B65C /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E4AE925D82FA30056B65C /* CHCSVParser.m */; };
 		8E3E4AEE25D830CD0056B65C /* BarcodeData.csv in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4AED25D830CD0056B65C /* BarcodeData.csv */; };
 		8E4296AF25EFA84D005164F8 /* SelectFridgeName.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E4296B125EFA84D005164F8 /* SelectFridgeName.storyboard */; };
@@ -51,6 +52,7 @@
 		8EBA43D825C666E700883BAA /* AddGrocery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EBA43DA25C666E700883BAA /* AddGrocery.storyboard */; };
 		8EBA43E625C7B90100883BAA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EBA43E825C7B90100883BAA /* Localizable.strings */; };
 		8EBA43EC25C7BABC00883BAA /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBA43EB25C7BABC00883BAA /* StringExtension.swift */; };
+		BD87D1D4C3D3F4D7A624F40D /* Pods_FreshFridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9046C847A7B858E2105F8752 /* Pods_FreshFridge.framework */; };
 		EE281C6925B7E8D40017AF54 /* ShopingCartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */; };
 		EE281C7725B837300017AF54 /* ShopingCartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */; };
 		F701FB6425B88779006906E8 /* PurchaseRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F701FB6225B88779006906E8 /* PurchaseRecordTableViewCell.swift */; };
@@ -58,7 +60,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		476DF0B1DDB72689A45C6821 /* Pods-FreshFridge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreshFridge.debug.xcconfig"; path = "Target Support Files/Pods-FreshFridge/Pods-FreshFridge.debug.xcconfig"; sourceTree = "<group>"; };
+		804C2AAE2199A6E05C6C5592 /* Pods-FreshFridge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FreshFridge.release.xcconfig"; path = "Target Support Files/Pods-FreshFridge/Pods-FreshFridge.release.xcconfig"; sourceTree = "<group>"; };
 		8E0C798C26CFBD9300ACF0FE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FamilyShare.strings; sourceTree = "<group>"; };
+		8E33062A26D20AB600B617AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Users/choichangae/Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8E3E4AE825D82FA20056B65C /* FreshFridge-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FreshFridge-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E3E4AE925D82FA30056B65C /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		8E3E4AEA25D82FA30056B65C /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
@@ -117,6 +122,7 @@
 		8EBA43E725C7B90100883BAA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8EBA43EA25C7B90500883BAA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8EBA43EB25C7BABC00883BAA /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		9046C847A7B858E2105F8752 /* Pods_FreshFridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FreshFridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE281C6825B7E8D40017AF54 /* ShopingCartTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopingCartTableViewController.swift; sourceTree = "<group>"; };
 		EE281C7625B837300017AF54 /* ShopingCartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopingCartTableViewCell.swift; sourceTree = "<group>"; };
 		F701FB6225B88779006906E8 /* PurchaseRecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseRecordTableViewCell.swift; sourceTree = "<group>"; };
@@ -129,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EA881B7261B7119001C079C /* StoreKit.framework in Frameworks */,
+				BD87D1D4C3D3F4D7A624F40D /* Pods_FreshFridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +148,7 @@
 				8E4B99CF25AD4AF500F2B0BF /* FreshFridge */,
 				8E4B99CE25AD4AF500F2B0BF /* Products */,
 				8EA881B5261B7119001C079C /* Frameworks */,
+				F969BA0ADBC565E2F0C7E1E1 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,6 +172,7 @@
 				8E97D5F125DBF24D00684485 /* Helpers */,
 				8E4B99D925AD4AF700F2B0BF /* Assets.xcassets */,
 				8E4B99DE25AD4AF700F2B0BF /* Info.plist */,
+				8E33062A26D20AB600B617AF /* GoogleService-Info.plist */,
 			);
 			path = FreshFridge;
 			sourceTree = "<group>";
@@ -253,8 +262,18 @@
 			isa = PBXGroup;
 			children = (
 				8EA881B6261B7119001C079C /* StoreKit.framework */,
+				9046C847A7B858E2105F8752 /* Pods_FreshFridge.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F969BA0ADBC565E2F0C7E1E1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				476DF0B1DDB72689A45C6821 /* Pods-FreshFridge.debug.xcconfig */,
+				804C2AAE2199A6E05C6C5592 /* Pods-FreshFridge.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,9 +283,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E4B99E125AD4AF700F2B0BF /* Build configuration list for PBXNativeTarget "FreshFridge" */;
 			buildPhases = (
+				0C1D1EA85064DDDE2CACC322 /* [CP] Check Pods Manifest.lock */,
 				8E4B99C925AD4AF500F2B0BF /* Sources */,
 				8E4B99CA25AD4AF500F2B0BF /* Frameworks */,
 				8E4B99CB25AD4AF500F2B0BF /* Resources */,
+				A22058B49D1D98075092E231 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -328,10 +349,53 @@
 				8E4B99D825AD4AF500F2B0BF /* Main.storyboard in Resources */,
 				8E3E4AEE25D830CD0056B65C /* BarcodeData.csv in Resources */,
 				8E4B99F725AD4C9200F2B0BF /* ShopingCart.storyboard in Resources */,
+				8E33062B26D20AB600B617AF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C1D1EA85064DDDE2CACC322 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FreshFridge-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A22058B49D1D98075092E231 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FreshFridge/Pods-FreshFridge-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FreshFridge/Pods-FreshFridge-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FreshFridge/Pods-FreshFridge-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8E4B99C925AD4AF500F2B0BF /* Sources */ = {
@@ -585,6 +649,7 @@
 		};
 		8E4B99E225AD4AF700F2B0BF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 476DF0B1DDB72689A45C6821 /* Pods-FreshFridge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -612,6 +677,7 @@
 		};
 		8E4B99E325AD4AF700F2B0BF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 804C2AAE2199A6E05C6C5592 /* Pods-FreshFridge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

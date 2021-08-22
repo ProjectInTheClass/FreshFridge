@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol ImageTableViewCellDelegate: class {
+protocol ImageTableViewCellDelegate: AnyObject {
     func selectedCell(cell: ImageTableViewCell)
 }
 

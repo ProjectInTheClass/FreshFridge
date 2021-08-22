@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TG5-xT-Abw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TG5-xT-Abw">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -70,7 +70,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="groceryCell" rowHeight="54" id="Jq0-HL-D5U" customClass="GroceryListTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="82" width="414" height="54"/>
+                                <rect key="frame" x="0.0" y="78.333333969116211" width="414" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jq0-HL-D5U" id="gRE-sg-FDO">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
@@ -98,7 +98,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="20"/>
                                                                     <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="55" id="Myn-25-PHD"/>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="Myn-25-PHD"/>
                                                                         <constraint firstAttribute="height" constant="20" id="Y4F-20-MjW"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -158,7 +158,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="groceryPictureCell" rowHeight="54" id="Fhf-Oo-jJE" customClass="GroceryListTableViewPictureCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="136" width="414" height="54"/>
+                                <rect key="frame" x="0.0" y="132.33333396911621" width="414" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fhf-Oo-jJE" id="MEN-rt-Lzt">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
@@ -193,7 +193,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="20"/>
                                                                     <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="55" id="2DG-vk-yEU"/>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="2DG-vk-yEU"/>
                                                                         <constraint firstAttribute="height" constant="20" id="Lcd-Jd-g6I"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -348,10 +348,10 @@
                             <tableViewSection headerTitle="냉장고 선택" footerTitle="냉장고는 다중 선택할 수 있습니다." id="q7d-jG-QRE">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="M2O-PC-XJK">
-                                        <rect key="frame" x="16" y="55.333332061767578" width="288" height="43.5"/>
+                                        <rect key="frame" x="16" y="49" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M2O-PC-XJK" id="0KJ-9K-Lif">
-                                            <rect key="frame" x="0.0" y="0.0" width="248" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="251.33333333333331" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fridgerGreen" translatesAutoresizingMaskIntoConstraints="NO" id="GSI-16-6Zh">
@@ -362,10 +362,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Kw-qu-9pc">
-                                                    <rect key="frame" x="60" y="0.0" width="200" height="44"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="200" id="zqa-li-h97"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="60.000000000000014" y="0.0" width="191.33333333333337" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="신선한 냉장고">
                                                         <color key="titleColor" systemColor="labelColor"/>
@@ -381,15 +378,16 @@
                                                 <constraint firstItem="0Kw-qu-9pc" firstAttribute="leading" secondItem="GSI-16-6Zh" secondAttribute="trailing" constant="10" id="CfH-O5-Tmb"/>
                                                 <constraint firstItem="0Kw-qu-9pc" firstAttribute="top" secondItem="0KJ-9K-Lif" secondAttribute="top" id="Geg-Rv-2fN"/>
                                                 <constraint firstAttribute="bottom" secondItem="GSI-16-6Zh" secondAttribute="bottom" constant="2" id="a2p-VH-eIB"/>
+                                                <constraint firstAttribute="trailing" secondItem="0Kw-qu-9pc" secondAttribute="trailing" id="m7i-zu-v8y"/>
                                                 <constraint firstAttribute="bottom" secondItem="0Kw-qu-9pc" secondAttribute="bottom" id="pHR-z8-Ygr"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="Jo6-Gb-cAg">
-                                        <rect key="frame" x="16" y="98.833332061767578" width="288" height="43.5"/>
+                                        <rect key="frame" x="16" y="92.5" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jo6-Gb-cAg" id="bn4-Rm-u3U">
-                                            <rect key="frame" x="0.0" y="0.0" width="248" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="251.33333333333331" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fridgerOrange" translatesAutoresizingMaskIntoConstraints="NO" id="Umf-t5-vCg">
@@ -400,10 +398,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UR6-At-0Hh">
-                                                    <rect key="frame" x="60" y="0.0" width="200" height="44"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="200" id="XxD-g5-Fzw"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="60.000000000000014" y="0.0" width="191.33333333333337" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="김치 냉장고">
                                                         <color key="titleColor" systemColor="labelColor"/>
@@ -414,6 +409,7 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="UR6-At-0Hh" secondAttribute="trailing" id="DrX-VL-ZkV"/>
                                                 <constraint firstItem="UR6-At-0Hh" firstAttribute="top" secondItem="bn4-Rm-u3U" secondAttribute="top" id="F4l-ba-cd9"/>
                                                 <constraint firstItem="Umf-t5-vCg" firstAttribute="top" secondItem="bn4-Rm-u3U" secondAttribute="top" constant="2" id="j7h-ur-LTy"/>
                                                 <constraint firstAttribute="bottom" secondItem="Umf-t5-vCg" secondAttribute="bottom" constant="2" id="kBG-gF-NUI"/>
@@ -424,10 +420,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="gEG-cB-fFt">
-                                        <rect key="frame" x="16" y="142.33333206176758" width="288" height="43.5"/>
+                                        <rect key="frame" x="16" y="136" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gEG-cB-fFt" id="uk2-FW-0JC">
-                                            <rect key="frame" x="0.0" y="0.0" width="248" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="251.33333333333331" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fridgerPink" translatesAutoresizingMaskIntoConstraints="NO" id="sGX-CR-q0x">
@@ -438,10 +434,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEd-kR-0Iw">
-                                                    <rect key="frame" x="60" y="0.0" width="200" height="44"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="200" id="Qqx-Oj-Kgc"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="60.000000000000014" y="0.0" width="191.33333333333337" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="추가 냉장고1">
                                                         <color key="titleColor" systemColor="labelColor"/>
@@ -454,6 +447,7 @@
                                             <constraints>
                                                 <constraint firstItem="sGX-CR-q0x" firstAttribute="top" secondItem="uk2-FW-0JC" secondAttribute="top" constant="2" id="8Rh-Yb-cMr"/>
                                                 <constraint firstItem="QEd-kR-0Iw" firstAttribute="top" secondItem="uk2-FW-0JC" secondAttribute="top" id="DN8-PU-nYH"/>
+                                                <constraint firstAttribute="trailing" secondItem="QEd-kR-0Iw" secondAttribute="trailing" id="Und-A2-AeX"/>
                                                 <constraint firstItem="sGX-CR-q0x" firstAttribute="leading" secondItem="uk2-FW-0JC" secondAttribute="leading" constant="20" id="Xgo-iz-tEr"/>
                                                 <constraint firstItem="QEd-kR-0Iw" firstAttribute="leading" secondItem="sGX-CR-q0x" secondAttribute="trailing" constant="10" id="ZFM-Eo-yiT"/>
                                                 <constraint firstAttribute="bottom" secondItem="QEd-kR-0Iw" secondAttribute="bottom" id="ewy-8c-18j"/>
@@ -462,10 +456,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="XWa-jr-b3s">
-                                        <rect key="frame" x="16" y="185.83333206176758" width="288" height="43.5"/>
+                                        <rect key="frame" x="16" y="179.5" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XWa-jr-b3s" id="aad-Pg-MrK">
-                                            <rect key="frame" x="0.0" y="0.0" width="248" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="251.33333333333331" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fridgerBlue" translatesAutoresizingMaskIntoConstraints="NO" id="zMi-S5-jK1">
@@ -476,10 +470,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73C-i0-Kfh">
-                                                    <rect key="frame" x="60" y="0.0" width="200" height="44"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="200" id="EcR-Do-f5n"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="60.000000000000014" y="0.0" width="191.33333333333337" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="추가 냉장고2">
                                                         <color key="titleColor" systemColor="labelColor"/>
@@ -492,6 +483,7 @@
                                             <constraints>
                                                 <constraint firstItem="73C-i0-Kfh" firstAttribute="top" secondItem="aad-Pg-MrK" secondAttribute="top" id="HGa-p3-am4"/>
                                                 <constraint firstAttribute="bottom" secondItem="zMi-S5-jK1" secondAttribute="bottom" constant="2" id="ZIV-Wd-H84"/>
+                                                <constraint firstAttribute="trailing" secondItem="73C-i0-Kfh" secondAttribute="trailing" id="dlE-yG-oEi"/>
                                                 <constraint firstItem="zMi-S5-jK1" firstAttribute="top" secondItem="aad-Pg-MrK" secondAttribute="top" constant="2" id="hX0-Eg-gz9"/>
                                                 <constraint firstItem="zMi-S5-jK1" firstAttribute="leading" secondItem="aad-Pg-MrK" secondAttribute="leading" constant="20" id="hYL-ik-Tud"/>
                                                 <constraint firstAttribute="bottom" secondItem="73C-i0-Kfh" secondAttribute="bottom" id="o2u-9P-uTq"/>
@@ -504,7 +496,7 @@
                             <tableViewSection headerTitle="정보 초기화" footerTitle="전체 지우기" id="8t7-Pj-VES">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="PnE-ww-6IA" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="304.66666412353516" width="288" height="43.5"/>
+                                        <rect key="frame" x="16" y="288.33333396911621" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PnE-ww-6IA" id="EOM-Dk-Lce">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
@@ -543,7 +535,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="XK2-vy-CaE" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="348.16666412353516" width="288" height="43.5"/>
+                                        <rect key="frame" x="16" y="331.83333396911621" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XK2-vy-CaE" id="8UJ-0g-2e9">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
@@ -582,7 +574,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="qIw-nV-p4b" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="391.66666412353516" width="288" height="43.5"/>
+                                        <rect key="frame" x="16" y="375.33333396911621" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qIw-nV-p4b" id="Qit-6q-uDn">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
@@ -625,7 +617,7 @@
                             <tableViewSection id="JwH-va-vCu">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="descriptionCell" rowHeight="132" id="QFh-Pp-rmQ" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="483.16666412353516" width="288" height="132"/>
+                                        <rect key="frame" x="16" y="463.16666793823242" width="288" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QFh-Pp-rmQ" id="3vS-Qe-qdz">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="132"/>
@@ -709,7 +701,7 @@ Daniel Shin</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kGG-eT-tA1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="h9I-Nu-xhu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1882.608695652174" y="-768.08035714285711"/>
+            <point key="canvasLocation" x="1882.608695652174" y="-768.75000000000011"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
