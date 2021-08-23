@@ -12,9 +12,14 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     @IBOutlet weak var alarmButton: UIBarButtonItem!
     @IBOutlet weak var categoryButton: UIButton!
+    @IBOutlet weak var sortByNameButton: UIButton!
+    @IBOutlet weak var sortByDueDate: UIButton!
+    
+    @IBOutlet weak var storageAllButton: UIButton!
     @IBOutlet weak var refrigerationButton: UIButton!
     @IBOutlet weak var freezingButton: UIButton!
     @IBOutlet weak var outdoorButton: UIButton!
+    
     var fridgeTabBarController: FridgeTabBarController!
     
     var numberOfSections: Int = 0
@@ -46,26 +51,21 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         
         getRequestManager().groceryListViewController = self
         
-        //tableView.cellLayoutMarginsFollowReadableWidth = true
-        
-        //tableView.dragInteractionEnabled = true
-       // tableView.dragDelegate = self
-        //tableView.dropDelegate = self
-        
         fridgeTabBarController = tabBarController as? FridgeTabBarController
-        
-        //GroceryImage.viewSize = CGSize(width: view.frame.width, height: view.frame.height)
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        
         
         updateFilteringButtons()
         updateTableView()
+        
+        self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+       // Code to refresh table view
+        
+        ShareManager.shared.update(async: false)
+        updateTableView()
+        tableView.reloadData()
+        self.refreshControl?.endRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,12 +73,17 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         tableView.reloadData()
     }
     
+    
     func updateFilteringButtons()
     {
         categoryButton.switchOnOff(isOn: isFridgeCategoryButtonOn)
-        refrigerationButton.switchOnOff(isOn: isFridgeFrigerationButtonOn)
-        freezingButton.switchOnOff(isOn: isFridgeFreezingButtonOn)
-        outdoorButton.switchOnOff(isOn: isFridgeOutdoorButtonOn)
+        sortByNameButton.switchOnOff(isOn: isFridgeNameSortButtonOn)
+        sortByDueDate.switchOnOff(isOn: isFridgeSortByDueDateButtonOn)
+        
+        storageAllButton.hideButton(isOn: isFridgeFrigerationButtonOn&&isFridgeFreezingButtonOn&&isFridgeOutdoorButtonOn)
+        refrigerationButton.hideButton(isOn: isFridgeFrigerationButtonOn==true&&isFridgeFreezingButtonOn==false&&isFridgeOutdoorButtonOn==false)
+        freezingButton.hideButton(isOn: isFridgeFrigerationButtonOn==false&&isFridgeFreezingButtonOn==true&&isFridgeOutdoorButtonOn==false)
+        outdoorButton.hideButton(isOn: isFridgeFrigerationButtonOn==false&&isFridgeFreezingButtonOn==false&&isFridgeOutdoorButtonOn==true)
         
         if(isFridgeAlarmButtonOn)
         {
@@ -118,12 +123,22 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         sectionNames.removeAll()
         
         // 냉장, 냉동, 실외 선택으로 보여지는 groceries를 필터링해서 showGroceries에 추가한다.
-        let showGroceries = DataManager.shared.getGroceries().filter
+        var showGroceries = DataManager.shared.getGroceries().filter
         {
             (((isFridgeFrigerationButtonOn == true && $0.storage == .Refrigeration)
             || (isFridgeFreezingButtonOn == true && $0.storage == .Freezing)
             || (isFridgeOutdoorButtonOn == true && $0.storage == .Outdoor))
                 && isEnableFridgeName(name: $0.fridgeName))
+        }
+        
+        // 이름순 sorting
+        if isFridgeNameSortButtonOn == true {
+            showGroceries = showGroceries.sorted { $0.info.title < $1.info.title }
+        }
+        
+        if(isFridgeSortByDueDateButtonOn)
+        {
+            showGroceries = showGroceries.sorted{$0.dueDate.date < $1.dueDate.date }
         }
         
         // 분류별이면 카테고리별로 섹터를 나누고 카테고리 순서로 filteredGroceries에 항목을 추가한다.
@@ -328,7 +343,6 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         contentOffset = CGPoint(x: scrollView.contentOffset.x, y: scrollView.contentOffset.y + 92)
     }
     
-    
     // editing
     override func tableView(_ tableView: UITableView,
                     leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
@@ -476,6 +490,25 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         updateFilteringButtons()
     }
     
+    @IBAction func sortByNameButtonTapped(_ sender: UIButton) {
+        isFridgeNameSortButtonOn = !isFridgeNameSortButtonOn
+        UserDefaults.standard.set(isFridgeNameSortButtonOn, forKey: "isFridgeNameSortButtonOn")
+        
+        updateFilteringButtons()
+        updateTableView()
+        tableView.reloadData()
+    }
+    
+    
+    @IBAction func sortByDueDate(_ sender: Any) {
+        isFridgeSortByDueDateButtonOn.toggle()
+        UserDefaults.standard.set(isFridgeSortByDueDateButtonOn, forKey: "isFridgeSortByDueDateButtonOn")
+        
+        updateFilteringButtons()
+        updateTableView()
+        tableView.reloadData()
+    }
+    
     @IBAction func categoryButtonTapped(_ sender: Any)
     {
         isFridgeCategoryButtonOn.toggle()
@@ -486,17 +519,25 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
 
     }
     
+    @IBAction func storageAllButtonTapped(_ sender: Any) {
+        isFridgeFrigerationButtonOn = true
+        isFridgeFreezingButtonOn = true
+        isFridgeOutdoorButtonOn = true
+        
+        UserDefaults.standard.set(isFridgeFrigerationButtonOn, forKey: "isFridgeFrigerationButtonOn")
+        UserDefaults.standard.set(isFridgeFreezingButtonOn, forKey: "isFridgeFreezingButtonOn")
+        UserDefaults.standard.set(isFridgeOutdoorButtonOn, forKey: "isFridgeOutdoorButtonOn")
+        updateFilteringButtons()
+        updateTableView()
+        tableView.reloadData()
+    }
+    
     @IBAction func refrigerationButtonTapped(_ sender: Any)
     {
-//        isFridgeFrigerationButtonOn.toggle()
-        if isFridgeFrigerationButtonOn == true {
-            isFridgeFreezingButtonOn.toggle()
-            isFridgeOutdoorButtonOn.toggle()
-        } else {
-            isFridgeFrigerationButtonOn = true
-            isFridgeFreezingButtonOn = true
-            isFridgeOutdoorButtonOn = true
-        }
+        isFridgeFrigerationButtonOn = true
+        isFridgeFreezingButtonOn = false
+        isFridgeOutdoorButtonOn = false
+        
         UserDefaults.standard.set(isFridgeFrigerationButtonOn, forKey: "isFridgeFrigerationButtonOn")
         updateFilteringButtons()
         updateTableView()
@@ -505,15 +546,10 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     @IBAction func freezingButtonTapped(_ sender: Any)
     {
-//        isFridgeFreezingButtonOn.toggle()
-        if isFridgeFreezingButtonOn == true {
-            isFridgeFrigerationButtonOn.toggle()
-            isFridgeOutdoorButtonOn.toggle()
-        } else {
-            isFridgeFrigerationButtonOn = true
-            isFridgeFreezingButtonOn = true
-            isFridgeOutdoorButtonOn = true
-        }
+        isFridgeFreezingButtonOn = true
+        isFridgeFrigerationButtonOn = false
+        isFridgeOutdoorButtonOn = false
+        
         UserDefaults.standard.set(isFridgeFreezingButtonOn, forKey: "isFridgeFreezingButtonOn")
         updateFilteringButtons()
         updateTableView()
@@ -523,15 +559,10 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     @IBAction func outdoorButtonTapped(_ sender: Any)
     {
-//        isFridgeOutdoorButtonOn.toggle()
-        if isFridgeOutdoorButtonOn == true {
-            isFridgeFrigerationButtonOn.toggle()
-            isFridgeFreezingButtonOn.toggle()
-        } else {
-            isFridgeFrigerationButtonOn = true
-            isFridgeFreezingButtonOn = true
-            isFridgeOutdoorButtonOn = true
-        }
+        isFridgeOutdoorButtonOn = true
+        isFridgeFrigerationButtonOn = false
+        isFridgeFreezingButtonOn = false
+        
         UserDefaults.standard.set(isFridgeOutdoorButtonOn, forKey: "isFridgeOutdoorButtonOn")
         updateFilteringButtons()
         updateTableView()
@@ -618,6 +649,13 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                     if let uiImage = UIImage(named: imageName)
                     {
                         image = GroceryImage(image: uiImage, filename: imageName)
+                    }
+                    else
+                    {
+                        if let uiImage = UIImage(named: category.systemName)
+                        {
+                            image = GroceryImage(image: uiImage, filename: imageName)
+                        }
                     }
                 }
                 

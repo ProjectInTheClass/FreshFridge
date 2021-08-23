@@ -17,14 +17,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <view key="tableHeaderView" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" id="ELG-Gh-XXw">
-                            <rect key="frame" x="0.0" y="0.0" width="428" height="108"/>
+                            <rect key="frame" x="0.0" y="0.0" width="428" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="GSs-4k-O9W">
-                                    <rect key="frame" x="10" y="0.0" width="408" height="108"/>
+                                    <rect key="frame" x="10" y="0.0" width="408" height="80"/>
                                     <subviews>
                                         <searchBar contentMode="redraw" verticalHuggingPriority="251" text="" placeholder="검색" translatesAutoresizingMaskIntoConstraints="NO" id="YgP-pg-bjE">
-                                            <rect key="frame" x="0.0" y="0.0" width="408" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="408" height="40"/>
                                             <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                             <scopeButtonTitles>
                                                 <string>Title</string>
@@ -32,27 +32,27 @@
                                             </scopeButtonTitles>
                                         </searchBar>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="L1P-pk-KpV">
-                                            <rect key="frame" x="0.0" y="54" width="408" height="54"/>
+                                            <rect key="frame" x="0.0" y="40" width="408" height="40"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcI-Qf-RSX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="136" height="54"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="136" height="40"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="분류별"/>
                                                     <connections>
                                                         <action selector="CategorySortButtonTapped:" destination="Xx5-TJ-k4i" eventType="touchUpInside" id="iWg-Nr-e3f"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kul-z3-o9U">
-                                                    <rect key="frame" x="136" y="0.0" width="136" height="54"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="136" y="0.0" width="136" height="40"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="즐겨찾기"/>
                                                     <connections>
                                                         <action selector="FavoriteSortButtonTapped:" destination="Xx5-TJ-k4i" eventType="touchUpInside" id="Ccw-gm-PUv"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ix-xb-XdR">
-                                                    <rect key="frame" x="272" y="0.0" width="136" height="54"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="272" y="0.0" width="136" height="40"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="최신순"/>
                                                     <connections>
                                                         <action selector="RecentSortButtonTapped:" destination="Xx5-TJ-k4i" eventType="touchUpInside" id="HYh-Y9-skc"/>
@@ -73,7 +73,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordCell" id="0jO-oe-uXx" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="132.33333396911621" width="428" height="40.333332061767578"/>
+                                <rect key="frame" x="0.0" y="104.33333396911621" width="428" height="40.333332061767578"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0jO-oe-uXx" id="SeZ-YD-VoW">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="40.333332061767578"/>
@@ -117,7 +117,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordWithPictureCell" id="FkW-eM-jEp" userLabel="PurchaseRecordWithPictureCell" customClass="PurchaseRecordWithPictureTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="172.66666603088379" width="428" height="40.333332061767578"/>
+                                <rect key="frame" x="0.0" y="144.66666603088379" width="428" height="40.333332061767578"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FkW-eM-jEp" id="OnM-fb-p62">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="40.333332061767578"/>
@@ -174,6 +174,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="구입 기록" id="c2J-dA-Cow"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="9aR-Ka-cTs">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                     <connections>
                         <outlet property="CategorySortButton" destination="HcI-Qf-RSX" id="gdp-H8-E28"/>
                         <outlet property="FavoriteSortButton" destination="kul-z3-o9U" id="rAe-kq-EEy"/>

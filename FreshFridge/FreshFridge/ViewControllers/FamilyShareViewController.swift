@@ -19,6 +19,7 @@ class FamilyShareViewController: UIViewController {
     @IBOutlet weak var resignShareButton: UIButton!
     @IBOutlet weak var unlockSharingButton: UIButton!
     @IBOutlet weak var restorePurchaseButton: UIButton!
+    @IBOutlet weak var publicCodeLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -64,16 +65,24 @@ class FamilyShareViewController: UIViewController {
         if ShareManager.shared.isShared()
         {
             SharingCondition.image = UIImage(systemName:"person.2")?.withTintColor(UIColor.systemBlue, renderingMode: .automatic)
-            resignShareButton.isEnabled = true
+            
             SharingCondition.image = SharingCondition.image?.withRenderingMode(.alwaysTemplate)
             SharingCondition.tintColor = UIColor.link
+            publicCodeLabel.isHidden = false
+            publicCodeLabel.text = "공유 코드".localized() + " : [\(ShareManager.shared.publicCode)]"
+            createPublicCodeButton.isEnabled = false
+            enterPublicCodeButton.isEnabled = false
+            resignShareButton.isEnabled = true
         }
         else
         {
             SharingCondition.image = UIImage(systemName:"person.badge.plus")?.withTintColor(.systemGray, renderingMode: .automatic)
-            resignShareButton.isEnabled = false
             SharingCondition.image = SharingCondition.image?.withRenderingMode(.alwaysTemplate)
             SharingCondition.tintColor = UIColor.systemGray2
+            publicCodeLabel.isHidden = true
+            createPublicCodeButton.isEnabled = true
+            enterPublicCodeButton.isEnabled = true
+            resignShareButton.isEnabled = false
         }
         
         
@@ -93,7 +102,7 @@ class FamilyShareViewController: UIViewController {
         if ShareManager.shared.isCreatedShareCode()
         {
             presentAlertOk(title: "[\"%@\"]".localized(with: [ShareManager.shared.createdPublicCode]), message: "이미 생성한 공유 코드가 존재합니다.".localized(), parent: self)
-            sharingInfo()
+            //sharingInfo()
             return
         }
         
@@ -187,8 +196,8 @@ class FamilyShareViewController: UIViewController {
     {
         if ShareManager.shared.isShared()
         {
-            presentAlertOk(title: "[\"%@\"]".localized(with: [ShareManager.shared.publicCode]), message: "사용 중인 공유 코드".localized(), parent: self)
-            sharingInfo()
+            presentAlertOk(title: "[\"%@\"]".localized(with: [ShareManager.shared.publicCode]), message: "공유 코드".localized(), parent: self)
+            //sharingInfo()
             return
         }
         
@@ -264,7 +273,7 @@ class FamilyShareViewController: UIViewController {
     {
         if ShareManager.shared.isShared() == false
         {
-            sharingInfo()
+            //sharingInfo()
             return
         }
         

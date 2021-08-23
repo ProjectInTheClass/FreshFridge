@@ -47,6 +47,17 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false // for selecting the rows, didSelectRowAtIndex path could not be fired until pressed long.
         view.addGestureRecognizer(tap)
+    
+        self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+       // Code to refresh table view
+        
+        ShareManager.shared.update(async: false)
+        updateTableView()
+        tableView.reloadData()
+        self.refreshControl?.endRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {

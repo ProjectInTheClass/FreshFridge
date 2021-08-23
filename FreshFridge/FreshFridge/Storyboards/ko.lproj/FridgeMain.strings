@@ -1,5 +1,5 @@
 
-/* Class = "UIButton"; normalTitle = "선선한 냉장고"; ObjectID = "0Kw-qu-9pc"; */
+/* Class = "UIButton"; normalTitle = "신선한 냉장고"; ObjectID = "0Kw-qu-9pc"; */
 "0Kw-qu-9pc.normalTitle" = "신선한 냉장고";
 
 /* Class = "UIButton"; normalTitle = "냉장고 품목 전체 지우기"; ObjectID = "6q7-jB-MS2"; */
@@ -8,11 +8,17 @@
 /* Class = "UIButton"; normalTitle = "추가 냉장고2"; ObjectID = "73C-i0-Kfh"; */
 "73C-i0-Kfh.normalTitle" = "추가 냉장고2";
 
+/* Class = "UITableViewSection"; footerTitle = "전체 지우기"; ObjectID = "8t7-Pj-VES"; */
+"8t7-Pj-VES.footerTitle" = "전체 지우기";
+
 /* Class = "UITableViewSection"; headerTitle = "정보 초기화"; ObjectID = "8t7-Pj-VES"; */
 "8t7-Pj-VES.headerTitle" = "정보 초기화";
 
-/* Class = "UINavigationItem"; title = "냉장고 선택"; ObjectID = "AYj-rL-Ab6"; */
-"AYj-rL-Ab6.title" = "냉장고 선택";
+/* Class = "UIButton"; normalTitle = "이름순"; ObjectID = "Ai4-nf-mp4"; */
+"Ai4-nf-mp4.normalTitle" = "이름순";
+
+/* Class = "UIButton"; normalTitle = "분류별"; ObjectID = "Fjj-Un-ewU"; */
+"Fjj-Un-ewU.normalTitle" = "분류별";
 
 /* Class = "UIButton"; normalTitle = "장바구니 전체 지우기"; ObjectID = "HDZ-v8-Fl4"; */
 "HDZ-v8-Fl4.normalTitle" = "장바구니 전체 지우기";
@@ -29,8 +35,8 @@
 /* Class = "UIButton"; normalTitle = "김치 냉장고"; ObjectID = "UR6-At-0Hh"; */
 "UR6-At-0Hh.normalTitle" = "김치 냉장고";
 
-/* Class = "UIButton"; normalTitle = "분류별"; ObjectID = "V5K-YJ-Xmq"; */
-"V5K-YJ-Xmq.normalTitle" = "분류별";
+/* Class = "UIButton"; normalTitle = "All"; ObjectID = "V5K-YJ-Xmq"; */
+"V5K-YJ-Xmq.normalTitle" = "All";
 
 /* Class = "UIBarButtonItem"; title = "추가"; ObjectID = "WeC-6a-ETG"; */
 "WeC-6a-ETG.title" = "추가";
@@ -67,3 +73,6 @@
 
 /* Class = "UIButton"; normalTitle = "냉동"; ObjectID = "zTS-JF-eWw"; */
 "zTS-JF-eWw.normalTitle" = "냉동";
+
+/* Class = "UIButton"; normalTitle = "보관기간순"; ObjectID = "zWU-tU-Zit"; */
+"zWU-tU-Zit.normalTitle" = "보관기간순";

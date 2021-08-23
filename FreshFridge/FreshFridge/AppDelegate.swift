@@ -71,6 +71,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if(UserDefaults.isFirstLaunch())
         {
             UserDefaults.standard.set(isFridgeCategoryButtonOn, forKey: "isFridgeCategoryButtonOn")
+            UserDefaults.standard.set(isFridgeNameSortButtonOn, forKey: "isFridgeNameSortButtonOn")
+            UserDefaults.standard.set(isFridgeSortByDueDateButtonOn, forKey: "isFridgeSortByDueDateButtonOn")
+            
             UserDefaults.standard.set(isFridgeFrigerationButtonOn, forKey: "isFridgeFrigerationButtonOn")
             UserDefaults.standard.set(isFridgeFreezingButtonOn, forKey: "isFridgeFreezingButtonOn")
             UserDefaults.standard.set(isFridgeOutdoorButtonOn, forKey: "isFridgeOutdoorButtonOn")
@@ -88,6 +91,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         else
         {
             isFridgeCategoryButtonOn = UserDefaults.standard.bool(forKey: "isFridgeCategoryButtonOn")
+            isFridgeNameSortButtonOn = UserDefaults.standard.bool(forKey: "isFridgeNameSortButtonOn")
+            isFridgeSortByDueDateButtonOn = UserDefaults.standard.bool(forKey: "isFridgeSortByDueDateButtonOn")
+            
             isFridgeFrigerationButtonOn = UserDefaults.standard.bool(forKey: "isFridgeFrigerationButtonOn")
             isFridgeFreezingButtonOn = UserDefaults.standard.bool(forKey: "isFridgeFreezingButtonOn")
             isFridgeOutdoorButtonOn = UserDefaults.standard.bool(forKey: "isFridgeOutdoorButtonOn")
@@ -203,7 +209,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func scheduledTimerWithTimeInterval(){
         // Scheduling timer to Call the function "updateCounting" with the interval of 1 seconds
-        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 600, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
     }
 
     @objc func updateCounting()

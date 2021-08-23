@@ -5,13 +5,13 @@
  "MHn-rC-Dyd.title" = "Family Share";
 
  /* Class = "UIButton"; normalTitle = "코드 입력"; ObjectID = "cn5-nq-0E6"; */
- "cn5-nq-0E6.normalTitle" = "Enter / View Shared Code";
+ "cn5-nq-0E6.normalTitle" = "Enter Shared Code";
 
  /* Class = "UIButton"; normalTitle = "가족 공유 기능 활성 (준비중)"; ObjectID = "eki-Kk-gf9"; */
  "eki-Kk-gf9.normalTitle" = "Exit Family Share";
 
  /* Class = "UIButton"; normalTitle = "공유 코드 생성"; ObjectID = "gBb-7M-akn"; */
- "gBb-7M-akn.normalTitle" = "Create / View Shared Code";
+ "gBb-7M-akn.normalTitle" = "Create Shared Code";
 
 /* Class = "UIButton"; normalTitle = "공유 기능 잠금 해제"; ObjectID = "R5d-2G-GXb"; */
 "R5d-2G-GXb.normalTitle" = "Unlock Sharing";

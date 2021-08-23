@@ -37,18 +37,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="sBm-Ww-KRd">
-                                <rect key="frame" x="41.333333333333343" y="118" width="331.33333333333326" height="500"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="sBm-Ww-KRd">
+                                <rect key="frame" x="41.333333333333343" y="138" width="331.33333333333326" height="460"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.badge.plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZjS-hT-GPY">
-                                        <rect key="frame" x="-2" y="1.6666666666666714" width="333.33333333333331" height="150"/>
+                                        <rect key="frame" x="-2" y="1.6666666666666714" width="333.33333333333331" height="100"/>
                                         <color key="tintColor" systemColor="systemGray2Color"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="zp9-a0-OcN"/>
+                                            <constraint firstAttribute="height" constant="100" id="zp9-a0-OcN"/>
                                         </constraints>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sharing Code : xxxxx" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1r7-jB-32h">
+                                        <rect key="frame" x="0.0" y="115" width="331.33333333333331" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="mYN-vd-wlf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBb-7M-akn">
-                                        <rect key="frame" x="0.0" y="170" width="331.33333333333331" height="50"/>
+                                        <rect key="frame" x="0.0" y="150" width="331.33333333333331" height="50"/>
                                         <color key="backgroundColor" systemColor="systemFillColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="4LW-gr-6dm"/>
@@ -60,7 +69,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cn5-nq-0E6">
-                                        <rect key="frame" x="0.0" y="240" width="331.33333333333331" height="50"/>
+                                        <rect key="frame" x="0.0" y="215" width="331.33333333333331" height="50"/>
                                         <color key="backgroundColor" systemColor="systemFillColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="mrv-eQ-WMR"/>
@@ -72,7 +81,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eki-Kk-gf9">
-                                        <rect key="frame" x="0.0" y="310" width="331.33333333333331" height="50"/>
+                                        <rect key="frame" x="0.0" y="280" width="331.33333333333331" height="50"/>
                                         <color key="backgroundColor" systemColor="systemFillColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Ejv-tR-iV7"/>
@@ -84,7 +93,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5d-2G-GXb">
-                                        <rect key="frame" x="0.0" y="380" width="331.33333333333331" height="50"/>
+                                        <rect key="frame" x="0.0" y="345" width="331.33333333333331" height="50"/>
                                         <color key="backgroundColor" systemColor="systemFillColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="8Rr-tT-mYH"/>
@@ -97,7 +106,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C8w-pw-tkU">
-                                        <rect key="frame" x="0.0" y="450" width="331.33333333333331" height="50"/>
+                                        <rect key="frame" x="0.0" y="410" width="331.33333333333331" height="50"/>
                                         <color key="backgroundColor" systemColor="systemFillColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="fZA-le-90c"/>
@@ -126,6 +135,7 @@
                         <outlet property="SharingCondition" destination="ZjS-hT-GPY" id="aOd-Qn-i06"/>
                         <outlet property="createPublicCodeButton" destination="gBb-7M-akn" id="KJI-tf-F0A"/>
                         <outlet property="enterPublicCodeButton" destination="cn5-nq-0E6" id="efT-k7-S48"/>
+                        <outlet property="publicCodeLabel" destination="1r7-jB-32h" id="2Rf-F8-gVm"/>
                         <outlet property="resignShareButton" destination="eki-Kk-gf9" id="ijI-t3-b7i"/>
                         <outlet property="restorePurchaseButton" destination="C8w-pw-tkU" id="2Ay-28-nVu"/>
                         <outlet property="unlockSharingButton" destination="R5d-2G-GXb" id="UlL-6w-IO2"/>

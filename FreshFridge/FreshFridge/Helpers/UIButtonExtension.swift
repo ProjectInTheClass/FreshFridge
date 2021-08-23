@@ -19,6 +19,27 @@ extension UIButton
         else
         {
             setTitleColor(.systemGray, for: .normal)
+            
+        }
+    }
+    
+    func hideButton(isOn: Bool) {
+        if(isOn)
+        {
+            setTitleColor(.white, for: .normal)
+            //let image = UIImage(named: "radio-off")!
+            let image = UIImage(named: "radio-off")!.withAlignmentRectInsets(UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
+            setBackgroundImage(image.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+            tintColor = .link
+            layoutIfNeeded()
+            subviews.first?.contentMode = .scaleAspectFit
+        }
+        else
+        {
+            setTitleColor(.link, for: .normal)
+            setBackgroundImage(nil, for: .normal)
+//            setTitleColor(UIColor(red: 1, green: 1, blue: 1, alpha: 0), for: .normal)
+//            tintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0)
         }
     }
     

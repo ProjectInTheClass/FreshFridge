@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tPo-MV-sYh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tPo-MV-sYh">
     <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -388,7 +387,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="oGU-au-lIl">
-                                                    <rect key="frame" x="5" y="5" width="364" height="334"/>
+                                                    <rect key="frame" x="5" y="5" width="364" height="332.5"/>
                                                     <connections>
                                                         <action selector="dueDatePickerChanged:" destination="sDW-H2-BPf" eventType="valueChanged" id="hyS-4b-gVU"/>
                                                     </connections>
@@ -581,7 +580,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoryCell" id="zhQ-F4-OOT" customClass="ImageTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44.5"/>
+                                <rect key="frame" x="0.0" y="24.5" width="320" height="44.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zhQ-F4-OOT" id="GD4-Gu-w5z">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44.5"/>
@@ -654,50 +653,11 @@
             <point key="canvasLocation" x="5564" y="-818"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="lcM-3m-jRW">
-            <objects>
-                <navigationController id="oim-3j-uY2" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6aS-Nc-ozq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="hWg-oA-I8R" kind="relationship" relationship="rootViewController" id="zUB-GE-inz"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QtU-v1-920" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3921" y="-820"/>
-        </scene>
-        <!--디폴트 이름 선택-->
-        <scene sceneID="8yP-rs-B74">
-            <objects>
-                <viewController id="hWg-oA-I8R" customClass="DefaultNameViewController" customModule="FreshFridge" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UFw-wj-R1i">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="dl4-GT-0nr"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="디폴트 이름 선택" id="vTz-1J-12D">
-                        <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="kE0-Ze-HRB">
-                            <connections>
-                                <segue destination="NH8-W8-r2d" kind="unwind" identifier="defaultNameSeque" unwindAction="unwindToAddGrocery:" id="0HR-Um-Bcu"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fGB-2U-Dnf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="NH8-W8-r2d" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="4663" y="-819"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="FhP-6R-xYt">
             <objects>
                 <navigationController id="tPo-MV-sYh" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="b4F-j8-Ffv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -756,7 +716,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordCell" id="ISQ-u5-5ii" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="122" width="320" height="40.5"/>
+                                <rect key="frame" x="0.0" y="118.5" width="320" height="40.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ISQ-u5-5ii" id="CS0-UL-v61">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="40.5"/>
@@ -800,7 +760,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordWithPictureCell" rowHeight="60" id="SQW-64-Pyc" userLabel="PurchaseRecordWithPictureCell" customClass="PurchaseRecordWithPictureTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="162.5" width="320" height="60"/>
+                                <rect key="frame" x="0.0" y="159" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SQW-64-Pyc" id="8Z3-GJ-pZi">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>

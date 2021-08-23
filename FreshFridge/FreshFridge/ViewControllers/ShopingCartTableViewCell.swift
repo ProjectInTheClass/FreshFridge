@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ShopingCartCellDelegate: class {
+protocol ShopingCartCellDelegate: AnyObject {
     func checkCartTapped(sender: ShopingCartTableViewCell)
     func countButtonTapped(sender: ShopingCartTableViewCell)
     func selectedCell()

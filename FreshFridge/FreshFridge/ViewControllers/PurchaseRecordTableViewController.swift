@@ -66,14 +66,16 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         updateButtons()
         updateTableView()
         
+        self.refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+       // Code to refresh table view
         
-        
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//         self.navigationItem.leftBarButtonItem = self.editButtonItem
+        ShareManager.shared.update(async: false)
+        updateTableView()
+        tableView.reloadData()
+        self.refreshControl?.endRefreshing()
     }
     
     override func viewWillAppear(_ animated: Bool) {

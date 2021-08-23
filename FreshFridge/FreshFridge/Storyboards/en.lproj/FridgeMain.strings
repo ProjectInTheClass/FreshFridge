@@ -29,9 +29,6 @@
 /* Class = "UIButton"; normalTitle = "김치 냉장고"; ObjectID = "UR6-At-0Hh"; */
 "UR6-At-0Hh.normalTitle" = "First Extra Fridge";
 
-/* Class = "UIButton"; normalTitle = "분류별"; ObjectID = "V5K-YJ-Xmq"; */
-"V5K-YJ-Xmq.normalTitle" = "Category";
-
 /* Class = "UIBarButtonItem"; title = "추가"; ObjectID = "WeC-6a-ETG"; */
 "WeC-6a-ETG.title" = "Add";
 
@@ -67,3 +64,15 @@
 
 /* Class = "UIButton"; normalTitle = "냉동"; ObjectID = "zTS-JF-eWw"; */
 "zTS-JF-eWw.normalTitle" = "Freezer";
+
+/* Class = "UIButton"; normalTitle = "분류별"; ObjectID = "V5K-YJ-Xmq"; */
+"V5K-YJ-Xmq.normalTitle" = "All";
+
+/* Class = "UIButton"; normalTitle = "카테고리별"; ObjectID = "Fjj-Un-ewU"; */
+"Fjj-Un-ewU.normalTitle" = "Category";
+
+/* Class = "UIButton"; normalTitle = "최신순"; ObjectID = "Ai4-nf-mp4"; */
+"Ai4-nf-mp4.normalTitle" = "SortbyName";
+
+/* Class = "UIButton"; normalTitle = "보관기간순"; ObjectID = "zWU-tU-Zit"; */
+"zWU-tU-Zit.normalTitle" = "SortbyExpiry";

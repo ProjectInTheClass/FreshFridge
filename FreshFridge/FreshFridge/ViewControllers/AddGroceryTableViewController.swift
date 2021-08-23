@@ -700,8 +700,8 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 if let image = UIImage(named: imageName)
                 {
                     groceryImage = GroceryImage(image: image, filename: imageName)
-                    updateTableView()
                 }
+                
                 
                 updateTableView()
                 enableCompletButton()
@@ -744,6 +744,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 {
                     groceryImage = GroceryImage(image: image, filename: imageName)
                 }
+                
                 
                 updateTableView()
                 enableCompletButton()

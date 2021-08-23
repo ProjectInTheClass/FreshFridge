@@ -45,7 +45,7 @@
 "현재 가지고 있는 데이터를 공유하시겠습니까? '아니요'하면 데이터가 지워집니다."="Would you like to share the data you currently have? 'No' will erase your data.";
 
 //"코드 보기"="View Shared Code";
-"사용 중인 공유 코드"="Sharing code in use";
+"공유 코드"="Sharing Code";
 
 "코드 입력"="Enter Shared Code";
 "공유 코드를 입력해주세요."="Please enter the sharing code.";

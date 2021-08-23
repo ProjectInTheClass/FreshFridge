@@ -92,13 +92,6 @@ class DataManager
                 {
                     groceryHistory.image = GroceryImage(image: uiImage, filename: image.filename)
                 }
-                else
-                {
-                    if let uiImage = UIImage(named: groceryHistory.category.systemName)
-                    {
-                        groceryHistory.image = GroceryImage(image: uiImage, filename: groceryHistory.category.systemName)
-                    }
-                }
             }
         }
     }

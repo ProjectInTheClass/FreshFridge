@@ -607,7 +607,7 @@ class ShareManager
                                 DataManager.shared.updateGroceryHistory(id: groceryHistory.id, favorite: product.favorite)
                             }
                             
-                            if(product.imageCode.isEmpty == false)
+                            if(product.imageCode.isEmpty == false && product.isDeleted == false )
                             {
                                 isDownloadImage = true
                                 if let image = groceryHistory.image
@@ -638,7 +638,6 @@ class ShareManager
                         {
                             if product.isDeleted == false
                             {
-                                
                                 DataManager.shared.insertGroceryHistory(id: product.id, title: product.title, category: GroceryHistory.Category(rawValue: product.category) ?? GroceryHistory.Category.ETC, image: nil, updateDate: false)
                                 DataManager.shared.updateGroceryHistory(id: AutoIncreasedID(product.id), favorite: product.favorite)
                                 
@@ -651,23 +650,54 @@ class ShareManager
                             }
                         }
                         
-                        if(isDownloadImage)
+                        // 이미지 다운롣
+                        if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
                         {
-                            if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
+                            // 1. 로컬에서 로드 시도
+                            var uiImage = GroceryImage.loadImage(filename: product.imageCode)
+                            if let uiImage = uiImage
                             {
-                                if let uiImage = GroceryImage.loadImage(filename: product.imageCode)
+                                groceryHistory.image = GroceryImage(image: uiImage, filename: product.imageCode)
+                                getRequestManager().isUpdatePurchaseRecord = true
+                                getRequestManager().isUpdateGroceryList = true
+                                getRequestManager().isUpdateShopingCart = true
+                            }
+                            else
+                            {
+                                if(isDownloadImage)
                                 {
-                                    groceryHistory.image = GroceryImage(image: uiImage, filename: product.imageCode)
-                                    getRequestManager().isUpdatePurchaseRecord = true
-                                    getRequestManager().isUpdateGroceryList = true
-                                    getRequestManager().isUpdateShopingCart = true
-                                }
-                                else
-                                {
+                                    // 2. 서버에서 다운 로드
                                     self.downloadImage(id: product.imageCode)
                                     { (image: UIImage?) in
-                                        groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
-                                        GroceryImage.saveImage(image: image, filename: product.imageCode)
+                                        if(image != nil)
+                                        {
+                                            groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
+                                            GroceryImage.saveImage(image: image, filename: product.imageCode)
+                                        }
+                                        else
+                                        {
+                                            // 3. 이름으로 이미지 검색
+                                            let imageName = imageNames[product.title] ?? product.title
+                                            uiImage = UIImage(named: imageName)
+                                            if let uiImage = uiImage
+                                            {
+                                                groceryHistory.image = GroceryImage(image: uiImage, filename: imageName)
+                                                GroceryImage.saveImage(image: uiImage, filename: imageName)
+                                            }
+                                            else
+                                            {
+                                                // 4. 카테고리 이미지 출력
+                                                if let category = GroceryHistory.Category(rawValue: product.category)
+                                                {
+                                                    uiImage = UIImage(named: category.systemName)
+                                                    if let uiImage = uiImage
+                                                    {
+                                                        groceryHistory.image = GroceryImage(image: uiImage, filename: category.systemName)
+                                                        GroceryImage.saveImage(image: uiImage, filename: category.systemName)
+                                                    }
+                                                }
+                                            }
+                                        }
                                         
                                         DispatchQueue.main.async {
                                             RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
@@ -676,22 +706,34 @@ class ShareManager
                                         }
                                     }
                                 }
-                            }
-                        }
-                        else // 이미지 설정이 없으면 카테고리 이미지로 대체
-                        {
-                            if let category = GroceryHistory.Category(rawValue: product.category)
-                             , let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
-                            {
-                                if let uiImage = UIImage(named: category.systemName)
+                                
+                                if(groceryHistory.image == nil)
                                 {
-                                    groceryHistory.image = GroceryImage(image: uiImage, filename: category.systemName)
-                                    getRequestManager().isUpdatePurchaseRecord = true
-                                    getRequestManager().isUpdateGroceryList = true
-                                    getRequestManager().isUpdateShopingCart = true
+                                    // 3. 이름으로 이미지 검색
+                                    let imageName = imageNames[product.title] ?? product.title
+                                    var uiImage = UIImage(named: imageName)
+                                    if let uiImage = uiImage
+                                    {
+                                        groceryHistory.image = GroceryImage(image: uiImage, filename: imageName)
+                                        GroceryImage.saveImage(image: uiImage, filename: imageName)
+                                    }
+                                    else
+                                    {
+                                        // 4. 카테고리 이미지 출력
+                                        if let category = GroceryHistory.Category(rawValue: product.category)
+                                        {
+                                            uiImage = UIImage(named: category.systemName)
+                                            if let uiImage = uiImage
+                                            {
+                                                groceryHistory.image = GroceryImage(image: uiImage, filename: category.systemName)
+                                                GroceryImage.saveImage(image: uiImage, filename: category.systemName)
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
+                        
                         
                         if(self.lastestProductUpdateAt < product.updatedAt)
                         {
@@ -1099,10 +1141,11 @@ class ShareManager
     
     func downloadImage(id: String, completion: @escaping ((UIImage?)->Void))
     {
-        let storageRef = Storage.storage().reference(withPath: "images/\(id)")
+        let storageRef = Storage.storage().reference(withPath: "images/\(ShareManager.shared.publicCode)/\(id)")
         storageRef.getData(maxSize: 1 * 1024 * 1024, completion: { (data, error) in
             if let error = error {
                 print("got an error downloadImage \(error.localizedDescription)")
+                completion(nil)
                 return
             }
             if let data = data{
@@ -1155,7 +1198,7 @@ class ShareManager
         }
         
         //let randomID = UUID.init().uuidString
-        let uploadRef = Storage.storage().reference(withPath: "images/\(filename)")
+        let uploadRef = Storage.storage().reference(withPath: "images/\(ShareManager.shared.publicCode)/\(filename)")
         guard let imageData = image.jpegData(compressionQuality: 0.5) else// (imageData == nil)
         {
             print("UIImageJPEGRepresentation return nil")
@@ -1163,6 +1206,7 @@ class ShareManager
         }
         let uploadMetadata = StorageMetadata.init()
         uploadMetadata.contentType = "image/jpeg"
+        uploadMetadata.customMetadata = ["publicCode":"\(ShareManager.shared.publicCode)"]
         
         let taskReference = uploadRef.putData(imageData, metadata: uploadMetadata, completion:
         {
@@ -1173,6 +1217,19 @@ class ShareManager
             }
             
             completion(filename)
+//            qRef.downloadURL(completion: {
+//                (url, error) in
+//                if let error = error{
+//                    print("got an error : \(error.localizedDescription)")
+//                }
+//
+//                if let url = url
+//                {
+//                    print("Here is url : \(url.relativeString)")
+//                    print("Here is url : \(url.absoluteURL)")
+//                    completion(url.absoluteString)
+//                }
+//            })
         })
         
         taskReference.observe(.progress, handler: {/*[weak self]*/
