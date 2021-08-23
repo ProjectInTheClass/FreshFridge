@@ -535,7 +535,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
         
         if UIImagePickerController.isSourceTypeAvailable(.camera)
         {
-            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { action in
+            let cameraAction = UIAlertAction(title: "Camera".localized(), style: .default, handler: { action in
                 //print("User selected Camera Action")
                 imagePicker.sourceType = .camera
                 self.present(imagePicker, animated: true, completion: nil)
@@ -544,12 +544,12 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             alertController.addAction(cameraAction)
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
         {
-            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: {
+            let photoLibraryAction = UIAlertAction(title: "Photo Library".localized(), style: .default, handler: {
                 action in
                 //print("User selected Photo Library Action")
                 imagePicker.sourceType = .photoLibrary

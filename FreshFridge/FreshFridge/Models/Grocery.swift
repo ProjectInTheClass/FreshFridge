@@ -416,10 +416,10 @@ func presentAlertOkCancel(title: String, message: String = "", parent: UIViewCon
 {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     
-    let ok = UIAlertAction(title: "OK", style: .default, handler: okHandler)
+    let ok = UIAlertAction(title: "Ok".localized(), style: .default, handler: okHandler)
     alert.addAction(ok)
     
-    let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+    let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel)
     alert.addAction(cancel)
     
     parent.present(alert, animated: true, completion: nil)
@@ -428,7 +428,7 @@ func presentAlertOkCancel(title: String, message: String = "", parent: UIViewCon
 func presentAlertOk(title: String, message: String = "", parent: UIViewController)
 {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+    let ok = UIAlertAction(title: "Ok".localized(), style: .default, handler: nil)
     alert.addAction(ok)
     
     parent.present(alert, animated: true, completion: nil)
@@ -439,9 +439,6 @@ func presentAlertYesNoCancel(title: String, message: String = "", parent: UIView
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     alert.addAction(yes)
     alert.addAction(no)
-    
-//    let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-//    alert.addAction(cancel)
     
     parent.present(alert, animated: true, completion: nil)
 }

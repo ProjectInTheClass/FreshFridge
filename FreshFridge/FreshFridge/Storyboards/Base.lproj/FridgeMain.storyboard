@@ -17,17 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" id="LNy-Cn-Eq7">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4HT-nL-hV2">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4HT-nL-hV2">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="DVt-tE-PfM">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fjj-Un-ewU">
-                                                    <rect key="frame" x="0.0" y="0.0" width="138" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="138" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
@@ -37,7 +37,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ai4-nf-mp4">
-                                                    <rect key="frame" x="138" y="0.0" width="138" height="40"/>
+                                                    <rect key="frame" x="138" y="0.0" width="138" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="이름순">
                                                         <color key="titleColor" systemColor="linkColor"/>
@@ -47,7 +47,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWU-tU-Zit">
-                                                    <rect key="frame" x="276" y="0.0" width="138" height="40"/>
+                                                    <rect key="frame" x="276" y="0.0" width="138" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
                                                     <state key="normal" title="보관기간순">
@@ -59,15 +59,12 @@
                                                 </button>
                                             </subviews>
                                             <viewLayoutGuide key="safeArea" id="pMx-Ck-mqf"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="caM-95-Y6T"/>
-                                            </constraints>
                                         </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="dHA-XX-7dO">
-                                            <rect key="frame" x="0.0" y="40" width="414" height="40"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dHA-XX-7dO">
+                                            <rect key="frame" x="0.0" y="30" width="414" height="30"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5K-YJ-Xmq">
-                                                    <rect key="frame" x="0.0" y="0.0" width="103.66666666666667" height="40"/>
+                                                    <rect key="frame" x="8" y="0.0" width="93.666666666666671" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <inset key="contentEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
@@ -77,7 +74,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccY-1T-3mc">
-                                                    <rect key="frame" x="103.66666666666669" y="0.0" width="103.33333333333331" height="40"/>
+                                                    <rect key="frame" x="109.66666666666669" y="0.0" width="93.333333333333314" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <inset key="contentEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
@@ -89,7 +86,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTS-JF-eWw">
-                                                    <rect key="frame" x="206.99999999999997" y="0.0" width="103.66666666666666" height="40"/>
+                                                    <rect key="frame" x="210.99999999999997" y="0.0" width="93.666666666666657" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <inset key="contentEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
@@ -101,7 +98,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ePx-zD-F6d">
-                                                    <rect key="frame" x="310.66666666666669" y="0.0" width="103.33333333333331" height="40"/>
+                                                    <rect key="frame" x="312.66666666666669" y="0.0" width="93.333333333333314" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <inset key="contentEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
@@ -113,14 +110,9 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="8F1-7S-ox0"/>
-                                            </constraints>
+                                            <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                                         </stackView>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="80" id="fIZ-QC-dy2"/>
-                                    </constraints>
                                 </stackView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -133,7 +125,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="groceryPictureCell" rowHeight="54" id="Fhf-Oo-jJE" customClass="GroceryListTableViewPictureCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="104.33333396911621" width="414" height="54"/>
+                                <rect key="frame" x="0.0" y="84.333333969116211" width="414" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fhf-Oo-jJE" id="MEN-rt-Lzt">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
@@ -229,7 +221,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="groceryCell" rowHeight="54" id="Jq0-HL-D5U" customClass="GroceryListTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="158.33333396911621" width="414" height="54"/>
+                                <rect key="frame" x="0.0" y="138.33333396911621" width="414" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jq0-HL-D5U" id="gRE-sg-FDO">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
@@ -367,7 +359,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbH-JZ-xvO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1257.9710144927537" y="26.785714285714285"/>
+            <point key="canvasLocation" x="1257.9710144927537" y="26.086956521739133"/>
         </scene>
         <!--AddGrocery-->
         <scene sceneID="5OZ-gA-aBD">
@@ -430,7 +422,7 @@
                                         <rect key="frame" x="16" y="49" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M2O-PC-XJK" id="0KJ-9K-Lif">
-                                            <rect key="frame" x="0.0" y="0.0" width="251.33333333333331" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="248" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fridgerGreen" translatesAutoresizingMaskIntoConstraints="NO" id="GSI-16-6Zh">
@@ -466,7 +458,7 @@
                                         <rect key="frame" x="16" y="92.5" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jo6-Gb-cAg" id="bn4-Rm-u3U">
-                                            <rect key="frame" x="0.0" y="0.0" width="251.33333333333331" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="248" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fridgerOrange" translatesAutoresizingMaskIntoConstraints="NO" id="Umf-t5-vCg">
@@ -502,7 +494,7 @@
                                         <rect key="frame" x="16" y="136" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gEG-cB-fFt" id="uk2-FW-0JC">
-                                            <rect key="frame" x="0.0" y="0.0" width="251.33333333333331" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="248" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fridgerPink" translatesAutoresizingMaskIntoConstraints="NO" id="sGX-CR-q0x">
@@ -538,7 +530,7 @@
                                         <rect key="frame" x="16" y="179.5" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XWa-jr-b3s" id="aad-Pg-MrK">
-                                            <rect key="frame" x="0.0" y="0.0" width="251.33333333333331" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="248" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fridgerBlue" translatesAutoresizingMaskIntoConstraints="NO" id="zMi-S5-jK1">

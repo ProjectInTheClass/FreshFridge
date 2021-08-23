@@ -3,7 +3,7 @@
 "0Kw-qu-9pc.normalTitle" = "Fresh Fridge";
 
 /* Class = "UIButton"; normalTitle = "냉장고 품목 전체 지우기"; ObjectID = "6q7-jB-MS2"; */
-"6q7-jB-MS2.normalTitle" = "Reset FreshFridge";
+"6q7-jB-MS2.normalTitle" = "Reset Fridge";
 
 /* Class = "UIButton"; normalTitle = "추가 냉장고2"; ObjectID = "73C-i0-Kfh"; */
 "73C-i0-Kfh.normalTitle" = "Third Extra Fridge";
@@ -36,7 +36,7 @@
 "ZxX-Yj-UWM.text" = "D-100";
 
 /* Class = "UIButton"; normalTitle = "냉장"; ObjectID = "ccY-1T-3mc"; */
-"ccY-1T-3mc.normalTitle" = "Refrigerator";
+"ccY-1T-3mc.normalTitle" = "Fridge";
 
 /* Class = "UIButton"; normalTitle = "실외"; ObjectID = "ePx-zD-F6d"; */
 "ePx-zD-F6d.normalTitle" = "Storage";

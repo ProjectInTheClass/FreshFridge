@@ -108,7 +108,7 @@ class FamilyShareViewController: UIViewController {
         
         if ShareManager.shared.isShared()
         {
-            presentAlertOk(title: "먼저 공유 취소를 해야합니다.", parent: self)
+            presentAlertOk(title: "먼저 공유 취소를 해야합니다.".localized(), parent: self)
             return
         }
         
@@ -125,7 +125,7 @@ class FamilyShareViewController: UIViewController {
         
 //        if(isSendLocalData)
 //        {
-            let yes = UIAlertAction(title: "Yes", style: .default)
+        let yes = UIAlertAction(title: "Yes".localized(), style: .default)
             {
                 (yes) in
                 ShareManager.shared.startShareAndCreateCode()
@@ -152,7 +152,7 @@ class FamilyShareViewController: UIViewController {
                 
             }
             
-            let no = UIAlertAction(title: "No", style: .default)
+        let no = UIAlertAction(title: "No".localized(), style: .default)
             { (no) in
                 ShareManager.shared.startShareAndCreateCode()
                 {
@@ -204,7 +204,7 @@ class FamilyShareViewController: UIViewController {
         var publicCode: String = ""
         let alert = UIAlertController(title: "코드 입력".localized(), message: "공유 코드를 입력해주세요.".localized(), preferredStyle: .alert)
         alert.addTextField()
-        let ok = UIAlertAction(title: "OK", style: .default)
+        let ok = UIAlertAction(title: "Ok".localized(), style: .default)
         {_ in
             // 공유 코드 가져오기
             publicCode = alert.textFields?[0].text ?? ""
@@ -212,7 +212,7 @@ class FamilyShareViewController: UIViewController {
             {
                 DispatchQueue.main.async()
                 {
-                    let yes = UIAlertAction(title: "Yes", style: .default)
+                    let yes = UIAlertAction(title: "Yes".localized(), style: .default)
                     { (yes) in
                         
                         DispatchQueue.main.async()
@@ -237,7 +237,7 @@ class FamilyShareViewController: UIViewController {
                         
                     }
                     
-                    let no = UIAlertAction(title: "No", style: .default)
+                    let no = UIAlertAction(title: "No".localized(), style: .default)
                     { (no) in
                         
                         DispatchQueue.main.async()
@@ -260,7 +260,7 @@ class FamilyShareViewController: UIViewController {
         }
         alert.addAction(ok)
         
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel)
         alert.addAction(cancel)
         
         self.present(alert, animated: true, completion: nil)

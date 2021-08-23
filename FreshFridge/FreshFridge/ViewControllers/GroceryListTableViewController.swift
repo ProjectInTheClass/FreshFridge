@@ -579,7 +579,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         
         if UIImagePickerController.isSourceTypeAvailable(.camera)
         {
-            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { [self] action in
+            let cameraAction = UIAlertAction(title: "Camera".localized(), style: .default, handler: { [self] action in
                 //print("User selected Camera Action")
                 imagePicker.sourceType = .camera
                 
@@ -589,7 +589,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             alertController.addAction(cameraAction)
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         
         alertController.popoverPresentationController?.sourceView = sender

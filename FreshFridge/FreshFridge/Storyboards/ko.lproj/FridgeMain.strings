@@ -35,9 +35,6 @@
 /* Class = "UIButton"; normalTitle = "김치 냉장고"; ObjectID = "UR6-At-0Hh"; */
 "UR6-At-0Hh.normalTitle" = "김치 냉장고";
 
-/* Class = "UIButton"; normalTitle = "All"; ObjectID = "V5K-YJ-Xmq"; */
-"V5K-YJ-Xmq.normalTitle" = "All";
-
 /* Class = "UIBarButtonItem"; title = "추가"; ObjectID = "WeC-6a-ETG"; */
 "WeC-6a-ETG.title" = "추가";
 
@@ -67,6 +64,9 @@
 
 /* Class = "UITextView"; text = "FreshFridgeCompany\n@gmail.com\n\nChangae Choi\nYoungeun Park\nDaniel Shin"; ObjectID = "uDk-tf-Fpd"; */
 "uDk-tf-Fpd.text" = "FreshFridgeCompany\n@gmail.com\n\nChangae Choi\nYoungeun Park\nDaniel Shin";
+
+/* Class = "UIButton"; normalTitle = "All"; ObjectID = "V5K-YJ-Xmq"; */
+"V5K-YJ-Xmq.normalTitle" = "전체";
 
 /* Class = "UINavigationItem"; title = "신선한 냉장고"; ObjectID = "wlj-jN-nJj"; */
 "wlj-jN-nJj.title" = "신선한 냉장고";

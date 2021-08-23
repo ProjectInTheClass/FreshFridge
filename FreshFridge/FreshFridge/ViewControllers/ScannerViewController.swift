@@ -20,7 +20,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     var code: String = ""
     var captureSession: AVCaptureSession!
+    var videoCaptureDevice :AVCaptureDevice!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    var currentDeviceInput: AVCaptureDeviceInput!
     
     var lineView: UIImageView! = nil
     var imageView: UIImageView! = nil
@@ -41,41 +43,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.black
-        captureSession = AVCaptureSession()
-
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
-        let videoInput: AVCaptureDeviceInput
-
-        do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-            return
-        }
-
-        if (captureSession.canAddInput(videoInput)) {
-            captureSession.addInput(videoInput)
-        } else {
-            failed()
-            return
-        }
-
-        let metadataOutput = AVCaptureMetadataOutput()
-
-        if (captureSession.canAddOutput(metadataOutput)) {
-            captureSession.addOutput(metadataOutput)
-
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.ean8, .ean13, .pdf417]
-        } else {
-            failed()
-            return
-        }
-
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.layer.bounds
-        previewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(previewLayer)
-        
         
         // adding box
         let boxWidth = 300
@@ -94,12 +61,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         lineView.layer.borderWidth = 3
         lineView.layer.masksToBounds = true
         view.addSubview(lineView)
-        
-        opaqueView = UIView()
-        opaqueView.frame = view.bounds
-        opaqueView.layer.backgroundColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.2)
-        mask(viewToMask: opaqueView, maskRect: cgRect, invert: true)
-        previewLayer.addSublayer(opaqueView.layer)
         
         imageView = UIImageView()
         imageView.frame = CGRect(x: Int(centerX) - Int( Double(boxWidth) * 0.5), y: Int(centerY) + Int(Double(boxHeight) * 0.5), width: 44, height: 44)
@@ -132,6 +93,74 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         backButton.tintColor = .white
         view.addSubview(backButton)
         
+        /*
+         captureSession = AVCaptureSession()
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
+        let videoInput: AVCaptureDeviceInput
+
+        do {
+            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+        } catch {
+            print("error: \(error.localizedDescription)")
+            return
+        }
+         */
+
+        captureSession = AVCaptureSession()
+
+        let discovery = AVCaptureDevice.DiscoverySession.init(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera],
+                                                                  mediaType: .video,
+                                                                  position: .unspecified) as AVCaptureDevice.DiscoverySession
+        for device in discovery.devices as [AVCaptureDevice] {
+                if device.hasMediaType(.video) {
+                    if device.position == AVCaptureDevice.Position.front {
+                        videoCaptureDevice = device
+                        do {
+                            try currentDeviceInput = AVCaptureDeviceInput(device: device)
+                        } catch {
+                            print("error: \(error.localizedDescription)")
+                            resultLabel.text = error.localizedDescription
+                            failed()
+                        }
+                    }
+                }
+            }
+        
+        guard currentDeviceInput != nil else {return}
+
+        if (captureSession.canAddInput(currentDeviceInput)) {
+            captureSession.addInput(currentDeviceInput)
+        } else {
+            failed()
+            return
+        }
+
+        let metadataOutput = AVCaptureMetadataOutput()
+
+        if (captureSession.canAddOutput(metadataOutput)) {
+            captureSession.addOutput(metadataOutput)
+
+            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            metadataOutput.metadataObjectTypes = [.ean8, .ean13, .pdf417]
+        } else {
+            failed()
+            return
+        }
+
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.frame = view.layer.bounds
+        previewLayer.videoGravity = .resizeAspectFill
+        view.layer.addSublayer(previewLayer)
+        
+        
+        opaqueView = UIView()
+        opaqueView.frame = view.bounds
+        opaqueView.layer.backgroundColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.2)
+        mask(viewToMask: opaqueView, maskRect: cgRect, invert: true)
+        previewLayer.addSublayer(opaqueView.layer)
+        
+        
+        
         captureSession.startRunning()
         (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
 
@@ -156,6 +185,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     func updateView() {
+        
+        guard previewLayer != nil else {return}
+        
         previewLayer.frame = view.layer.bounds
     
         // adding box
@@ -192,7 +224,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     func failed() {
         let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        ac.addAction(UIAlertAction(title: "Ok".localized(), style: .default))
         present(ac, animated: true)
         captureSession = nil
     }
@@ -262,7 +294,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     @IBAction func backButtonTapped(_ sender: Any)
     {
-        captureSession.stopRunning()
+        if let captureSession = captureSession
+        {
+            captureSession.stopRunning()
+        }
         
         (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .all
         
