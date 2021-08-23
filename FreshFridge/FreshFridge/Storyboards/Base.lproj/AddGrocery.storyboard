@@ -732,8 +732,7 @@
                                                         <constraint firstAttribute="width" constant="30" id="gtD-y1-n9o"/>
                                                     </constraints>
                                                     <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                                    <state key="normal" title="Button" image="favorite-Icon"/>
-                                                    <state key="selected" image="favorite-Icon.fill"/>
+                                                    <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="FavoriteButtonTapped:" destination="ISQ-u5-5ii" eventType="touchUpInside" id="udE-17-whf"/>
                                                     </connections>
@@ -776,8 +775,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="xvN-1z-tB6"/>
                                                     </constraints>
                                                     <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                                    <state key="normal" title="Button" image="favorite-Icon"/>
-                                                    <state key="selected" image="favorite-Icon.fill"/>
+                                                    <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="FavoriteButtonTapped:" destination="SQW-64-Pyc" eventType="touchUpInside" id="ang-L3-cI5"/>
                                                     </connections>
@@ -854,8 +852,6 @@
         <image name="calender" width="78.666664123535156" height="78.666664123535156"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
-        <image name="favorite-Icon" width="247.33332824707031" height="237"/>
-        <image name="favorite-Icon.fill" width="94" height="90"/>
         <image name="memo" width="78.666664123535156" height="78.666664123535156"/>
         <image name="refrigerator" width="78.666664123535156" height="78.666664123535156"/>
         <image name="tag" width="78.666664123535156" height="78.666664123535156"/>

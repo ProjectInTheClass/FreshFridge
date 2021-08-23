@@ -194,11 +194,11 @@
 		8E97D5EF25DBF1FF00684485 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				8E4B99F525AD4C9200F2B0BF /* ShopingCart.storyboard */,
-				8E4B99E925AD4BE100F2B0BF /* FridgeMain.storyboard */,
 				8EBA43DA25C666E700883BAA /* AddGrocery.storyboard */,
 				8E4296B125EFA84D005164F8 /* SelectFridgeName.storyboard */,
+				8E4B99E925AD4BE100F2B0BF /* FridgeMain.storyboard */,
 				8E4B99F125AD4C5900F2B0BF /* PurchaseRecord.storyboard */,
+				8E4B99F525AD4C9200F2B0BF /* ShopingCart.storyboard */,
 				8E4B99DB25AD4AF700F2B0BF /* LaunchScreen.storyboard */,
 				8E4B99D625AD4AF500F2B0BF /* Main.storyboard */,
 				8E4B99E525AD4B8400F2B0BF /* FamilyShare.storyboard */,
