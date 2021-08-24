@@ -48,6 +48,8 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         toFridgeButton.setImage(image.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
         toFridgeButton.imageView?.contentMode = .scaleAspectFit
         
+        allCheckMarkButton.imageView?.contentMode = .scaleAspectFit
+        
         sortedArray = DataManager.shared.getCartGroceries()
         updateButtons() 
         updateTableView()

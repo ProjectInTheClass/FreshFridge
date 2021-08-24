@@ -175,6 +175,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //            }
         }
         
+        getRequestManager().resetAllAlarms()
+        
         return true
     }
     

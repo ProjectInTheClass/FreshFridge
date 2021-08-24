@@ -102,32 +102,18 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="mjy-X6-PyU">
                                             <rect key="frame" x="21.5" y="5" width="371" height="44"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EW0-Ag-y6b">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcN-fc-fUN">
                                                     <rect key="frame" x="0.0" y="0.0" width="36" height="44"/>
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcN-fc-fUN">
-                                                            <rect key="frame" x="3" y="3" width="30" height="38"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="30" id="11j-ir-4xH"/>
-                                                                <constraint firstAttribute="height" constant="44" id="LNt-Un-3RV"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                            <inset key="contentEdgeInsets" minX="3" minY="10" maxX="3" maxY="10"/>
-                                                            <state key="normal" image="check"/>
-                                                            <connections>
-                                                                <action selector="CheckCartButtonTapped:" destination="gUr-1M-w14" eventType="touchUpInside" id="1aB-CU-3WM"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="EcN-fc-fUN" firstAttribute="top" secondItem="EW0-Ag-y6b" secondAttribute="top" constant="3" id="1Xn-Vu-SXM"/>
-                                                        <constraint firstAttribute="bottom" secondItem="EcN-fc-fUN" secondAttribute="bottom" constant="3" id="HqN-g8-foT"/>
-                                                        <constraint firstAttribute="height" constant="50" id="RR8-qf-Az8"/>
-                                                        <constraint firstAttribute="width" constant="36" id="hdL-pe-2if"/>
-                                                        <constraint firstItem="EcN-fc-fUN" firstAttribute="leading" secondItem="EW0-Ag-y6b" secondAttribute="leading" constant="3" id="npk-3p-yqO"/>
+                                                        <constraint firstAttribute="width" constant="36" id="0MI-WS-at1"/>
                                                     </constraints>
-                                                </view>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <inset key="contentEdgeInsets" minX="6" minY="10" maxX="6" maxY="10"/>
+                                                    <state key="normal" image="check"/>
+                                                    <connections>
+                                                        <action selector="CheckCartButtonTapped:" destination="gUr-1M-w14" eventType="touchUpInside" id="1aB-CU-3WM"/>
+                                                    </connections>
+                                                </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Tyy-nd-gk4">
                                                     <rect key="frame" x="43" y="0.0" width="328" height="44"/>
                                                     <subviews>
@@ -155,6 +141,11 @@
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="EcN-fc-fUN" firstAttribute="leading" secondItem="mjy-X6-PyU" secondAttribute="leading" id="S8h-jQ-61I"/>
+                                                <constraint firstItem="EcN-fc-fUN" firstAttribute="top" secondItem="mjy-X6-PyU" secondAttribute="top" id="gsP-XG-VtV"/>
+                                                <constraint firstAttribute="bottom" secondItem="EcN-fc-fUN" secondAttribute="bottom" id="vz9-LZ-Gqe"/>
+                                            </constraints>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -183,31 +174,18 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="vzz-Vr-hgG">
                                             <rect key="frame" x="21.5" y="5" width="371" height="44"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qCF-0H-WOU">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSe-q0-ohD">
                                                     <rect key="frame" x="0.0" y="0.0" width="36" height="44"/>
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSe-q0-ohD">
-                                                            <rect key="frame" x="3" y="3" width="30" height="38"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="30" id="L2l-VV-Kyb"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                            <inset key="contentEdgeInsets" minX="3" minY="10" maxX="3" maxY="10"/>
-                                                            <state key="normal" image="check"/>
-                                                            <connections>
-                                                                <action selector="CheckCartButtonTapped:" destination="0B6-hM-wAu" eventType="touchUpInside" id="D0a-6Y-EFf"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="nSe-q0-ohD" firstAttribute="leading" secondItem="qCF-0H-WOU" secondAttribute="leading" constant="3" id="C0M-ZG-kEX"/>
-                                                        <constraint firstAttribute="width" constant="36" id="T75-Y2-GCU"/>
-                                                        <constraint firstAttribute="bottom" secondItem="nSe-q0-ohD" secondAttribute="bottom" constant="3" id="dJO-57-HTU"/>
-                                                        <constraint firstItem="nSe-q0-ohD" firstAttribute="top" secondItem="qCF-0H-WOU" secondAttribute="top" constant="3" id="gj0-JO-etq"/>
-                                                        <constraint firstAttribute="height" constant="50" id="rFQ-63-gxH"/>
+                                                        <constraint firstAttribute="width" constant="36" id="L2l-VV-Kyb"/>
                                                     </constraints>
-                                                </view>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <inset key="contentEdgeInsets" minX="6" minY="10" maxX="6" maxY="10"/>
+                                                    <state key="normal" image="check"/>
+                                                    <connections>
+                                                        <action selector="CheckCartButtonTapped:" destination="0B6-hM-wAu" eventType="touchUpInside" id="D0a-6Y-EFf"/>
+                                                    </connections>
+                                                </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="li8-e8-frZ">
                                                     <rect key="frame" x="43" y="0.0" width="328" height="44"/>
                                                     <subviews>
@@ -246,6 +224,11 @@
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="nSe-q0-ohD" firstAttribute="top" secondItem="vzz-Vr-hgG" secondAttribute="top" id="F5H-qm-4Kc"/>
+                                                <constraint firstItem="nSe-q0-ohD" firstAttribute="leading" secondItem="vzz-Vr-hgG" secondAttribute="leading" id="MPJ-Rw-bMx"/>
+                                                <constraint firstAttribute="bottom" secondItem="nSe-q0-ohD" secondAttribute="bottom" id="vRY-4y-2o1"/>
+                                            </constraints>
                                         </stackView>
                                     </subviews>
                                     <constraints>

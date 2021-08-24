@@ -107,11 +107,72 @@ class RequestManager
         }
     }
     
+    func removeAlarmAll()
+    {
+        for n in -2...29
+        {
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["expired_\(n)"])
+        }
+    }
+    
     func removeAlarm(grocery: Grocery)
     {
-        for n in -2...2
+        for n in -2...29
         {
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [grocery.id.string + "_\(n)"])
+        }
+    }
+    
+    func setAlarmsForAll()
+    {
+        let content = UNMutableNotificationContent()
+        content.title = "기간 만료 알림".localized()
+        content.body = "보관 기간이 지난 제품이 있습니다.".localized()
+        
+        content.categoryIdentifier = "alarm"
+        content.userInfo = ["customData": "fizzbuzz"]
+        content.sound = .default
+        
+        for n in 0...29
+        {
+            let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: Calendar.current.startOfDay(for: Date()))!
+            
+            let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: "expired_\(n)", content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request)
+        }
+        
+    }
+    
+    func setAlarmsForOne(grocery : Grocery)
+    {
+        let expiration = grocery.dueDate.getExpiration()
+        
+        if(expiration < 30)
+        {
+            let content = UNMutableNotificationContent()
+            content.title = "기간 만료 알림".localized()
+            //content.body = "\(grocery.info.title)의 보관 기간이 만료되었습니다.."
+            content.body = "%@의 보관 기간이 만료되었습니다.".localized(with: [grocery.info.title])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
+            
+            content.categoryIdentifier = "alarm"
+            content.userInfo = ["customData": "fizzbuzz"]
+            content.sound = .default
+            
+            for n in 0...29
+            {
+                //print(content.body+grocery.id.uuidString + "_\(n)")
+                
+                let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
+                //sprint(nextTriggerDate)
+                let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
+                
+                let request = UNNotificationRequest(identifier: grocery.id.string + "_\(n)", content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request)
+            }
         }
     }
     
@@ -159,30 +220,7 @@ class RequestManager
             UNUserNotificationCenter.current().add(request)
         }
         
-        if(expiration < 3)
-        {
-            let content = UNMutableNotificationContent()
-            content.title = "기간 만료 알림".localized()
-            //content.body = "\(grocery.info.title)의 보관 기간이 만료되었습니다.."
-            content.body = "%@의 보관 기간이 만료되었습니다.".localized(with: [grocery.info.title])//"\(grocery.info.title)의 보관 기간이 \(-n)일 남았습니다."
-            
-            content.categoryIdentifier = "alarm"
-            content.userInfo = ["customData": "fizzbuzz"]
-            content.sound = .default
-            
-            for n in 0...2
-            {
-                //print(content.body+grocery.id.uuidString + "_\(n)")
-                
-                let nextTriggerDate = Calendar.current.date(byAdding: .day, value: n, to: grocery.dueDate.date)!
-                //sprint(nextTriggerDate)
-                let comps = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: nextTriggerDate)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
-                
-                let request = UNNotificationRequest(identifier: grocery.id.string + "_\(n)", content: content, trigger: trigger)
-                UNUserNotificationCenter.current().add(request)
-            }
-        }
+        
     }
     
     func resetAllAlarms()
@@ -191,9 +229,28 @@ class RequestManager
         
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         
+        var expiredCount = 0
+        for grocery in DataManager.shared.getGroceries()
+        {
+            if(grocery.dueDate.getExpiration() >= 0)
+            {
+                expiredCount = expiredCount + 1;
+            }
+        }
+        
         for grocery in DataManager.shared.getGroceries()
         {
             setAlarm(grocery: grocery)
+            
+            if(expiredCount > 0 && expiredCount <= 3)
+            {
+                setAlarmsForOne(grocery: grocery)
+            }
+        }
+        
+        if(expiredCount > 3)
+        {
+            setAlarmsForAll()
         }
     }
     

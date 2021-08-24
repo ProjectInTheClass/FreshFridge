@@ -46,6 +46,8 @@ class DataManager
         {
             getRequestManager().removeAlarm(grocery: grocery)
         }
+        getRequestManager().removeAlarmAll()
+        
         groceries.removeAll()
         saveGrocery()
     }

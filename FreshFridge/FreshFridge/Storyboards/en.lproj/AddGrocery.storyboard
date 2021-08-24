@@ -714,18 +714,18 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordCell" id="g3Y-KA-c4T" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="118.5" width="414" height="40.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordCell" rowHeight="60" id="g3Y-KA-c4T" customClass="PurchaseRecordTableViewCell" customModule="FreshFridge" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="118.5" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g3Y-KA-c4T" id="EMg-vY-uIe">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="40.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="UKT-GA-R4M">
-                                            <rect key="frame" x="21.5" y="5" width="371" height="30.5"/>
+                                            <rect key="frame" x="21.5" y="5" width="371" height="50"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aif-uU-jCj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="30.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="ANk-OE-EJv"/>
                                                         <constraint firstAttribute="width" constant="30" id="nKz-Sa-wVO"/>
@@ -737,7 +737,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVw-ma-yHo">
-                                                    <rect key="frame" x="32" y="0.0" width="339" height="30.5"/>
+                                                    <rect key="frame" x="32" y="0.0" width="339" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -758,7 +758,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PurchaseRecordWithPictureCell" rowHeight="60" id="xbB-vR-F1c" userLabel="PurchaseRecordWithPictureCell" customClass="PurchaseRecordWithPictureTableViewCell" customModule="FreshFridge" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="159" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="178.5" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xbB-vR-F1c" id="VcC-F5-uPD">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
