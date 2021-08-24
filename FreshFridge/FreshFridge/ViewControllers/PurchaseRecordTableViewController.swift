@@ -38,16 +38,28 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     // 최종 테이블 뷰는 필터드그로서리즈로 만든다. 카네고리별로 분류 될수 있다.
     var filteredGroceries: [[GroceryHistory]] = []
     
-
-//    var favoriteFirstArray: [GroceryHistory] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        
-        //tableView.cellLayoutMarginsFollowReadableWidth = true
+        if let CategorySortButton = CategorySortButton
+        {
+            let image = UIImage(named: "sort-category")!
+            CategorySortButton.setImage(image.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+            CategorySortButton.imageView?.contentMode = .scaleAspectFit
+        }
+        if let FavoriteSortButton = FavoriteSortButton
+        {
+            let image = UIImage(named: "sort-favorite")!
+            FavoriteSortButton.setImage(image.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+            FavoriteSortButton.imageView?.contentMode = .scaleAspectFit
+        }
+        if let RecentSortButton = RecentSortButton
+        {
+            let image = UIImage(named: "sort-recent")!
+            RecentSortButton.setImage(image.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+            RecentSortButton.imageView?.contentMode = .scaleAspectFit
+        }
         
         SearchBar.delegate = self
         

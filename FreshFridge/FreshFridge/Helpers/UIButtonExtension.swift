@@ -15,11 +15,12 @@ extension UIButton
         if(isOn)
         {   
             setTitleColor(.systemBlue, for: .normal)
+            tintColor = .systemBlue
         }
         else
         {
             setTitleColor(.systemGray, for: .normal)
-            
+            tintColor = .systemGray
         }
     }
     

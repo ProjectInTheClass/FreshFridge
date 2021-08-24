@@ -20,11 +20,11 @@
                             <rect key="frame" x="0.0" y="0.0" width="428" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="GSs-4k-O9W">
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="GSs-4k-O9W">
                                     <rect key="frame" x="10" y="0.0" width="408" height="80"/>
                                     <subviews>
                                         <searchBar contentMode="redraw" verticalHuggingPriority="251" text="" placeholder="검색" translatesAutoresizingMaskIntoConstraints="NO" id="YgP-pg-bjE">
-                                            <rect key="frame" x="0.0" y="0.0" width="408" height="35.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="408" height="40"/>
                                             <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                             <scopeButtonTitles>
                                                 <string>Title</string>
@@ -32,28 +32,40 @@
                                             </scopeButtonTitles>
                                         </searchBar>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="L1P-pk-KpV">
-                                            <rect key="frame" x="0.0" y="44.666666666666657" width="408" height="35.333333333333343"/>
+                                            <rect key="frame" x="0.0" y="40" width="408" height="40"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcI-Qf-RSX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="136" height="35.333333333333336"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" title="분류별"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zu0-qP-ku8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="68" height="40"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8GO-di-wMr">
+                                                    <rect key="frame" x="68" y="0.0" width="68" height="40"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bcp-Fd-UXX">
+                                                    <rect key="frame" x="136" y="0.0" width="68" height="40"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcI-Qf-RSX">
+                                                    <rect key="frame" x="204" y="0.0" width="68" height="40"/>
+                                                    <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                                    <state key="normal" image="sort-category"/>
                                                     <connections>
                                                         <action selector="CategorySortButtonTapped:" destination="Xx5-TJ-k4i" eventType="touchUpInside" id="iWg-Nr-e3f"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kul-z3-o9U">
-                                                    <rect key="frame" x="136" y="0.0" width="136" height="35.333333333333336"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" title="즐겨찾기"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kul-z3-o9U">
+                                                    <rect key="frame" x="272" y="0.0" width="68" height="40"/>
+                                                    <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                                    <state key="normal" image="sort-favorite"/>
                                                     <connections>
                                                         <action selector="FavoriteSortButtonTapped:" destination="Xx5-TJ-k4i" eventType="touchUpInside" id="Ccw-gm-PUv"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ix-xb-XdR">
-                                                    <rect key="frame" x="272" y="0.0" width="136" height="35.333333333333336"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" title="최신순"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ix-xb-XdR">
+                                                    <rect key="frame" x="340" y="0.0" width="68" height="40"/>
+                                                    <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                                    <state key="normal" image="sort-recent"/>
                                                     <connections>
                                                         <action selector="RecentSortButtonTapped:" destination="Xx5-TJ-k4i" eventType="touchUpInside" id="HYh-Y9-skc"/>
                                                     </connections>
@@ -225,6 +237,9 @@
     </scenes>
     <resources>
         <image name="purchaseList_Icon" width="33.333332061767578" height="33.333332061767578"/>
+        <image name="sort-category" width="100" height="100"/>
+        <image name="sort-favorite" width="96" height="96"/>
+        <image name="sort-recent" width="96" height="96"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

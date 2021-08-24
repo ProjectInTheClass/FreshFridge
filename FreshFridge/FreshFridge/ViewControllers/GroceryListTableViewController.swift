@@ -49,6 +49,16 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var image = UIImage(named: "sort-category")!
+        categoryButton.setImage(image.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+        categoryButton.imageView?.contentMode = .scaleAspectFit
+        image = UIImage(named: "sort-alpha-up")!
+        sortByNameButton.setImage(image.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+        sortByNameButton.imageView?.contentMode = .scaleAspectFit
+        image = UIImage(named: "sort-numeric")!
+        sortByDueDate.setImage(image.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+        sortByDueDate.imageView?.contentMode = .scaleAspectFit
+        
         getRequestManager().groceryListViewController = self
         
         fridgeTabBarController = tabBarController as? FridgeTabBarController
@@ -62,7 +72,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     @objc func refresh(_ sender: AnyObject) {
        // Code to refresh table view
         
-        ShareManager.shared.update(async: false)
+        ShareManager.shared.update(async: true)
         updateTableView()
         tableView.reloadData()
         self.refreshControl?.endRefreshing()

@@ -38,7 +38,15 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         
         getRequestManager().shopingCartViewController = self
         
-        //tableView.cellLayoutMarginsFollowReadableWidth = true
+        var image = UIImage(named: "sort-category")!
+        categoryButton.setImage(image.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+        categoryButton.imageView?.contentMode = .scaleAspectFit
+        image = UIImage(named: "sort-recent")!
+        latestButton.setImage(image.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+        latestButton.imageView?.contentMode = .scaleAspectFit
+        image = UIImage(named: "toFridge")!
+        toFridgeButton.setImage(image.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: .normal)
+        toFridgeButton.imageView?.contentMode = .scaleAspectFit
         
         sortedArray = DataManager.shared.getCartGroceries()
         updateButtons() 
