@@ -44,6 +44,70 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         view.backgroundColor = UIColor.black
         
+        
+        
+        /*
+         captureSession = AVCaptureSession()
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
+        let videoInput: AVCaptureDeviceInput
+
+        do {
+            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+        } catch {
+            print("error: \(error.localizedDescription)")
+            return
+        }
+         */
+
+        captureSession = AVCaptureSession()
+        captureSession.sessionPreset = AVCaptureSession.Preset.hd1280x720
+
+        let discovery = AVCaptureDevice.DiscoverySession.init(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera],
+                                                                  mediaType: .video,
+                                                                  position: .unspecified) as AVCaptureDevice.DiscoverySession
+        for device in discovery.devices as [AVCaptureDevice] {
+                if device.hasMediaType(.video) {
+                    if device.position == AVCaptureDevice.Position.back {
+                        videoCaptureDevice = device
+                        do {
+                            try currentDeviceInput = AVCaptureDeviceInput(device: device)
+                        } catch {
+                            print("error: \(error.localizedDescription)")
+                            resultLabel.text = error.localizedDescription
+                            failed()
+                        }
+                    }
+                }
+            }
+        
+        guard currentDeviceInput != nil else {return}
+
+        if (captureSession.canAddInput(currentDeviceInput)) {
+            captureSession.addInput(currentDeviceInput)
+        } else {
+            failed()
+            return
+        }
+
+        let metadataOutput = AVCaptureMetadataOutput()
+
+        if (captureSession.canAddOutput(metadataOutput)) {
+            captureSession.addOutput(metadataOutput)
+
+            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            metadataOutput.metadataObjectTypes = [.ean8, .ean13, .pdf417]
+        } else {
+            failed()
+            return
+        }
+        
+        
+
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.frame = view.layer.bounds
+        previewLayer.videoGravity = .resizeAspectFill
+        view.layer.addSublayer(previewLayer)
+        
         // adding box
         let boxWidth = 300
         let boxHeight = 180
@@ -92,65 +156,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         backButton.setTitleShadowColor(.black, for: .normal)
         backButton.tintColor = .white
         view.addSubview(backButton)
-        
-        /*
-         captureSession = AVCaptureSession()
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
-        let videoInput: AVCaptureDeviceInput
-
-        do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-            print("error: \(error.localizedDescription)")
-            return
-        }
-         */
-
-        captureSession = AVCaptureSession()
-
-        let discovery = AVCaptureDevice.DiscoverySession.init(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera],
-                                                                  mediaType: .video,
-                                                                  position: .unspecified) as AVCaptureDevice.DiscoverySession
-        for device in discovery.devices as [AVCaptureDevice] {
-                if device.hasMediaType(.video) {
-                    if device.position == AVCaptureDevice.Position.front {
-                        videoCaptureDevice = device
-                        do {
-                            try currentDeviceInput = AVCaptureDeviceInput(device: device)
-                        } catch {
-                            print("error: \(error.localizedDescription)")
-                            resultLabel.text = error.localizedDescription
-                            failed()
-                        }
-                    }
-                }
-            }
-        
-        guard currentDeviceInput != nil else {return}
-
-        if (captureSession.canAddInput(currentDeviceInput)) {
-            captureSession.addInput(currentDeviceInput)
-        } else {
-            failed()
-            return
-        }
-
-        let metadataOutput = AVCaptureMetadataOutput()
-
-        if (captureSession.canAddOutput(metadataOutput)) {
-            captureSession.addOutput(metadataOutput)
-
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.ean8, .ean13, .pdf417]
-        } else {
-            failed()
-            return
-        }
-
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.layer.bounds
-        previewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(previewLayer)
         
         
         opaqueView = UIView()
