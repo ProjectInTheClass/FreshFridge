@@ -83,8 +83,9 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
     
     @objc func refresh(_ sender: AnyObject) {
        // Code to refresh table view
-        
-        ShareManager.shared.update(async: false)
+        for _ in 0..<10 {
+            ShareManager.shared.update(async: true)
+        }
         updateTableView()
         tableView.reloadData()
         self.refreshControl?.endRefreshing()
@@ -229,18 +230,27 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         var cell: PurchaseRecordTableViewCell! = nil
         let cellContents = filteredGroceries[indexPath.section][indexPath.row]
          
-        if let groceryImage =  cellContents.image,
-           let image = groceryImage.image()
+        var image : UIImage?
+        if(nil != cellContents.image)
         {
-            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordWithPictureCell", for: indexPath) as? PurchaseRecordWithPictureTableViewCell
-            let pictureCell = cell as? PurchaseRecordWithPictureTableViewCell
-            pictureCell?.titleImage.image = image
+            image = cellContents.image?.image()
         }
         else
         {
-            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as? PurchaseRecordTableViewCell
-            
+            image = GroceryImage.getProxyImage(title: cellContents.title, category: cellContents.category)
         }
+//        if let groceryImage =  cellContents.image,
+//           let image = groceryImage.image()
+//        {
+            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordWithPictureCell", for: indexPath) as? PurchaseRecordWithPictureTableViewCell
+            let pictureCell = cell as? PurchaseRecordWithPictureTableViewCell
+            pictureCell?.titleImage.image = image
+//        }
+//        else
+//        {
+//            cell = tableView.dequeueReusableCell(withIdentifier: "PurchaseRecordCell", for: indexPath) as? PurchaseRecordTableViewCell
+//
+//        }
         
         cell.updateCell(with: cellContents, isFromAddGrocery: isFromAddGrocery)
         cell.delegate = self
@@ -270,7 +280,7 @@ class PurchaseRecordTableViewController: UITableViewController, UISearchBarDeleg
         { [self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             
             let selectedHistory = filteredGroceries[indexPath.section][indexPath.row]
-            RequestManager.shared.getRequestInterface().addCartGrocery(title: selectedHistory.title, category: selectedHistory.category, image: selectedHistory.image)
+            RequestManager.shared.getRequestInterface().addCartGrocery(title: selectedHistory.title, category: selectedHistory.category, isUploadImage: false)//, image: selectedHistory.image)
             
             success(true)
         })

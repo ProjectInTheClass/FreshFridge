@@ -89,6 +89,10 @@ class ShopingCartTableViewPictureCell : ShopingCartTableViewCell
         {
             titleImage.image = image
         }
+        else
+        {
+            titleImage.image = GroceryImage.getProxyImage(title: inCell.info.title, category: inCell.info.category)
+        }
     }
 }
 

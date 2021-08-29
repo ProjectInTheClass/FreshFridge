@@ -46,7 +46,7 @@ class ShareManager
     var lastUpdateTime: Date = Date()
     var lastestCartUpdatedAt: Int = -1
     var lastestProductUpdateAt: Int = -1
-    var lastestRefriUpdateAt: Int = -1
+    var lastestRefriUpdateAt: [Int] = [-1,-1,-1,-1]
     
     
     static let shared = ShareManager()
@@ -102,7 +102,7 @@ class ShareManager
     {
         lastestProductUpdateAt = -1
         lastestCartUpdatedAt = -1
-        lastestRefriUpdateAt = -1
+        lastestRefriUpdateAt = [-1, -1, -1, -1]
     }
     
     func initShareManager()
@@ -292,9 +292,7 @@ class ShareManager
             createCartGrocery(productID: cartGrocery.info.id.id, count: cartGrocery.count, isPercentageCount: cartGrocery.isPercentageCount, isPurchased: cartGrocery.isPurchased)
         }
         
-        ShareManager.shared.lastestProductUpdateAt = -1
-        ShareManager.shared.lastestCartUpdatedAt = -1
-        ShareManager.shared.lastestRefriUpdateAt = -1
+        resetUpdating()
         
         NSLog("completed sendAllData")
     }
@@ -379,6 +377,7 @@ class ShareManager
             }
             
             NSLog("Complete: \(String(describing: response))")
+            NSLog("Data: \(String(data: data, encoding: .utf8)!)")
             
             if let requestCode = try? jsonDecoder.decode(RequestCode.self, from: data)
             {
@@ -436,9 +435,7 @@ class ShareManager
                 DataManager.shared.removeAllCartGroceries()
                 DataManager.shared.removeAllFridgeGroceries()
                 
-                ShareManager.shared.lastestProductUpdateAt = -1
-                ShareManager.shared.lastestCartUpdatedAt = -1
-                ShareManager.shared.lastestRefriUpdateAt = -1
+                self.resetUpdating()
                 
                 //self.createdPublicCode = "" // test code
                 completion()
@@ -574,7 +571,7 @@ class ShareManager
         let jsonDecoder = JSONDecoder()
         if let data = data
         {
-            print(String(data: data, encoding: .utf8)!)
+            //print(String(data: data, encoding: .utf8)!)
             
             do
             {
@@ -583,6 +580,9 @@ class ShareManager
                 {
                     for product in products
                     {
+                        if(product.isDeleted == false) {
+                            print("processProductData : \(product.title)")
+                        }
                         var isDownloadImage = false
                         if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
                         {
@@ -654,7 +654,7 @@ class ShareManager
                         if let groceryHistory = DataManager.shared.findGroceryHistory(id: AutoIncreasedID(product.id))
                         {
                             // 1. 로컬에서 로드 시도
-                            var uiImage = GroceryImage.loadImage(filename: product.imageCode)
+                            let uiImage = GroceryImage.loadImage(filename: product.imageCode)
                             if let uiImage = uiImage
                             {
                                 groceryHistory.image = GroceryImage(image: uiImage, filename: product.imageCode)
@@ -674,30 +674,30 @@ class ShareManager
                                             groceryHistory.image = GroceryImage(image: image, filename: product.imageCode)
                                             GroceryImage.saveImage(image: image, filename: product.imageCode)
                                         }
-                                        else
-                                        {
-                                            // 3. 이름으로 이미지 검색
-                                            let imageName = imageNames[product.title] ?? product.title
-                                            uiImage = UIImage(named: imageName)
-                                            if let uiImage = uiImage
-                                            {
-                                                groceryHistory.image = GroceryImage(image: uiImage, filename: imageName)
-                                                GroceryImage.saveImage(image: uiImage, filename: imageName)
-                                            }
-                                            else
-                                            {
-                                                // 4. 카테고리 이미지 출력
-                                                if let category = GroceryHistory.Category(rawValue: product.category)
-                                                {
-                                                    uiImage = UIImage(named: category.systemName)
-                                                    if let uiImage = uiImage
-                                                    {
-                                                        groceryHistory.image = GroceryImage(image: uiImage, filename: category.systemName)
-                                                        GroceryImage.saveImage(image: uiImage, filename: category.systemName)
-                                                    }
-                                                }
-                                            }
-                                        }
+//                                        else
+//                                        {
+//                                            // 3. 이름으로 이미지 검색
+//                                            let imageName = imageNames[product.title] ?? product.title
+//                                            uiImage = UIImage(named: imageName)
+//                                            if let uiImage = uiImage
+//                                            {
+//                                                groceryHistory.image = GroceryImage(image: uiImage, filename: imageName)
+//                                                GroceryImage.saveImage(image: uiImage, filename: imageName)
+//                                            }
+//                                            else
+//                                            {
+//                                                // 4. 카테고리 이미지 출력
+//                                                if let category = GroceryHistory.Category(rawValue: product.category)
+//                                                {
+//                                                    uiImage = UIImage(named: category.systemName)
+//                                                    if let uiImage = uiImage
+//                                                    {
+//                                                        groceryHistory.image = GroceryImage(image: uiImage, filename: category.systemName)
+//                                                        GroceryImage.saveImage(image: uiImage, filename: category.systemName)
+//                                                    }
+//                                                }
+//                                            }
+//                                        }
                                         
                                         DispatchQueue.main.async {
                                             RequestManager.shared.updatePurchaseRecordViewController(updateTableView: true)
@@ -707,30 +707,30 @@ class ShareManager
                                     }
                                 }
                                 
-                                if(groceryHistory.image == nil)
-                                {
-                                    // 3. 이름으로 이미지 검색
-                                    let imageName = imageNames[product.title] ?? product.title
-                                    var uiImage = UIImage(named: imageName)
-                                    if let uiImage = uiImage
-                                    {
-                                        groceryHistory.image = GroceryImage(image: uiImage, filename: imageName)
-                                        GroceryImage.saveImage(image: uiImage, filename: imageName)
-                                    }
-                                    else
-                                    {
-                                        // 4. 카테고리 이미지 출력
-                                        if let category = GroceryHistory.Category(rawValue: product.category)
-                                        {
-                                            uiImage = UIImage(named: category.systemName)
-                                            if let uiImage = uiImage
-                                            {
-                                                groceryHistory.image = GroceryImage(image: uiImage, filename: category.systemName)
-                                                GroceryImage.saveImage(image: uiImage, filename: category.systemName)
-                                            }
-                                        }
-                                    }
-                                }
+//                                if(groceryHistory.image == nil)
+//                                {
+//                                    // 3. 이름으로 이미지 검색
+//                                    let imageName = imageNames[product.title] ?? product.title
+//                                    var uiImage = UIImage(named: imageName)
+//                                    if let uiImage = uiImage
+//                                    {
+//                                        groceryHistory.image = GroceryImage(image: uiImage, filename: imageName)
+//                                        GroceryImage.saveImage(image: uiImage, filename: imageName)
+//                                    }
+//                                    else
+//                                    {
+//                                        // 4. 카테고리 이미지 출력
+//                                        if let category = GroceryHistory.Category(rawValue: product.category)
+//                                        {
+//                                            uiImage = UIImage(named: category.systemName)
+//                                            if let uiImage = uiImage
+//                                            {
+//                                                groceryHistory.image = GroceryImage(image: uiImage, filename: category.systemName)
+//                                                GroceryImage.saveImage(image: uiImage, filename: category.systemName)
+//                                            }
+//                                        }
+//                                    }
+//                                }
                             }
                         }
                         
@@ -868,7 +868,7 @@ class ShareManager
             
             NSLog("Complete: \(String(describing: response))")
             
-            print(String(data: data, encoding: .utf8)!)
+            //print(String(data: data, encoding: .utf8)!)
             do
             {
                 let product: ShareManager.Product? = try jsonDecoder.decode(ShareManager.Product.self, from: data)
@@ -921,7 +921,7 @@ class ShareManager
             return
         }
         let jsonDecoder = JSONDecoder()
-        print(String(data: data, encoding: .utf8)!)
+        //print(String(data: data, encoding: .utf8)!)
         do
         {
             let product: ShareManager.Product? = try jsonDecoder.decode(ShareManager.Product.self, from: data)
@@ -1043,7 +1043,7 @@ class ShareManager
                 }
                 
                 // 통신에 성공한 경우 data에 Data 객체가 전달됩니다.
-                print(String(data: data, encoding: .utf8)!)
+                //print(String(data: data, encoding: .utf8)!)
 
                 let jsonDecoder = JSONDecoder()
                 let productItem: ShareManager.Product? = try? jsonDecoder.decode(ShareManager.Product.self, from: data)
@@ -1349,12 +1349,12 @@ class ShareManager
         }
     }
     
-    func processRefrigeratorItemData(async: Bool, data: Data?) -> Bool
+    func processRefrigeratorItemData(async: Bool, data: Data?, fridgeIndex: Int) -> Bool
     {
         let jsonDecoder = JSONDecoder()
         if let data = data
         {
-            print(String(data: data, encoding: .utf8)!)
+            //print(String(data: data, encoding: .utf8)!)
             
             do
             {
@@ -1365,6 +1365,10 @@ class ShareManager
                     
                     for refriItem in refriItems
                     {
+                        if(refriItem.isDeleted == false)
+                        {
+                            print("processRefrigeratorItemData:\(refriItem.product?.title)")
+                        }
                         if let product = refriItem.product
                         {
                             if let grocery = DataManager.shared.findGrocery(id: AutoIncreasedID(refriItem.id))
@@ -1444,10 +1448,10 @@ class ShareManager
                             }
                         }
                         
-                        if(self.lastestRefriUpdateAt < refriItem.updatedAt)
+                        if(self.lastestRefriUpdateAt[fridgeIndex] < refriItem.updatedAt)
                         {
-                            self.lastestRefriUpdateAt = refriItem.updatedAt
-                            print(self.lastestRefriUpdateAt)
+                            self.lastestRefriUpdateAt[fridgeIndex] = refriItem.updatedAt
+                            print(self.lastestRefriUpdateAt[fridgeIndex])
                         }
                         
                         
@@ -1488,6 +1492,9 @@ class ShareManager
         
         let subURL = "/RefriItem"
         let baseURL = URL(string: getServerURL() + subURL)!
+        
+        var results : [Bool] = [true, true, true, true]
+        var fridgeIndex = 0
         for frigdeID in fridgeIDs
         {
             guard frigdeID != -1 else { continue }
@@ -1495,7 +1502,7 @@ class ShareManager
             let query: [String: String] = [
                     "idForRefri": "\(frigdeID)",
                     "sort":"updatedAt ASC",
-                    "where": "{\"updatedAt\":{\">\":\(lastestRefriUpdateAt)},\"idForRefri\":\(frigdeID)}"
+                    "where": "{\"updatedAt\":{\">\":\(lastestRefriUpdateAt[fridgeIndex])},\"idForRefri\":\(frigdeID)}"
                 ]
             
             let url = baseURL.withQueries(query)!
@@ -1519,12 +1526,11 @@ class ShareManager
                     
                     NSLog("Complete: \(String(describing: response))")
                     
-                    _ = self.processRefrigeratorItemData(async: async, data: data)
+                    _ = self.processRefrigeratorItemData(async: async, data: data, fridgeIndex: fridgeIndex)
                     completion()
                 }
                 task.resume()
                 
-                return true
             }
             else
             {
@@ -1539,11 +1545,13 @@ class ShareManager
                     print("Error occur: \(String(describing: error))")
                     return true
                 }
-                return processRefrigeratorItemData(async: async, data: data)
+                results[fridgeIndex] = processRefrigeratorItemData(async: async, data: data, fridgeIndex: fridgeIndex)
             }
+            
+            fridgeIndex = fridgeIndex + 1
         }
         
-        return true
+        return results[0] && results[1] && results[2] && results[3]
     } // end of func
     
     func createGrocery(productID: Int, count: Int, isPercentageCount: Bool, dueDate: DueDate, storage: Grocery.Storage, fridgeName: String, notes: String, image: GroceryImage?, completion: (((RefrigeratorItem)->Void)?) = nil)
@@ -1592,7 +1600,7 @@ class ShareManager
                 let jsonDecoder = JSONDecoder()
                 //if let data = data
                 //{
-                    print(String(data: data, encoding: .utf8)!)
+                    //print(String(data: data, encoding: .utf8)!)
                     
                     do
                     {
@@ -1668,7 +1676,7 @@ class ShareManager
                 }
                 
                 // 통신에 성공한 경우 data에 Data 객체가 전달됩니다.
-                print(String(data: data, encoding: .utf8)!)
+                //print(String(data: data, encoding: .utf8)!)
 
                 let jsonDecoder = JSONDecoder()
                 let refriItem: ShareManager.RefrigeratorItem? = try? jsonDecoder.decode(ShareManager.RefrigeratorItem.self, from: data)
@@ -2042,7 +2050,7 @@ class ShareManager
                 }
                 
                 // 통신에 성공한 경우 data에 Data 객체가 전달됩니다.
-                print(String(data: data, encoding: .utf8)!)
+                //print(String(data: data, encoding: .utf8)!)
 
                 do
                 {
@@ -2116,7 +2124,7 @@ class ShareManager
                 }
                 
                 // 통신에 성공한 경우 data에 Data 객체가 전달됩니다.
-                print(String(data: data, encoding: .utf8)!)
+                //print(String(data: data, encoding: .utf8)!)
 
                 let jsonDecoder = JSONDecoder()
                 let cartItem: ShareManager.CartItem? = try? jsonDecoder.decode(ShareManager.CartItem.self, from: data)
@@ -2280,7 +2288,7 @@ class ShareManager
             }
             let jsonDecoder = JSONDecoder()
            
-            print(String(data: data, encoding: .utf8)!)
+            //print(String(data: data, encoding: .utf8)!)
             
             do
             {
@@ -2328,7 +2336,7 @@ class ShareManager
             }
             let jsonDecoder = JSONDecoder()
            
-            print(String(data: data, encoding: .utf8)!)
+            //print(String(data: data, encoding: .utf8)!)
             
             do
             {

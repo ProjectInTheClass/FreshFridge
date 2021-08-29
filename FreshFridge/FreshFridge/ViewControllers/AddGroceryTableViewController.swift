@@ -45,6 +45,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     
     var isSupportBarcode: Bool = false
     var contentOffset: CGFloat = 0.0
+    var isSelectedImage : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -305,20 +306,6 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             fridgeSelectButton.setTitle("", for: .normal)
         }
         
-        if let groceryImage = groceryImage
-        {
-            pictureButton.setBackgroundImage(groceryImage.image(), for: .normal)
-            pictureButton.layoutIfNeeded()
-            pictureButton.subviews.first?.contentMode = .scaleAspectFill
-            pictureButton.setTitle(nil, for: .normal)
-            
-            // debugging code
-            #if DEBUG
-            pictureButton.setTitle(groceryImage.filename, for: .normal)
-            #endif
-            
-        }
-        
         storageSegment.selectedSegmentIndex = storage.rawValue
         
         if let category = category
@@ -326,6 +313,24 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
             categoryButton.setTitle(category.description, for: .normal)
             categoryImage.image = UIImage(named: category.systemName)
         }
+        
+        var image : UIImage?
+        if let groceryImage = groceryImage
+        {
+            image = groceryImage.image()
+            // debugging code
+            #if DEBUG
+            pictureButton.setTitle(groceryImage.filename, for: .normal)
+            #endif
+        }
+        else if(nil != nameTextField.text && false == nameTextField.text!.isEmpty && nil != category )
+        {
+            image = GroceryImage.getProxyImage(title: nameTextField.text!, category: category!)
+        }
+        pictureButton.setBackgroundImage(image, for: .normal)
+        pictureButton.layoutIfNeeded()
+        pictureButton.subviews.first?.contentMode = .scaleAspectFill
+        pictureButton.setTitle(nil, for: .normal)
     }
     
     func enableCompletButton()
@@ -568,6 +573,7 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         
+        isSelectedImage = true
         groceryImage = GroceryImage(image: selectedImage)
         updateTableView()
         enableCompletButton()
@@ -691,16 +697,16 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 // Use data from the view controller which initiated the unwind segue
                 nameTextField.text = sourceViewController.selectedName
                 
-                let imageName = imageNames[sourceViewController.selectedName] ?? sourceViewController.selectedName
+                //let imageName = imageNames[sourceViewController.selectedName] ?? sourceViewController.selectedName
                 if let selectedCategory = defaultNames[sourceViewController.selectedName]
                 {
                     //categoryButton.setTitle(category.description, for: .normal)
                     category = selectedCategory
                 }
-                if let image = UIImage(named: imageName)
-                {
-                    groceryImage = GroceryImage(image: image, filename: imageName)
-                }
+//                if let image = UIImage(named: imageName)
+//                {
+//                    groceryImage = GroceryImage(image: image, filename: imageName)
+//                }
                 
                 
                 updateTableView()
@@ -739,11 +745,11 @@ class AddGroceryTableViewController: UITableViewController, UIImagePickerControl
                 nameTextField.text = selectedGroceryHistory.title
                 category = selectedGroceryHistory.category
                 
-                let imageName = imageNames[selectedGroceryHistory.title] ?? selectedGroceryHistory.title
-                if let image = UIImage(named: imageName)
-                {
-                    groceryImage = GroceryImage(image: image, filename: imageName)
-                }
+//                let imageName = imageNames[selectedGroceryHistory.title] ?? selectedGroceryHistory.title
+//                if let image = UIImage(named: imageName)
+//                {
+//                    groceryImage = GroceryImage(image: image, filename: imageName)
+//                }
                 
                 
                 updateTableView()

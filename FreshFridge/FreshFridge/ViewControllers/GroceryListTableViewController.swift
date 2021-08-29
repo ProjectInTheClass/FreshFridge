@@ -71,8 +71,9 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
     
     @objc func refresh(_ sender: AnyObject) {
        // Code to refresh table view
-        
-        ShareManager.shared.update(async: true)
+        for _ in 0..<10 {
+            ShareManager.shared.update(async: true)
+        }
         updateTableView()
         tableView.reloadData()
         self.refreshControl?.endRefreshing()
@@ -247,18 +248,26 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
         {
             let grocery = filteredGroceries[indexPath.section][indexPath.row]
             
-            if let groceryImage =  grocery.info.image,
-               let image = groceryImage.image()
-            {
-                cell = tableView.dequeueReusableCell(withIdentifier: "groceryPictureCell", for: indexPath) as? GroceryListTableViewCell
-                let pictureCell = cell as? GroceryListTableViewPictureCell
+//            if let groceryImage =  grocery.info.image,
+//               let image = groceryImage.image()
+//            {
+            cell = tableView.dequeueReusableCell(withIdentifier: "groceryPictureCell", for: indexPath) as? GroceryListTableViewCell
+            let pictureCell = cell as? GroceryListTableViewPictureCell
                 //
-                pictureCell?.titleImage.image = image
+            
+            if(nil != grocery.info.image)
+            {
+                pictureCell?.titleImage.image = grocery.info.image!.image()
             }
             else
             {
-                cell = tableView.dequeueReusableCell(withIdentifier: "groceryCell", for: indexPath) as? GroceryListTableViewCell
+                pictureCell?.titleImage.image = GroceryImage.getProxyImage(title: grocery.info.title, category: grocery.info.category)
             }
+//            }
+//            else
+//            {
+//                cell = tableView.dequeueReusableCell(withIdentifier: "groceryCell", for: indexPath) as? GroceryListTableViewCell
+//            }
             
             cell.delegate = self
 
@@ -389,7 +398,7 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
             
             // goto the cart
             let selectedGrocery = filteredGroceries[indexPath.section][indexPath.row]
-            RequestManager.shared.getRequestInterface().addCartGrocery(title: selectedGrocery.info.title, category: selectedGrocery.info.category)
+            RequestManager.shared.getRequestInterface().addCartGrocery(title: selectedGrocery.info.title, category: selectedGrocery.info.category, isUploadImage: false)
             
             success(true)
         })
@@ -652,22 +661,25 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                 let storage = sourceViewController.storage
                 let fridgeName = sourceViewController.fridgeName ?? ""
                 let notes = sourceViewController.noteTextField.text
-                var image = sourceViewController.groceryImage
-                if(image == nil)
-                {
-                    let imageName = imageNames[title] ?? title
-                    if let uiImage = UIImage(named: imageName)
-                    {
-                        image = GroceryImage(image: uiImage, filename: imageName)
-                    }
-                    else
-                    {
-                        if let uiImage = UIImage(named: category.systemName)
-                        {
-                            image = GroceryImage(image: uiImage, filename: imageName)
-                        }
-                    }
-                }
+                let image = sourceViewController.groceryImage
+                
+                
+                
+//                if(image == nil)
+//                {
+//                    let imageName = imageNames[title] ?? title
+//                    if let uiImage = UIImage(named: imageName)
+//                    {
+//                        image = GroceryImage(image: uiImage, filename: imageName)
+//                    }
+//                    else
+//                    {
+//                        if let uiImage = UIImage(named: category.systemName)
+//                        {
+//                            image = GroceryImage(image: uiImage, filename: imageName)
+//                        }
+//                    }
+//                }
                 
                 if let grocery = sourceViewController.grocery,
                    let selectedRow = editingSelectedRow//tableView.indexPathForSelectedRow
@@ -726,24 +738,24 @@ class GroceryListTableViewController: UITableViewController, GroceryListCellDele
                         RequestManager.shared.getRequestInterface().updateGroceryHistory(id: grocery.info.id, image: image)
                     }
                     
-                    if(grocery.info.image == nil)
-                    {
-                        if let cell = tableView.cellForRow(at: selectedRow) as? GroceryListTableViewCell
-                        {
-                            cell.titleLabel.text = title
-                            cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
-                            cell.countButton.setTitle("\(grocery.count)", for: .normal)
-                        }
-                    }
-                    else
-                    {
+//                    if(grocery.info.image == nil)
+//                    {
+//                        if let cell = tableView.cellForRow(at: selectedRow) as? GroceryListTableViewCell
+//                        {
+//                            cell.titleLabel.text = title
+//                            cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
+//                            cell.countButton.setTitle("\(grocery.count)", for: .normal)
+//                        }
+//                    }
+//                    else
+//                    {
                         if let cell = tableView.cellForRow(at: selectedRow) as? GroceryListTableViewPictureCell
                         {
                             cell.titleLabel.text = title
                             cell.expirationLabel.text = grocery.dueDate.getExpirationDay()
                             cell.countButton.setTitle("\(grocery.count)", for: .normal)
                         }
-                    }
+                    //}
                 }
                 else
                 {

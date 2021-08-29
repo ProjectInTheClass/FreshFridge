@@ -118,4 +118,26 @@ class GroceryImage: Codable
             try? data.write(to: fullFilename)
         }
     }
+    
+    static func getProxyImage(title: String, category: GroceryHistory.Category) -> UIImage?
+    {
+        // 3. 이름으로 이미지 검색
+        let imageName = imageNames[title] ?? title
+        var uiImage = UIImage(named: imageName)
+        if let uiImage = uiImage
+        {
+            return uiImage
+        }
+        else
+        {
+            // 4. 카테고리 이미지 출력
+            uiImage = UIImage(named: category.systemName)
+            if let uiImage = uiImage
+            {
+                return uiImage
+            }
+        }
+        
+        return nil
+    }
 }

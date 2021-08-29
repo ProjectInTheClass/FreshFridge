@@ -64,7 +64,9 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     @objc func refresh(_ sender: AnyObject) {
        // Code to refresh table view
         
-        ShareManager.shared.update(async: false)
+        for _ in 0..<10 {
+            ShareManager.shared.update(async: true)
+        }
         updateTableView()
         tableView.reloadData()
         self.refreshControl?.endRefreshing()
@@ -142,21 +144,22 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
         
         
         let cellContents = filteredCartGroceries[indexPath.section][indexPath.row]
-        if let groceryImage =  cellContents.info.image,
-           let _ = groceryImage.image()
-        {
+        
+//        if let groceryImage =  cellContents.info.image,
+//           let _ = groceryImage.image()
+//        {
             let cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartPictureCell", for: indexPath) as! ShopingCartTableViewPictureCell
             cell.updateCell(with: cellContents)
             cell.delegate = self
             return cell
-        }
-        else
-        {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartCell", for: indexPath) as! ShopingCartTableViewCell
-            cell.updateCell(with: cellContents)
-            cell.delegate = self
-            return cell
-        }
+//        }
+//        else
+//        {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "shopingCartCell", for: indexPath) as! ShopingCartTableViewCell
+//            cell.updateCell(with: cellContents)
+//            cell.delegate = self
+//            return cell
+//        }
     }
 
 // 장바구니 체크 박스 누르면 반응
@@ -295,13 +298,11 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
     
     @IBAction func unwindToShopingCart(_ unwindSegue: UIStoryboardSegue)
     {
-        
         // Use data from the view controller which initiated the unwind segue
         if(unwindSegue.identifier == "UnwindShopingCartFromAddGrocery")
         {
             if let sourceViewController = unwindSegue.source as? AddGroceryTableViewController
             {
-                
                 // 장바구니에 추가하는 경우
                 let title = sourceViewController.nameTextField.text ?? ""
                 var category : GroceryHistory.Category
@@ -316,6 +317,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                 
                 let count = sourceViewController.count
                 let isPercentageCount = sourceViewController.percentageSwitch.isOn
+                
                 let image = sourceViewController.groceryImage
                 
                 //var bUpdateTableView = false
@@ -324,7 +326,7 @@ class ShopingCartTableViewController: UITableViewController, ShopingCartCellDele
                     // adding
                     if(title.isEmpty == false)
                     {
-                        RequestManager.shared.getRequestInterface().addCartGrocery(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount)
+                        RequestManager.shared.getRequestInterface().addCartGrocery(title: title, category: category, image: image, isUploadImage: sourceViewController.isSelectedImage, count: count, isPercentageCount: isPercentageCount)
                     }
                 }
                 else

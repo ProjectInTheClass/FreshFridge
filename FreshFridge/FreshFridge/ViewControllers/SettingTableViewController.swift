@@ -14,41 +14,27 @@ class SettingTableViewController: UITableViewController {
     @IBOutlet var selectFridgeCells: [UITableViewCell]!
     @IBOutlet var selectFridgeButtons: [UIButton]!
     @IBOutlet var removeButtons: [UIButton]!
-    
     @IBOutlet weak var appImage: UIImageView!
+    @IBOutlet var checkFridgeButtons: [UIButton]!
+    
+    let checkImageNames : [String] = ["circleCheckGreen", "circleCheckOrange", "circleCheckPink", "circleCheckBlue"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         for index in 0...3
         {
-            if(selectedFridgeIndex.contains(index))
-            {
-                selectFridgeCells[index].accessoryType = .checkmark
-            }
-            else
-            {
-                selectFridgeCells[index].accessoryType = .none
-            }
-            
-            selectFridgeButtons[0].titleLabel?.textAlignment = .left
-            selectFridgeButtons[1].titleLabel?.textAlignment = .left
-            selectFridgeButtons[2].titleLabel?.textAlignment = .left
-            selectFridgeButtons[3].titleLabel?.textAlignment = .left
-            
-            removeButtons[0].titleLabel?.textAlignment = .left
-            removeButtons[1].titleLabel?.textAlignment = .left
-            removeButtons[2].titleLabel?.textAlignment = .left
+            updateSelectFridgeButtons(index: index)
+            selectFridgeButtons[index].titleLabel?.textAlignment = .left
         }
+            
+        removeButtons[0].titleLabel?.textAlignment = .left
+        removeButtons[1].titleLabel?.textAlignment = .left
+        removeButtons[2].titleLabel?.textAlignment = .left
         
         appImage.layer.cornerRadius = 20
         appImage.clipsToBounds = true
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     @IBAction func backButtonTapped(_ sender: Any)
@@ -56,23 +42,33 @@ class SettingTableViewController: UITableViewController {
         performSegue(withIdentifier: "ToGroceryList", sender: self)
     }
     
-    func updateSelectFridgeButtons(index: Int)
-    {
+    func toggleSelectFridgeButtons(index: Int) {
         if let selectedIndex = selectedFridgeIndex.first(where: {$0 == index})
         {
             // check된 것을 선택했을때 check 해제
             selectedFridgeIndex.remove(at: selectedFridgeIndex.firstIndex(of: selectedIndex)!)
-            selectFridgeCells[index].accessoryType = .none
         }
         else
         {
             // check안된 것을 선택했을때 check marking
             selectedFridgeIndex.append(index)
             selectedFridgeIndex.sort(by:{$0<$1})
-            selectFridgeCells[index].accessoryType = .checkmark
         }
-        
         UserDefaults.standard.set(selectedFridgeIndex, forKey: "selectedFridgeIndex")
+    }
+    
+    func updateSelectFridgeButtons(index: Int)
+    {
+        if let _ = selectedFridgeIndex.first(where: {$0 == index})
+        {
+            checkFridgeButtons[index].setImage(UIImage(named: checkImageNames[index]), for: .normal)
+            checkFridgeButtons[index].contentMode = .scaleAspectFit
+        }
+        else
+        {
+            checkFridgeButtons[index].setImage(nil, for: .normal)
+            checkFridgeButtons[index].contentMode = .scaleAspectFit
+        }
         
         if(selectedFridgeIndex.count == 0)
         {
@@ -86,18 +82,22 @@ class SettingTableViewController: UITableViewController {
 
     
     @IBAction func selectFirstFridge(_ sender: Any) {
+        toggleSelectFridgeButtons(index: 0)
         updateSelectFridgeButtons(index: 0)
     }
     
     @IBAction func selectSecondFridge(_ sender: Any) {
+        toggleSelectFridgeButtons(index: 1)
         updateSelectFridgeButtons(index: 1)
     }
     
     @IBAction func selectThirdFridge(_ sender: Any) {
+        toggleSelectFridgeButtons(index: 2)
         updateSelectFridgeButtons(index: 2)
     }
     
     @IBAction func selectForthFridge(_ sender: Any) {
+        toggleSelectFridgeButtons(index: 3)
         updateSelectFridgeButtons(index: 3)
     }
     

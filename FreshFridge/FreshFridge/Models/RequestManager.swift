@@ -277,7 +277,7 @@ class RequestInterface
     func updateGrocery(id: AutoIncreasedID, title: String) {}
 
     //
-    func addCartGrocery(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, count: Int = 1, isPercentageCount: Bool = false, isPurchased: Bool = false) {}
+    func addCartGrocery(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, isUploadImage : Bool, count: Int = 1, isPercentageCount: Bool = false, isPurchased: Bool = false) {}
     func removeCartGrocery(id: AutoIncreasedID) {}
     func updateCartGrocery(id: AutoIncreasedID, isPurchased: Bool) {}
     func updateCartGrocery(id: AutoIncreasedID, count: Int) {}
@@ -445,35 +445,17 @@ class RequestToServer : RequestInterface
         }
     }
     
-    override func addCartGrocery(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, count: Int = 1, isPercentageCount: Bool = false, isPurchased: Bool = false)
+    override func addCartGrocery(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, isUploadImage : Bool, count: Int = 1, isPercentageCount: Bool = false, isPurchased: Bool = false)
     {
         guard ShareManager.shared.isShared() else { return }
         
         // product가 있는지 찾아본다.
-        var productID = -1
         if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
         {
-            productID = groceryHistory.id.id
-            DataManager.shared.updateGroceryHistory(id: groceryHistory.id, image: image)
-            
-            // processing image
-            if let image = image,
-               let uiImage = image.image()
-            {
-                ShareManager.shared.uploadImage(image: uiImage, filename: image.filename)
-                {
-                    (imageName: String) in
-                    image.resetFilename(name: imageName)
-                    ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, image: image)
-                    {
-                    }
-                }
-            }
-            
+            // 구입기록 갱신 후 장바구니 아이템 추가
             ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, lastPurchaseDate: Date())
             {
-                //DataManager.shared.moveToTheFrontGroceryHistory(groceryHistory: groceryHistory)
-                
+                let productID = groceryHistory.id.id
                 ShareManager.shared.createCartGrocery(productID: productID, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased)
                 { (cartItem: ShareManager.CartItem) in
                     
@@ -489,17 +471,67 @@ class RequestToServer : RequestInterface
         else
         {
             // 없으면 서버에 product를 추가한다.
-            ShareManager.shared.createGroceryHistoryForCart(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased )
+            ShareManager.shared.createGroceryHistory(title: title, category: category)
+            { (id: Int) in
+                
+                // insert grocery history
+                DataManager.shared.insertGroceryHistory(id: id, title: title, category: category, image: image, updateDate: true)
+                
+//                // processing image
+//                if let image = image,
+//                   let uiImage = image.image()
+//                {
+//                    ShareManager.shared.uploadImage(image: uiImage, filename: image.filename)
+//                    {
+//                        (imageName: String) in
+//                        DispatchQueue.main.async
+//                        {
+//                            image.resetFilename(name: imageName)
+//                            ShareManager.shared.updateGroceryHistory(id: AutoIncreasedID(id), image: image)
+//                            {
+//                            }
+//                        }
+//                    }
+//                }
+                
+                // create cart grocery
+                ShareManager.shared.createCartGrocery(productID: id, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased)
+                {
+                    (cartItem: ShareManager.CartItem) in
+
+                    DataManager.shared.insertCartGrocery(title: cartItem.product!.title, category: GroceryHistory.Category(rawValue: cartItem.product!.category) ?? GroceryHistory.Category.ETC, image: image,
+                                                                   id: cartItem.id, count: cartItem.count, isPercentageCount: cartItem.isPercentageCount, isPurchased: cartItem.isPurchased)
+
+                    getRequestManager().updatePurchaseRecordViewController(updateTableView: true)
+                    getRequestManager().updateShopingCartViewController(updateTableView: true)
+
+                    getRequestManager().animateBadge(tabBarIndex: .shopingCartTabBar)
+                }
+
+            }
+
+//            ShareManager.shared.createGroceryHistoryForCart(title: title, category: category, image: image, count: count, isPercentageCount: isPercentageCount, isPurchased: isPurchased )
+        }
+        
+        if(isUploadImage)
+        {
+            if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
             {
-                (cartItem: ShareManager.CartItem) in
+                // processing image
+                DataManager.shared.updateGroceryHistory(id: groceryHistory.id, image: image)
                 
-                DataManager.shared.insertCartGrocery(title: cartItem.product!.title, category: GroceryHistory.Category(rawValue: cartItem.product!.category) ?? GroceryHistory.Category.ETC, image: image,
-                                                               id: cartItem.id, count: cartItem.count, isPercentageCount: cartItem.isPercentageCount, isPurchased: cartItem.isPurchased)
-                
-                getRequestManager().updatePurchaseRecordViewController(updateTableView: true)
-                getRequestManager().updateShopingCartViewController(updateTableView: true)
-                
-                getRequestManager().animateBadge(tabBarIndex: .shopingCartTabBar)
+                if let image = image,
+                   let uiImage = image.image()
+                {
+                    ShareManager.shared.uploadImage(image: uiImage, filename: image.filename)
+                    {
+                        (imageName: String) in
+                        image.resetFilename(name: imageName)
+                        ShareManager.shared.updateGroceryHistory(id: groceryHistory.id, image: image)
+                        {
+                        }
+                    }
+                }
             }
         }
     }
@@ -704,7 +736,7 @@ class RequestToLocal : RequestInterface
     }
     
     //
-    override func addCartGrocery(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, count: Int = 1, isPercentageCount: Bool = false, isPurchased: Bool = false)
+    override func addCartGrocery(title: String, category: GroceryHistory.Category, image: GroceryImage? = nil, isUploadImage : Bool, count: Int = 1, isPercentageCount: Bool = false, isPurchased: Bool = false)
     {
         if let groceryHistory = DataManager.shared.getGroceryHistory(title: title, category: category)
         {

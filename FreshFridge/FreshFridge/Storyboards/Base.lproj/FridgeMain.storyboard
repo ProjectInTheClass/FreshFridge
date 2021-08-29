@@ -434,11 +434,11 @@
                         <sections>
                             <tableViewSection headerTitle="냉장고 선택" footerTitle="냉장고는 다중 선택할 수 있습니다." id="q7d-jG-QRE">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="M2O-PC-XJK">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="M2O-PC-XJK">
                                         <rect key="frame" x="16" y="49" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M2O-PC-XJK" id="0KJ-9K-Lif">
-                                            <rect key="frame" x="0.0" y="0.0" width="251.33333333333331" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fridgerGreen" translatesAutoresizingMaskIntoConstraints="NO" id="GSI-16-6Zh">
@@ -449,7 +449,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Kw-qu-9pc">
-                                                    <rect key="frame" x="60.000000000000014" y="0.0" width="191.33333333333337" height="44"/>
+                                                    <rect key="frame" x="60" y="0.0" width="190" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="신선한 냉장고">
                                                         <color key="titleColor" systemColor="labelColor"/>
@@ -458,23 +458,35 @@
                                                         <action selector="selectFirstFridge:" destination="n27-7O-L2K" eventType="touchUpInside" id="umh-6a-Ioc"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q2u-3E-E13">
+                                                    <rect key="frame" x="250" y="0.0" width="38" height="44"/>
+                                                    <inset key="imageEdgeInsets" minX="9" minY="12" maxX="9" maxY="12"/>
+                                                    <state key="normal" image="circleCheckGreen"/>
+                                                    <connections>
+                                                        <action selector="selectFirstFridge:" destination="n27-7O-L2K" eventType="touchUpInside" id="aUN-WU-qGQ"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="GSI-16-6Zh" firstAttribute="leading" secondItem="0KJ-9K-Lif" secondAttribute="leading" constant="20" id="3Kv-OG-hvL"/>
                                                 <constraint firstItem="GSI-16-6Zh" firstAttribute="top" secondItem="0KJ-9K-Lif" secondAttribute="top" constant="2" id="7gQ-br-m4W"/>
                                                 <constraint firstItem="0Kw-qu-9pc" firstAttribute="leading" secondItem="GSI-16-6Zh" secondAttribute="trailing" constant="10" id="CfH-O5-Tmb"/>
+                                                <constraint firstItem="q2u-3E-E13" firstAttribute="leading" secondItem="0Kw-qu-9pc" secondAttribute="trailing" id="EB6-v9-uVn"/>
                                                 <constraint firstItem="0Kw-qu-9pc" firstAttribute="top" secondItem="0KJ-9K-Lif" secondAttribute="top" id="Geg-Rv-2fN"/>
                                                 <constraint firstAttribute="bottom" secondItem="GSI-16-6Zh" secondAttribute="bottom" constant="2" id="a2p-VH-eIB"/>
-                                                <constraint firstAttribute="trailing" secondItem="0Kw-qu-9pc" secondAttribute="trailing" id="m7i-zu-v8y"/>
+                                                <constraint firstAttribute="trailing" secondItem="q2u-3E-E13" secondAttribute="trailing" id="cxe-Vv-eEO"/>
+                                                <constraint firstAttribute="bottom" secondItem="q2u-3E-E13" secondAttribute="bottom" id="laR-Ct-9eI"/>
+                                                <constraint firstAttribute="trailing" secondItem="0Kw-qu-9pc" secondAttribute="trailing" constant="38" id="m7i-zu-v8y"/>
                                                 <constraint firstAttribute="bottom" secondItem="0Kw-qu-9pc" secondAttribute="bottom" id="pHR-z8-Ygr"/>
+                                                <constraint firstItem="q2u-3E-E13" firstAttribute="top" secondItem="0KJ-9K-Lif" secondAttribute="top" id="xbP-SW-hPZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="Jo6-Gb-cAg">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="Jo6-Gb-cAg">
                                         <rect key="frame" x="16" y="92.5" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jo6-Gb-cAg" id="bn4-Rm-u3U">
-                                            <rect key="frame" x="0.0" y="0.0" width="251.33333333333331" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fridgerOrange" translatesAutoresizingMaskIntoConstraints="NO" id="Umf-t5-vCg">
@@ -485,7 +497,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UR6-At-0Hh">
-                                                    <rect key="frame" x="60.000000000000014" y="0.0" width="191.33333333333337" height="44"/>
+                                                    <rect key="frame" x="60" y="0.0" width="190" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="김치 냉장고">
                                                         <color key="titleColor" systemColor="labelColor"/>
@@ -494,23 +506,35 @@
                                                         <action selector="selectSecondFridge:" destination="n27-7O-L2K" eventType="touchUpInside" id="J2c-hF-qGi"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAz-cr-tLh">
+                                                    <rect key="frame" x="250" y="0.0" width="38" height="44"/>
+                                                    <inset key="imageEdgeInsets" minX="9" minY="12" maxX="9" maxY="12"/>
+                                                    <state key="normal" image="circleCheckOrange"/>
+                                                    <connections>
+                                                        <action selector="selectSecondFridge:" destination="n27-7O-L2K" eventType="touchUpInside" id="zgW-iZ-1WP"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="UR6-At-0Hh" secondAttribute="trailing" id="DrX-VL-ZkV"/>
+                                                <constraint firstAttribute="trailing" secondItem="UR6-At-0Hh" secondAttribute="trailing" constant="38" id="DrX-VL-ZkV"/>
                                                 <constraint firstItem="UR6-At-0Hh" firstAttribute="top" secondItem="bn4-Rm-u3U" secondAttribute="top" id="F4l-ba-cd9"/>
+                                                <constraint firstAttribute="bottom" secondItem="AAz-cr-tLh" secondAttribute="bottom" id="ai7-vY-aGm"/>
+                                                <constraint firstItem="AAz-cr-tLh" firstAttribute="leading" secondItem="UR6-At-0Hh" secondAttribute="trailing" id="bOl-FT-mRj"/>
+                                                <constraint firstAttribute="trailing" secondItem="AAz-cr-tLh" secondAttribute="trailing" id="cUh-4u-e7e"/>
                                                 <constraint firstItem="Umf-t5-vCg" firstAttribute="top" secondItem="bn4-Rm-u3U" secondAttribute="top" constant="2" id="j7h-ur-LTy"/>
                                                 <constraint firstAttribute="bottom" secondItem="Umf-t5-vCg" secondAttribute="bottom" constant="2" id="kBG-gF-NUI"/>
                                                 <constraint firstAttribute="bottom" secondItem="UR6-At-0Hh" secondAttribute="bottom" id="kPD-hf-pA6"/>
                                                 <constraint firstItem="UR6-At-0Hh" firstAttribute="leading" secondItem="Umf-t5-vCg" secondAttribute="trailing" constant="10" id="mcu-f7-4ED"/>
                                                 <constraint firstItem="Umf-t5-vCg" firstAttribute="leading" secondItem="bn4-Rm-u3U" secondAttribute="leading" constant="20" id="pAF-tX-T2E"/>
+                                                <constraint firstItem="AAz-cr-tLh" firstAttribute="top" secondItem="bn4-Rm-u3U" secondAttribute="top" id="zsz-4i-iov"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="gEG-cB-fFt">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="gEG-cB-fFt">
                                         <rect key="frame" x="16" y="136" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gEG-cB-fFt" id="uk2-FW-0JC">
-                                            <rect key="frame" x="0.0" y="0.0" width="251.33333333333331" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fridgerPink" translatesAutoresizingMaskIntoConstraints="NO" id="sGX-CR-q0x">
@@ -521,7 +545,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEd-kR-0Iw">
-                                                    <rect key="frame" x="60.000000000000014" y="0.0" width="191.33333333333337" height="44"/>
+                                                    <rect key="frame" x="60" y="0.0" width="190" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="추가 냉장고1">
                                                         <color key="titleColor" systemColor="labelColor"/>
@@ -530,23 +554,35 @@
                                                         <action selector="selectThirdFridge:" destination="n27-7O-L2K" eventType="touchUpInside" id="0cw-8a-b4l"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e83-K5-JTq">
+                                                    <rect key="frame" x="250" y="0.0" width="38" height="44"/>
+                                                    <inset key="imageEdgeInsets" minX="9" minY="12" maxX="9" maxY="12"/>
+                                                    <state key="normal" image="circleCheckPink"/>
+                                                    <connections>
+                                                        <action selector="selectThirdFridge:" destination="n27-7O-L2K" eventType="touchUpInside" id="S25-Gp-I0b"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="sGX-CR-q0x" firstAttribute="top" secondItem="uk2-FW-0JC" secondAttribute="top" constant="2" id="8Rh-Yb-cMr"/>
                                                 <constraint firstItem="QEd-kR-0Iw" firstAttribute="top" secondItem="uk2-FW-0JC" secondAttribute="top" id="DN8-PU-nYH"/>
-                                                <constraint firstAttribute="trailing" secondItem="QEd-kR-0Iw" secondAttribute="trailing" id="Und-A2-AeX"/>
+                                                <constraint firstItem="e83-K5-JTq" firstAttribute="leading" secondItem="QEd-kR-0Iw" secondAttribute="trailing" id="OOK-0H-aCq"/>
+                                                <constraint firstAttribute="trailing" secondItem="QEd-kR-0Iw" secondAttribute="trailing" constant="38" id="Und-A2-AeX"/>
                                                 <constraint firstItem="sGX-CR-q0x" firstAttribute="leading" secondItem="uk2-FW-0JC" secondAttribute="leading" constant="20" id="Xgo-iz-tEr"/>
+                                                <constraint firstAttribute="trailing" secondItem="e83-K5-JTq" secondAttribute="trailing" id="ZEt-cM-wdn"/>
                                                 <constraint firstItem="QEd-kR-0Iw" firstAttribute="leading" secondItem="sGX-CR-q0x" secondAttribute="trailing" constant="10" id="ZFM-Eo-yiT"/>
+                                                <constraint firstItem="e83-K5-JTq" firstAttribute="top" secondItem="uk2-FW-0JC" secondAttribute="top" id="b1k-5j-eFa"/>
                                                 <constraint firstAttribute="bottom" secondItem="QEd-kR-0Iw" secondAttribute="bottom" id="ewy-8c-18j"/>
+                                                <constraint firstAttribute="bottom" secondItem="e83-K5-JTq" secondAttribute="bottom" id="uGe-0S-28Q"/>
                                                 <constraint firstAttribute="bottom" secondItem="sGX-CR-q0x" secondAttribute="bottom" constant="2" id="wH1-cZ-Qjj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="XWa-jr-b3s">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FridgeNameCell" id="XWa-jr-b3s">
                                         <rect key="frame" x="16" y="179.5" width="288" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XWa-jr-b3s" id="aad-Pg-MrK">
-                                            <rect key="frame" x="0.0" y="0.0" width="251.33333333333331" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fridgerBlue" translatesAutoresizingMaskIntoConstraints="NO" id="zMi-S5-jK1">
@@ -557,7 +593,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73C-i0-Kfh">
-                                                    <rect key="frame" x="60.000000000000014" y="0.0" width="191.33333333333337" height="44"/>
+                                                    <rect key="frame" x="60" y="0.0" width="190" height="44"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                     <state key="normal" title="추가 냉장고2">
                                                         <color key="titleColor" systemColor="labelColor"/>
@@ -566,15 +602,27 @@
                                                         <action selector="selectForthFridge:" destination="n27-7O-L2K" eventType="touchUpInside" id="RiY-78-OHn"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kj1-4W-uuo">
+                                                    <rect key="frame" x="250" y="0.0" width="38" height="44"/>
+                                                    <inset key="imageEdgeInsets" minX="9" minY="12" maxX="9" maxY="12"/>
+                                                    <state key="normal" image="circleCheckBlue"/>
+                                                    <connections>
+                                                        <action selector="selectForthFridge:" destination="n27-7O-L2K" eventType="touchUpInside" id="VfP-jw-wmO"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Kj1-4W-uuo" firstAttribute="leading" secondItem="73C-i0-Kfh" secondAttribute="trailing" id="6VA-MA-BWj"/>
                                                 <constraint firstItem="73C-i0-Kfh" firstAttribute="top" secondItem="aad-Pg-MrK" secondAttribute="top" id="HGa-p3-am4"/>
+                                                <constraint firstAttribute="trailing" secondItem="Kj1-4W-uuo" secondAttribute="trailing" id="Icg-hV-QnP"/>
                                                 <constraint firstAttribute="bottom" secondItem="zMi-S5-jK1" secondAttribute="bottom" constant="2" id="ZIV-Wd-H84"/>
-                                                <constraint firstAttribute="trailing" secondItem="73C-i0-Kfh" secondAttribute="trailing" id="dlE-yG-oEi"/>
+                                                <constraint firstAttribute="trailing" secondItem="73C-i0-Kfh" secondAttribute="trailing" constant="38" id="dlE-yG-oEi"/>
                                                 <constraint firstItem="zMi-S5-jK1" firstAttribute="top" secondItem="aad-Pg-MrK" secondAttribute="top" constant="2" id="hX0-Eg-gz9"/>
                                                 <constraint firstItem="zMi-S5-jK1" firstAttribute="leading" secondItem="aad-Pg-MrK" secondAttribute="leading" constant="20" id="hYL-ik-Tud"/>
                                                 <constraint firstAttribute="bottom" secondItem="73C-i0-Kfh" secondAttribute="bottom" id="o2u-9P-uTq"/>
+                                                <constraint firstAttribute="bottom" secondItem="Kj1-4W-uuo" secondAttribute="bottom" id="qIb-8c-vYy"/>
                                                 <constraint firstItem="73C-i0-Kfh" firstAttribute="leading" secondItem="zMi-S5-jK1" secondAttribute="trailing" constant="10" id="qsP-X3-hji"/>
+                                                <constraint firstItem="Kj1-4W-uuo" firstAttribute="top" secondItem="aad-Pg-MrK" secondAttribute="top" id="v9n-du-bnI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -781,6 +829,10 @@ Daniel Shin</string>
                         <outletCollection property="removeButtons" destination="6q7-jB-MS2" collectionClass="NSMutableArray" id="wPf-ig-j3c"/>
                         <outletCollection property="removeButtons" destination="Lrr-2V-r7k" collectionClass="NSMutableArray" id="eeM-LL-GAB"/>
                         <outletCollection property="removeButtons" destination="HDZ-v8-Fl4" collectionClass="NSMutableArray" id="2EM-Q6-TWh"/>
+                        <outletCollection property="checkFridgeButtons" destination="q2u-3E-E13" collectionClass="NSMutableArray" id="WwG-Xb-coV"/>
+                        <outletCollection property="checkFridgeButtons" destination="AAz-cr-tLh" collectionClass="NSMutableArray" id="YwK-Rl-UMq"/>
+                        <outletCollection property="checkFridgeButtons" destination="e83-K5-JTq" collectionClass="NSMutableArray" id="feg-r2-1k8"/>
+                        <outletCollection property="checkFridgeButtons" destination="Kj1-4W-uuo" collectionClass="NSMutableArray" id="Cq2-gq-6jk"/>
                         <segue destination="h9I-Nu-xhu" kind="unwind" identifier="ToAddGrocery" unwindAction="unwindToAddGrocery:" id="ZFh-A4-qYG"/>
                         <segue destination="h9I-Nu-xhu" kind="unwind" identifier="ToGroceryList" unwindAction="unwindToGroceryListTableView:" id="SOz-3t-Rjt"/>
                     </connections>
@@ -2685,6 +2737,10 @@ AAAEAQAAAAAAAABoAAAAAAAAAAAAAAAAAAG2/A
         </image>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="circleCartReset" width="52.333332061767578" height="52.333332061767578"/>
+        <image name="circleCheckBlue" width="52.333332061767578" height="52.333332061767578"/>
+        <image name="circleCheckGreen" width="52.333332061767578" height="52.333332061767578"/>
+        <image name="circleCheckOrange" width="52.333332061767578" height="52.333332061767578"/>
+        <image name="circleCheckPink" width="52.333332061767578" height="52.333332061767578"/>
         <image name="circleHistoryReset" width="52.333332061767578" height="52.333332061767578"/>
         <image name="freshFridge_icon" width="18.666666030883789" height="24.666666030883789"/>
         <image name="fridgerBlue" width="52.333332061767578" height="52.333332061767578"/>
